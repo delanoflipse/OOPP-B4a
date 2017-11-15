@@ -1,3 +1,9 @@
+# Group B4a
+This is the OOP project repository for group B4a.
+
+## Team members:
+Delano Flipse(4606116)
+
 # TI1216 Template Repository
 
 This a template repository to help you get started on making the best project possible!
