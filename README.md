@@ -7,6 +7,7 @@ Wouter Polet (4730577)\
 Dirk Linders (4697065)\
 Rick de Boer (4661362)\
 Yana Angelova (4649370)\
+Carl Afriyie (4696069) \
 
 # TI1216 Template Repository
 
