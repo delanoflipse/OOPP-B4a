@@ -4,7 +4,8 @@ This is the OOP project repository for group B4a.
 ## Team members:
 Delano Flipse(4606116)\
 Wouter Polet (4730577)\
-Dirk Linders (4697065)
+Dirk Linders (4697065)\
+Rick de Boer (4661362)
 
 # TI1216 Template Repository
 
