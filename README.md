@@ -8,7 +8,7 @@ Dirk Linders (4697065)\
 Rick de Boer (4661362)\
 Yana Angelova (4649370)\
 Carl Afriyie (4696069)\
-
+Sten Nijdam(4710673)
 # TI1216 Template Repository
 
 This a template repository to help you get started on making the best project possible!
