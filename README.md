@@ -8,6 +8,7 @@ Dirk Linders (4697065)\
 Rick de Boer (4661362)\
 Yana Angelova (4649370)\
 Quint Remington (4713745)\
+Sten Nijdam (471673)\
 
 # TI1216 Template Repository
 
