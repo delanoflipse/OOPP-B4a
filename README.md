@@ -6,6 +6,7 @@ Delano Flipse(4606116)\
 Wouter Polet (4730577)\
 Dirk Linders (4697065)\
 ![alt text](https://github.com/delanoflipse/OOPP-B4a/blob/master/imgs/dirk.png)
+\
 Rick de Boer (4661362)\
 Yana Angelova (4649370)\
 Quint Remington (4713745)\
