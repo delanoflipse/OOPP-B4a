@@ -1,13 +1,3 @@
-public class Answer {
-    String text;
-    boolean correct = false;
+import org.javalite.activejdbc.Model;
 
-    public Answer(String text) {
-        this(text, false);
-    }
-
-    public Answer(String text, boolean correct) {
-        this.text = text;
-        this.correct = correct;
-    }
-}
+public class Answer extends Model{}

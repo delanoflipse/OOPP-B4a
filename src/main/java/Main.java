@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -5,30 +6,18 @@ public class Main {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         int correctAnswers = 0;
-        Question[] questions = {
-                new Question("Wat is het antwoord?", new Answer[] {
-                        new Answer("Ja."),
-                        new Answer("Ja."),
-                        new Answer("Nee.", true),
-                        new Answer("Ja."),
-                }),
 
-                new Question("Wat is het tweede antwoord?", new Answer[] {
-                        new Answer("Ja."),
-                        new Answer("Ja."),
-                        new Answer("Nee.", true),
-                        new Answer("Ja."),
-                })
-        };
+        List<Question> questions = Question.findAll();
+        int i = 1;
+        for (Question question : questions) {
+            List<Answer> answers = question.getAll(Answer.class);
+            System.out.println("Vraag " + i + ": " + question.text);
 
-        for (int i = 0; i < questions.length; i++) {
-            Question question = questions[i];
-            System.out.println("Vraag " + (i + 1) + ": " + question.text);
-
-            for (int j = 0; j < question.answers.length; j++) {
-                Answer answer = question.answers[j];
+            int j = 0;
+            for (Answer answer : answers) {
                 char x = (char) ('A' + j);
                 System.out.println("\t " + x + ". " + answer.text);
+                j++;
             }
 
             boolean valid = false;
@@ -37,12 +26,12 @@ public class Main {
                 char c = input.nextLine().charAt(0);
                 int index = (int) c - (int)'A';
 
-                if (index < 0 || index > question.answers.length - 1 ) {
+                if (index < 0 || index > answers.size() - 1 ) {
                     System.out.println("Please enter a valid answer");
                 } else {
                     valid = true;
 
-                    if (question.answers[index].correct) {
+                    if (answers.get(index).correct) {
                         correctAnswers++;
                         System.out.println("That answer is correct");
                     } else {
@@ -50,6 +39,8 @@ public class Main {
                     }
                 }
             }
+
+            i++;
         }
 
         System.out.println("Your score: " + correctAnswers + "/" + questions.length);
