@@ -6,48 +6,37 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        Base.open("org.sqlite.JDBC", "jdbc:sqlite:db.sqlite3", "", "");
-        Scanner input = new Scanner(System.in);
-        int correctAnswers = 0;
 
+        askMultipleChoichequestions();
+    }
+
+    public static void askMultipleChoichequestions(){
+        Base.open("org.sqlite.JDBC", "jdbc:sqlite:db.sqlite3", "", "");
         List<Question> questions = Question.findAll();
+
+        Scanner input = new Scanner(System.in);
+
+        int correctAnswers = 0;
 
         int i = 1;
         for (Question question : questions) {
-            List<Answer> answers = question.getAll(Answer.class);
-            System.out.println("Vraag " + i + ": " + question.get("text"));
 
-            int j = 0;
-            for (Answer answer : answers) {
-                char x = (char) ('A' + j);
-                System.out.println("\t " + x + ". " + answer.get("text"));
-                j++;
+            System.out.println("Question " + i + ":");
+            System.out.println(question);
+
+            char inputchar = input.nextLine().charAt(0);
+
+            if (question.answer_correct(inputchar, input)) {
+                correctAnswers++;
+                System.out.println("That answer is correct");
+            } else {
+                System.out.println("That answer is incorrect");
             }
-
-            boolean valid = false;
-
-            while (!valid) {
-                char c = input.nextLine().charAt(0);
-                int index = (int) c - (int)'A';
-
-                if (index < 0 || index > answers.size() - 1 ) {
-                    System.out.println("Please enter a valid answer");
-                } else {
-                    valid = true;
-
-                    if ((int) answers.get(index).get("correct") == 1) {
-                        correctAnswers++;
-                        System.out.println("That answer is correct");
-                    } else {
-                        System.out.println("That answer is incorrect");
-                    }
-                }
-            }
+            input = new Scanner (System.in);
 
             i++;
         }
 
         System.out.println("Your score: " + correctAnswers + "/" + questions.size());
-
     }
 }
