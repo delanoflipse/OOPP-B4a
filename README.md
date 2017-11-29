@@ -4,6 +4,8 @@ This is the OOP project repository for group B4a.
 ## Team members:
 Delano Flipse(4606116)\
 Wouter Polet (4730577)\
+![alt text](https://github.com/delanoflipse/OOPP-B4a/blob/master/imgs/Wouter.jpeg)
+\
 Dirk Linders (4697065)\
 ![alt text](https://github.com/delanoflipse/OOPP-B4a/blob/master/imgs/dirk.png)
 \
