@@ -1,3 +1,3 @@
-import org.javalite.activejdbc.Model;
-
-public class Answer extends Model{}
+public class Answer {
+    boolean correct = false;
+}
