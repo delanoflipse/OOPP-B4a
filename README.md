@@ -14,6 +14,8 @@ Yana Angelova (4649370)\
 Quint Remington (4713745)\
 Carl Afriyie (4696069)\
 Sten Nijdam(4710673)\
+![alt text](https://github.com/delanoflipse/OOPP-B4a/blob/master/imgs/sten.jpg)
+\
 # TI1216 Template Repository
 
 This a template repository to help you get started on making the best project possible!
