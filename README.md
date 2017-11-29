@@ -10,6 +10,8 @@ Dirk Linders (4697065)\
 ![alt text](https://github.com/delanoflipse/OOPP-B4a/blob/master/imgs/dirk.png)
 \
 Rick de Boer (4661362)\
+![alt text](https://github.com/delanoflipse/OOPP-B4a/blob/master/imgs/Rick.jpg)
+\
 Yana Angelova (4649370)\
 Quint Remington (4713745)\
 Carl Afriyie (4696069)\
