@@ -1,5 +1,7 @@
 import org.javalite.activejdbc.Base;
 
+import java.awt.image.DataBuffer;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -11,32 +13,37 @@ public class Main {
     }
 
     public static void askMultipleChoichequestions(){
-        Base.open("org.sqlite.JDBC", "jdbc:sqlite:db.sqlite3", "", "");
-        List<Question> questions = Question.findAll();
+
+        Database.loadDatabase();
 
         Scanner input = new Scanner(System.in);
-
         int correctAnswers = 0;
 
         int i = 1;
-        for (Question question : questions) {
+        ArrayList<Question> list = Database.getQuestionsForLevel(1);
 
-            System.out.println("Question " + i + ":");
-            System.out.println(question);
+        for (Question q : list) {
+            if (q instanceof TextQuestion) {
+                TextQuestion question = (TextQuestion) q;
+                System.out.println("Question " + i + ":");
+                System.out.println(question.text);
+                question.display();
+                System.out.print("Your answer: ");
 
-            char inputchar = input.nextLine().charAt(0);
+                char inputChar = input.nextLine().charAt(0);
+                int inputIndex = (int) (inputChar - 'A');
+                if (question.isCorrect(inputIndex)) {
+                    correctAnswers++;
+                    System.out.println("That answer is correct");
+                } else {
+                    System.out.println("That answer is incorrect");
+                }
 
-            if (question.answer_correct(inputchar, input)) {
-                correctAnswers++;
-                System.out.println("That answer is correct");
-            } else {
-                System.out.println("That answer is incorrect");
+                i++;
             }
-            input = new Scanner (System.in);
-
-            i++;
         }
 
-        System.out.println("Your score: " + correctAnswers + "/" + questions.size());
+        System.out.println("Your score: " + correctAnswers);
+
     }
 }
