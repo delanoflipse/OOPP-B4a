@@ -3,6 +3,8 @@ This is the OOP project repository for group B4a.
 
 ## Team members:
 Delano Flipse(4606116)\
+![alt text](https://github.com/delanoflipse/OOPP-B4a/blob/master/imgs/delano.png)
+\
 Wouter Polet (4730577)\
 ![alt text](https://github.com/delanoflipse/OOPP-B4a/blob/master/imgs/Wouter.jpeg)
 \
