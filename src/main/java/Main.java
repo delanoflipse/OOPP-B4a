@@ -39,4 +39,20 @@ public class Main {
 
         System.out.println("Your score: " + correctAnswers + "/" + questions.size());
     }
+
+    public static void addQuetions(){
+        System.out.println("1. What is the question you'd like to add?");
+        String question1 = input.next();
+        System.out.println("2. What is the first wrong answer you'd like to add?");
+        String answer1 = input.next();
+        System.out.println("3. What is the second wrong answer you'd like to add?");
+        String answer2 = input.next();
+        System.out.println("4. What is the third wrong answer you'd like to add?");
+        String answer3 = input.next();
+        System.out.println("5. What is the correct answer you'd like to add?");
+        String correctanswer = input.next();
+
+        String fullquestion = (question1 + "\n" + answer1 + "\n" + answer2 + "\n" + answer3 + "\n" + correctanswer);
+        System.out.println(fullquestion);
+    }
 }
