@@ -3,6 +3,8 @@ This is the OOP project repository for group B4a.
 
 ## Team members:
 Delano Flipse(4606116)\
+![alt text](https://github.com/delanoflipse/OOPP-B4a/blob/master/imgs/delano.png)
+\
 Wouter Polet (4730577)\
 ![alt text](https://github.com/delanoflipse/OOPP-B4a/blob/master/imgs/Wouter.jpeg)
 \
@@ -10,10 +12,14 @@ Dirk Linders (4697065)\
 ![alt text](https://github.com/delanoflipse/OOPP-B4a/blob/master/imgs/dirk.png)
 \
 Rick de Boer (4661362)\
+![alt text](https://github.com/delanoflipse/OOPP-B4a/blob/master/imgs/Rick.jpg)
+\
 Yana Angelova (4649370)\
 Quint Remington (4713745)\
 Carl Afriyie (4696069)\
 Sten Nijdam(4710673)\
+![alt text](https://github.com/delanoflipse/OOPP-B4a/blob/master/imgs/sten.jpg)
+\
 # TI1216 Template Repository
 
 This a template repository to help you get started on making the best project possible!
