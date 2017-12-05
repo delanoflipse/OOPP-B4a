@@ -15,6 +15,8 @@ Rick de Boer (4661362)\
 ![alt text](https://github.com/delanoflipse/OOPP-B4a/blob/master/imgs/Rick.jpg)
 \
 Yana Angelova (4649370)\
+![alt text](https://github.com/delanoflipse/OOPP-B4a/blob/master/imgs/Yana.jpg)
+\
 Quint Remington (4713745)\
 Carl Afriyie (4696069)\
 Sten Nijdam(4710673)\
