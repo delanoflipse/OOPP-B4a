@@ -1,16 +1,43 @@
-public class imgQuestion {
+import javax.swing.JFrame;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
-    private String question;
-    private String path;
+public class imgQuestion extends Question{
 
-    public imgQuestion(String question, String path){
+     String path;
 
-        this.question = question;
+    public imgQuestion(String text, int level, String path){
+
+        super(text, level);
         this.path = path;
+    }
+
+    public void addAnswer(imgAnswer answer) {
+        answers.add(answer);
     }
 
     public String toString(){
 
+        String res;
+        return res;
+    }
 
+    public void display(){
+        JFrame frame = new JFrame();
+        ImageIcon icon = new ImageIcon(path);
+        JLabel label = new JLabel(icon);
+        frame.add(label);
+        frame.setDefaultCloseOperation
+                (JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+    }
+
+    public boolean isCorrect(int index) {
+        if (answers.size() > index) {
+            return answers.get(index).correct;
+        }
+
+        return false;
     }
 }

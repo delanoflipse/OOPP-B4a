@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 
+
 public class TextQuestion extends Question {
     public ArrayList<TextAnswer> answers;
 
@@ -21,6 +22,7 @@ public class TextQuestion extends Question {
             i++;
         }
     }
+
 
     public boolean isCorrect(int index) {
         if (answers.size() > index) {
