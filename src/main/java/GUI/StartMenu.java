@@ -4,6 +4,8 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -31,7 +33,6 @@ public class StartMenu extends Application {
         titlegrid.setHgap(30);
         titlegrid.setVgap(10);
         titlegrid.setPadding(new Insets(25, 25, 25, 25));
-        titlegrid.setGridLinesVisible(true);
 
         Image logo = new Image("file:///E:/Documents/TU/OOPP-B4a/src/main/java/GUI/logo.png");
         ImageView logov = new ImageView();
@@ -57,9 +58,16 @@ public class StartMenu extends Application {
         centergrid.setHgap(30);
         centergrid.setVgap(10);
         centergrid.setPadding(new Insets(25, 25, 25, 25));
-        centergrid.setGridLinesVisible(true);
 
-        Image question1 = new Image("file:///E:/Documents/TU/OOPP-B4a/src/main/java/GUI/logo.png");
+        Button MCbutton = new Button();
+        MCbutton.setOnAction(e -> {
+            System.out.println("Launch the MCQuestions!");
+        });
+        MCbutton.setMinSize(300,300);
+        centergrid.add(MCbutton,0,0);
+        /**Label MC = new Label("Multiple Choice Questions");
+        MC.setId("label");
+        Image question1 = new Image("file:///E:/Documents/TU/OOPP-B4a/src/main/java/GUI/mcquestions.jpg");
         ImageView question1v = new ImageView();
         question1v.setImage(question1);
         question1v.setFitWidth(350);
@@ -67,6 +75,10 @@ public class StartMenu extends Application {
         question1v.setSmooth(true);
         question1v.setCache(true);
         centergrid.add(question1v, 0, 0);
+        centergrid.add(MC, 0,0);**/
+
+        titlegrid.setGridLinesVisible(false);
+        centergrid.setGridLinesVisible(false);
 
         Scene scene = new Scene(rootpane, 1280, 720);
         scene.getStylesheets().add("file:///E:/Documents/TU/OOPP-B4a/src/main/java/GUI/start_menu.css");
