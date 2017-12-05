@@ -1,0 +1,13 @@
+.root{
+    -fx-background-image: url("background.jpg");
+    //-fx-background-size: cover;
+    -fx-background-repeat: stretch;
+    -fx-background-position: bottom center;
+}
+
+#Title{
+    -fx-font-size: 72px;
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-fill: #cd6600;
+    -fx-effect: innershadow(two-pass-box, #8b4500, 6, 0.0, 0, 2);
+}
