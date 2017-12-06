@@ -3,13 +3,13 @@ This is the OOP project repository for group B4a.
 
 ## Team members:
 Delano Flipse(4606116)\
-![alt text](https://github.com/delanoflipse/OOPP-B4a/blob/master/imgs/delano.png | width=200px)
+![alt text](https://github.com/delanoflipse/OOPP-B4a/blob/master/imgs/delano.png){:class="img-responsive"}
 \
 Wouter Polet (4730577)\
-![alt text](https://github.com/delanoflipse/OOPP-B4a/blob/master/imgs/Wouter.jpeg | width=200px)
+![alt text](https://github.com/delanoflipse/OOPP-B4a/blob/master/imgs/Wouter.jpeg){:width="300px"}
 \
 Dirk Linders (4697065)\
-![alt text](https://github.com/delanoflipse/OOPP-B4a/blob/master/imgs/dirk.png | width=200px)
+![alt text](https://github.com/delanoflipse/OOPP-B4a/blob/master/imgs/dirk.png | width=200)
 \
 Rick de Boer (4661362)\
 ![alt text](https://github.com/delanoflipse/OOPP-B4a/blob/master/imgs/Rick.jpg | width=200px)
