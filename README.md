@@ -3,25 +3,25 @@ This is the OOP project repository for group B4a.
 
 ## Team members:
 Delano Flipse(4606116)\
-![alt text](https://github.com/delanoflipse/OOPP-B4a/blob/master/imgs/delano.png)
+![alt text](https://github.com/delanoflipse/OOPP-B4a/blob/master/imgs/delano.png=200px)
 \
 Wouter Polet (4730577)\
-![alt text](https://github.com/delanoflipse/OOPP-B4a/blob/master/imgs/Wouter.jpeg)
+![alt text](https://github.com/delanoflipse/OOPP-B4a/blob/master/imgs/Wouter.jpeg=200px)
 \
 Dirk Linders (4697065)\
-![alt text](https://github.com/delanoflipse/OOPP-B4a/blob/master/imgs/dirk.png)
+![alt text](https://github.com/delanoflipse/OOPP-B4a/blob/master/imgs/dirk.png=200px)
 \
 Rick de Boer (4661362)\
-![alt text](https://github.com/delanoflipse/OOPP-B4a/blob/master/imgs/Rick.jpg)
+![alt text](https://github.com/delanoflipse/OOPP-B4a/blob/master/imgs/Rick.jpg=200px)
 \
 Yana Angelova (4649370)\
-![alt text](https://github.com/delanoflipse/OOPP-B4a/blob/master/imgs/Yana.png)
+![alt text](https://github.com/delanoflipse/OOPP-B4a/blob/master/imgs/Yana.png=200px)
 \
-Quint Remington (4713745)\
+Quint Remington (4713745) †\
 Carl Afriyie (4696069)\
 Sten Nijdam(4710673)\
-![alt text](https://github.com/delanoflipse/OOPP-B4a/blob/master/imgs/sten.jpg)
-\
+![alt text](https://github.com/delanoflipse/OOPP-B4a/blob/master/imgs/sten.jpg=200px)
+
 # TI1216 Template Repository
 
 This a template repository to help you get started on making the best project possible!
