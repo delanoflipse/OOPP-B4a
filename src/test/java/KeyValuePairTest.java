@@ -6,7 +6,7 @@ class KeyValuePairTest {
     @Test
     void valueAsInt() {
         KeyValuePair res = new KeyValuePair("some key", "[^\\d.]7");
-        assertEquals(2,res.valueAsInt());
+        assertEquals(7,res.valueAsInt());
     }
 
 }
