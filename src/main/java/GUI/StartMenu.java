@@ -2,6 +2,8 @@ package GUI;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.RadioButton;
 import javafx.scene.paint.Color;
 import main.*;
@@ -11,14 +13,11 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -28,7 +27,18 @@ import java.util.ArrayList;
 public class StartMenu extends Application {
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage stage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/startscreen.fxml"));
+
+        Scene scene = new Scene(root, 1280, 720);
+
+        stage.setTitle("Stichting Lezen en Schrijven - Practice Program");
+        stage.setScene(scene);
+        stage.show();
+
+        return;
+        /*
+
         StackPane rootpane = new StackPane();
         GridPane titlegrid = new GridPane();
         GridPane centergrid = new GridPane();
@@ -79,7 +89,7 @@ public class StartMenu extends Application {
         scene.getStylesheets().add("file:src/stylesheets/start_menu.css");
         primaryStage.setScene(scene);
         primaryStage.show();
-
+        */
     }
 
     public static void askMCquestions(Stage primaryStage) {
