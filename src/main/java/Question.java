@@ -6,7 +6,11 @@ import java.util.ArrayList;
 public abstract class Question {
     public String text;
     public int level;
-    public ArrayList<Answer> answers;
+
+    public Question(String text, int level){
+        this.text = text;
+        this.level = level;
+    }
 
     public abstract boolean isCorrect(int index);
 }

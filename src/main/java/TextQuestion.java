@@ -4,7 +4,8 @@ import java.util.ArrayList;
 public class TextQuestion extends Question {
     public ArrayList<TextAnswer> answers;
 
-    public TextQuestion() {
+    public TextQuestion(String text, int level) {
+        super(text, level);
         this.answers = new ArrayList<TextAnswer>();
     }
 

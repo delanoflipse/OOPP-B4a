@@ -4,22 +4,12 @@ import javax.swing.JLabel;
 
 public class imgQuestion extends Question{
 
-     String path;
+     public String path;
 
     public imgQuestion(String text, int level, String path){
 
         super(text, level);
         this.path = path;
-    }
-
-    public void addAnswer(imgAnswer answer) {
-        answers.add(answer);
-    }
-
-    public String toString(){
-
-        String res;
-        return res;
     }
 
     public void display(){
