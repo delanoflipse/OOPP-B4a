@@ -1,5 +1,6 @@
 package main;
 
+import GUI.StartMenu;
 import main.Database;
 
 import java.util.ArrayList;
@@ -8,8 +9,13 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-
-        askMultipleChoichequestions();
+        new Thread() {
+            @Override
+            public void run() {
+                javafx.application.Application.launch(StartMenu.class);
+            }
+        }.start();
+//        askMultipleChoichequestions();
     }
 
     public static void askMultipleChoichequestions(){

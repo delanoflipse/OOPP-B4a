@@ -29,7 +29,7 @@ public class MCQuestion extends Application {
         titlegrid.setVgap(10);
         titlegrid.setPadding(new Insets(25, 25, 25, 25));
 
-        Image logo = new Image("file:///E:/Documents/TU/OOPP-B4a/src/main/java/GUI/logo.png");
+        Image logo = new Image("file:src/images/logo.png");
         ImageView logov = new ImageView();
         logov.setImage(logo);
         logov.setFitWidth(100);

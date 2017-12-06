@@ -27,10 +27,6 @@ import java.util.ArrayList;
 
 public class StartMenu extends Application {
 
-    public static void main(String[] args) {
-        launch(args);
-    }
-
     @Override
     public void start(Stage primaryStage) {
         StackPane rootpane = new StackPane();
@@ -44,7 +40,7 @@ public class StartMenu extends Application {
         titlegrid.setVgap(10);
         titlegrid.setPadding(new Insets(25, 25, 25, 25));
 
-        Image logo = new Image("file:///C:/Users/woute/Documents/Github/OOPP-B4a/src/main/java/GUI/logo.png");
+        Image logo = new Image("file:src/images/logo.png");
         ImageView logov = new ImageView();
         logov.setImage(logo);
         logov.setFitWidth(100);
@@ -80,7 +76,7 @@ public class StartMenu extends Application {
         centergrid.setGridLinesVisible(false);
 
         Scene scene = new Scene(rootpane, 1280, 720);
-        scene.getStylesheets().add("file:///C:/Users/woute/Documents/Github/OOPP-B4a/src/main/java/GUI/start_menu.css");
+        scene.getStylesheets().add("file:src/stylesheets/start_menu.css");
         primaryStage.setScene(scene);
         primaryStage.show();
 
@@ -101,7 +97,7 @@ public class StartMenu extends Application {
         titlegrid.setVgap(10);
         titlegrid.setPadding(new Insets(25, 25, 25, 25));
 
-        Image logo = new Image("file:///C:/Users/woute/Documents/Github/OOPP-B4a/src/main/java/GUI/logo.png");
+        Image logo = new Image("file:src/images/logo.png");
         ImageView logov = new ImageView();
         logov.setImage(logo);
         logov.setFitWidth(100);
