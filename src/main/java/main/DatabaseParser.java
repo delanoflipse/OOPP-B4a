@@ -1,4 +1,5 @@
-import javax.lang.model.element.NestingKind;
+package main;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -23,7 +24,7 @@ public class DatabaseParser {
                     continue;
                 }
 
-                if (currentQuestion instanceof  TextQuestion) {
+                if (currentQuestion instanceof TextQuestion) {
                     boolean cont = textQuestionLineParse((TextQuestion) currentQuestion, line);
                     if (!cont) {
                         questions.add(currentQuestion);
