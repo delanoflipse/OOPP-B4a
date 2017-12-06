@@ -1,8 +1,8 @@
-import org.javalite.activejdbc.Base;
+package main;
 
-import java.awt.image.DataBuffer;
+import main.Database;
+
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
