@@ -19,6 +19,8 @@ Yana Angelova (4649370)\
 \
 Quint Remington (4713745) †\
 Carl Afriyie (4696069)\
+![alt text](https://github.com/delanoflipse/OOPP-B4a/blob/master/imgs/karl.jpg)
+
 Sten Nijdam(4710673)\
 ![alt text](https://github.com/delanoflipse/OOPP-B4a/blob/master/imgs/sten.jpg | width=200px)
 
