@@ -1,0 +1,20 @@
+# COMMENTAAR
+
+# fancy syntax
+type: text
+level: 1
+question: How long is 1 metre?
+    answer: 0.5 metre.
+    correctanswer: 1 metre.
+    answer: Yes.
+    answer: I have no idea.
+    answer: What was the question?
+    answer: I refuse to answer
+
+# this works tooc:
+        type :   text
+level:  1
+        question:Answer correct
+ correctanswer: correct
+    answer:   not soo correct
+  answer:     Lorem Ipsum something something
