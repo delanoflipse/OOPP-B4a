@@ -18,6 +18,8 @@ Yana Angelova (4649370)\
 <img src="https://github.com/delanoflipse/OOPP-B4a/blob/master/imgs/Yana.png" width=300>
 \
 Quint Remington (4713745) †\
+<img src="https://github.com/delanoflipse/OOPP-B4a/blob/master/imgs/quint.png" width=300>
+
 Carl Afriyie (4696069)\
 <img src="https://github.com/delanoflipse/OOPP-B4a/blob/master/imgs/karl.jpg" width=300>
 
