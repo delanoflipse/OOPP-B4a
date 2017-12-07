@@ -140,6 +140,6 @@ class KeyValuePair {
     }
 
     public int valueAsInt() {
-        return Integer.parseInt(value.replaceAll("[^\\d.]", ""));
+        return Integer.parseInt(value.replaceAll("[^\\d]", ""));
     }
 }
