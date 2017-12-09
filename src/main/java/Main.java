@@ -54,26 +54,43 @@ public class Main {
         String type1 = input.nextLine();
         System.out.println("0. What is the question you'd like to add?");
         String question1 = input.nextLine();
-        System.out.println("1. Is the answer you're about to add an correct or wrong answer?");
+        System.out.println("1. Is the answer you're about to add a correct or wrong answer?");
         String typeanswer1 = input.nextLine();
         System.out.println("1. What is the first answer you'd like to add?");
         String answer1 = input.nextLine();
-        System.out.println("2. Is the answer you're about to add an correct or wrong answer?");
+        System.out.println("2. Is the answer you're about to add a correct or wrong answer?");
         String typeanswer2 = input.nextLine();
         System.out.println("2. What is the second answer you'd like to add?");
         String answer2 = input.nextLine();
-        System.out.println("3. Is the answer you're about to add an correct or wrong answer?");
+        System.out.println("3. Is the answer you're about to add a correct or wrong answer?");
         String typeanswer3 = input.nextLine();
         System.out.println("3. What is the third answer you'd like to add?");
         String answer3 = input.nextLine();
+        System.out.println("4. Is the answer you're about to add a correct or wrong answer?");
+        String typeanswer4 = input.nextLine();
+        System.out.println("4. What is the fourth answer you'd like to add?");
+        String answer4 = input.nextLine();
+        System.out.println("Would you like to add another answer? Answer with: Yes or no");
+        String adding1 = input.nextLine();
+        System.out.println("5. Is the answer you're about to add a correct or wrong answer?");
+        String typeanswer5 = input.nextLine();
+        System.out.println("5. What is the fifth answer you'd like to add?");
+        String answer5 = input.nextLine();
+        System.out.println("Would you like to add another answer? Answer with: Yes or no");
+        String adding2 = input.nextLine();
+        System.out.println("6. Is the answer you're about to add a correct or wrong answer?");
+        String typeanswer6 = input.nextLine();
+        System.out.println("6. What is the sixth answer you'd like to add?");
+        String answer6 = input.nextLine();
+
 
         String correctanswer = input.nextLine();
 
         if(typeanswer1.contains("correct")) {
-            typeanswer1 = "correctanswer: ";
+            typeanswer1 = "correctanswer: " + answer1;
         }
         else{
-            typeanswer1 = "answer";
+            typeanswer1 = "answer: " + answer1;
         }
 
         if(typeanswer2.contains("correct")) {
@@ -87,10 +104,44 @@ public class Main {
             typeanswer3 = "correctanswer: " + answer3;
         }
         else{
-            typeanswer2 = "answer: " + answer3;
+            typeanswer3 = "answer: " + answer3;
         }
 
-        String fullquestion = ("type: " + type1 + "\n" + "question: " + question1 + "\n   " + typeanswer1 + answer1 + "\n   " + typeanswer2);
+        if(typeanswer4.contains("correct")) {
+            typeanswer4 = "correctanswer: " + answer4;
+        }
+        else{
+            typeanswer4 = "answer: " + answer4;
+        }
+
+        if(typeanswer5.contains("correct")) {
+            typeanswer5 = "correctanswer: " + answer5;
+        }
+        else{
+            typeanswer5 = "answer: " + answer5;
+        }
+
+        if(typeanswer6.contains("correct")) {
+            typeanswer6 = "correctanswer: " + answer6;
+        }
+        else{
+            typeanswer6 = "answer: " + answer6;
+        }
+
+        if(adding1.contains("no")){
+            System.exit(0);
+        }
+
+        if(adding2.contains("no")){
+            System.exit(0);
+        }
+
+
+
+
+
+        String fullquestion = ("type: " + type1 + "\n" + "question: " + question1 + "\n   " + typeanswer1 + "\n   " + typeanswer2
+                + "\n   " + typeanswer3  + "\n   " + typeanswer4  + "\n   " + typeanswer5  + "\n   " + typeanswer6);
         System.out.println(fullquestion);
     }
 
