@@ -67,9 +67,7 @@ public class StartMenu extends Application {
         centergrid.setPadding(new Insets(25, 25, 25, 25));
 
         Button MCbutton = new Button();
-        MCbutton.setOnAction(e -> {
-            askMCquestions(primaryStage);
-        });
+
         MCbutton.setMinSize(300, 300);
         centergrid.add(MCbutton, 0, 0);
 
@@ -77,115 +75,15 @@ public class StartMenu extends Application {
         centergrid.setGridLinesVisible(false);
 
         Scene scene = new Scene(rootpane, 1280, 720);
+        MCbutton.setOnAction(e -> {
+            MCQuestion.askQuestions(primaryStage, scene);
+        });
         scene.getStylesheets().add("file:src/stylesheets/start_menu.css");
         primaryStage.setScene(scene);
+        primaryStage.setHeight(720);
+        primaryStage.setWidth(1280);
         primaryStage.show();
 
     }
 
-    public static void askMCquestions(Stage primaryStage) {
-        Database.loadDatabase();
-        ArrayList<Question> questionlist = Database.getQuestionsForLevel(1);
-
-        StackPane rootpane = new StackPane();
-        GridPane titlegrid = new GridPane();
-
-        primaryStage.setTitle("Stichting Lezen en Schrijven - Practice Program");
-        titlegrid.setAlignment(Pos.TOP_LEFT);
-        titlegrid.setHgap(30);
-        titlegrid.setVgap(10);
-        titlegrid.setPadding(new Insets(25, 25, 25, 25));
-
-        Image logo = new Image("file:src/images/logo.png");
-        ImageView logov = new ImageView();
-        logov.setImage(logo);
-        logov.setFitWidth(100);
-        logov.setPreserveRatio(true);
-        logov.setSmooth(true);
-        logov.setCache(true);
-        titlegrid.add(logov, 0, 0);
-
-        Text title = new Text("Multiple Choiche Questions");
-        title.setId("Title");
-        titlegrid.add(title, 1, 0);
-
-
-        int i = 1;
-
-        for (Question question : questionlist) {
-
-            GridPane centergrid = new GridPane();
-
-            centergrid.setAlignment(Pos.CENTER_LEFT);
-            centergrid.setHgap(30);
-            centergrid.setVgap(10);
-            centergrid.setPadding(new Insets(25, 25, 25, 25));
-
-            TextQuestion q = (TextQuestion) question;
-            ToggleGroup answergroup = new ToggleGroup();
-            ArrayList<RadioButton> answerbuttons = new ArrayList<RadioButton>();
-
-            Text qtitle = new Text("Question" + i);
-            centergrid.add(qtitle, 0, 0);
-
-            Text qtext = new Text(q.text);
-            centergrid.add(qtext, 0, 1);
-            for (Answer answer : q.answers) {
-                TextAnswer tanswer = (TextAnswer) answer;
-                answerbuttons.add(new RadioButton(tanswer.text));
-            }
-            int j = 1;
-            for (RadioButton button : answerbuttons) {
-                button.setToggleGroup(answergroup);
-                j++;
-                centergrid.add(button, 0, j);
-            }
-            Button submit = new Button("Submit");
-            final Text response = new Text();
-
-            submit.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-
-                public void handle(ActionEvent event) {
-
-                    int selected = answerbuttons.indexOf((RadioButton) answergroup.getSelectedToggle());
-                    if (q.isCorrect(selected)) {
-
-                        response.setFill(Color.DARKGREEN);
-                        response.setText("That is correct. We'll go to the next question");
-                        try {
-                            Thread.sleep(3000);
-                        } catch (Exception exception) {
-                            System.out.println("woops");
-                        }
-
-                    } else {
-                        response.setFill(Color.FIREBRICK);
-                        response.setText("That is incorrect. The answer was ... We'll go to the next question");
-                        try {
-                            Thread.sleep(3000);
-                        } catch (Exception exception) {
-                            System.out.println("woops");
-                        }
-
-                    }
-
-                }
-            });
-            centergrid.add(submit, 1, j + 1);
-
-            i++;
-
-            rootpane.getChildren().addAll(titlegrid, centergrid);
-            Scene scene = new Scene(rootpane, primaryStage.getWidth(), primaryStage.getHeight());
-            //scene.getStylesheets().add("file:///C:/Users/woute/Documents/Github/OOPP-B4a/src/main/java/GUI/start_menu.css");
-            primaryStage.setScene(scene);
-            primaryStage.show();
-
-            rootpane.getChildren().removeAll(titlegrid, centergrid);
-
-
-        }
-
-    }
 }
