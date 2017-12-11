@@ -71,9 +71,11 @@ public class MCQuestion {
         answerbuttons = new ArrayList<RadioButton>();
 
         Text qtitle = new Text("Question 1");
+        qtitle.setId("qtitle");
         centergrid.add(qtitle, 0, 0);
 
         Text qtext = new Text(q.text);
+        qtext.setId("qtext");
         centergrid.add(qtext, 0, 1);
         for (Answer answer : q.answers) {
             TextAnswer tanswer = (TextAnswer) answer;
@@ -86,6 +88,7 @@ public class MCQuestion {
             centergrid.add(button, 0, j);
         }
         response = new Text("");
+        response.setId("responsetext");
         centergrid.add(response, 0, j + 1);
 
         i=0;
@@ -111,16 +114,17 @@ public class MCQuestion {
                 }
                 final int col = centergrid.getColumnIndex(submit);
                 final int row = centergrid.getRowIndex(submit);
-                centergrid.add(next, col, row);
+                centergrid.add(next, col+1, row);
                 centergrid.getChildren().remove(submit);
             }
         });
-        centergrid.add(submit, 1, j+1);
+        centergrid.add(submit, 0, j+1);
 
         next.setOnAction(e -> showNextQuestion());
 
         root.getChildren().add(centergrid);
         Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight());
+        scene.getStylesheets().add("file:src/stylesheets/MCquestions.css");
         primaryStage.setScene(scene);
 
     }
@@ -139,9 +143,11 @@ public class MCQuestion {
         centergrid.getChildren().clear();
         TextQuestion q = (TextQuestion) questionlist.get(i);
         Text qtitle = new Text("Question " + (i+1));
+        qtitle.setId("qtitle");
         centergrid.add(qtitle, 0, 0);
 
         Text qtext = new Text(q.text);
+        qtext.setId("qtext");
         centergrid.add(qtext, 0, 1);
         answerbuttons.clear();
         for (Answer answer : q.answers) {
@@ -156,13 +162,17 @@ public class MCQuestion {
         }
         response.setText("");
         centergrid.add(response, 0, j + 1);
-        centergrid.add(submit, 1, j+1);
+        centergrid.add(submit, 0, j+1);
     }
 
     private static void done(GridPane centergrid, ArrayList<Question> questionlist, Stage primaryStage){
         Text end = new Text("That were all the question, well done!");
         Text endscore = new Text("Your score is: " + score + " out of " + questionlist.size());
         Text back = new Text("You will be redirected to the startscreen, when you click exit.");
+
+        end.setId("end");
+        endscore.setId("end");
+        back.setId("end");
 
         centergrid.getChildren().clear();
         centergrid.add(end, 0, 0);
