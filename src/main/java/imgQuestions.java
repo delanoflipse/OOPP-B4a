@@ -12,6 +12,9 @@ public class imgQuestion extends Question{
         this.path = path;
     }
 
+
+
+
     public void display(){
         JFrame frame = new JFrame();
         ImageIcon icon = new ImageIcon(path);
@@ -24,9 +27,7 @@ public class imgQuestion extends Question{
     }
 
     public boolean isCorrect(int index) {
-        if (answers.size() > index) {
-            return answers.get(index).correct;
-        }
+ 
 
         return false;
     }
