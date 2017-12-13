@@ -18,3 +18,41 @@ level:  1
  correctanswer: correct
     answer:   not soo correct
   answer:     Lorem Ipsum something something
+
+
+
+
+
+
+#1
+type: clickable
+level: 1
+question: What is the title of the text?
+    answer: een speciale bestelling # de box van de titel
+    answer: gefeliciteerd # de box van gefeliciteerd
+    correctanswer: een speciale bestelling
+
+
+#2
+type: clickable
+level: 1
+question: How long is 1 metre?
+    answer: 0.5 metre.
+    correctanswer: 1 metre.
+    answer: Yes.
+    answer: I have no idea.
+    answer: What was the question?
+    answer: I refuse to answer
+
+
+
+
+
+
+
+
+
+
+
+
+
