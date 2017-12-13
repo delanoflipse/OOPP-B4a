@@ -75,9 +75,11 @@ public class StartMenu extends Application {
         centergrid.setGridLinesVisible(false);
 
         Scene scene = new Scene(rootpane, 1280, 720);
+
         MCbutton.setOnAction(e -> {
             MCQuestion.askQuestions(primaryStage, scene);
         });
+
         scene.getStylesheets().add("file:src/stylesheets/start_menu.css");
         primaryStage.setScene(scene);
         primaryStage.setHeight(720);
