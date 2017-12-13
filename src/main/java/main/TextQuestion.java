@@ -6,8 +6,7 @@ import java.util.ArrayList;
 public class TextQuestion extends Question {
     public ArrayList<TextAnswer> answers;
 
-    public TextQuestion(String text, int level) {
-        super(text, level);
+    public TextQuestion() {
         this.answers = new ArrayList<TextAnswer>();
     }
 

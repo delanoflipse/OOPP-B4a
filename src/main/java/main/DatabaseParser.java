@@ -61,8 +61,8 @@ public class DatabaseParser {
         }
 
         return new KeyValuePair(
-          line.substring(0, index).trim(),
-          line.substring(index + 1, line.length()).trim()
+                line.substring(0, index).trim(),
+                line.substring(index + 1, line.length()).trim()
         );
 
     }

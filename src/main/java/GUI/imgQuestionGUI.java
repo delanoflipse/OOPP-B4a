@@ -1,22 +1,17 @@
+package GUI;
+
+import GUI.AlertBox;
 import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.embed.swing.SwingFXUtils;
-import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.SnapshotParameters;
-import javafx.scene.image.WritableImage;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javax.imageio.ImageIO;
-import java.io.File;
-import java.io.IOException;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class imgQuestionGUI extends Application{
 
@@ -36,8 +31,8 @@ public class imgQuestionGUI extends Application{
         window = primaryStage;
         window.setTitle("title");
 
-        question = new Label("Click my eyes");
-        questionImg = new Image("file:///C:/Documents/knul.jpg");
+        question = new Label("Click me!");
+        questionImg = new Image("file:src/images/knul.jpg");
         questionImgV = new ImageView();
         questionImgV.setImage(questionImg);
         questionImgV.setFitWidth(500);
@@ -47,9 +42,14 @@ public class imgQuestionGUI extends Application{
         questionImgV.setCache(true);
         questionImgV.setOnMouseClicked(e -> AlertBox.Display("Nice!", "U did it, great job!!!"));
 
-        StackPane layout = new StackPane();
-        layout.getChildren().addAll(question, questionImgV);
-        Scene question1 = new Scene(layout, 300, 250);
+        GridPane layout = new GridPane();
+        layout.setAlignment(Pos.CENTER_LEFT);
+        layout.setHgap(30);
+        layout.setVgap(10);
+        layout.setPadding(new Insets(25, 25, 25, 25));
+        layout.add(question, 0, 0);
+        layout.add(questionImgV, 0, 1);
+        Scene question1 = new Scene(layout, 1000, 1000);
         window.setScene(question1);
         window.show();
     }

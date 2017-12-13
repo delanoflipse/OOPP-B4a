@@ -1,14 +1,16 @@
+package main;
+
 import javax.swing.JFrame;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 public class imgQuestion extends Question{
 
-     public String path;
+    public String path;
 
-    public imgQuestion(String text, int level, String path){
+    public imgQuestion( String path){
 
-        super(text, level);
+
         this.path = path;
     }
 
@@ -27,7 +29,7 @@ public class imgQuestion extends Question{
     }
 
     public boolean isCorrect(int index) {
- 
+
 
         return false;
     }
