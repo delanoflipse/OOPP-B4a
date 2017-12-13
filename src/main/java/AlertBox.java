@@ -27,7 +27,7 @@ public class AlertBox {
 
         Label label = new Label();
         label.setText(alert);
-        Button closeButton = new Button("Ok");
+        Button closeButton = new Button("Next question");
         closeButton.setOnAction(e -> window.close());
 
         VBox layout = new VBox(10);

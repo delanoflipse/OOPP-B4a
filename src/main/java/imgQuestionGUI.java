@@ -36,20 +36,19 @@ public class imgQuestionGUI extends Application{
         window = primaryStage;
         window.setTitle("title");
 
-        nextQuestion = new Button("Next question");
         question = new Label("Click my eyes");
         questionImg = new Image("file:///C:/Documents/knul.jpg");
         questionImgV = new ImageView();
         questionImgV.setImage(questionImg);
-        questionImgV.setFitWidth(100);
-        questionImgV.setFitHeight(100);
+        questionImgV.setFitWidth(500);
+        questionImgV.setFitHeight(500);
         questionImgV.setPreserveRatio(false);
         questionImgV.setSmooth(true);
         questionImgV.setCache(true);
         questionImgV.setOnMouseClicked(e -> AlertBox.Display("Nice!", "U did it, great job!!!"));
 
         StackPane layout = new StackPane();
-        layout.getChildren().addAll(question, questionImgV, nextQuestion);
+        layout.getChildren().addAll(question, questionImgV);
         Scene question1 = new Scene(layout, 300, 250);
         window.setScene(question1);
         window.show();
