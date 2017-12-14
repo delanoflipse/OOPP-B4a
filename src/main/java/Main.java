@@ -52,6 +52,8 @@ public class Main {
 
         System.out.println("What kind of question do you want? Insert: text or image.");
         String type1 = input.nextLine();
+        System.out.println("What level difficulty is this question? Choose between 1, 2 or 3");
+        String difficulty = input.nextLine();
         System.out.println("0. What is the question you'd like to add?");
         String question1 = input.nextLine();
         System.out.println("1. Is the answer you're about to add a correct or wrong answer?");
@@ -106,7 +108,7 @@ public class Main {
         String adding1 = input.nextLine();
 
         if(adding1.contains("no")){
-            String fullquestion = ("type: " + type1 + "\n" + "question: " + question1 + "\n   " + typeanswer1 + "\n   " + typeanswer2
+            String fullquestion = ("type: " + type1 + "\n" + "level: " + difficulty + "\n" + "question: " + question1 + "\n   " + typeanswer1 + "\n   " + typeanswer2
                     + "\n   " + typeanswer3  + "\n   " + typeanswer4);
             System.out.println(fullquestion);
 
@@ -132,7 +134,7 @@ public class Main {
         String adding2 = input.nextLine();
 
         if(adding2.contains("no")){
-            String fullquestion = ("type: " + type1 + "\n" + "question: " + question1 + "\n   " + typeanswer1 + "\n   " + typeanswer2
+            String fullquestion = ("type: " + type1 + "\n" + "level: " + difficulty + "\n" + "question: " + question1 + "\n   " + typeanswer1 + "\n   " + typeanswer2
                     + "\n   " + typeanswer3  + "\n   " + typeanswer4  + "\n   " + typeanswer5);
             System.out.println(fullquestion);
 
@@ -154,7 +156,7 @@ public class Main {
             typeanswer6 = "answer: " + answer6;
         }
 
-        String fullquestion = ("type: " + type1 + "\n" + "question: " + question1 + "\n   " + typeanswer1 + "\n   " + typeanswer2
+        String fullquestion = ("type: " + type1 + "\n" + "level: " + difficulty + "\n" + "question: " + question1 + "\n   " + typeanswer1 + "\n   " + typeanswer2
                 + "\n   " + typeanswer3  + "\n   " + typeanswer4  + "\n   " + typeanswer5 + "\n   " + typeanswer6);
         System.out.println(fullquestion);
     }
