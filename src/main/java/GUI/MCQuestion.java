@@ -15,12 +15,20 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import main.*;
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
+import tts.TextToSpeech;
 
 import java.util.ArrayList;
 
 public class MCQuestion {
+    private static Service<Void> backGroundThread;
+    private static TextToSpeech tts = new TextToSpeech();
 
-    private static int i;
+
+
+    private static String ttsfinal = "" ;
+    private static int i ;
     private static int score;
     private static Text response;
     private static ArrayList<RadioButton> answerbuttons;
@@ -33,6 +41,7 @@ public class MCQuestion {
     private static Scene startMenu;
 
     public static void askQuestions(Stage stage, Scene start){
+        ttsfinal = ttsfinal + "welcome to the multiple choice questions ";
         primaryStage = stage;
         startMenu = start;
         Database.loadDatabase();
@@ -58,8 +67,7 @@ public class MCQuestion {
         Text title = new Text("Multiple Choice Questions");
         title.setId("Title");
         titlegrid.add(title, 1, 0);
-
-        root.getChildren().add(titlegrid);
+        //root.getChildren().add(titlegrid);
 
         centergrid = new GridPane();
         centergrid.setAlignment(Pos.CENTER_LEFT);
@@ -73,14 +81,17 @@ public class MCQuestion {
         Text qtitle = new Text("Question 1");
         qtitle.setId("qtitle");
         centergrid.add(qtitle, 0, 0);
-
+        ttsfinal = ttsfinal + "question 1";
         Text qtext = new Text(q.text);
         qtext.setId("qtext");
         centergrid.add(qtext, 0, 1);
+
         for (Answer answer : q.answers) {
             TextAnswer tanswer = (TextAnswer) answer;
             answerbuttons.add(new RadioButton(tanswer.text));
+            ttsfinal = ttsfinal + tanswer.text + " ";
         }
+
         int j = 1;
         for (RadioButton button : answerbuttons) {
             button.setToggleGroup(answergroup);
@@ -95,6 +106,7 @@ public class MCQuestion {
         Button next = new Button("Continue");
 
         submit = new Button("Submit");
+        submit.setOnMouseEntered(e-> tts("submit"));
         submit.setOnAction(e -> {
             if (answerbuttons.indexOf(answergroup.getSelectedToggle()) != -1) {
                 int selected = answerbuttons.indexOf(answergroup.getSelectedToggle());
@@ -102,6 +114,7 @@ public class MCQuestion {
                     addScore();
                     response.setFill(Color.DARKGREEN);
                     response.setText("That is correct. Click continue to go to the next question");
+                    tts("That is correct. Click continue to go to the next question");
                 } else {
                     for (Answer answer : ((TextQuestion) questionlist.get(i)).answers) {
                         TextAnswer tanswer = (TextAnswer) answer;
@@ -109,6 +122,7 @@ public class MCQuestion {
                             final String answertext = tanswer.text;
                             response.setFill(Color.FIREBRICK);
                             response.setText("That is incorrect. The answer was:\n" + answertext + "\nClick continue to go to the next question");
+                            tts("That is incorrect. The answer was:" + answertext + "Click continue to go to the next question");
                         }
                     }
                 }
@@ -119,7 +133,7 @@ public class MCQuestion {
             }
         });
         centergrid.add(submit, 0, j+1);
-
+        next.setOnMouseEntered(e -> tts("continue"));
         next.setOnAction(e -> showNextQuestion());
 
         root.getChildren().add(centergrid);
@@ -132,7 +146,28 @@ public class MCQuestion {
     private static void addScore(){
         score++;
     }
+    private static void tts(String text){
+        backGroundThread = new Service<Void>() {
+            protected Task<Void> createTask() {
+                return new Task<Void>() {
+                    @Override
+                    protected Void call() throws Exception {
 
+
+                        tts.speak(text, 1, false, true);
+                        return null;
+
+                    }
+
+
+                };
+            }
+
+
+        };
+        backGroundThread.restart();
+
+    }
     private static void showNextQuestion(){
         i++;
         if (i >= questionlist.size()){

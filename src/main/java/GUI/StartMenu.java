@@ -22,12 +22,13 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import tts.TextToSpeech;
 
 
 import java.util.ArrayList;
 
 public class StartMenu extends Application {
-
+    public static final TextToSpeech tts = new TextToSpeech();
     @Override
     public void start(Stage primaryStage) {
         StackPane rootpane = new StackPane();
@@ -75,7 +76,9 @@ public class StartMenu extends Application {
         centergrid.setGridLinesVisible(false);
 
         Scene scene = new Scene(rootpane, 1280, 720);
-
+        MCbutton.setOnMouseEntered(e -> {
+            tts("multiple choice questions", false);
+        });
         MCbutton.setOnAction(e -> {
             MCQuestion.askQuestions(primaryStage, scene);
         });
@@ -87,5 +90,7 @@ public class StartMenu extends Application {
         primaryStage.show();
 
     }
-
+    public static void tts(String text, boolean wait){
+        tts.speak(text,1,false,wait);
+    }
 }
