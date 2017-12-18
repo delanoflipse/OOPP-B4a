@@ -67,7 +67,7 @@ public class MCQuestion {
         Text title = new Text("Multiple Choice Questions");
         title.setId("Title");
         titlegrid.add(title, 1, 0);
-        //root.getChildren().add(titlegrid);
+        root.getChildren().add(titlegrid);
 
         centergrid = new GridPane();
         centergrid.setAlignment(Pos.CENTER_LEFT);
@@ -78,18 +78,19 @@ public class MCQuestion {
         answergroup = new ToggleGroup();
         answerbuttons = new ArrayList<RadioButton>();
 
-        Text qtitle = new Text("Question 1");
+        Text qtitle = new Text("Question 1 ");
         qtitle.setId("qtitle");
         centergrid.add(qtitle, 0, 0);
-        ttsfinal = ttsfinal + "question 1";
+        ttsfinal = ttsfinal + "question 1 ";
         Text qtext = new Text(q.text);
         qtext.setId("qtext");
+        ttsfinal = ttsfinal + qtext.getText() + " ";
         centergrid.add(qtext, 0, 1);
 
         for (Answer answer : q.answers) {
             TextAnswer tanswer = (TextAnswer) answer;
             answerbuttons.add(new RadioButton(tanswer.text));
-            ttsfinal = ttsfinal + tanswer.text + " ";
+            ttsfinal = ttsfinal + " " + tanswer.text + " ";
         }
 
         int j = 1;
@@ -140,6 +141,7 @@ public class MCQuestion {
         Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight());
         scene.getStylesheets().add("file:src/stylesheets/MCquestions.css");
         primaryStage.setScene(scene);
+        tts(ttsfinal);
 
     }
 
@@ -147,14 +149,21 @@ public class MCQuestion {
         score++;
     }
     private static void tts(String text){
+
         backGroundThread = new Service<Void>() {
             protected Task<Void> createTask() {
                 return new Task<Void>() {
                     @Override
                     protected Void call() throws Exception {
+                        boolean busy = false;
+                        if(busy){
 
-
-                        tts.speak(text, 1, false, true);
+                        }
+                        else {
+                            busy = true;
+                            tts.speak(text, 1, false, true);
+                            busy = false;
+                        }
                         return null;
 
                     }
@@ -165,12 +174,15 @@ public class MCQuestion {
 
 
         };
-        backGroundThread.restart();
+
+        backGroundThread.start();
 
     }
+
     private static void showNextQuestion(){
         i++;
         if (i >= questionlist.size()){
+            backGroundThread.cancel();
             done(centergrid, questionlist, primaryStage);
             return;
         }
