@@ -24,7 +24,7 @@ import java.util.ArrayList;
 public class MCQuestion {
     private static Service<Void> backGroundThread;
     private static TextToSpeech tts = new TextToSpeech();
-
+    protected static boolean playtts = false;
 
 
     private static String ttsfinal = "" ;
@@ -41,13 +41,17 @@ public class MCQuestion {
     private static Scene startMenu;
 
     public static void askQuestions(Stage stage, Scene start){
+
         ttsfinal = ttsfinal + "welcome to the multiple choice questions ";
+
+
         primaryStage = stage;
         startMenu = start;
         Database.loadDatabase();
         questionlist = Database.getQuestionsForLevel(1);
         score = 0;
         root = new StackPane();
+        
 
         GridPane titlegrid = new GridPane();
         titlegrid.setAlignment(Pos.TOP_LEFT);
@@ -84,7 +88,7 @@ public class MCQuestion {
         ttsfinal = ttsfinal + "question 1 ";
         Text qtext = new Text(q.text);
         qtext.setId("qtext");
-        ttsfinal = ttsfinal + qtext.getText() + " ";
+        ttsfinal = ttsfinal + "what is correct? ";
         centergrid.add(qtext, 0, 1);
 
         for (Answer answer : q.answers) {
@@ -133,6 +137,10 @@ public class MCQuestion {
                 centergrid.getChildren().remove(submit);
             }
         });
+        Button tts = new Button("tts");
+
+        centergrid.add(tts,1,5);
+        tts.setOnMouseClicked(e -> {if(playtts){playtts = false;tts("g");}else{playtts=true;tts(ttsfinal);}});
         centergrid.add(submit, 0, j+1);
         next.setOnMouseEntered(e -> tts("continue"));
         next.setOnAction(e -> showNextQuestion());
@@ -155,15 +163,12 @@ public class MCQuestion {
                 return new Task<Void>() {
                     @Override
                     protected Void call() throws Exception {
-                        boolean busy = false;
-                        if(busy){
-
-                        }
-                        else {
-                            busy = true;
-                            tts.speak(text, 1, false, true);
-                            busy = false;
-                        }
+                            if(playtts) {
+                                tts.speak(text, 1, false, true);
+                            }
+                            else{
+                                tts.speak(" ",1,false,false);
+                            }
                         return null;
 
                     }
@@ -186,20 +191,23 @@ public class MCQuestion {
             done(centergrid, questionlist, primaryStage);
             return;
         }
-
+        String newtts = " ";
         centergrid.getChildren().clear();
         TextQuestion q = (TextQuestion) questionlist.get(i);
         Text qtitle = new Text("Question " + (i+1));
+        newtts = newtts + "Question " + (i+1) + ". ";
         qtitle.setId("qtitle");
         centergrid.add(qtitle, 0, 0);
 
         Text qtext = new Text(q.text);
+        newtts = newtts + "what is correct? ";
         qtext.setId("qtext");
         centergrid.add(qtext, 0, 1);
         answerbuttons.clear();
         for (Answer answer : q.answers) {
             TextAnswer tanswer = (TextAnswer) answer;
             answerbuttons.add(new RadioButton(tanswer.text));
+            newtts = newtts + tanswer.text + " ";
         }
         int j = 1;
         for (RadioButton button : answerbuttons) {
@@ -210,13 +218,15 @@ public class MCQuestion {
         response.setText("");
         centergrid.add(response, 0, j + 1);
         centergrid.add(submit, 0, j+1);
+        tts(newtts);
     }
 
     private static void done(GridPane centergrid, ArrayList<Question> questionlist, Stage primaryStage){
+        String endtts ="";
         Text end = new Text("That were all the question, well done!");
         Text endscore = new Text("Your score is: " + score + " out of " + questionlist.size());
         Text back = new Text("You will be redirected to the startscreen, when you click exit.");
-
+        endtts = endtts + "That were all the question, well done!" +  "Your score is: " + score + ". out of ." + questionlist.size() + ". You will be redirected to the startscreen, when you click exit.";
         end.setId("end");
         endscore.setId("end");
         back.setId("end");
@@ -228,13 +238,13 @@ public class MCQuestion {
 
         Button exit = new Button("Exit");
         exit.setOnAction(e -> primaryStage.setScene(startMenu));
-
+        exit.setOnMouseEntered(e -> {tts("exit");});
         HBox exitbox = new HBox();
         exitbox.setAlignment(Pos.CENTER);
         exitbox.getChildren().add(exit);
 
         centergrid.add(exitbox ,0, 3);
-
+        tts(endtts);
 
     }
 

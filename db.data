@@ -3,30 +3,25 @@
 # fancy syntax
 type: text
 level: 1
-question: How long is 1 metre?
-    answer: 0.5 metre.
-    correctanswer: 1 metre.
-    answer: Yes.
-    answer: I have no idea.
-    answer: What was the question?
-    answer: I refuse to answer
+question: Henk is in late tomorrow, because he has to go to the dentist. What is correct?
+    correctanswer: Henk is ill.
+    answer: Henk is late today.
+    answer: From now on Henk will be late for work.
+    answer: None of the above.
+
 
 # this works tooc:
         type :   text
 level:  1
-        question:Answer correct
- correctanswer: correct
-    answer:   not soo correct
-  answer:     Lorem Ipsum something something
+        question: Anne is travelling to New York on Friday morning. What is correct?
+ answer: Anne is in New York.
+    answer:   Anne loves to travel.
+  answer:     Anne is flying to New York on Friday.
+  correctanswer:       None of the above.
 
-type: open
-level: 1
-question: Hoeveel is 2 + 2 = 3 - 1 ?
-correctanswer: quick maths
+  type: text
+  level : 1
+  question: lallalallalla
+  answer: lalal1
+  correctanswer: lala2
 
-type: image
-level: 1
-image: picture.jpg
-question: Wat?
-topleft: 1,1
-bottomright: 2,2

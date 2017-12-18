@@ -37,6 +37,7 @@ public class StartMenu extends Application {
         rootpane.getChildren().addAll(titlegrid, centergrid);
 
         primaryStage.setTitle("Stichting Lezen en Schrijven - Practice Program");
+
         titlegrid.setAlignment(Pos.TOP_CENTER);
         titlegrid.setHgap(30);
         titlegrid.setVgap(10);
@@ -88,6 +89,7 @@ public class StartMenu extends Application {
         primaryStage.setHeight(720);
         primaryStage.setWidth(1280);
         primaryStage.show();
+
 
     }
     public static void tts(String text, boolean wait){
