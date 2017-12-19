@@ -21,10 +21,12 @@ import tts.TextToSpeech;
 
 import java.util.ArrayList;
 
+import static GUI.StartMenu.playtts;
+
 public class MCQuestion {
     private static Service<Void> backGroundThread;
     private static TextToSpeech tts = new TextToSpeech();
-    protected static boolean playtts = false;
+
 
 
     private static String ttsfinal = "" ;
@@ -137,10 +139,9 @@ public class MCQuestion {
                 centergrid.getChildren().remove(submit);
             }
         });
-        Button tts = new Button("tts");
-
-        centergrid.add(tts,1,5);
-        tts.setOnMouseClicked(e -> {if(playtts){playtts = false;tts("g");}else{playtts=true;tts(ttsfinal);}});
+        if(playtts){
+            tts(ttsfinal);
+        }
         centergrid.add(submit, 0, j+1);
         next.setOnMouseEntered(e -> tts("continue"));
         next.setOnAction(e -> showNextQuestion());
@@ -149,7 +150,7 @@ public class MCQuestion {
         Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight());
         scene.getStylesheets().add("file:src/stylesheets/MCquestions.css");
         primaryStage.setScene(scene);
-        tts(ttsfinal);
+
 
     }
 

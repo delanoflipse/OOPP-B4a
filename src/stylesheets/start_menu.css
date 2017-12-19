@@ -10,7 +10,7 @@
     -fx-fill: #cd6600;
     -fx-effect: innershadow(two-pass-box, #8b4500, 6, 0.0, 0, 2);
 }
-.button{
+#MCbutton {
     -fx-background-image: url("../images/mcquestions.jpg");
     -fx-background-size: cover;
 }

@@ -29,6 +29,8 @@ import java.util.ArrayList;
 
 public class StartMenu extends Application {
     public static final TextToSpeech tts = new TextToSpeech();
+    public static boolean playtts = false;
+
     @Override
     public void start(Stage primaryStage) {
         StackPane rootpane = new StackPane();
@@ -69,6 +71,7 @@ public class StartMenu extends Application {
         centergrid.setPadding(new Insets(25, 25, 25, 25));
 
         Button MCbutton = new Button();
+        MCbutton.setId("MCbutton");
 
         MCbutton.setMinSize(300, 300);
         centergrid.add(MCbutton, 0, 0);
@@ -84,14 +87,26 @@ public class StartMenu extends Application {
             MCQuestion.askQuestions(primaryStage, scene);
         });
 
+        Button ttsB = new Button("tts");
+
+        centergrid.add(ttsB, 1, 5);
+        ttsB.setOnMouseClicked(e -> {
+            if (playtts) {
+                playtts = false;
+                ;
+            } else {
+                playtts = true;
+            }
+        });
+
         scene.getStylesheets().add("file:src/stylesheets/start_menu.css");
         primaryStage.setScene(scene);
         primaryStage.setHeight(720);
         primaryStage.setWidth(1280);
         primaryStage.show();
-
-
     }
+
+
     public static void tts(String text, boolean wait){
         tts.speak(text,1,false,wait);
     }
