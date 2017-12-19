@@ -98,7 +98,7 @@ public class MCQuestion {
         submit.setOnAction(e -> {
             if (answerbuttons.indexOf(answergroup.getSelectedToggle()) != -1) {
                 int selected = answerbuttons.indexOf(answergroup.getSelectedToggle());
-                if (questionlist.get(i).isCorrect(selected)) {
+                if (((TextQuestion) questionlist.get(i)).isCorrect(selected)) {
                     addScore();
                     response.setFill(Color.DARKGREEN);
                     response.setText("That is correct. Click continue to go to the next question");
@@ -140,7 +140,6 @@ public class MCQuestion {
             return;
         }
 
-        centergrid.getChildren().clear();
         TextQuestion q = (TextQuestion) questionlist.get(i);
         Text qtitle = new Text("Question " + (i+1));
         qtitle.setId("qtitle");

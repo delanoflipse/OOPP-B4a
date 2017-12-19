@@ -66,10 +66,15 @@ public class StartMenu extends Application {
         centergrid.setVgap(10);
         centergrid.setPadding(new Insets(25, 25, 25, 25));
 
-        Button MCbutton = new Button();
-
+        Button MCbutton = new Button("Multiple Choiche Questions");
         MCbutton.setMinSize(300, 300);
+        MCbutton.setId("MCButton");
         centergrid.add(MCbutton, 0, 0);
+
+        Button Selectimgbutton = new Button("Select part of Image Questions");
+        Selectimgbutton.setMinSize(300, 300);
+        Selectimgbutton.setId("SelectIMGButton");
+        centergrid.add(Selectimgbutton, 1, 0);
 
         titlegrid.setGridLinesVisible(false);
         centergrid.setGridLinesVisible(false);
@@ -78,6 +83,10 @@ public class StartMenu extends Application {
         MCbutton.setOnAction(e -> {
             MCQuestion.askQuestions(primaryStage, scene);
         });
+        Selectimgbutton.setOnAction(e -> {
+            GUI.SelectQuestion.askQuestions(primaryStage);
+        });
+
         scene.getStylesheets().add("file:src/stylesheets/start_menu.css");
         primaryStage.setScene(scene);
         primaryStage.setHeight(720);

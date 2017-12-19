@@ -9,5 +9,5 @@ public abstract class Question {
     public int level;
     public ArrayList<Answer> answers;
 
-    public abstract boolean isCorrect(int index);
+    //public abstract boolean isCorrect(int index);
 }
