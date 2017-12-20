@@ -37,16 +37,18 @@ public class SelectQuestion {
     private static Button next;
     private static Text response;
     private static main.SelectQuestion q;
+    private static double imgratio;
 
 
     public static void askQuestions(Stage stage) {
         primaryStage = stage;
 
-        ratio = 0.3;
+        ratio = 1;
 
         questionlist = new ArrayList<main.SelectQuestion>();
 
-        questionlist.add(new main.SelectQuestion(458.0, 570.0, 600.0, 720.0, 50.0, "background.jpg", "Select the tree."));
+        questionlist.add(new main.SelectQuestion(687.0, 855.0, 900.0, 1080.0, 50.0, "background.jpg", "Select the tree."));
+        questionlist.add(new main.SelectQuestion(539.325, 1584.68, 621.44, 1626.85, 20.0, "Wally.jpg", "Where's Wally?"));
 
         GridPane titlegrid = new GridPane();
         titlegrid.setAlignment(Pos.TOP_LEFT);
@@ -98,9 +100,12 @@ public class SelectQuestion {
         qimagev.setPreserveRatio(true);
         qimagev.setSmooth(true);
 
+        //image is changed by this ratio
+        imgratio = qimage.getHeight()/qimagev.getFitHeight();
+
         Pane imagepane = new Pane();
         imagepane.setPrefHeight(qimagev.getFitHeight());
-        imagepane.setPrefWidth(qimage.getWidth()*ratio);
+        imagepane.setPrefWidth(qimage.getWidth()*imgratio);
         centergrid.add(imagepane, 0, 1);
 
         imagepane.getChildren().add(qimagev);
@@ -127,7 +132,7 @@ public class SelectQuestion {
 
         qimagev.setOnMouseDragged(e -> setCoordinates(e.getX(), e.getY()));
 
-        qimagev.setOnMouseReleased(e -> endDrag());
+        qimagev.setOnMouseReleased(e -> endDrag(e));
 
         selected.setOnMousePressed(e -> beginDrag(e));
 
@@ -143,8 +148,8 @@ public class SelectQuestion {
     }
 
     private static void setCoordinates(double X, double Y) {
-        System.out.println("X: " + X);
-        System.out.println("Y: " + Y + "\n");
+        //System.out.println("X: " + X);
+        //System.out.println("Y: " + Y + "\n");
 
         if (X >= 0.0 && X <= qimagev.getFitHeight()/qimage.getHeight()*qimage.getWidth()) {
             rbX = X;
@@ -168,8 +173,7 @@ public class SelectQuestion {
 
         if (Y >= 0 && Y <= qimagev.getFitHeight()) {
             rbY = Y;
-        }
-        else {
+        } else {
             if (Y <= 0) {
                 rbY = 0.0;
                 Y = 0;
@@ -200,7 +204,13 @@ public class SelectQuestion {
 
         submit = new Button("submit");
         submit.setOnAction(e -> {
-            if (q.isCorrect(selected.getY(), selected.getX(), selected.getY()+selected.getHeight(), selected.getX()+selected.getWidth(), ratio)) {
+            //just debugging things
+            System.out.println("imgRatio: " + imgratio);
+            System.out.println("ltY: " + selected.getY()*imgratio);
+            System.out.println("ltX: " + selected.getX()*imgratio);
+            System.out.println("rbY: " +(selected.getY()+selected.getHeight())*imgratio);
+            System.out.println("rbX: " +(selected.getX()+selected.getWidth())*imgratio);
+            if (q.isCorrect(selected.getY(), selected.getX(), selected.getY()+selected.getHeight(), selected.getX()+selected.getWidth(), imgratio)) {
                 response.setFill(Color.DARKGREEN);
                 response.setText("That is correct. Click continue to go to the next question.");
                 selected.setFill(Color.DARKGREEN);
@@ -209,10 +219,10 @@ public class SelectQuestion {
                 response.setFill(Color.FIREBRICK);
                 response.setText("That is incorrect, you can see the answer on the image now.\n" +
                         "Click \"continue\" to go to the next question.");
-                selected.setX(ratio*q.getCorrectltX());
-                selected.setY(ratio*q.getCorrectltY());
-                selected.setWidth(ratio*(q.getCorrectrbX() - q.getCorrectltX()));
-                selected.setHeight(ratio*(q.getCorrectrbY() - q.getCorrectltY()));
+                selected.setX(q.getCorrectltX()/imgratio);
+                selected.setY(q.getCorrectltY()/imgratio);
+                selected.setWidth((q.getCorrectrbX() - q.getCorrectltX())/imgratio);
+                selected.setHeight((q.getCorrectrbY() - q.getCorrectltY())/imgratio);
                 selected.setFill(Color.FIREBRICK);
             }
             centergrid.add(next, 0, 3);
@@ -229,10 +239,12 @@ public class SelectQuestion {
         selected.setFill(Color.SKYBLUE);
     }
 
-    private static void endDrag() {
+    private static void endDrag(MouseEvent e) {
         if (selected.getWidth() >= 5 && selected.getHeight() >= 5) {
             submit.setDisable(false);
             selected.setFill(Color.DEEPSKYBLUE);
+            System.out.println("X: "+e.getX());
+            System.out.println("Y: "+e.getY());
         }
     }
 
