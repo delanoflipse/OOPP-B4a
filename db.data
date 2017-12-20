@@ -20,3 +20,163 @@ level:  1
 
 
   answer:     Lorem Ipsum something something
+
+
+
+
+
+
+
+  #1
+  type: clickable
+  level: 1
+  question: What is the title of the text?
+      answer: een speciale bestelling # de box van de titel
+      answer: gefeliciteerd # de box van gefeliciteerd
+      correctanswer: een speciale bestelling
+
+
+  #2
+  type: clickable
+  level: 1
+  question: How long is 1 metre?
+      answer: 0.5 metre.
+      correctanswer: 1 metre.
+      answer: Yes.
+      answer: I have no idea.
+      answer: What was the question?
+      answer: I refuse to answer
+
+
+
+  #3
+  type: multiple choice
+  level: 1
+  question: Henk is in late tomorrow, because he has to go to the dentist. What is correct?
+      correctanswer: A
+      answer: A. Henk is ill.
+      answer: B. Henk is late today.
+      answer: C. From now on Henk will be late for work.
+      answer: D. None of the above.
+
+
+
+  #4
+  type: multiple choice
+  level: 1
+  question: Anne is travelling to New York on Friday morning. What is correct?
+      correctanswer: D
+      answer: A. Anne is in New York.
+      answer: B. Anne loves to travel.
+      answer: C. Anne is flying to New York on Friday.
+      answer: D. None of the above.
+
+
+
+  #5
+  type: mulitple choice
+  level: 1
+  question: Peter ate pizza for lunch, even though he hates it. What is correct?
+      correctanswer: C
+      answer: A. Peter missed lunch today.
+      answer: B. Peter hates lunch.
+      answer: C. Peter hates pizza.
+      answer: D. All of the above.
+
+
+
+  #6
+  type: multiple choice
+  level: 1
+  question: It's 9:45 and the shop closes in 15 minutes. What is correct?
+      correctanswer: B.
+      answer: A. The shop is closed.
+      answer: B. The shop closes at 10:00.
+      answer: C. The shop is closing for 15 minutes.
+      answer: D. None of the above.
+
+
+
+  #7
+  type: multiple choice
+  level: 1
+  question: The parking costs 1$ for the fist hour and then 2.5$ per hour. What is correct?
+      correctanswer: C
+      answer: A. The parking costs 2.5$ per hour.
+      answer: B. The parking costs 1$ per hour.
+      answer: C. If you park for 3 hours you'll pay 6$.
+      answer: D. None of the above.
+
+
+
+  #8
+  type: multiple choice
+  level: 1
+  question: For baking apple pie you need 6 apples, 1/2 cup of sugar and 1/4 cup of water. What is correct?
+      correctanswer: D
+      answer: A. For apple pie you need water.
+      answer: B. You need half a cup of sugar.
+      answer: C. 6 apples will be enough for the pie.
+      answer: D. All of the above.
+
+
+
+  #9
+  type: multiple choice
+  level: 1
+  question: A car crashed into a shop, killing 2 and inguring more than 4 people. What is incorrect?
+      correctanswer: B
+      answer: A. There was a car crash in a shop.
+      answer: B. 4 people were killed.
+      answer: C. At least 4 people were injured.
+      answer: D. None of the above.
+
+
+
+  #10
+  type: multiple choice
+  level: 1
+  question: While cutting onion Susan cut her finger. What is correct?
+      correctanswer: A
+      answer: A. Susan's finger is bleeding.
+      answer: B. Susan was cutting her fingers.
+      answer: C. Susan likes onion.
+      answer: D. None of the above.
+
+
+  #11
+  type: multiple choice
+  level: 1
+  question: On her wedding day Mary said she wanted 2 children. What is correct?
+      correctanswer: A
+      answer: A. Mary is married.
+      answer: B. Mary has 2 children.
+      answer: C. Mary wants to get married.
+      answer: D. All of the above.
+
+
+
+
+  #12
+  type: multiple choice
+  level:1
+  question: After the robbery 1000$ were missing from the shop.What is correct?
+      correctanswer: D
+      answer: A. The shop was robbed.
+      answer: B. 1000$ was taken by the theif.
+      answer: C. There was missing money.
+      answer: D. All of the above.
+
+
+  #13
+  type: multiple choice
+  level: 1
+  question:   After the end of the war Hans returned to Germany with his family. What is incorrect?
+      correctanswer: A
+      answer: A. Hans left his family in Germany.
+      answer: B. The war has ended.
+      answer: C. Hans returned to Germany.
+      answer: D. None of the above.
+
+
+
