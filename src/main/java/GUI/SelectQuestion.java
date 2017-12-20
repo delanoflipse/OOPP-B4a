@@ -28,14 +28,19 @@ public class SelectQuestion {
     private static double rbX;
     private static double rbY;
     private static Rectangle selected = new Rectangle();
+    private static ImageView qimagev;
+    private static Image qimage;
+    private static double ratio; //how much of the screen the image should be (1 is full 0 is nothing)
 
 
     public static void askQuestions(Stage stage) {
         primaryStage = stage;
 
+        ratio = 0.5;
+
         questionlist = new ArrayList<main.SelectQuestion>();
 
-        questionlist.add(new main.SelectQuestion(229.0, 285.0, 300.0, 360.0, 20.0, "background.jpg", "Select the top loft corner"));
+        questionlist.add(new main.SelectQuestion(229.0, 285.0, 300.0, 360.0, 20.0, "background.jpg", "Select the tree."));
 
         GridPane titlegrid = new GridPane();
         titlegrid.setAlignment(Pos.TOP_LEFT);
@@ -79,15 +84,15 @@ public class SelectQuestion {
         Text questiontext = new Text(q.getQuestion());
         centergrid.add(questiontext, 0, 0);
 
-        Image qimage = new Image("file:src/images/"+q.getImgname());
-        ImageView qimagev = new ImageView(qimage);
-        qimagev.setFitHeight(primaryStage.getHeight()*0.5);
+        qimage = new Image("file:src/images/"+q.getImgname());
+        qimagev = new ImageView(qimage);
+        qimagev.setFitHeight(primaryStage.getHeight()*ratio);
         qimagev.setPreserveRatio(true);
         qimagev.setSmooth(true);
 
         Pane imagepane = new Pane();
         imagepane.setPrefHeight(qimagev.getFitHeight());
-        imagepane.setPrefWidth(qimagev.getFitWidth());
+        imagepane.setPrefWidth(qimage.getWidth()*ratio);
         centergrid.add(imagepane, 0, 1);
 
         imagepane.getChildren().add(qimagev);
@@ -97,7 +102,7 @@ public class SelectQuestion {
 
         Button submit = new Button("submit");
         submit.setOnAction(e -> {
-            if (q.isCorrect(ltY, ltX, rbY, rbX)) {
+            if (q.isCorrect(selected.getY(), selected.getX(), selected.getY()+selected.getHeight(), selected.getX()+selected.getWidth())) {
                 response.setFill(Color.DARKGREEN);
                 response.setText("That is correct. Click continue to go to the next question.");
                 selected.setFill(Color.DARKGREEN);
@@ -114,15 +119,18 @@ public class SelectQuestion {
             }
         });
 
+        submit.setDisable(true);
+        centergrid.add(submit, 0, 2);
+
 
         imagepane.getChildren().add(selected);
 
         qimagev.setOnDragDetected(e -> {
             System.out.println("Drag Begon!");
-            setBeginCoordinates(e.getX(), e.getY());
             selected.setX(e.getX());
             selected.setY(e.getY());
-            selected.setOpacity(0.5);
+            setBeginCoordinates(e.getX(), e.getY());
+            submit.setDisable(false);
             selected.setFill(Color.SKYBLUE);
         });
 
@@ -136,12 +144,13 @@ public class SelectQuestion {
             System.out.println("ltY: "+ltY);
             System.out.println("rbX: "+rbX);
             System.out.println("rbY: "+rbY);
-            if (!centergrid.getChildren().contains(submit)) {
-                centergrid.add(submit, 0, 2);
-            }
+            submit.setDisable(false);
             selected.setFill(Color.DEEPSKYBLUE);
         });
 
+        selected.setOpacity(0.5);
+        selected.setHeight(0);
+        selected.setWidth(0);
 
     }
 
@@ -151,24 +160,48 @@ public class SelectQuestion {
     }
 
     private static void setCoordinates(double X, double Y) {
-        if (X >= ltX) {
+        System.out.println("X: " + X);
+        System.out.println("Y: " + Y + "\n");
+
+        if (X >= 0.0 && X <= qimagev.getFitHeight()/qimage.getHeight()*qimage.getWidth()) {
             rbX = X;
         }
         else {
-            rbX = ltX;
-            ltX = X;
-            selected.setX(X);
+            if (X <= 0) {
+                rbX = 0.0;
+                X = 0;
+            }
+            if (X > qimagev.getFitHeight()/qimage.getHeight()*qimage.getWidth()) {
+                rbX = qimagev.getFitHeight()/qimage.getHeight()*qimage.getWidth();
+            }
         }
-        selected.setWidth(rbX - ltX);
-        if (Y >= ltY) {
+
+        if (rbX - ltX < 0) {
+            selected.setX(X);
+            selected.setWidth(ltX - rbX);
+        } else {
+            selected.setWidth(rbX - ltX);
+        }
+
+        if (Y >= 0 && Y <= qimagev.getFitHeight()) {
             rbY = Y;
         }
         else {
-            rbY = ltY;
-            ltY = Y;
-            selected.setY(Y);
+            if (Y <= 0) {
+                rbY = 0.0;
+                Y = 0;
+            }
+            if (Y > qimagev.getFitHeight()) {
+                rbY = qimagev.getFitHeight();
+            }
         }
-        selected.setHeight(rbY - ltY);
+
+        if (rbY - ltY < 0) {
+            selected.setY(Y);
+            selected.setHeight(ltY - rbY);
+        } else {
+            selected.setHeight(rbY - ltY);
+        }
     }
 
 }
