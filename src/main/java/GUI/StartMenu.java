@@ -30,9 +30,15 @@ import java.util.ArrayList;
 public class StartMenu extends Application {
     public static final TextToSpeech tts = new TextToSpeech();
     public static boolean playtts = false;
-
+    public static boolean before= false;
     @Override
     public void start(Stage primaryStage) {
+        if(before){
+            playtts = false;
+        }
+        else{
+            playtts= true;
+        }
         StackPane rootpane = new StackPane();
         GridPane titlegrid = new GridPane();
         GridPane centergrid = new GridPane();
@@ -93,7 +99,7 @@ public class StartMenu extends Application {
         ttsB.setOnMouseClicked(e -> {
             if (playtts) {
                 playtts = false;
-                ;
+                tts.stopSpeaking();
             } else {
                 playtts = true;
             }
@@ -108,6 +114,12 @@ public class StartMenu extends Application {
 
 
     public static void tts(String text, boolean wait){
-        tts.speak(text,1,false,wait);
+
+        if(playtts) {
+            tts.speak(text,1,false,wait);
+        }
+        else{
+            tts.stopSpeaking();
+        }
     }
 }

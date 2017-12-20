@@ -22,7 +22,7 @@ import tts.TextToSpeech;
 import java.util.ArrayList;
 
 import static GUI.StartMenu.playtts;
-
+import static GUI.StartMenu.before;
 public class MCQuestion {
     private static Service<Void> backGroundThread;
     private static TextToSpeech tts = new TextToSpeech();
@@ -30,6 +30,7 @@ public class MCQuestion {
 
 
     private static String ttsfinal = "" ;
+
     private static int i ;
     private static int score;
     private static Text response;
@@ -121,7 +122,8 @@ public class MCQuestion {
                     addScore();
                     response.setFill(Color.DARKGREEN);
                     response.setText("That is correct. Click continue to go to the next question");
-                    tts("That is correct. Click continue to go to the next question");
+                    ttsfinal="That is correct. Click continue to go to the next question";
+                    tts(ttsfinal);
                 } else {
                     for (Answer answer : ((TextQuestion) questionlist.get(i)).answers) {
                         TextAnswer tanswer = (TextAnswer) answer;
@@ -129,19 +131,24 @@ public class MCQuestion {
                             final String answertext = tanswer.text;
                             response.setFill(Color.FIREBRICK);
                             response.setText("That is incorrect. The answer was:\n" + answertext + "\nClick continue to go to the next question");
-                            tts("That is incorrect. The answer was:" + answertext + "Click continue to go to the next question");
+                            ttsfinal ="That is incorrect. The answer was:" + answertext + "Click continue to go to the next question";
+                            tts(ttsfinal);
                         }
                     }
                 }
+
                 final int col = centergrid.getColumnIndex(submit);
                 final int row = centergrid.getRowIndex(submit);
                 centergrid.add(next, col+1, row);
                 centergrid.getChildren().remove(submit);
             }
         });
-        if(playtts){
+        Button ttsB = new Button("tts");
+
+        centergrid.add(ttsB, 1, 5);
+        ttsB.setOnMouseClicked(e -> {toggletts();});
             tts(ttsfinal);
-        }
+
         centergrid.add(submit, 0, j+1);
         next.setOnMouseEntered(e -> tts("continue"));
         next.setOnAction(e -> showNextQuestion());
@@ -167,10 +174,10 @@ public class MCQuestion {
                             if(playtts) {
                                 tts.speak(text, 1, false, true);
                             }
-                            else{
-                                tts.speak(" ",1,false,false);
+                            else {
+                                tts.stopSpeaking();
                             }
-                        return null;
+                                return null;
 
                     }
 
@@ -188,27 +195,30 @@ public class MCQuestion {
     private static void showNextQuestion(){
         i++;
         if (i >= questionlist.size()){
-            backGroundThread.cancel();
+            tts.stopSpeaking();
             done(centergrid, questionlist, primaryStage);
+            before=true;
             return;
         }
-        String newtts = " ";
+
         centergrid.getChildren().clear();
         TextQuestion q = (TextQuestion) questionlist.get(i);
         Text qtitle = new Text("Question " + (i+1));
-        newtts = newtts + "Question " + (i+1) + ". ";
+        ttsfinal =  "Question " + (i+1) + ". ";
         qtitle.setId("qtitle");
         centergrid.add(qtitle, 0, 0);
+        Button ttsB = new Button("tts");
+
 
         Text qtext = new Text(q.text);
-        newtts = newtts + "what is correct? ";
+        ttsfinal = ttsfinal + "what is correct? ";
         qtext.setId("qtext");
         centergrid.add(qtext, 0, 1);
         answerbuttons.clear();
         for (Answer answer : q.answers) {
             TextAnswer tanswer = (TextAnswer) answer;
             answerbuttons.add(new RadioButton(tanswer.text));
-            newtts = newtts + tanswer.text + " ";
+           ttsfinal = ttsfinal + tanswer.text + " ";
         }
         int j = 1;
         for (RadioButton button : answerbuttons) {
@@ -219,15 +229,27 @@ public class MCQuestion {
         response.setText("");
         centergrid.add(response, 0, j + 1);
         centergrid.add(submit, 0, j+1);
-        tts(newtts);
+        centergrid.add(ttsB, 1, 5);
+        ttsB.setOnMouseClicked(e -> {toggletts();});
+
     }
+    private static void toggletts(){
+        if (playtts) {
+            playtts = false;
+            tts.stopSpeaking();
+
+        } else {
+            playtts = true;
+            tts(ttsfinal);
+        }};
+
 
     private static void done(GridPane centergrid, ArrayList<Question> questionlist, Stage primaryStage){
-        String endtts ="";
+
         Text end = new Text("That were all the question, well done!");
         Text endscore = new Text("Your score is: " + score + " out of " + questionlist.size());
         Text back = new Text("You will be redirected to the startscreen, when you click exit.");
-        endtts = endtts + "That were all the question, well done!" +  "Your score is: " + score + ". out of ." + questionlist.size() + ". You will be redirected to the startscreen, when you click exit.";
+        ttsfinal =   "That were all the questions, well done!" +  "Your score is: " + score + ". out of ." + questionlist.size() + ". You will be redirected to the startscreen, when you click exit.";
         end.setId("end");
         endscore.setId("end");
         back.setId("end");
@@ -236,7 +258,10 @@ public class MCQuestion {
         centergrid.add(end, 0, 0);
         centergrid.add(endscore, 0, 1);
         centergrid.add(back, 0, 2);
+        Button ttsB = new Button("tts");
 
+        centergrid.add(ttsB, 1, 5);
+        ttsB.setOnMouseClicked(e -> {toggletts();});
         Button exit = new Button("Exit");
         exit.setOnAction(e -> primaryStage.setScene(startMenu));
         exit.setOnMouseEntered(e -> {tts("exit");});
@@ -245,7 +270,7 @@ public class MCQuestion {
         exitbox.getChildren().add(exit);
 
         centergrid.add(exitbox ,0, 3);
-        tts(endtts);
+        tts(ttsfinal);
 
     }
 
