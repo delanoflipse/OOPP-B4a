@@ -19,3 +19,17 @@ level:  1
     answer:   not soo correct
   answer:     Lorem Ipsum something something
 
+<<<<<<< HEAD
+=======
+type: open
+level: 1
+question: Hoeveel is 2 + 2 = 3 - 1 ?
+correctanswer: quick maths
+
+type: image
+level: 1
+image: picture.jpg
+question: Wat?
+topleft: 1,1
+bottomright: 2,2
+>>>>>>> a8158e0dc0b5ea782a2b14d6b95f14da19644ade

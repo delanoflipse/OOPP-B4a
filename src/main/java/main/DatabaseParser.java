@@ -1,5 +1,6 @@
 package main;
 
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -23,15 +24,18 @@ public class DatabaseParser {
                     currentQuestion = baseLineParse(line);
                     continue;
                 }
-
+                boolean cont = true;
                 if (currentQuestion instanceof TextQuestion) {
-                    boolean cont = textQuestionLineParse((TextQuestion) currentQuestion, line);
-                    if (!cont) {
-                        questions.add(currentQuestion);
-                        currentQuestion = null;
-                    }
-//                } else if () {
+                    cont = textQuestionLineParse((TextQuestion) currentQuestion, line);
+                } else if (currentQuestion instanceof OpenQuestion) {
+                    cont = openQuestionLineParse((OpenQuestion) currentQuestion, line);
+                } else if (currentQuestion instanceof ImageQuestion) {
+                    cont = imageQuestionLineParse((ImageQuestion) currentQuestion, line);
+                }
 
+                if (!cont) {
+                    questions.add(currentQuestion);
+                    currentQuestion = null;
                 }
             }
 
@@ -78,6 +82,10 @@ public class DatabaseParser {
             switch (parts.value) {
                 case "text":
                     return new TextQuestion();
+                case "open":
+                    return new OpenQuestion();
+                case "image":
+                    return new ImageQuestion();
                 default:
                     return null;
             }
@@ -129,6 +137,82 @@ public class DatabaseParser {
         return true;
     }
 
+    private boolean imageQuestionLineParse(ImageQuestion question, String line) {
+        if (line.equals("")) {
+            return false;
+        }
+
+        if (question == null) {
+            System.out.println("no question");
+            return true;
+        }
+
+        KeyValuePair parts = splitLine(line);
+
+        if (parts == null) {
+            return true;
+        }
+
+        switch (parts.key) {
+            case "level":
+                question.level = parts.valueAsInt();
+                break;
+
+            case "question":
+                question.text = parts.value;
+                break;
+
+            case "image":
+                question.image = parts.value;
+                break;
+
+            case "bottomright":
+                Position posbr = new Position(parts.value);
+                question.setBottomRight(posbr.x, posbr.y);
+                break;
+
+            case "topleft":
+                Position postf = new Position(parts.value);
+                question.setBottomRight(postf.x, postf.y);
+                break;
+        }
+
+        return true;
+    }
+
+    private boolean openQuestionLineParse(OpenQuestion question, String line) {
+        if (line.equals("")) {
+            return false;
+        }
+
+        if (question == null) {
+            System.out.println("no question");
+            return true;
+        }
+
+        KeyValuePair parts = splitLine(line);
+
+        if (parts == null) {
+            return true;
+        }
+
+        switch (parts.key) {
+            case "level":
+                question.level = parts.valueAsInt();
+                break;
+
+            case "question":
+                question.text = parts.value;
+                break;
+
+            case "correctanswer":
+                question.setCorrectAnswer(parts.value);
+                break;
+        }
+
+        return true;
+    }
+
 }
 
 class KeyValuePair {
@@ -143,4 +227,21 @@ class KeyValuePair {
     public int valueAsInt() {
         return Integer.parseInt(value.replaceAll("[^\\d]", ""));
     }
+}
+
+class Position {
+    int x = 0;
+    int y = 0;
+
+    public Position(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public Position(String value) {
+        String[] arr = value.trim().split(",");
+        this.x = Integer.parseInt(arr[0].replaceAll("[^\\d]", ""));
+        this.y = Integer.parseInt(arr[1].replaceAll("[^\\d]", ""));
+    }
+
 }
