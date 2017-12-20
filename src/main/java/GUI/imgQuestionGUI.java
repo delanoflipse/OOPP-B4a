@@ -47,8 +47,8 @@ public class imgQuestionGUI extends Application{
         layout.setHgap(30);
         layout.setVgap(10);
         layout.setPadding(new Insets(25, 25, 25, 25));
-        layout.add(question, 0, 0);
-        layout.add(questionImgV, 0, 1);
+        layout.add(questionImgV, 0, 0);
+        layout.add(question, 0, 1);
         Scene question1 = new Scene(layout, 1000, 1000);
         window.setScene(question1);
         window.show();
