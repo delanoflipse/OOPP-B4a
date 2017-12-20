@@ -1,5 +1,6 @@
 package GUI;
 
+import database.*;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -14,7 +15,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import main.*;
 
 import java.util.ArrayList;
 
@@ -105,7 +105,7 @@ public class MCQuestion {
                 } else {
                     for (Answer answer : ((TextQuestion) questionlist.get(i)).answers) {
                         TextAnswer tanswer = (TextAnswer) answer;
-                        if (tanswer.getCorrect()) {
+                        if (tanswer.correct) {
                             final String answertext = tanswer.text;
                             response.setFill(Color.FIREBRICK);
                             response.setText("That is incorrect. The answer was:\n" + answertext + "\nClick continue to go to the next question");
