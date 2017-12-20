@@ -9,5 +9,7 @@ public abstract class Question {
     public int level;
     public ArrayList<Answer> answers;
 
-    public abstract boolean isCorrect(int index);
+    public boolean isCorrect(int index) {return true;};
+    public boolean isCorrect(String answer) {return true;};
+    public boolean isCorrect(int x, int y) {return true;};
 }
