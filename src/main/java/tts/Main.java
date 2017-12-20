@@ -88,10 +88,9 @@ public class Main {
 		List<String> arrayList = Arrays.asList("Are you mad bro", "I am gay", "Bro pliz tell me i am gay ok?", "But gay is ok remember");
 		
 		//Loop infinitely
-		for (int i = 0; i < 150.000; i++)
-			arrayList.forEach(word -> tts.speak(word, 2.0f, false, true));
+
 		
-	}
+
 	
 	//=========================================================================
 	//=========================================================================
@@ -115,8 +114,7 @@ public class Main {
 	//=========================================================================
 	//=========================================================================
 	//=========================================================================
-	public void tutorial_1_2_3_FromYoutube() {
-		TextToSpeech tts = new TextToSpeech();
+
 		
 		//=========================================================================
 		//=========================Print available voices =========================
@@ -185,6 +183,6 @@ public class Main {
 		// TTS say something that we actually are typing into the first variable
 		tts.speak("Shut up Elize . Let's continue our tutorials!", 2.0f, false, true);
 		
-	}
+
 	
-}
+}}

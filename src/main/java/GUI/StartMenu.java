@@ -29,6 +29,7 @@ import java.util.ArrayList;
 
 public class StartMenu extends Application {
     public static final TextToSpeech tts = new TextToSpeech();
+
     public static boolean playtts = false;
     public static boolean before= false;
     @Override
@@ -116,7 +117,9 @@ public class StartMenu extends Application {
     public static void tts(String text, boolean wait){
 
         if(playtts) {
-            tts.speak(text,1,false,wait);
+            tts.setVoice("dfki-poppy-hsmm");
+            tts.speak(text,2,false,wait);
+
         }
         else{
             tts.stopSpeaking();

@@ -172,7 +172,8 @@ public class MCQuestion {
                     @Override
                     protected Void call() throws Exception {
                             if(playtts) {
-                                tts.speak(text, 1, false, true);
+                                tts.setVoice("dfki-poppy-hsmm");
+                                tts.speak(text, 2, false, true);
                             }
                             else {
                                 tts.stopSpeaking();
