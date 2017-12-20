@@ -1,5 +1,7 @@
 package database;
 
+import main.KeyValuePair;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -65,39 +67,12 @@ public class DatabaseParser {
     }
 
     /**
-     * Parse line to key:value pair
-     * @param line Line with format "key:pair"
-     * @return A pair, or null
-     */
-    private KeyValuePair splitLine(String line) {
-        if (line == null || line.length() == 0) {
-            return null;
-        }
-
-        if (line.charAt(0) == '#') {
-            return null;
-        }
-
-        int index = line.indexOf(':');
-
-        if (index == -1) {
-            return null;
-        }
-
-        return new KeyValuePair(
-          line.substring(0, index).trim(),
-          line.substring(index + 1, line.length()).trim()
-        );
-
-    }
-
-    /**
      * Parse line to check for a new question
      * @param line current line from the database
      * @return A question or null
      */
     private Question baseLineParse(String line) {
-        KeyValuePair parts = splitLine(line);
+        KeyValuePair parts = KeyValuePair.splitLine(line);
 
         if (parts == null) {
             return null;
@@ -136,7 +111,7 @@ public class DatabaseParser {
             return true;
         }
 
-        KeyValuePair parts = splitLine(line);
+        KeyValuePair parts = KeyValuePair.splitLine(line);
 
         if (parts == null) {
             return true;
@@ -184,7 +159,7 @@ public class DatabaseParser {
             return true;
         }
 
-        KeyValuePair parts = splitLine(line);
+        KeyValuePair parts = KeyValuePair.splitLine(line);
 
         if (parts == null) {
             return true;
@@ -233,7 +208,7 @@ public class DatabaseParser {
             return true;
         }
 
-        KeyValuePair parts = splitLine(line);
+        KeyValuePair parts = KeyValuePair.splitLine(line);
 
         if (parts == null) {
             return true;
