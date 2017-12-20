@@ -134,6 +134,7 @@ public class MCQuestion {
     }
 
     private static void showNextQuestion(){
+        centergrid.getChildren().clear();
         i++;
         if (i >= questionlist.size()){
             done(centergrid, questionlist, primaryStage);

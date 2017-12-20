@@ -68,7 +68,7 @@ public class StartMenu extends Application {
 
         Button MCbutton = new Button("Multiple Choiche Questions");
         MCbutton.setMinSize(300, 300);
-        MCbutton.setId("MCButton");
+        MCbutton.setId("MCbutton");
         centergrid.add(MCbutton, 0, 0);
 
         Button Selectimgbutton = new Button("Select part of Image Questions");
