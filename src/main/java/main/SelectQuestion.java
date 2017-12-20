@@ -44,11 +44,11 @@ public class SelectQuestion extends Question{
         return correctrbY;
     }
 
-    public boolean isCorrect(double ltY, double ltX, double rbY, double rbX) {
-        if (ltY < correctltY + range && ltY > correctltY - range
-            && ltX < correctltX + range && ltX > correctltX - range
-            && rbY < correctrbY + range && rbY > correctrbY - range
-            && rbX < correctrbX + range && rbX > correctrbX - range) {
+    public boolean isCorrect(double ltY, double ltX, double rbY, double rbX, double ratio) {
+        if (ltY < ratio*correctltY + range && ltY > ratio*correctltY - range
+            && ltX < ratio*correctltX + range && ltX > ratio*correctltX - range
+            && rbY < ratio*correctrbY + range && rbY > ratio*correctrbY - range
+            && rbX < ratio*correctrbX + range && rbX > ratio*correctrbX - range) {
             return true;
         }
         return false;

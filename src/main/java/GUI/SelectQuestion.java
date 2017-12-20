@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -31,21 +32,26 @@ public class SelectQuestion {
     private static ImageView qimagev;
     private static Image qimage;
     private static double ratio; //how much of the screen the image should be (1 is full 0 is nothing)
+    private static int i;
+    private static Button submit;
+    private static Button next;
+    private static Text response;
+    private static main.SelectQuestion q;
 
 
     public static void askQuestions(Stage stage) {
         primaryStage = stage;
 
-        ratio = 0.5;
+        ratio = 0.3;
 
         questionlist = new ArrayList<main.SelectQuestion>();
 
-        questionlist.add(new main.SelectQuestion(229.0, 285.0, 300.0, 360.0, 20.0, "background.jpg", "Select the tree."));
+        questionlist.add(new main.SelectQuestion(458.0, 570.0, 600.0, 720.0, 50.0, "background.jpg", "Select the tree."));
 
         GridPane titlegrid = new GridPane();
         titlegrid.setAlignment(Pos.TOP_LEFT);
         titlegrid.setHgap(30);
-        titlegrid.setVgap(10);
+        titlegrid.setVgap(30);
         titlegrid.setPadding(new Insets(25, 25, 25, 25));
 
         Image logo = new Image("file:src/images/logo.png");
@@ -73,13 +79,15 @@ public class SelectQuestion {
         Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight());
         primaryStage.setScene(scene);
 
+        makeButtons();
+
         showQuestion(0);
     }
 
     private static void showQuestion(int index) {
         centergrid.getChildren().clear();
 
-        main.SelectQuestion q = questionlist.get(index);
+        q = questionlist.get(index);
 
         Text questiontext = new Text(q.getQuestion());
         centergrid.add(questiontext, 0, 0);
@@ -97,27 +105,8 @@ public class SelectQuestion {
 
         imagepane.getChildren().add(qimagev);
 
-        Text response = new Text("");
+        response = new Text("");
         centergrid.add(response, 1, 2);
-
-        Button submit = new Button("submit");
-        submit.setOnAction(e -> {
-            if (q.isCorrect(selected.getY(), selected.getX(), selected.getY()+selected.getHeight(), selected.getX()+selected.getWidth())) {
-                response.setFill(Color.DARKGREEN);
-                response.setText("That is correct. Click continue to go to the next question.");
-                selected.setFill(Color.DARKGREEN);
-            }
-            else {
-                response.setFill(Color.FIREBRICK);
-                response.setText("That is incorrect, you can see the answer on the image now.\n" +
-                "Click \"continue\" to go to the next question.");
-                selected.setX(q.getCorrectltX());
-                selected.setY(q.getCorrectltY());
-                selected.setWidth(q.getCorrectrbX() - q.getCorrectltX());
-                selected.setHeight(q.getCorrectrbY() - q.getCorrectltY());
-                selected.setFill(Color.FIREBRICK);
-            }
-        });
 
         submit.setDisable(true);
         centergrid.add(submit, 0, 2);
@@ -125,28 +114,22 @@ public class SelectQuestion {
 
         imagepane.getChildren().add(selected);
 
-        qimagev.setOnDragDetected(e -> {
-            System.out.println("Drag Begon!");
-            selected.setX(e.getX());
-            selected.setY(e.getY());
-            setBeginCoordinates(e.getX(), e.getY());
-            submit.setDisable(false);
-            selected.setFill(Color.SKYBLUE);
-        });
+        qimagev.setOnMousePressed(e -> beginDrag(e));
 
-        qimagev.setOnMouseDragged(e -> {
-            setCoordinates(e.getX(), e.getY());
-        });
+        //qimagev.setOnDragDetected(e -> {
+        //    System.out.println("Drag Begon!");
+        //    selected.setX(e.getX());
+        //    selected.setY(e.getY());
+        //    setBeginCoordinates(e.getX(), e.getY());
+        //    submit.setDisable(false);
+        //    selected.setFill(Color.SKYBLUE);
+        //});
 
-        qimagev.setOnMouseReleased(e -> {
-            System.out.println("Drag Done!");
-            System.out.println("ltX: "+ltX);
-            System.out.println("ltY: "+ltY);
-            System.out.println("rbX: "+rbX);
-            System.out.println("rbY: "+rbY);
-            submit.setDisable(false);
-            selected.setFill(Color.DEEPSKYBLUE);
-        });
+        qimagev.setOnMouseDragged(e -> setCoordinates(e.getX(), e.getY()));
+
+        qimagev.setOnMouseReleased(e -> endDrag());
+
+        selected.setOnMousePressed(e -> beginDrag(e));
 
         selected.setOpacity(0.5);
         selected.setHeight(0);
@@ -201,6 +184,55 @@ public class SelectQuestion {
             selected.setHeight(ltY - rbY);
         } else {
             selected.setHeight(rbY - ltY);
+        }
+    }
+
+    private static void incIndex() {
+        i++;
+    }
+
+    private static void makeButtons(){
+        next = new Button("Continue");
+        next.setOnAction(e -> {
+            incIndex();
+            showQuestion(i);
+        });
+
+        submit = new Button("submit");
+        submit.setOnAction(e -> {
+            if (q.isCorrect(selected.getY(), selected.getX(), selected.getY()+selected.getHeight(), selected.getX()+selected.getWidth(), ratio)) {
+                response.setFill(Color.DARKGREEN);
+                response.setText("That is correct. Click continue to go to the next question.");
+                selected.setFill(Color.DARKGREEN);
+            }
+            else {
+                response.setFill(Color.FIREBRICK);
+                response.setText("That is incorrect, you can see the answer on the image now.\n" +
+                        "Click \"continue\" to go to the next question.");
+                selected.setX(ratio*q.getCorrectltX());
+                selected.setY(ratio*q.getCorrectltY());
+                selected.setWidth(ratio*(q.getCorrectrbX() - q.getCorrectltX()));
+                selected.setHeight(ratio*(q.getCorrectrbY() - q.getCorrectltY()));
+                selected.setFill(Color.FIREBRICK);
+            }
+            centergrid.add(next, 0, 3);
+        });
+    }
+
+    private static void beginDrag(MouseEvent e) {
+        selected.setX(e.getX());
+        selected.setY(e.getY());
+        selected.setWidth(0);
+        selected.setHeight(0);
+        setBeginCoordinates(e.getX(), e.getY());
+        submit.setDisable(true);
+        selected.setFill(Color.SKYBLUE);
+    }
+
+    private static void endDrag() {
+        if (selected.getWidth() >= 5 && selected.getHeight() >= 5) {
+            submit.setDisable(false);
+            selected.setFill(Color.DEEPSKYBLUE);
         }
     }
 
