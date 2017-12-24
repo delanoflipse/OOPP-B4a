@@ -13,6 +13,7 @@ public class DatabaseParser {
         this.filename = filename;
     }
 
+
     public ArrayList<Question> parse() {
         ArrayList<Question> questions = new ArrayList<>();
         Question currentQuestion = null;

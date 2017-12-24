@@ -163,7 +163,7 @@ level:  1
   question: After the robbery 1000$ were missing from the shop.What is correct?
       correctanswer: D
       answer: A. The shop was robbed.
-      answer: B. 1000$ was taken by the theif.
+      answer: B. 1000$ was taken by the thief.
       answer: C. There was missing money.
       answer: D. All of the above.
 
@@ -180,3 +180,13 @@ level:  1
 
 
 
+
+#Question Added by the MC GUI
+type: multiple choice
+level:1
+question: 1+1=?
+correctanswer: C
+answer: A. Not this one
+answer: B. One more
+answer: C. 2
+answer: D. No , go back to C
