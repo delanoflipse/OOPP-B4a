@@ -1,25 +1,14 @@
 package GUI;
 
-import com.sun.management.VMOption;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.control.RadioButton;
-import javafx.scene.paint.Color;
-import main.*;
-
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -28,71 +17,124 @@ import java.util.ArrayList;
 
 public class StartMenu extends Application {
 
+    private static ImageView logov;
+    private static ImageView logov2;
+    private static GridPane centergrid;
+    private static GridPane titlegrid;
+    private static Scene scene;
+    private static Text title;
+    private static Button MCbutton;
+    private static Button Selectimgbutton;
+
     @Override
     public void start(Stage primaryStage) {
+        //Set up the different panes
         StackPane rootpane = new StackPane();
-        GridPane titlegrid = new GridPane();
-        GridPane centergrid = new GridPane();
+        titlegrid = new GridPane();
+        centergrid = new GridPane();
         rootpane.getChildren().addAll(titlegrid, centergrid);
 
+        //Set the title of the stage
         primaryStage.setTitle("Stichting Lezen en Schrijven - Practice Program");
-        titlegrid.setAlignment(Pos.TOP_CENTER);
+        //Some settings for the grid at the top
         titlegrid.setHgap(30);
         titlegrid.setVgap(10);
         titlegrid.setPadding(new Insets(25, 25, 25, 25));
 
+        //Load logos for the title and add the first logo
+        //Second logo is added in display() because only the start menu has two logos
         Image logo = new Image("file:src/images/logo.png");
-        ImageView logov = new ImageView();
+        logov = new ImageView();
         logov.setImage(logo);
         logov.setFitWidth(100);
         logov.setPreserveRatio(true);
         logov.setSmooth(true);
         logov.setCache(true);
         titlegrid.add(logov, 0, 0);
-        ImageView logov2 = new ImageView();
+        logov2 = new ImageView();
         logov2.setImage(logo);
         logov2.setFitWidth(100);
         logov2.setPreserveRatio(true);
         logov2.setSmooth(true);
         logov2.setCache(true);
-        titlegrid.add(logov2, 2, 0);
 
-        Text title = new Text("Practice Program");
+        //Make the title text and add it
+        title = new Text();
         title.setId("Title");
         titlegrid.add(title, 1, 0);
 
-        centergrid.setAlignment(Pos.CENTER);
+        //some setup for the grid in the center
         centergrid.setHgap(30);
         centergrid.setVgap(10);
         centergrid.setPadding(new Insets(25, 25, 25, 25));
 
-        Button MCbutton = new Button("Multiple Choiche Questions");
+        //Make the button for MCQuestion
+        MCbutton = new Button("Multiple Choiche Questions");
         MCbutton.setMinSize(300, 300);
         MCbutton.setId("MCbutton");
-        centergrid.add(MCbutton, 0, 0);
 
-        Button Selectimgbutton = new Button("Select part of Image Questions");
+        //Make the button for the ImageQuestions
+        Selectimgbutton = new Button("Select part of Image Questions");
         Selectimgbutton.setMinSize(300, 300);
         Selectimgbutton.setId("SelectIMGButton");
-        centergrid.add(Selectimgbutton, 1, 0);
 
+        //Gridlines for debugging are off
         titlegrid.setGridLinesVisible(false);
         centergrid.setGridLinesVisible(false);
 
-        Scene scene = new Scene(rootpane, 1280, 720);
+        //Make scene to display the panes in
+        scene = new Scene(rootpane, 1280, 720);
+        //Set actions for the buttons
         MCbutton.setOnAction(e -> {
-            MCQuestion.askQuestions(primaryStage, scene);
+            //Change the title
+            titlegrid.setAlignment(Pos.TOP_LEFT);
+            title.setText("Multiple Choiche Questions");
+            //Remove the second logo
+            titlegrid.getChildren().remove(logov2);
+            //Ask the questions
+            MCQuestion.askQuestions(centergrid);
+            //Set other CSS file
+            scene.getStylesheets().clear();
+            scene.getStylesheets().add("file:src/stylesheets/MCquestions.css");
         });
         Selectimgbutton.setOnAction(e -> {
             GUI.SelectQuestion.askQuestions(primaryStage);
         });
 
-        scene.getStylesheets().add("file:src/stylesheets/start_menu.css");
+        //Set the scene and size of the stage
         primaryStage.setScene(scene);
         primaryStage.setHeight(720);
         primaryStage.setWidth(1280);
+
+        //Display the menu
+        display();
+
+        //Show it all
         primaryStage.show();
 
+    }
+
+    public static void display(){
+        //Set alignment titlegrid to center
+        titlegrid.setAlignment(Pos.TOP_CENTER);
+
+        //Change the title text
+        title.setText("Practice Program");
+
+        //Add the second logo
+        titlegrid.add(logov2, 2, 0);
+
+        //Set centergrid alignment
+        centergrid.setAlignment(Pos.CENTER);
+
+        //Set the CSS
+        scene.getStylesheets().clear();
+        scene.getStylesheets().add("file:src/stylesheets/start_menu.css");
+
+        //Clear the centergrid and add the buttons
+        centergrid.getChildren().clear();
+        centergrid.add(MCbutton, 0, 0);
+        centergrid.add(Selectimgbutton, 1, 0);
     }
 
 }

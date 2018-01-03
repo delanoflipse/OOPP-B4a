@@ -121,15 +121,6 @@ public class SelectQuestion {
 
         qimagev.setOnMousePressed(e -> beginDrag(e));
 
-        //qimagev.setOnDragDetected(e -> {
-        //    System.out.println("Drag Begon!");
-        //    selected.setX(e.getX());
-        //    selected.setY(e.getY());
-        //    setBeginCoordinates(e.getX(), e.getY());
-        //    submit.setDisable(false);
-        //    selected.setFill(Color.SKYBLUE);
-        //});
-
         qimagev.setOnMouseDragged(e -> setCoordinates(e.getX(), e.getY()));
 
         qimagev.setOnMouseReleased(e -> endDrag(e));
