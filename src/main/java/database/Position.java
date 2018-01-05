@@ -3,13 +3,13 @@ package database;
 /**
  * XY-vector Position class, used by the db parser
  */
-class Position {
-    public int x = 0;
-    public int y = 0;
+public class Position {
+    public double x = 0;
+    public double y = 0;
 
     public Position() {}
 
-    public Position(int x, int y) {
+    public Position(double x, double y) {
         this.x = x;
         this.y = y;
     }

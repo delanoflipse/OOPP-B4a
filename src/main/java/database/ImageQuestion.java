@@ -15,24 +15,23 @@ public class ImageQuestion extends Question{
 
     public void setTopLeft(int x, int y) {
         topLeft.x = x;
-        topLeft.y = x;
+        topLeft.y = y;
     }
 
     public void setTopLeft(Position p) {
         topLeft = p;
     }
 
-    public void setBottomRight(int x, int y) {
+    public void setBottomRight(double x, double y) {
         bottomRight.x = x;
-        bottomRight.y = x;
+        bottomRight.y = y;
     }
 
     public void setBottomRight(Position p) {
         bottomRight = p;
     }
 
-    @Override
-    public boolean isCorrect(int x, int y) {
+    public boolean isCorrect(double x, double y) {
         return x >= topLeft.x
                 && x <= bottomRight.x
                 && y >= topLeft.y

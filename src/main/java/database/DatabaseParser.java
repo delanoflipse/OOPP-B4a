@@ -105,7 +105,7 @@ public class DatabaseParser {
 
         if (parts.key.equals("type")) {
             switch (parts.value) {
-                case "text":
+                case "multiple choice":
                     return new TextQuestion();
                 case "open":
                     return new OpenQuestion();

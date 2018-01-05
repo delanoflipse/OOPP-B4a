@@ -16,7 +16,6 @@ public class TextQuestion extends Question {
         answers.add(answer);
     }
 
-    @Override
     public boolean isCorrect(int index) {
         if (answers.size() > index) {
             return answers.get(index).correct;
