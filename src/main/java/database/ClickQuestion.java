@@ -3,7 +3,7 @@ package database;
 /**
  * Image question
  */
-public class ImageQuestion extends Question{
+public class ClickQuestion extends Question{
     /** Image url*/
     public String image;
     /** question text*/

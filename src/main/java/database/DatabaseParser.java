@@ -43,8 +43,8 @@ public class DatabaseParser {
                     cont = textQuestionLineParse((TextQuestion) currentQuestion, line);
                 } else if (currentQuestion instanceof OpenQuestion) {
                     cont = openQuestionLineParse((OpenQuestion) currentQuestion, line);
-                } else if (currentQuestion instanceof ImageQuestion) {
-                    cont = imageQuestionLineParse((ImageQuestion) currentQuestion, line);
+                } else if (currentQuestion instanceof ClickQuestion) {
+                    cont = imageQuestionLineParse((ClickQuestion) currentQuestion, line);
                 }
 
                 // newline? -> end of question data
@@ -110,7 +110,7 @@ public class DatabaseParser {
                 case "open":
                     return new OpenQuestion();
                 case "image":
-                    return new ImageQuestion();
+                    return new ClickQuestion();
                 default:
                     return null;
             }
@@ -174,7 +174,7 @@ public class DatabaseParser {
      * @param line The current line of the database
      * @return If the parser should continue to parse for this question
      */
-    private boolean imageQuestionLineParse(ImageQuestion question, String line) {
+    private boolean imageQuestionLineParse(ClickQuestion question, String line) {
         if (line.equals("")) {
             return false;
         }

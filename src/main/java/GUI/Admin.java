@@ -21,6 +21,8 @@ public class Admin extends Application {
     private static Button MCbut;
     private static Text subtitle;
     private static Text info;
+    private static Button selectbut;
+    private static Label selecttext;
 
     public static void main(String[] args) {
         launch(args);
@@ -79,8 +81,17 @@ public class Admin extends Application {
         });
         MCtext = new Label("Multiple Choiche Question");
 
+        //Set the button to go to adding select question
+        selectbut = new Button("2");
+        selectbut.setOnAction(e -> {
+            title.setText("Adding Clickable Image Question");
+            AddSelectQuestion.AddQuestion(primaryStage, centergrid);
+        });
+        selecttext = new Label("Clickable Image Question");
+
         //Set CSS and show the program
         scene.getStylesheets().add("file:src/stylesheets/admin.css");
+        display();
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -91,9 +102,11 @@ public class Admin extends Application {
         //Add Texts and Buttons
         centergrid.add(subtitle, 1, 0);
         centergrid.add(info, 1, 1);
-        //Add the button and text
+        //Add the buttons and texts
         centergrid.add(MCbut, 0, 2);
         centergrid.add(MCtext, 1, 2);
+        centergrid.add(selectbut, 0, 3);
+        centergrid.add(selecttext, 1, 3);
         //Change back alignment
         centergrid.setAlignment(Pos.CENTER_LEFT);
     }
