@@ -26,49 +26,16 @@ public class AddMCQuestion {
     private static Button addanswerfieldbutton;
     private static Button savebutton;
     private static Button cancelbutton;
-    private static Scene startmenu;
-    private static Stage primaryStage;
     private static ArrayList<RadioButton> levelbuttons = new ArrayList<>();
     private static TextField questionfield;
     private static ToggleGroup correctgroup = new ToggleGroup();
 
-    public static void AddQuestion(Stage primarystage, Scene startscene) {
-        //Set startmenu scene for quit function
-        startmenu = startscene;
-        primaryStage = primarystage;
+    public static void AddQuestion(GridPane grid) {
+        //Initialize pane
+        centergrid = grid;
 
-        //Initialize panes
-        StackPane rootpane = new StackPane();
-        GridPane titlegrid = new GridPane();
-        centergrid = new GridPane();
-        rootpane.getChildren().addAll(titlegrid, centergrid);
-
-        //Set titlegrid settings
-        titlegrid.setAlignment(Pos.TOP_LEFT);
-        titlegrid.setHgap(30);
-        titlegrid.setVgap(10);
-        titlegrid.setPadding(new Insets(25, 25, 25, 25));
-
-        //Add stichting lezen en schrijven logo
-        Image logo = new Image("file:src/images/logo.png");
-        ImageView logov = new ImageView();
-        logov.setImage(logo);
-        logov.setFitWidth(100);
-        logov.setPreserveRatio(true);
-        logov.setSmooth(true);
-        logov.setCache(true);
-        titlegrid.add(logov, 0, 0);
-
-        //Add title
-        Text title = new Text("Adding MC Question");
-        title.setId("Title");
-        titlegrid.add(title, 1, 0);
-
-        //Set centergrid settings
+        //Set centergrid alignment
         centergrid.setAlignment(Pos.BOTTOM_LEFT);
-        centergrid.setHgap(30);
-        centergrid.setVgap(10);
-        centergrid.setPadding(new Insets(25, 25, 25, 25));
 
         //Add intro text
         Text intro = new Text("Please fill in the following fields:\nYou can click the plus to add a new answer.\nClick save to store the question in the database.");
@@ -116,14 +83,6 @@ public class AddMCQuestion {
         //Now that the buttons exist we can show the answerfield
         //This also shows the buttons
         addAnswerField();
-
-        //Make new scene with new content
-        Scene scene = new Scene(rootpane, 1920, 1080);
-        //Set CSS file
-        scene.getStylesheets().add("file:src/stylesheets/admin.css");
-        //Show it on the screen
-        primaryStage.setScene(scene);
-
     }
 
     //Makes a new answerfield
@@ -145,7 +104,7 @@ public class AddMCQuestion {
         showButtons();
     }
 
-    //Shows the button at the bottom again so that they don't go trough answerfields
+    //Shows the button at the bottom again so that they don't go through answerfields
     private static void showButtons() {
         // remove the buttons
         centergrid.getChildren().removeAll(addanswerfieldbutton, savebutton, cancelbutton);
@@ -159,7 +118,7 @@ public class AddMCQuestion {
     //Makes the new question and saves it in the database
     private static void saveQuestion(){
         try {
-            //Read the data
+            //Read the data:
 
             //Read question
             String question = questionfield.getText();
@@ -216,7 +175,7 @@ public class AddMCQuestion {
 
     //Go back to the start screen
     private static void quit(){
-        primaryStage.setScene(startmenu);
+        Admin.display();
     }
 
 }

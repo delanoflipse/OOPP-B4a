@@ -16,7 +16,6 @@ public class ImageQuestion extends Question{
         bottomRight[1] = x;
     }
 
-    @Override
     public boolean isCorrect(int x, int y) {
         return x >= topLeft[0] && x <= bottomRight[0] && y >= topLeft[1] && y <= bottomRight[1];
     }
