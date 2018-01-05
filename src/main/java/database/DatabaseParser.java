@@ -109,7 +109,7 @@ public class DatabaseParser {
                     return new TextQuestion();
                 case "open":
                     return new OpenQuestion();
-                case "image":
+                case "clickable":
                     return new ClickQuestion();
                 default:
                     return null;
@@ -210,7 +210,7 @@ public class DatabaseParser {
 
             case "topleft":
                 Position postf = new Position(parts.value);
-                question.setBottomRight(postf);
+                question.setTopLeft(postf);
                 break;
         }
 

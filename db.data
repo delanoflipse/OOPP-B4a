@@ -131,24 +131,24 @@ answer: D. No , go back to C
 
 #Question Added by the Add Clickable Image GUI
 type: clickable
-level:2
+level: 1
 image:DSC02859.JPG
 question: Where is a male head on this picture?
-topleft: 2627.4643874643875,493.4017094017094
-topleft: 2816.0,822.3361823361823
+topleft: 2627,493
+bottomright: 2816,822
 
 #Question Added by the Add Clickable Image GUI
 type: clickable
-level:6
+level: 1
 image:ori_wallpaper2.jpg
 question: Where is Ori?
-topleft: 863.5897435897435,363.07692307692304
-topleft: 1146.6666666666665,613.3333333333333
+topleft: 863,363
+bottomright: 1146,613
 
 #Question Added by the Add Clickable Image GUI
 type: clickable
-level:7
+level: 1
 image:nintendo 3ds 021.JPG
 question: Click on Kirby.
-topleft: 59.71509971509972,71.56695156695157
-topleft: 179.14529914529916,192.82051282051282
+topleft: 59,71
+bottomright: 179,192

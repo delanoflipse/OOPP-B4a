@@ -21,8 +21,13 @@ public class Position {
     public Position(String value) {
         // split, parse, save
         String[] arr = value.trim().split(",");
-        this.x = Integer.parseInt(arr[0].replaceAll("[^\\d]", ""));
-        this.y = Integer.parseInt(arr[1].replaceAll("[^\\d]", ""));
+        this.x = Double.parseDouble(arr[0].replaceAll("[^\\d]", ""));
+        this.y = Double.parseDouble(arr[1].replaceAll("[^\\d]", ""));
+    }
+
+    public String toString() {
+        String out = x+","+y;
+        return out;
     }
 
 }
