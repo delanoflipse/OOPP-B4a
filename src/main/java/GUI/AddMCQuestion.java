@@ -141,11 +141,11 @@ public class AddMCQuestion {
             }
 
             //Read correct answer
-            char correct = 'A';
+            int correct = 0;
             i = 0;
             for (RadioButton button : correctanswerlist) {
                 if (button.isSelected()) {
-                    correct = (char) (65+i);
+                    correct = i;
                 }
                 i++;
             }
@@ -161,6 +161,9 @@ public class AddMCQuestion {
             writer.println("correctanswer: "+correct);
             i=0;
             for (String answer: answers) {
+                if (answers.indexOf(answer) == i) {
+                    writer.print("correct");
+                }
                 writer.println("answer: " + (char)(65+i)+". "+answer);
                 i++;
             }

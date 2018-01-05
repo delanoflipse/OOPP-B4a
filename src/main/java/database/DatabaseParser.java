@@ -1,11 +1,13 @@
-package main;
+package database;
 
-import java.awt.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Parse the database file
+ */
 public class DatabaseParser {
     String filename;
 
@@ -13,27 +15,39 @@ public class DatabaseParser {
         this.filename = filename;
     }
 
-
+    /**
+     * Parse the database file
+     * @return A list of questions for the database
+     */
     public ArrayList<Question> parse() {
+        // final object
         ArrayList<Question> questions = new ArrayList<>();
+        // current question
         Question currentQuestion = null;
+        // current line of the database file
         String line;
 
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+            // for each line in the file
             while ((line = br.readLine()) != null) {
+                // if not currently modifying a question
                 if (currentQuestion == null) {
+                    // check we need to modify
                     currentQuestion = baseLineParse(line);
                     continue;
                 }
+
+                // parse line based on type
                 boolean cont = true;
                 if (currentQuestion instanceof TextQuestion) {
                     cont = textQuestionLineParse((TextQuestion) currentQuestion, line);
                 } else if (currentQuestion instanceof OpenQuestion) {
                     cont = openQuestionLineParse((OpenQuestion) currentQuestion, line);
-                } else if (currentQuestion instanceof ImageQuestion) {
-                    cont = imageQuestionLineParse((ImageQuestion) currentQuestion, line);
+                } else if (currentQuestion instanceof ClickQuestion) {
+                    cont = imageQuestionLineParse((ClickQuestion) currentQuestion, line);
                 }
 
+                // newline? -> end of question data
                 if (!cont) {
                     questions.add(currentQuestion);
                     currentQuestion = null;
@@ -50,6 +64,11 @@ public class DatabaseParser {
         return questions;
     }
 
+    /**
+     * Parse line to key:value pair
+     * @param line Line with format "key:pair"
+     * @return A pair, or null
+     */
     private KeyValuePair splitLine(String line) {
         if (line == null || line.length() == 0) {
             return null;
@@ -72,6 +91,11 @@ public class DatabaseParser {
 
     }
 
+    /**
+     * Parse line to check for a new question
+     * @param line current line from the database
+     * @return A question or null
+     */
     private Question baseLineParse(String line) {
         KeyValuePair parts = splitLine(line);
 
@@ -81,12 +105,12 @@ public class DatabaseParser {
 
         if (parts.key.equals("type")) {
             switch (parts.value) {
-                case "text":
+                case "multiple choice":
                     return new TextQuestion();
                 case "open":
                     return new OpenQuestion();
-                case "image":
-                    return new ImageQuestion();
+                case "clickable":
+                    return new ClickQuestion();
                 default:
                     return null;
             }
@@ -96,6 +120,12 @@ public class DatabaseParser {
 
     }
 
+    /**
+     * Parse a text question
+     * @param question Current question
+     * @param line The current line of the database
+     * @return If the parser should continue to parse for this question
+     */
     private boolean textQuestionLineParse(TextQuestion question, String line) {
         if (line.equals("")) {
             return false;
@@ -138,7 +168,13 @@ public class DatabaseParser {
         return true;
     }
 
-    private boolean imageQuestionLineParse(ImageQuestion question, String line) {
+    /**
+     * Parse an image question
+     * @param question Current question
+     * @param line The current line of the database
+     * @return If the parser should continue to parse for this question
+     */
+    private boolean imageQuestionLineParse(ClickQuestion question, String line) {
         if (line.equals("")) {
             return false;
         }
@@ -169,18 +205,24 @@ public class DatabaseParser {
 
             case "bottomright":
                 Position posbr = new Position(parts.value);
-                question.setBottomRight(posbr.x, posbr.y);
+                question.setBottomRight(posbr);
                 break;
 
             case "topleft":
                 Position postf = new Position(parts.value);
-                question.setBottomRight(postf.x, postf.y);
+                question.setTopLeft(postf);
                 break;
         }
 
         return true;
     }
 
+    /**
+     * Parse an open question
+     * @param question Current question
+     * @param line The current line of the database
+     * @return If the parser should continue to parse for this question
+     */
     private boolean openQuestionLineParse(OpenQuestion question, String line) {
         if (line.equals("")) {
             return false;
@@ -216,33 +258,3 @@ public class DatabaseParser {
 
 }
 
-class KeyValuePair {
-    String key;
-    String value;
-
-    public KeyValuePair(String key, String value) {
-        this.key = key;
-        this.value = value;
-    }
-
-    public int valueAsInt() {
-        return Integer.parseInt(value.replaceAll("[^\\d]", ""));
-    }
-}
-
-class Position {
-    int x = 0;
-    int y = 0;
-
-    public Position(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-
-    public Position(String value) {
-        String[] arr = value.trim().split(",");
-        this.x = Integer.parseInt(arr[0].replaceAll("[^\\d]", ""));
-        this.y = Integer.parseInt(arr[1].replaceAll("[^\\d]", ""));
-    }
-
-}

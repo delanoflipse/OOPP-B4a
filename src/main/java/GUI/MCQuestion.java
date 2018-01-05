@@ -1,5 +1,6 @@
 package GUI;
 
+import database.*;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
@@ -8,8 +9,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
-import main.*;
 
 import java.util.ArrayList;
 
@@ -21,14 +20,23 @@ public class MCQuestion {
     private static ArrayList<RadioButton> answerbuttons = new ArrayList<>();
     private static ToggleGroup answergroup = new ToggleGroup();
     private static GridPane centergrid;
-    private static ArrayList<Question> questionlist;
+    private static ArrayList<TextQuestion> questionlist = new ArrayList<>();
     private static Button submit;
 
     public static void askQuestions(GridPane grid){
         centergrid = grid;
         //Get the questions from the database
         Database.loadDatabase();
-        questionlist = Database.getQuestionsForLevel(1);
+        ArrayList<Question> allquestions = Database.getQuestionsForLevel(1);
+
+        //Get all mc questions
+        for (Question q: allquestions) {
+            if (q instanceof TextQuestion) {
+                questionlist.add((TextQuestion) q);
+            }
+        }
+
+
         //Set score to 0 for the beginning
         score = 0;
 
@@ -60,7 +68,7 @@ public class MCQuestion {
                     for (Answer answer : ((TextQuestion) questionlist.get(i)).answers) {
                         //Get correct answer
                         TextAnswer tanswer = (TextAnswer) answer;
-                        if (tanswer.getCorrect()) {
+                        if (tanswer.correct) {
                             //Set response text with the correct answer in it
                             final String answertext = tanswer.text;
                             response.setFill(Color.FIREBRICK);
@@ -132,7 +140,7 @@ public class MCQuestion {
         centergrid.add(submit, 0, j+1);
     }
 
-    private static void done(GridPane centergrid, ArrayList<Question> questionlist){
+    private static void done(GridPane centergrid, ArrayList<TextQuestion> questionlist){
         //Make the texts for the ending
         Text end = new Text("That were all the question, well done!");
         Text endscore = new Text("Your score is: " + score + " out of " + questionlist.size());

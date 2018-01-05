@@ -318,8 +318,8 @@ public class AddSelectQuestion {
             writer.println("level:" + level);
             writer.println("image:" + filename + "." + extension);
             writer.println("question: " + question);
-            writer.println("topleft: "+correctltX+","+correctltY);
-            writer.println("topleft: "+correctrbX+","+correctrbY);
+            writer.println("topleft: "+((Double) correctltX).intValue()+","+((Double) correctltY).intValue());
+            writer.println("bottomright: "+((Double) correctrbX).intValue()+","+((Double) correctrbY).intValue());
             //Close the writer
             writer.close();
             //Go back to the start menu

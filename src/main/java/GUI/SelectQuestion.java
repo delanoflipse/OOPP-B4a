@@ -1,5 +1,7 @@
 package GUI;
 
+
+import database.*;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -17,7 +19,7 @@ import java.util.ArrayList;
 public class SelectQuestion {
 
     private static GridPane centergrid;
-    private static ArrayList<main.SelectQuestion> questionlist;
+    private static ArrayList<ClickQuestion> questionlist = new ArrayList<>();
     private static ImageView qimagev;
     private static Image qimage;
     private static Circle selected = new Circle();
@@ -26,7 +28,7 @@ public class SelectQuestion {
     private static Button submit;
     private static Button next;
     private static Text response;
-    private static main.SelectQuestion q;
+    private static ClickQuestion q;
     private static double imgratio;
     private static Rectangle correct = new Rectangle();
 
@@ -34,10 +36,14 @@ public class SelectQuestion {
     public static void askQuestions(GridPane grid) {
         ratio = .5;
 
-        //Make a questionlist and add questions, will be done by the database in the future
-        questionlist = new ArrayList<>();
-        questionlist.add(new main.SelectQuestion(687.0, 855.0, 900.0, 1080.0,  "background.jpg", "Select the tree."));
-        questionlist.add(new main.SelectQuestion(539.325, 1584.68, 621.44, 1626.85,  "Wally.jpg", "Where's Wally?"));
+        //Make a questionlist and add questions
+        Database.loadDatabase();
+        ArrayList<Question> allquestions = Database.getQuestionsForLevel(1);
+        for (Question q : allquestions) {
+            if (q instanceof ClickQuestion) {
+                questionlist.add((ClickQuestion) q);
+            }
+        }
 
         //Set the private centergrid to the one given by the funtion parameter
         centergrid = grid;
@@ -55,10 +61,10 @@ public class SelectQuestion {
         //Get the question
         q = questionlist.get(index);
         //Show the question
-        Text questiontext = new Text(q.getQuestion());
+        Text questiontext = new Text(q.text);
         centergrid.add(questiontext, 0, 0);
         //Load the image
-        qimage = new Image("file:src/images/"+q.getImgname());
+        qimage = new Image("file:src/images/"+q.image);
         qimagev = new ImageView(qimage);
         qimagev.setFitHeight(centergrid.getHeight()*ratio);
         qimagev.setPreserveRatio(true);
@@ -153,12 +159,6 @@ public class SelectQuestion {
         //Button to submit the answer
         submit = new Button("submit");
         submit.setOnAction(e -> {
-            //just debugging things
-            /**System.out.println("imgRatio: " + imgratio);
-            System.out.println("ltY: " + selected.getY()*imgratio);
-            System.out.println("ltX: " + selected.getX()*imgratio);
-            System.out.println("rbY: " +(selected.getY()+selected.getHeight())*imgratio);
-            System.out.println("rbX: " +(selected.getX()+selected.getWidth())*imgratio);**/
             //If the answer is correct
             if (q.isCorrect(selected.getCenterX()*imgratio, selected.getCenterY()*imgratio)) {
                 response.setFill(Color.DARKGREEN);
@@ -170,10 +170,10 @@ public class SelectQuestion {
                 response.setFill(Color.FIREBRICK);
                 response.setText("That is incorrect, you can see the answer on the image now.\n" +
                         "Click \"continue\" to go to the next question.");
-                correct.setX(q.getCorrectltX()/imgratio);
-                correct.setY(q.getCorrectltY()/imgratio);
-                correct.setWidth((q.getCorrectrbX() - q.getCorrectltX())/imgratio);
-                correct.setHeight((q.getCorrectrbY() - q.getCorrectltY())/imgratio);
+                correct.setX(q.topLeft.x/imgratio);
+                correct.setY(q.topLeft.y/imgratio);
+                correct.setWidth((q.bottomRight.x - q.topLeft.x)/imgratio);
+                correct.setHeight((q.bottomRight.y - q.topLeft.y)/imgratio);
                 correct.setFill(Color.FIREBRICK);
             }
             //Show the button to go to the next question
@@ -192,8 +192,6 @@ public class SelectQuestion {
     private static void endDrag() {
         //Enable the submit button and make the color a bit darker
         submit.setDisable(false);
-        /**System.out.println("X: "+e.getX());
-         System.out.println("Y: "+e.getY());**/
     }
 
 
