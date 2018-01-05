@@ -15,6 +15,13 @@ import javafx.stage.Stage;
 
 public class Admin extends Application {
 
+    private static Text title;
+    private static GridPane centergrid;
+    private static Label MCtext;
+    private static Button MCbut;
+    private static Text subtitle;
+    private static Text info;
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -24,7 +31,7 @@ public class Admin extends Application {
         //Set panes
         StackPane rootpane = new StackPane();
         GridPane titlegrid = new GridPane();
-        GridPane centergrid = new GridPane();
+        centergrid = new GridPane();
         rootpane.getChildren().addAll(titlegrid, centergrid);
 
         //Set settings for titlegrid
@@ -45,7 +52,7 @@ public class Admin extends Application {
         titlegrid.add(logov, 0, 0);
 
         //Add title
-        Text title = new Text("Admin Program");
+        title = new Text("Admin Program");
         title.setId("Title");
         titlegrid.add(title, 1, 0);
 
@@ -56,31 +63,38 @@ public class Admin extends Application {
         centergrid.setPadding(new Insets(25, 25, 25, 25));
 
         //Add subtitle and info text
-        Text subtitle = new Text("Here you can add new Questions for the practice program.");
+        subtitle = new Text("Here you can add new Questions for the practice program.");
         subtitle.setId("subtitle");
-        Text info = new Text("Please click on the type of question you want to add.");
+        info = new Text("Please click on the type of question you want to add.");
         info.setId("info");
-
-        centergrid.add(subtitle, 1, 0);
-        centergrid.add(info, 1, 1);
 
         //Define scene here so that we can use it in the button action
         Scene scene = new Scene(rootpane, 1920, 1080);
 
         //Set the button to go to the addMCquestion interface
-        Button MCbut = new Button("1");
+        MCbut = new Button("1");
         MCbut.setOnAction(e -> {
-            AddMCQuestion.AddQuestion(primaryStage, scene);
+            title.setText("Adding MC Question");
+            AddMCQuestion.AddQuestion(centergrid);
         });
-        Label MCtext = new Label("Multiple Choiche Question");
-
-        //Add the button and text
-        centergrid.add(MCbut, 0, 2);
-        centergrid.add(MCtext, 1, 2);
+        MCtext = new Label("Multiple Choiche Question");
 
         //Set CSS and show the program
         scene.getStylesheets().add("file:src/stylesheets/admin.css");
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+
+    public static void display() {
+        //Empty the centergrid
+        centergrid.getChildren().clear();
+        //Add Texts and Buttons
+        centergrid.add(subtitle, 1, 0);
+        centergrid.add(info, 1, 1);
+        //Add the button and text
+        centergrid.add(MCbut, 0, 2);
+        centergrid.add(MCtext, 1, 2);
+        //Change back alignment
+        centergrid.setAlignment(Pos.CENTER_LEFT);
     }
 }

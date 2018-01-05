@@ -12,7 +12,6 @@ public class OpenQuestion extends Question {
         correctAnswer = answer.trim().toLowerCase();
     }
 
-    @Override
     public boolean isCorrect(String answer) {
         return correctAnswer.equals(answer.trim().toLowerCase());
     }
