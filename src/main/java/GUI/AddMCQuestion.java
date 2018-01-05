@@ -33,6 +33,7 @@ public class AddMCQuestion {
     public static void AddQuestion(GridPane grid) {
         //Initialize pane
         centergrid = grid;
+        centergrid.getChildren().clear();
 
         //Set centergrid alignment
         centergrid.setAlignment(Pos.BOTTOM_LEFT);
@@ -78,7 +79,7 @@ public class AddMCQuestion {
         });
 
         cancelbutton = new Button("Cancel");
-        cancelbutton.setOnAction(e -> quit());
+        cancelbutton.setOnAction(e -> Admin.display());
 
         //Now that the buttons exist we can show the answerfield
         //This also shows the buttons
@@ -129,8 +130,8 @@ public class AddMCQuestion {
             for (RadioButton button : levelbuttons) {
                 if (button.isSelected()) {
                     level = i;
-                    i++;
                 }
+                i++;
             }
 
             //Read answers
@@ -155,7 +156,7 @@ public class AddMCQuestion {
             //Write all the data
             writer.println("#Question Added by the MC GUI");
             writer.println("type: multiple choice");
-            writer.println("level:"+level);
+            writer.println("level: "+level);
             writer.println("question: "+question);
             writer.println("correctanswer: "+correct);
             i=0;
@@ -175,6 +176,12 @@ public class AddMCQuestion {
 
     //Go back to the start screen
     private static void quit(){
+        //prepare new screen
+        centergrid.getChildren().clear();
+        centergrid.setAlignment(Pos.TOP_LEFT);
+
+        //Show the MC question just made
+
         Admin.display();
     }
 

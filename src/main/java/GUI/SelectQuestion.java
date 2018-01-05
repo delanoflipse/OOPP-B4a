@@ -43,8 +43,8 @@ public class SelectQuestion {
 
         //Make a questionlist and add questions, will be done by the database in the future
         questionlist = new ArrayList<>();
-        questionlist.add(new main.SelectQuestion(687.0, 855.0, 900.0, 1080.0, 50.0, "background.jpg", "Select the tree."));
-        questionlist.add(new main.SelectQuestion(539.325, 1584.68, 621.44, 1626.85, 20.0, "Wally.jpg", "Where's Wally?"));
+        questionlist.add(new main.SelectQuestion(687.0, 855.0, 900.0, 1080.0,  "background.jpg", "Select the tree."));
+        questionlist.add(new main.SelectQuestion(539.325, 1584.68, 621.44, 1626.85,  "Wally.jpg", "Where's Wally?"));
 
         //Set the private centergrid to the one given by the funtion parameter
         centergrid = grid;

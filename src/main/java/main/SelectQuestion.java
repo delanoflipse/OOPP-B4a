@@ -10,12 +10,11 @@ public class SelectQuestion extends Question{
     private String imgname;
     private String question;
 
-    public SelectQuestion(double ltY, double ltX, double rbY, double rbX, double range, String imgname, String question) {
+    public SelectQuestion(double ltY, double ltX, double rbY, double rbX, String imgname, String question) {
         this.correctltY = ltY;
         this.correctltX = ltX;
         this.correctrbY = rbY;
         this.correctrbX = rbX;
-        this.range = range;
         this.imgname = imgname;
         this.question = question;
     }
@@ -45,10 +44,10 @@ public class SelectQuestion extends Question{
     }
 
     public boolean isCorrect(double ltY, double ltX, double rbY, double rbX, double ratio) {
-        if (ratio*ltY < correctltY + range/ratio && ratio*ltY > correctltY - range/ratio
-            && ratio*ltX < correctltX + range/ratio && ratio*ltX > correctltX - range/ratio
-            && ratio*rbY < correctrbY + range/ratio && ratio*rbY > correctrbY - range/ratio
-            && ratio*rbX < correctrbX + range/ratio && ratio*rbX > correctrbX - range/ratio) {
+        if (ratio*ltY < correctltY && ratio*ltY > correctltY
+            && ratio*ltX < correctltX && ratio*ltX > correctltX
+            && ratio*rbY < correctrbY && ratio*rbY > correctrbY
+            && ratio*rbX < correctrbX && ratio*rbX > correctrbX) {
             return true;
         }
         return false;
