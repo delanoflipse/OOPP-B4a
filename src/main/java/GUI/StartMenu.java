@@ -84,6 +84,7 @@ public class StartMenu extends Application {
 
         //Make scene to display the panes in
         scene = new Scene(rootpane, 1280, 720);
+      
         //Set actions for the buttons
         MCbutton.setOnAction(e -> {
             //Change the title
@@ -97,6 +98,7 @@ public class StartMenu extends Application {
             scene.getStylesheets().clear();
             scene.getStylesheets().add("file:src/stylesheets/MCquestions.css");
         });
+
         Selectimgbutton.setOnAction(e -> {
             //Change the title
             titlegrid.setAlignment(Pos.TOP_LEFT);
@@ -113,6 +115,7 @@ public class StartMenu extends Application {
         });
 
         //Set the scene and size of the stage
+        scene.getStylesheets().add("file:src/stylesheets/start_menu.css");
         primaryStage.setScene(scene);
         primaryStage.setHeight(720);
         primaryStage.setWidth(1280);
