@@ -98,7 +98,18 @@ public class StartMenu extends Application {
             scene.getStylesheets().add("file:src/stylesheets/MCquestions.css");
         });
         Selectimgbutton.setOnAction(e -> {
-            GUI.SelectQuestion.askQuestions(primaryStage);
+            //Change the title
+            titlegrid.setAlignment(Pos.TOP_LEFT);
+            title.setText("Select Image Questions");
+            //Remove the second logo
+            titlegrid.getChildren().remove(logov2);
+            //Set other CSS file
+            scene.getStylesheets().clear();
+            //We dont have CSS for this question yet
+            //scene.getStylesheets().add("file:src/stylesheets/");
+
+            //Ask the questions
+            GUI.SelectQuestion.askQuestions(centergrid);
         });
 
         //Set the scene and size of the stage
