@@ -1,6 +1,7 @@
 package main;
 
 import GUI.StartMenu;
+import user.UserData;
 
 public class Main {
 
@@ -11,6 +12,8 @@ public class Main {
                 javafx.application.Application.launch(StartMenu.class);
             }
         }.start();
-//        askMultipleChoichequestions();
+
+//        UserData data = UserData.parse("user.userdata");
+//        data.save();
     }
 }
