@@ -11,6 +11,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.scene.control.ChoiceBox;
 
@@ -23,6 +24,9 @@ public class dropDownQuestion extends Application{
     Label h1;
     Label info;
     Label navigation;
+    StackPane root = new StackPane();
+    Image logo = new Image("file:src/images/logo.png");
+    ImageView logov = new ImageView();
 
     public static void main(String[] args) {
         launch(args);
@@ -51,6 +55,21 @@ public class dropDownQuestion extends Application{
             }
         });
 
+        GridPane titlegrid = new GridPane();
+        logov.setImage(logo);
+        logov.setFitWidth(100);
+        logov.setPreserveRatio(true);
+        logov.setSmooth(true);
+        logov.setCache(true);
+        titlegrid.setHgap(30);
+        titlegrid.setVgap(10);
+        titlegrid.setPadding(new Insets(25, 25, 25, 25));
+        titlegrid.add(logov, 0, 0);
+
+        Label caption = new Label("Question #");
+        caption.setFont(new Font("Arial", 30));
+        titlegrid.add(caption, 1, 0);
+
         GridPane layout = new GridPane();
         layout.setAlignment(Pos.CENTER_LEFT);
         layout.setHgap(30);
@@ -62,7 +81,8 @@ public class dropDownQuestion extends Application{
         layout.add(choiceBox, 1, 1);
         layout.add(question, 0, 2);
         layout.add(submit, 0, 3);
-        Scene question1 = new Scene(layout, 1000, 1000);
+        root.getChildren().addAll(titlegrid, layout);
+        Scene question1 = new Scene(root, 1920, 1000);
         window.setScene(question1);
         window.show();
     }
