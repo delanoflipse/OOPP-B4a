@@ -14,6 +14,8 @@ public class Main {
         }.start();
 
 //        UserData data = UserData.parse("user.userdata");
+//        data.name = "asdfs";
+//        System.out.println(data.getPreference("useTTS"));
 //        data.save();
     }
 }
