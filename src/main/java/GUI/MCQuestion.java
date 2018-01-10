@@ -36,7 +36,6 @@ public class MCQuestion {
             }
         }
 
-
         //Set score to 0 for the beginning
         score = 0;
 

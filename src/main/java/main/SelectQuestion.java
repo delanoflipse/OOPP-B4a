@@ -1,5 +1,7 @@
 package main;
 
+import database.Question;
+
 public class SelectQuestion extends Question{
 
     private double correctltY;

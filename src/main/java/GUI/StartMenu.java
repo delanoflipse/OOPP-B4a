@@ -12,10 +12,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-
-import java.util.ArrayList;
-
-public class StartMenu extends Application {
+public class StartMenu extends UIScene {
 
     private static ImageView logov;
     private static ImageView logov2;
@@ -27,15 +24,14 @@ public class StartMenu extends Application {
     private static Button Selectimgbutton;
 
     @Override
-    public void start(Stage primaryStage) {
-        //Set up the different panes
-        StackPane rootpane = new StackPane();
+    public void render(UI gui, UIContext context) {
+        //Set the title of the stage
+        gui.setTitle("Stichting Lezen en Schrijven - Practice Program");
+        gui.setCSS("start_menu.css");
+
         titlegrid = new GridPane();
         centergrid = new GridPane();
-        rootpane.getChildren().addAll(titlegrid, centergrid);
 
-        //Set the title of the stage
-        primaryStage.setTitle("Stichting Lezen en Schrijven - Practice Program");
         //Some settings for the grid at the top
         titlegrid.setHgap(30);
         titlegrid.setVgap(10);
@@ -43,20 +39,9 @@ public class StartMenu extends Application {
 
         //Load logos for the title and add the first logo
         //Second logo is added in display() because only the start menu has two logos
-        Image logo = new Image("file:src/images/logo.png");
-        logov = new ImageView();
-        logov.setImage(logo);
-        logov.setFitWidth(100);
-        logov.setPreserveRatio(true);
-        logov.setSmooth(true);
-        logov.setCache(true);
+        logov = createImageView("logo.png");
         titlegrid.add(logov, 0, 0);
-        logov2 = new ImageView();
-        logov2.setImage(logo);
-        logov2.setFitWidth(100);
-        logov2.setPreserveRatio(true);
-        logov2.setSmooth(true);
-        logov2.setCache(true);
+        logov2 = createImageView("logo.png");
 
         //Make the title text and add it
         title = new Text();
@@ -81,9 +66,6 @@ public class StartMenu extends Application {
         //Gridlines for debugging are off
         titlegrid.setGridLinesVisible(false);
         centergrid.setGridLinesVisible(false);
-
-        //Make scene to display the panes in
-        scene = new Scene(rootpane, 1280, 720);
       
         //Set actions for the buttons
         MCbutton.setOnAction(e -> {
@@ -95,8 +77,8 @@ public class StartMenu extends Application {
             //Ask the questions
             MCQuestion.askQuestions(centergrid);
             //Set other CSS file
-            scene.getStylesheets().clear();
-            scene.getStylesheets().add("file:src/stylesheets/MCquestions.css");
+            gui.scene.getStylesheets().clear();
+            gui.scene.getStylesheets().add("file:src/stylesheets/MCquestions.css");
         });
 
         Selectimgbutton.setOnAction(e -> {
@@ -106,25 +88,18 @@ public class StartMenu extends Application {
             //Remove the second logo
             titlegrid.getChildren().remove(logov2);
             //Set other CSS file
-            scene.getStylesheets().clear();
+            gui.scene.getStylesheets().clear();
             //We dont have CSS for this question yet
             //scene.getStylesheets().add("file:src/stylesheets/");
 
             //Ask the questions
-            GUI.SelectQuestion.askQuestions(centergrid);
+            SelectQuestion.askQuestions(centergrid);
         });
-
-        //Set the scene and size of the stage
-        scene.getStylesheets().add("file:src/stylesheets/start_menu.css");
-        primaryStage.setScene(scene);
-        primaryStage.setHeight(720);
-        primaryStage.setWidth(1280);
 
         //Display the menu
         display();
 
-        //Show it all
-        primaryStage.show();
+        gui.root.getChildren().addAll(titlegrid, centergrid);
 
     }
 
@@ -140,10 +115,6 @@ public class StartMenu extends Application {
 
         //Set centergrid alignment
         centergrid.setAlignment(Pos.CENTER);
-
-        //Set the CSS
-        scene.getStylesheets().clear();
-        scene.getStylesheets().add("file:src/stylesheets/start_menu.css");
 
         //Clear the centergrid and add the buttons
         centergrid.getChildren().clear();

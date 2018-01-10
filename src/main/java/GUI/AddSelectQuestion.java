@@ -313,7 +313,7 @@ public class AddSelectQuestion {
             PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter("db.data", true)));
             writer.print("\n");
             //Write all the data
-            writer.println("#Question Added by the Add Clickable Image GUI");
+            writer.println("#Question Added by the Add Clickable Image UI");
             writer.println("type: clickable");
             writer.println("level:" + level);
             writer.println("image:" + filename + "." + extension);

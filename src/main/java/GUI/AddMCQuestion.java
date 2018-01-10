@@ -154,7 +154,7 @@ public class AddMCQuestion {
             PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter("db.data", true)));
             writer.print("\n");
             //Write all the data
-            writer.println("#Question Added by the MC GUI");
+            writer.println("#Question Added by the MC UI");
             writer.println("type: multiple choice");
             writer.println("level: "+level);
             writer.println("question: "+question);

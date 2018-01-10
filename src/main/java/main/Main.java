@@ -1,7 +1,6 @@
 package main;
 
-import GUI.StartMenu;
-import user.UserData;
+import GUI.UI;
 
 public class Main {
 
@@ -9,7 +8,7 @@ public class Main {
         new Thread() {
             @Override
             public void run() {
-                javafx.application.Application.launch(StartMenu.class);
+                javafx.application.Application.launch(UI.class);
             }
         }.start();
 
