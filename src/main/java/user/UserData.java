@@ -6,36 +6,61 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.security.Key;
-import java.security.KeyPair;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+/**
+ * User data class
+ */
 public class UserData {
-    String name;
-    String filename;
-    ArrayList<UserDateScore> scores;
-    Map<String, UserPreferenceValue> preferences;
+    /** User name */
+    public String name;
+    /** User filename */
+    public String filename;
+    /** Scores */
+    public ArrayList<UserDateScore> scores;
+    /** Preferences */
+    private Map<String, UserPreferenceValue> preferences;
 
     public UserData() {
         scores = new ArrayList<>();
         preferences = new HashMap<>();
     }
 
+    /**
+     * Get integer preference
+     * @param key The preference name
+     * @return An int
+     */
     public int getIntPreference(String key) {
         return preferences.get(key).valueAsInt();
     }
 
+    /**
+     * Get a String preference(default)
+     * @param key The preference name
+     * @return A String
+     */
     public String getPreference(String key) {
         return preferences.get(key).value;
     }
 
+    /**
+     * Get boolean preference
+     * @param key The preference name
+     * @return A boolean
+     */
     public Boolean getBoolPreference(String key) {
         return preferences.get(key).valueAsBoolean();
     }
 
+    /**
+     * Parse a userdata file and return a new UserData instance
+     * @param file The filename
+     * @return a UserData instance
+     */
     public static UserData parse(String file) {
         UserData data = new UserData();
         data.filename = file;
@@ -102,6 +127,9 @@ public class UserData {
         return data;
     }
 
+    /**
+     * Save the file
+     */
     public void save() {
         try {
             PrintWriter writer = new PrintWriter(filename, "UTF-8");
