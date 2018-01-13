@@ -1,5 +1,7 @@
 import org.junit.jupiter.api.Test;
 
+import main.*;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class KeyValuePairTest {

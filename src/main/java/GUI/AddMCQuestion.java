@@ -39,7 +39,7 @@ public class AddMCQuestion {
         centergrid.setAlignment(Pos.BOTTOM_LEFT);
 
         //Add intro text
-        Text intro = new Text("Please fill in the following fields:\nYou can click the plus to add a new answer.\nClick save to store the question in the database.");
+        Text intro = new Text("Please fill in the following fields:\nYou can click \"New Answer\" to add a new answer.\nClick save to store the question in the database.");
         centergrid.add(intro, 1, 0, 4, 3);
 
         //Add Question label and textfield
@@ -158,10 +158,9 @@ public class AddMCQuestion {
             writer.println("type: multiple choice");
             writer.println("level: "+level);
             writer.println("question: "+question);
-            writer.println("correctanswer: "+correct);
             i=0;
             for (String answer: answers) {
-                if (answers.indexOf(answer) == i) {
+                if (i==correct) {
                     writer.print("correct");
                 }
                 writer.println("answer: " + (char)(65+i)+". "+answer);
@@ -183,7 +182,7 @@ public class AddMCQuestion {
         centergrid.getChildren().clear();
         centergrid.setAlignment(Pos.TOP_LEFT);
 
-        //Show the MC question just made
+        //Show the MC question just made (to be implemented)
 
         Admin.display();
     }

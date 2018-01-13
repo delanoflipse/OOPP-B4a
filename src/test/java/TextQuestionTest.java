@@ -1,6 +1,6 @@
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
+import database.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 

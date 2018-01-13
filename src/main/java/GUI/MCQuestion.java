@@ -16,12 +16,14 @@ public class MCQuestion {
 
     private static int i;
     private static int score;
+    private static int total;
     private static Text response;
     private static ArrayList<RadioButton> answerbuttons = new ArrayList<>();
     private static ToggleGroup answergroup = new ToggleGroup();
     private static GridPane centergrid;
     private static ArrayList<TextQuestion> questionlist = new ArrayList<>();
     private static Button submit;
+    private static Button stop;
 
     public static void askQuestions(GridPane grid){
         centergrid = grid;
@@ -36,11 +38,10 @@ public class MCQuestion {
             }
         }
 
-
         //Set score to 0 for the beginning
         score = 0;
 
-        //Set nnew alignment for the grid
+        //Set new alignment for the grid
         centergrid.setAlignment(Pos.CENTER_LEFT);
 
         //Make the response text
@@ -50,9 +51,14 @@ public class MCQuestion {
         //Make the button for going to the next question
         Button next = new Button("Continue");
 
+        //Make button for stopping the quiz
+        stop = new Button("Stop Quiz");
+        stop.setOnAction(e -> done());
+
         //Make button to submit the question and set the action
         submit = new Button("Submit");
         submit.setOnAction(e -> {
+            total++;
             //If there is an answer selected
             if (answerbuttons.indexOf(answergroup.getSelectedToggle()) != -1) {
                 //Get the index fo the selected answer
@@ -79,7 +85,9 @@ public class MCQuestion {
                 //Add the continue button to the grid
                 final int col = centergrid.getColumnIndex(submit);
                 final int row = centergrid.getRowIndex(submit);
-                centergrid.add(next, col+1, row);
+                centergrid.add(next, col, row+1);
+                centergrid.getChildren().remove(stop);
+                centergrid.add(stop, col+1, row+1);
                 centergrid.getChildren().remove(submit);
             }
         });
@@ -99,12 +107,12 @@ public class MCQuestion {
     private static void showNextQuestion(){
         //Clear the centergrid
         centergrid.getChildren().clear();
-        //Increase i to get the enxt question
+        //Increase i to get the next question
         i++;
         //Check whether there is a next question
         if (i >= questionlist.size()){
             //If not: give the end screen
-            done(centergrid, questionlist);
+            done();
             return;
         }
 
@@ -117,10 +125,10 @@ public class MCQuestion {
         //Display the question itself
         Text qtext = new Text(q.text);
         qtext.setId("qtext");
-        centergrid.add(qtext, 0, 1);
+        centergrid.add(qtext, 0, 1, 2, 1);
         //Clear the answerbuttons list
         answerbuttons.clear();
-        //Add the new buttons with the rifght texts behind it
+        //Add the new buttons with the right texts behind it
         for (Answer answer : q.answers) {
             TextAnswer tanswer = (TextAnswer) answer;
             answerbuttons.add(new RadioButton(tanswer.text));
@@ -131,19 +139,20 @@ public class MCQuestion {
         for (RadioButton button : answerbuttons) {
             button.setToggleGroup(answergroup);
             j++;
-            centergrid.add(button, 0, j);
+            centergrid.add(button, 0, j, 2, 1);
         }
         //Make the response text 'disappear'
         response.setText("");
         //Add the response text and submit button on the right place
-        centergrid.add(response, 0, j + 1);
+        centergrid.add(response, 0, j + 1, 2, 1);
         centergrid.add(submit, 0, j+1);
+        centergrid.add(stop, 0, j+2);
     }
 
-    private static void done(GridPane centergrid, ArrayList<TextQuestion> questionlist){
+    private static void done(){
         //Make the texts for the ending
         Text end = new Text("That were all the question, well done!");
-        Text endscore = new Text("Your score is: " + score + " out of " + questionlist.size());
+        Text endscore = new Text("Your score is: " + score + " out of " + total);
         Text back = new Text("You will be redirected to the startscreen, when you click exit.");
 
         //Set IDs for CSS
