@@ -36,7 +36,7 @@ public class SelectQuestion {
     private static Button stop;
 
     public static void askQuestions(GridPane grid) {
-        ratio = .5;
+        ratio = .65;
         score = 0;
         totalanswered = 0;
         //Make a questionlist and add questions
@@ -48,7 +48,7 @@ public class SelectQuestion {
             }
         }
 
-        //Set the private centergrid to the one given by the funtion parameter
+        //Set the private centergrid to the one given by the function parameter
         centergrid = grid;
         //Set alignment to center left
         centergrid.setAlignment(Pos.CENTER_LEFT);

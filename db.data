@@ -152,3 +152,11 @@ image:nintendo 3ds 021.JPG
 question: Click on Kirby.
 topleft: 59,71
 bottomright: 179,192
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:1
+image:Screenshot (15).png
+question: Where can uou type your search?
+topleft: 638,440
+bottomright: 1290,491
