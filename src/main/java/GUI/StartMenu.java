@@ -25,6 +25,7 @@ public class StartMenu extends Application {
     private static Text title;
     private static Button MCbutton;
     private static Button Selectimgbutton;
+    private static Button GUIbutton;
 
     @Override
     public void start(Stage primaryStage) {
@@ -78,6 +79,11 @@ public class StartMenu extends Application {
         Selectimgbutton.setMinSize(300, 300);
         Selectimgbutton.setId("SelectIMGButton");
 
+        //Make button for the GUIQuestions
+        GUIbutton = new Button("GUI Elements Question");
+        GUIbutton.setMinSize(300, 300);
+        GUIbutton.setId("GUIbutton");
+
         //Gridlines for debugging are off
         titlegrid.setGridLinesVisible(false);
         centergrid.setGridLinesVisible(false);
@@ -112,6 +118,21 @@ public class StartMenu extends Application {
 
             //Ask the questions
             GUI.SelectQuestion.askQuestions(centergrid);
+        });
+
+        GUIbutton.setOnAction(e -> {
+            //Change the title
+            titlegrid.setAlignment(Pos.TOP_LEFT);
+            title.setText("GUI Elements Questions");
+            //Remove the second logo
+            titlegrid.getChildren().remove(logov2);
+            //Set other CSS file
+            scene.getStylesheets().clear();
+            //We dont have CSS for this question yet
+            //scene.getStylesheets().add("file:src/stylesheets/");
+
+            //Ask the questions
+            GUI.GUIQuestion.askQuestions(centergrid);
         });
 
         //Set the scene and size of the stage
@@ -149,6 +170,7 @@ public class StartMenu extends Application {
         centergrid.getChildren().clear();
         centergrid.add(MCbutton, 0, 0);
         centergrid.add(Selectimgbutton, 1, 0);
+        centergrid.add(GUIbutton, 2, 0);
     }
 
 }

@@ -209,6 +209,9 @@ public class SelectQuestion {
     }
 
     private static void done() {
+        //To make sure next time it starts with the first question
+        i=0;
+
         //Make the texts for the ending
         Text end = new Text("That were all the question, well done!");
         Text endscore = new Text("Your score is: " + score + " out of " + totalanswered);
