@@ -38,7 +38,7 @@ public class SelectQuestion {
 
         //Make a questionlist and add questions
         Database.loadDatabase();
-        ArrayList<Question> allquestions = Database.getQuestionsForLevel(1);
+        ArrayList<Question> allquestions = Database.getQuestionsForLevel(1, "ImageQuestion");
         for (Question q : allquestions) {
             if (q instanceof ClickQuestion) {
                 questionlist.add((ClickQuestion) q);

@@ -19,7 +19,7 @@ class DatabaseTest {
         res.add(q2);
         res2.add(q1);
         tst.questions = res;
-        assertEquals(res2, Database.getQuestionsForLevel(2));
+        assertEquals(res2, Database.getQuestionsForLevel(2, "TextQuestion"));
         }
 
     }

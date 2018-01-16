@@ -8,11 +8,10 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
 public class WelcomeScene extends UIScene {
-    Text welcomeText, labelText;
-    TextField textInput;
-    Button submitButton;
+    private static Text welcomeText, labelText;
+    private static TextField textInput;
+    private static Button submitButton;
 
-    @Override
     public void render(UI gui, UIContext context) {
         gui.setTitle("Stichting Lezen en Schrijven - Practice Program");
         gui.setCSS("base.css");
@@ -35,9 +34,9 @@ public class WelcomeScene extends UIScene {
         submitButton.setId("btn");
 
         submitButton.setOnAction(e -> {
-            gui.goToScene(new StartMenu(), new UIContext()
-                    .set("test", textInput.getText())
-            );
+//            UI.goToScene(new StartMenu(), new UIContext()
+//                    .set("test", textInput.getText())
+//            );
         });
 
         GridPane pane = new GridPane();

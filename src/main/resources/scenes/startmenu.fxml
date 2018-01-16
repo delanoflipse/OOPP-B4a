@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.Button?>
+
+<StackPane xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="GUI.StartMenu">
+    <GridPane gridLinesVisible="false" alignment="TOP_CENTER" hgap="30" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+        <padding>
+            <Insets bottom="25" left="25" right="25" top="25" />
+        </padding>
+
+        <ImageView fx:id="logoImage1" fitWidth="100.0" smooth="true" cache="true" preserveRatio="true"  GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <Text fx:id="Title" text="Practise Program" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        <ImageView fx:id="logoImage2" fitWidth="100.0" smooth="true" cache="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+    </GridPane>
+
+    <GridPane gridLinesVisible="false" alignment="CENTER" hgap="30" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+        <padding>
+            <Insets bottom="25" left="25" right="25" top="25" />
+        </padding>
+
+        <Button text="Multiple Choiche Questions" minWidth="300" minHeight="300" fx:id="MCButton" GridPane.columnIndex="0" GridPane.rowIndex="0" onAction="#handleMCButton"/>
+        <Button text="Select part of Image Questions" minWidth="300" minHeight="300" fx:id="SelectIMGButton" GridPane.columnIndex="1" GridPane.rowIndex="0" onAction="#handleIQButton"/>
+    </GridPane>
+</StackPane>

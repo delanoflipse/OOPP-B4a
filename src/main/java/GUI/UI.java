@@ -2,42 +2,70 @@ package GUI;
 
 import database.Database;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class UI extends Application {
-    StackPane root;
-    Stage stage;
-    Scene scene;
+    public static StackPane root;
+    public static Stage stage;
+    public static Scene scene;
 
-    UIState state;
+    public static UIState state;
 
-    public void setTitle(String title) {
+    public static void setTitle(String title) {
         stage.setTitle(title);
     }
 
-    public void setCSS(String file) {
+    public static void setCSS(String file) {
         scene.getStylesheets().add("file:src/stylesheets/" + file);
     }
 
     @Override
     public void start(Stage primaryStage) {
+        // load basics filex
         state = new UIState();
-        
         stage = primaryStage;
         root = new StackPane();
         scene = new Scene(root, 1280, 720);
         stage.setScene(scene);
 
-        goToScene(new WelcomeScene(), null);
+        // go to starting scene
+        goToScene("startmenu");
+
         primaryStage.show();
     }
 
-    public void goToScene(UIScene guiscene, UIContext context) {
-        root.getChildren().clear();
-        scene.getStylesheets().clear();
+    public static void goToScene(String sceneName) {
+        try {
+            // clear
+            clearScene();
+            clearCSS();
 
-        guiscene.render(this, context == null ? new UIContext() : context);
+            // load scene
+            FXMLLoader loader = new FXMLLoader(UI.class.getResource("/scenes/" + sceneName + ".fxml"));
+            StackPane rt = (StackPane) loader.load();
+
+            // set variables
+            scene.setRoot(rt);
+            root = rt;
+
+            // setup controller
+            UIScene controller = (UIScene) loader.getController();
+            controller.setup();
+        } catch (IOException e) {
+            return;
+        }
+    }
+
+    public static void clearScene() {
+        root.getChildren().clear();
+    }
+
+    public static void clearCSS() {
+        scene.getStylesheets().clear();
     }
 }

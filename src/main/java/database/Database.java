@@ -24,12 +24,12 @@ public class Database {
      * @param level Difficulty level
      * @return A list of questions
      */
-    public static ArrayList<Question> getQuestionsForLevel(int level) {
+    public static ArrayList<Question> getQuestionsForLevel(int level, String type) {
         ArrayList<Question> set = new ArrayList<>();
 
         // simple filter function
         for (Question q : questions) {
-            if (q.level == level) {
+            if (q.level == level && q.getClass().getSimpleName().equals(type)) {
                 set.add(q);
             }
         }

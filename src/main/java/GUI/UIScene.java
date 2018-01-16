@@ -6,7 +6,7 @@ import javafx.scene.text.Text;
 
 public abstract class UIScene {
 
-    public abstract void render(UI gui, UIContext context);
+    public void setup() {}
 
     public ImageView createImageView(String path) {
         Image img = new Image("file:src/images/" + path);

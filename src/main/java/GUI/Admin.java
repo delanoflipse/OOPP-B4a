@@ -24,10 +24,6 @@ public class Admin extends Application {
     private static Button selectbut;
     private static Label selecttext;
 
-    public static void main(String[] args) {
-        launch(args);
-    }
-
     @Override
     public void start(Stage primaryStage) {
         //Set panes

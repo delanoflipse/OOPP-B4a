@@ -4,6 +4,13 @@ import database.Database;
 
 public class UIState {
     Database database;
-    int questionIndex = 0;
+    String username = "";
+    int userscore = 0;
+
+    UIContext context = new UIContext();
+
+    public void setContext(UIContext context) {
+        this.context = context;
+    }
 
 }
