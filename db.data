@@ -169,6 +169,7 @@ menu: Companies
 element: Company one
 element: Company two
 element: Company three
+element: Company four
 menu: Schools
 element: School one
 element: School two
@@ -177,3 +178,14 @@ menu: Places
 correctelement: Place one
 element: Place two
 element: Place three
+
+type: gui
+level: 1
+question: How can you send emails to this company?
+menu: about us
+element: our employees
+element: what we do
+menu: contact us
+element: our address
+correctelement: our email
+element: our phone number

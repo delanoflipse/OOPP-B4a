@@ -5,6 +5,8 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
@@ -156,8 +158,16 @@ public class GUIQuestion {
             response.setText("That is correct! Click continue to go to the next question.");
         }
         else {
-            response.setFill(Color.FIREBRICK);
-            response.setText("That is incorrect. Click continue to go to the next question");
+            for (ChoiceBox<Element> choiceBox : choiceBoxList) {
+                for (int i = 0; i < choiceBox.getItems().size(); i++){
+                    if (choiceBox.getItems().get(i).correct) {
+                        String answer = choiceBox.getItems().get(i).toString();
+                        String domain = choiceBox.getItems().get(0).toString();
+                        response.setFill(Color.FIREBRICK);
+                        response.setText("That is incorrect.\nYou should have selected " + answer + " inside the " + domain + " menu\nClick continue to go to the next question");
+                    }
+                }
+            }
         }
 
         centergrid.getChildren().remove(submit);
