@@ -150,6 +150,7 @@ public class MCQuestion {
     }
 
     private static void done(){
+        questionlist.clear();
         //Make the texts for the ending
         Text end = new Text("That were all the question, well done!");
         Text endscore = new Text("Your score is: " + score + " out of " + total);

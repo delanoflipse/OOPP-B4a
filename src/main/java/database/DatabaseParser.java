@@ -47,6 +47,8 @@ public class DatabaseParser {
                     cont = openQuestionLineParse((OpenQuestion) currentQuestion, line);
                 } else if (currentQuestion instanceof ClickQuestion) {
                     cont = imageQuestionLineParse((ClickQuestion) currentQuestion, line);
+                } else if (currentQuestion instanceof GUIQuestion) {
+                    cont = guiQuestionLineParse((GUIQuestion) currentQuestion, line);
                 }
 
                 // newline? -> end of question data
@@ -86,6 +88,8 @@ public class DatabaseParser {
                     return new OpenQuestion();
                 case "clickable":
                     return new ClickQuestion();
+                case "gui":
+                    return new GUIQuestion();
                 default:
                     return null;
             }
@@ -228,6 +232,52 @@ public class DatabaseParser {
                 break;
         }
 
+        return true;
+    }
+
+    /**
+     * Parse a text question
+     * @param question Current question
+     * @param line The current line of the database
+     * @return If the parser should continue to parse for this question
+     */
+    private boolean guiQuestionLineParse(GUIQuestion question, String line) {
+        if (line.equals("")) {
+            return false;
+        }
+
+        if (question == null) {
+            System.out.println("no question");
+            return true;
+        }
+
+        KeyValuePair parts = KeyValuePair.splitLine(line);
+
+        if (parts == null) {
+            return true;
+        }
+
+        switch (parts.key) {
+            case "level":
+                question.level = parts.valueAsInt();
+                break;
+            case "question":
+                question.text = parts.value;
+                break;
+            case "menu":
+                question.answers.add(new DropDownHead(parts.value));
+                break;
+            case "element":
+                DropDownHead tempmenu = (DropDownHead) question.answers.get(question.answers.size()-1);
+                tempmenu.getElements().add(new Element(parts.value));
+                break;
+            case "correctelement":
+                DropDownHead tempmenu2 = (DropDownHead) question.answers.get(question.answers.size()-1);
+                Element element = new Element(parts.value);
+                element.correct = true;
+                tempmenu2.getElements().add(element);
+                break;
+        }
         return true;
     }
 

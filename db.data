@@ -161,3 +161,19 @@ question: Where can uou type your search?
 topleft: 638,440
 bottomright: 1290,491
 
+#testing the Database parser
+type: gui
+level: 1
+question: Where can we find place one?
+menu: Companies
+element: Company one
+element: Company two
+element: Company three
+menu: Schools
+element: School one
+element: School two
+element: School three
+menu: Places
+correctelement: Place one
+element: Place two
+element: Place three
