@@ -24,7 +24,8 @@ public class GUIQuestion {
     private static Button stop;
     private static Text response = new Text("");
     private static database.GUIQuestion q;
-    private static ChoiceBox<Element> choiceBox;
+    private static ArrayList<ChoiceBox<Element>> choiceBoxList = new ArrayList<>();
+    private static Button submit;
 
 
     public static void askQuestions(GridPane grid) {
@@ -75,6 +76,9 @@ public class GUIQuestion {
         stop = new Button("Stop Quiz");
         stop.setOnAction(e -> done());
 
+        submit = new Button("Submit");
+        submit.setOnAction(e -> checkAnswer());
+
 
         showQuestion(index);
     }
@@ -99,6 +103,7 @@ public class GUIQuestion {
         //Add all dropdownmenus to the grid
         for (Answer answer : q.answers) {
             centergrid.add(makeMenu((DropDownHead) answer), i+2, 2);
+            i++;
         }
 
         //ColSpan i so that menus don't appear 'behind' the text
@@ -115,34 +120,46 @@ public class GUIQuestion {
         //Add stop button
         centergrid.add(stop, 0, 4);
 
+        //Add submit button
+        centergrid.add(submit, 1, 4);
+
 
     }
 
     private static ChoiceBox<Element> makeMenu(DropDownHead menu) {
-        choiceBox = new ChoiceBox<>();
+        ChoiceBox<Element> choiceBox = new ChoiceBox<>();
         choiceBox.setValue(menu);
         choiceBox.getItems().add(menu);
         for (Element element : menu.getElements()) {
             choiceBox.getItems().add(element);
         }
+        choiceBoxList.add(choiceBox);
         return choiceBox;
     }
 
-    private static void checkAnswer(Element answer) {
+    private static void checkAnswer() {
         total++;
-        //If the answer is correct
-        if (answer.correct) {
-            response.setText("That is correct. Click continue to go to the next question.");
-            response.setFill(Color.DARKGREEN);
-            score++;
+        boolean correct = false;
+        //Check whether the correct answer is selected in one of the dropdownboxes
+        for (ChoiceBox<Element> choiceBox : choiceBoxList) {
+            if (choiceBox.getValue().correct) {
+                correct = true;
+            }
         }
-        //If it's not correct
+        //If the answer is correct
+        if (correct) {
+            score++;
+            response.setFill(Color.DARKGREEN);
+            response.setText("That is correct! Click continue to go to the next question.");
+        }
         else {
             response.setFill(Color.FIREBRICK);
-            response.setText("That is incorrect. Click continue to go to the next question.");
+            response.setText("That is incorrect. Click continue to go to the next question");
         }
-        //Add continue button
-        centergrid.add(next, 0, 5);
+
+        centergrid.getChildren().remove(submit);
+        centergrid.add(next, 1, 4);
+
     }
 
     private static void done() {
