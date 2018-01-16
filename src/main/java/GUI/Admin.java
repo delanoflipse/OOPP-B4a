@@ -23,6 +23,8 @@ public class Admin extends Application {
     private static Text info;
     private static Button selectbut;
     private static Label selecttext;
+    private static Button guibut;
+    private static Label guitext;
 
     public static void main(String[] args) {
         launch(args);
@@ -89,6 +91,14 @@ public class Admin extends Application {
         });
         selecttext = new Label("Clickable Image Question");
 
+        //Set the button to go to adding gui question
+        guibut = new Button("3");
+        guibut.setOnAction(e -> {
+            title.setText("Adding GUI Question");
+            AddGUIQuestion.AddQuestion(centergrid);
+        });
+        guitext = new Label("GUI Question");
+
         //Set CSS and show the program
         scene.getStylesheets().add("file:src/stylesheets/admin.css");
         display();
@@ -107,6 +117,8 @@ public class Admin extends Application {
         centergrid.add(MCtext, 1, 2);
         centergrid.add(selectbut, 0, 3);
         centergrid.add(selecttext, 1, 3);
+        centergrid.add(guibut, 0, 4);
+        centergrid.add(guitext, 1, 4);
         //Change back alignment
         centergrid.setAlignment(Pos.CENTER_LEFT);
     }

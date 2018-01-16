@@ -164,7 +164,7 @@ bottomright: 1290,491
 #testing the Database parser
 type: gui
 level: 1
-question: Where can we find place one?
+question: Where can we find place one (or three is fine as well)?
 menu: Companies
 element: Company one
 element: Company two
@@ -176,4 +176,4 @@ element: School three
 menu: Places
 correctelement: Place one
 element: Place two
-element: Place three
+correctelement: Place three
