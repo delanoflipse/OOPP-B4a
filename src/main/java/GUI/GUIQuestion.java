@@ -35,17 +35,17 @@ public class GUIQuestion {
         centergrid = grid;
         centergrid.setAlignment(Pos.CENTER_LEFT);
         //Get the questions from the database
-        /**Database.loadDatabase();
+        Database.loadDatabase();
         ArrayList<Question> allquestions = Database.getQuestionsForLevel(1);
 
         //Get all GUI questions
         for (Question q: allquestions) {
-            if (q instanceof TextQuestion) {
+            if (q instanceof database.GUIQuestion) {
                 questionlist.add((database.GUIQuestion) q);
             }
-        }**/
+        }
 
-        DropDownHead menu = new DropDownHead("Companies");
+        /**DropDownHead menu = new DropDownHead("Companies");
         menu.getElements().add(new Element("Company one"));
         menu.getElements().add(new Element("Company two"));
         menu.getElements().add(new Element("Company three"));
@@ -61,15 +61,18 @@ public class GUIQuestion {
         menu3.getElements().add(new Element("Place three"));
         menu3.getElements().get(0).correct = true;
 
-        database.GUIQuestion guiQuestion = new database.GUIQuestion("Where can we find Place one?", 1);
+        database.GUIQuestion guiQuestion = new database.GUIQuestion();
+        guiQuestion.level = 1;
+        guiQuestion.text = "Where can we find Place one?";
         guiQuestion.answers.add(menu);
         guiQuestion.answers.add(menu2);
         guiQuestion.answers.add(menu3);
-        questionlist.add(guiQuestion);
+        questionlist.add(guiQuestion);**/
 
         next = new Button("Continue");
         next.setOnAction(e -> {
             index++;
+            choiceBoxList.clear();
             showQuestion(index);
         });
 
@@ -163,6 +166,8 @@ public class GUIQuestion {
     }
 
     private static void done() {
+        questionlist.clear();
+
         //To make sure next time it starts with the first question
         index=0;
 

@@ -209,6 +209,7 @@ public class SelectQuestion {
     }
 
     private static void done() {
+        questionlist.clear();
         //To make sure next time it starts with the first question
         i=0;
 
