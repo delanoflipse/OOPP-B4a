@@ -54,7 +54,8 @@ public class AddSelectQuestion {
         );
         imageChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("JPG", "*.jpg"),
-                new FileChooser.ExtensionFilter("PNG", "*.png")
+                new FileChooser.ExtensionFilter("PNG", "*.png"),
+                new FileChooser.ExtensionFilter("JPEG", "*.jpeg")
         );
 
         //Add intro text
@@ -265,7 +266,7 @@ public class AddSelectQuestion {
             if (button.isSelected()) {
                 level = i;
             }
-            i++;
+
         }
 
         //Read filename of image (the read file)
@@ -326,6 +327,7 @@ public class AddSelectQuestion {
             Admin.display();
         }
         catch(IOException e) {System.out.println(e.getMessage());}
+
     }
 
 }

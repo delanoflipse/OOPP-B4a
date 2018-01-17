@@ -129,37 +129,12 @@ correctanswer: C. 2
 answer: D. No , go back to C
 
 
-#Question Added by the Add Clickable Image GUI
-type: clickable
-level: 1
-image:DSC02859.JPG
-question: Where is a male head on this picture?
-topleft: 2627,493
-bottomright: 2816,822
 
-#Question Added by the Add Clickable Image GUI
-type: clickable
-level: 1
-image:ori_wallpaper2.jpg
-question: Where is Ori?
-topleft: 863,363
-bottomright: 1146,613
 
-#Question Added by the Add Clickable Image GUI
-type: clickable
-level: 1
-image:nintendo 3ds 021.JPG
-question: Click on Kirby.
-topleft: 59,71
-bottomright: 179,192
 
-#Question Added by the Add Clickable Image GUI
-type: clickable
-level:1
-image:Screenshot (15).png
-question: Where can uou type your search?
-topleft: 638,440
-bottomright: 1290,491
+
+
+
 
 #testing the Database parser
 type: gui
@@ -193,3 +168,483 @@ element: Garden 1
 element: Garedn2
 element: Garden something something
 menu: empty
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:1
+image:mull.jpg
+question: Click on the nose of the mole
+topleft: 425,328
+bottomright: 597,432
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:1
+image:aardbei.jpg
+question: select the strawberry
+topleft: 670,277
+bottomright: 815,401
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:1
+image:baardaap.jpg
+question: click on one of his eyes
+topleft: 550,149
+bottomright: 760,240
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:1
+image:bloemist.jpg
+question: click on the pink ribbon
+topleft: 914,447
+bottomright: 1016,546
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:1
+image:burgers.jpg
+question: click on the rawest burger
+topleft: 0,200
+bottomright: 430,550
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:1
+image:etages.jpg
+question: click on the top floor
+topleft: 107,96
+bottomright: 984,224
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:1
+image:eten.jpg
+question: click on the spoon
+topleft: 715,1
+bottomright: 883,409
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:1
+image:fruit.jpg
+question: click on the smoothie
+topleft: 222,202
+bottomright: 422,385
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:1
+image:haven.jpg
+question: click on the harbor
+topleft: 117,429
+bottomright: 449,631
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:1
+image:hipsters.jpg
+question: click on his beard
+topleft: 227,102
+bottomright: 336,259
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:1
+image:oudecamera.jpg
+question: click on the top lens
+topleft: 342,75
+bottomright: 519,272
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:1
+image:paraplus.jpg
+question: click on the middle white umbrella
+topleft: 316,189
+bottomright: 608,482
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:1
+image:skyline.jpg
+question: click on the tallest tower
+topleft: 203,115
+bottomright: 250,447
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:1
+image:station.jpg
+question: click on the man with the green shirt, looking ate the clock
+topleft: 548,514
+bottomright: 590,642
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:1
+image:stoeltje.jpg
+question: click on the chair
+topleft: 928,381
+bottomright: 1010,521
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:1
+image:tafeltuin.jpg
+question: click on the bin on the left
+topleft: 99,359
+bottomright: 151,425
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:1
+image:tassenwinkel.jpg
+question: click on the beige bag
+topleft: 618,255
+bottomright: 749,415
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:1
+image:trammetje.jpg
+question: click on the trams headlight
+topleft: 398,435
+bottomright: 429,467
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:1
+image:weightlifter.jpg
+question: click on the weightlifters ear
+topleft: 497,187
+bottomright: 533,235
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:1
+image:zonsondergang.jpeg
+question: click on the sun
+topleft: 715,366
+bottomright: 786,440
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:2
+image:action2.jpg
+question: select the opening hours of next week
+topleft: 1084,684
+bottomright: 1274,1111
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:2
+image:ah2.jpg
+question: select the part that lets you know you can recharge your ov-chipcard
+topleft: 591,213
+bottomright: 1129,381
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:2
+image:cuba2.jpg
+question: select the phone number 
+topleft: 2363,553
+bottomright: 2879,664
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:2
+image:ewi2.jpg
+question: select opening hours
+topleft: 1300,927
+bottomright: 2333,1379
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:2
+image:hema2.jpg
+question: selecty the city of the address
+topleft: 1490,934
+bottomright: 1677,993
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:2
+image:jumbo2.jpg
+question: select the part that says open today
+topleft: 1035,676
+bottomright: 1355,720
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:2
+image:kfc2.jpg
+question: select the part that says they have free wifi
+topleft: 2933,897
+bottomright: 3200,1008
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:2
+image:lidl2.jpg
+question: select the name of the broccoli
+topleft: 1141,1392
+bottomright: 1316,1490
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:2
+image:mcdo2.jpg
+question: select the part that says you can pin
+topleft: 968,1090
+bottomright: 1163,1252
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:2
+image:rijks2.jpg
+question: click on the zip code
+topleft: 944,1008
+bottomright: 1065,1073
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:2
+image:boekenplank.jpeg
+question: select the part the headphones are resting on
+topleft: 300,266
+bottomright: 366,355
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:2
+image:cruise.jpeg
+question: select the escape methods of this boat
+topleft: 2,493
+bottomright: 639,529
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:2
+image:huisje.jpeg
+question: select the part that looks like a mustache
+topleft: 475,307
+bottomright: 566,342
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:2
+image:kleurstof.jpeg
+question: select the thing the color is coming out of
+topleft: 363,224
+bottomright: 489,312
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:2
+image:macbook.jpeg
+question: select the thing that makes you see better
+topleft: 772,134
+bottomright: 1050,501
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:2
+image:menu.jpeg
+question: select the bottle of water
+topleft: 39,506
+bottomright: 147,700
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:2
+image:restaurant.jpeg
+question: select the part where people can see what they can eat at this restaurant
+topleft: 1359,246
+bottomright: 1620,646
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:2
+image:server.jpeg
+question: select the cable that is other than the others
+topleft: 361,378
+bottomright: 568,478
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:2
+image:steegje.jpeg
+question: select the thing that makes this alley a dead end
+topleft: 374,307
+bottomright: 618,448
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:2
+image:zeebad.jpeg
+question: click on the highest persons in the image
+topleft: 925,68
+bottomright: 976,148
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:3
+image:action3.jpg
+question: select the part that lets u use your own location
+topleft: 636,255
+bottomright: 994,315
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:3
+image:ah3.jpg
+question: select the part of the image that says you can scan your groceries yourself if you'd like to
+topleft: 659,699
+bottomright: 1095,850
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:3
+image:aldi3.jpg
+question: select the title of the store in rijswijk
+topleft: 117,760
+bottomright: 441,807
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:3
+image:bijenkorf3.jpg
+question: click on the floor with the wine store
+topleft: 1883,716
+bottomright: 2492,1106
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:3
+image:bk3.jpg
+question: click on the address
+topleft: 1801,948
+bottomright: 2183,1096
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:3
+image:cuba3.jpg
+question: click on the part where you can reservate online
+topleft: 1527,598
+bottomright: 2153,1273
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:3
+image:dirk3.jpg
+question: click on the part that says how the parking options are
+topleft: 2441,691
+bottomright: 2711,919
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:3
+image:ewipark3.jpg
+question: select the park that says something about handicapped parking
+topleft: 1307,658
+bottomright: 1872,904
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:3
+image:hema3.jpg
+question: select the address of the store in abcoude
+topleft: 722,295
+bottomright: 1004,424
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:3
+image:hm3.jpg
+question: select the part that says what type of clothes are availible here
+topleft: 2881,386
+bottomright: 3475,511
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:3
+image:ikea3.jpg
+question: select the store manager
+topleft: 2388,490
+bottomright: 2830,650
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:3
+image:jumbo3.jpg
+question: click on the opening hours
+topleft: 1040,940
+bottomright: 1444,1365
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:3
+image:kfc3.jpg
+question: click on the opening hours of christmas
+topleft: 2917,1173
+bottomright: 3784,1365
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:3
+image:lezens schrijven3.jpg
+question: select the name of the spokes(wo)man
+topleft: 1548,1294
+bottomright: 1792,1371
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:3
+image:lidl3.jpg
+question: select the part that says something about bread
+topleft: 1429,1395
+bottomright: 1850,1467
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:3
+image:linders3.jpg
+question: select the day with the longest opening hours
+topleft: 1937,718
+bottomright: 2248,785
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:3
+image:mcdo3.jpg
+question: select the days with the longest opening hours
+topleft: 1264,1178
+bottomright: 1541,1264
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:3
+image:pathe3.jpg
+question: select the times of the movie coco in 3d
+topleft: 1023,198
+bottomright: 1327,381
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:3
+image:primera3.jpg
+question: select the part with extra info
+topleft: 2443,1101
+bottomright: 2892,1194
+
+#Question Added by the Add Clickable Image GUI
+type: clickable
+level:3
+image:rijks3.jpg
+question: click on the route from schiphol
+topleft: 956,641
+bottomright: 1575,703
