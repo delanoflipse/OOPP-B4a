@@ -1,14 +1,15 @@
 package GUI;
 
 import javafx.application.Application;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -20,10 +21,10 @@ public class StartMenu extends Application {
     private static ImageView tutor;
     private static GridPane centergrid;
     private static GridPane titlegrid;
-    private static GridPane bottomleftgrid;
-    private static GridPane bottomrightgrid;
     private static Scene scene;
     private static Text title;
+    private static VBox vboxLeft;
+    private static VBox vboxRight;
     private static Button MCbutton;
     private static Button Selectimgbutton;
     private static Button GUIbutton;
@@ -31,12 +32,11 @@ public class StartMenu extends Application {
     @Override
     public void start(Stage primaryStage) {
         //Set up the different panes
-        StackPane rootpane = new StackPane();
+        BorderPane rootpane = new BorderPane();
         titlegrid = new GridPane();
         centergrid = new GridPane();
-        bottomleftgrid = new GridPane();
-        bottomrightgrid = new GridPane();
-        rootpane.getChildren().addAll(titlegrid, bottomrightgrid, bottomleftgrid, centergrid);
+        rootpane.setTop(titlegrid);
+        rootpane.setCenter(centergrid);
 
         //Set the title of the stage
         primaryStage.setTitle("Stichting Lezen en Schrijven - Practice Program");
@@ -87,38 +87,40 @@ public class StartMenu extends Application {
         GUIbutton.setMinSize(300, 300);
         GUIbutton.setId("GUIbutton");
 
-        //Some settings for the grid at the bottom
-        bottomrightgrid.setHgap(30);
-        bottomrightgrid.setVgap(10);
-        bottomrightgrid.setPadding(new Insets(25, 25, 25, 25));
+        vboxLeft = new VBox();
+        vboxLeft.setPadding(new Insets(15, 12, 15, 12));
+        vboxLeft.setSpacing(10);
+        vboxLeft.setAlignment(Pos.BOTTOM_LEFT);
+
+        vboxRight = new VBox();
+        vboxRight.setPadding(new Insets(15, 12, 15, 12));
+        vboxRight.setSpacing(10);
+        vboxRight.setAlignment(Pos.BOTTOM_RIGHT);
 
         //Make the tutor button
         Image tutorButton = new Image("file:src/images/Tutor.png");
         tutor = new ImageView();
         tutor.setImage(tutorButton);
-        tutor.setFitWidth(250);
+        tutor.setFitWidth(300);
         tutor.setPreserveRatio(true);
         tutor.setSmooth(true);
         tutor.setCache(true);
         tutor.setId("tutorButton");
 
-        //Some settings for the grid at the bottom
-        bottomleftgrid.setHgap(30);
-        bottomleftgrid.setVgap(10);
-        bottomleftgrid.setPadding(new Insets(25, 25, 25, 25));
-
         //Make the exit button
         Image exitButton = new Image("file:src/images/Exit.png");
         exit = new ImageView();
         exit.setImage(exitButton);
-        exit.setFitWidth(250);
+        exit.setFitWidth(300);
         exit.setPreserveRatio(true);
         exit.setSmooth(true);
         exit.setCache(true);
         exit.setId("exitButton");
 
-        bottomrightgrid.add(tutor, 0, 0);
-        bottomleftgrid.add(exit, 0, 0);
+        //vboxLeft.getChildren().add(exit);
+        //vboxRight.getChildren().add(tutor);
+        rootpane.setLeft(vboxLeft);
+        rootpane.setRight(vboxRight);
 
         tutor.setOnMouseClicked(e -> {Admin.display();});
 
@@ -128,8 +130,6 @@ public class StartMenu extends Application {
         //Gridlines for debugging are off
         titlegrid.setGridLinesVisible(false);
         centergrid.setGridLinesVisible(false);
-        bottomleftgrid.setGridLinesVisible(false);
-        bottomrightgrid.setGridLinesVisible(false);
 
         //Make scene to display the panes in
         scene = new Scene(rootpane, 1280, 720);
@@ -141,6 +141,9 @@ public class StartMenu extends Application {
             title.setText("Multiple Choiche Questions");
             //Remove the second logo
             titlegrid.getChildren().remove(logov2);
+            //Remove buttons
+            vboxLeft.getChildren().clear();
+            vboxRight.getChildren().clear();
             //Ask the questions
             MCQuestion.askQuestions(centergrid);
             //Set other CSS file
@@ -153,6 +156,9 @@ public class StartMenu extends Application {
             titlegrid.setAlignment(Pos.TOP_LEFT);
             title.setText("Select Image Questions");
             //Remove the second logo
+            //Remove buttons
+            vboxLeft.getChildren().clear();
+            vboxRight.getChildren().clear();
             titlegrid.getChildren().remove(logov2);
             //Set other CSS file
             scene.getStylesheets().clear();
@@ -169,6 +175,9 @@ public class StartMenu extends Application {
             title.setText("GUI Elements Questions");
             //Remove the second logo
             titlegrid.getChildren().remove(logov2);
+            //Remove buttons
+            vboxLeft.getChildren().clear();
+            vboxRight.getChildren().clear();
             //Set other CSS file
             scene.getStylesheets().clear();
             //We dont have CSS for this question yet
@@ -211,12 +220,6 @@ public class StartMenu extends Application {
         //Set centergrid alignment
         centergrid.setAlignment(Pos.CENTER);
 
-        //Set bottomleftgrid alignment
-        bottomleftgrid.setAlignment(Pos.BOTTOM_LEFT);
-
-        //Set bottomrightgrid alignment
-        bottomrightgrid.setAlignment(Pos.BOTTOM_RIGHT);
-
         //Set the CSS
         scene.getStylesheets().clear();
         scene.getStylesheets().add("file:src/stylesheets/start_menu.css");
@@ -226,6 +229,8 @@ public class StartMenu extends Application {
         centergrid.add(MCbutton, 0, 0);
         centergrid.add(Selectimgbutton, 1, 0);
         centergrid.add(GUIbutton, 2, 0);
+        vboxLeft.getChildren().add(exit);
+        vboxRight.getChildren().add(tutor);
     }
 
 }

@@ -5,9 +5,12 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
@@ -22,12 +25,16 @@ public class MCQuestion {
     private static ArrayList<RadioButton> answerbuttons = new ArrayList<>();
     private static ToggleGroup answergroup = new ToggleGroup();
     private static GridPane centergrid;
+    private static VBox vboxLeft;
+    private static BorderPane borderpane;
     private static ArrayList<TextQuestion> questionlist = new ArrayList<>();
     private static Button submit;
-    private static Button stop;
+    private static ImageView stop;
 
     public static void askQuestions(GridPane grid){
         centergrid = grid;
+        vboxLeft = new VBox(); 
+        borderpane = new BorderPane();
         //Get the questions from the database
         Database.loadDatabase();
         ArrayList<Question> allquestions = Database.getQuestionsForLevel(1);
@@ -43,7 +50,8 @@ public class MCQuestion {
         score = 0;
 
         //Set new alignment for the grid
-        centergrid.setAlignment(Pos.CENTER_LEFT);
+        borderpane.setAlignment(centergrid, Pos.CENTER);
+        borderpane.setAlignment(vboxLeft, Pos.BOTTOM_LEFT);
 
         //Make the response text
         response = new Text();
@@ -53,8 +61,15 @@ public class MCQuestion {
         Button next = new Button("Continue");
 
         //Make button for stopping the quiz
-        stop = new Button("Stop Quiz");
-        stop.setOnAction(e -> done());
+        Image stopButton = new Image("file:src/images/stop_quiz.png");
+        stop = new ImageView();
+        stop.setImage(stopButton);
+        stop.setFitWidth(300);
+        stop.setPreserveRatio(true);
+        stop.setSmooth(true);
+        stop.setCache(true);
+        stop.setId("stopButton");
+        stop.setOnMouseClicked(e -> done());
 
         //Make button to submit the question and set the action
         submit = new Button("Submit");
@@ -87,8 +102,8 @@ public class MCQuestion {
                 final int col = centergrid.getColumnIndex(submit);
                 final int row = centergrid.getRowIndex(submit);
                 centergrid.add(next, col, row+1);
-                centergrid.getChildren().remove(stop);
-                centergrid.add(stop, col+1, row+1);
+                vboxLeft.getChildren().remove(stop);
+                vboxLeft.getChildren().add(stop);
                 centergrid.getChildren().remove(submit);
             }
         });
@@ -147,7 +162,7 @@ public class MCQuestion {
         //Add the response text and submit button on the right place
         centergrid.add(response, 0, j + 1, 2, 1);
         centergrid.add(submit, 0, j+1);
-        centergrid.add(stop, 0, j+2);
+        vboxLeft.getChildren().add(stop);
     }
 
     private static void done(){
