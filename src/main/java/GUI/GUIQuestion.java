@@ -45,30 +45,6 @@ public class GUIQuestion {
             }
         }
 
-        /**DropDownHead menu = new DropDownHead("Companies");
-        menu.getElements().add(new Element("Company one"));
-        menu.getElements().add(new Element("Company two"));
-        menu.getElements().add(new Element("Company three"));
-
-        DropDownHead menu2 = new DropDownHead("Schools");
-        menu2.getElements().add(new Element("School one"));
-        menu2.getElements().add(new Element("School two"));
-        menu2.getElements().add(new Element("School three"));
-
-        DropDownHead menu3 = new DropDownHead("Places");
-        menu3.getElements().add(new Element("Place one"));
-        menu3.getElements().add(new Element("Place two"));
-        menu3.getElements().add(new Element("Place three"));
-        menu3.getElements().get(0).correct = true;
-
-        database.GUIQuestion guiQuestion = new database.GUIQuestion();
-        guiQuestion.level = 1;
-        guiQuestion.text = "Where can we find Place one?";
-        guiQuestion.answers.add(menu);
-        guiQuestion.answers.add(menu2);
-        guiQuestion.answers.add(menu3);
-        questionlist.add(guiQuestion);**/
-
         next = new Button("Continue");
         next.setOnAction(e -> {
             index++;
@@ -142,15 +118,31 @@ public class GUIQuestion {
 
     private static void checkAnswer() {
         total++;
-        boolean correct = false;
+        //Set total correct answers
+        int totalcorrect = 0;
+
+        //Set required number of correct elements
+        int required = 0;
+        for (ChoiceBox<Element> choiceBox : choiceBoxList) {
+            boolean correct = false;
+            for (Element element : choiceBox.getItems()) {
+                if (element.correct) {
+                    correct = true;
+                }
+            }
+            if (correct) {
+                required++;
+            }
+        }
+
         //Check whether the correct answer is selected in one of the dropdownboxes
         for (ChoiceBox<Element> choiceBox : choiceBoxList) {
             if (choiceBox.getValue().correct) {
-                correct = true;
+                totalcorrect++;
             }
         }
         //If the answer is correct
-        if (correct) {
+        if (totalcorrect >= required) {
             score++;
             response.setFill(Color.DARKGREEN);
             response.setText("That is correct! Click continue to go to the next question.");

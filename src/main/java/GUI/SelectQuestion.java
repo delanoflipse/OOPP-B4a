@@ -41,7 +41,7 @@ public class SelectQuestion {
         totalanswered = 0;
         //Make a questionlist and add questions
         Database.loadDatabase();
-        ArrayList<Question> allquestions = Database.getQuestionsForLevel(1);
+        ArrayList<Question> allquestions = Database.getQuestionsForLevel(2);
         for (Question q : allquestions) {
             if (q instanceof ClickQuestion) {
                 questionlist.add((ClickQuestion) q);

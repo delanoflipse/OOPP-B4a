@@ -76,7 +76,7 @@
   #9
   type: multiple choice
   level: 1
-  question: A car crashed into a shop, killing 2 and inguring more than 4 people. What is incorrect?
+  question: A car crashed into a shop, killing 2 and injuring more than 4 people. What is incorrect?
       answer: A. There was a car crash in a shop.
       correctanswer: B. 4 people were killed.
       answer: C. At least 4 people were injured.
@@ -277,7 +277,7 @@ bottomright: 250,447
 type: clickable
 level:1
 image:station.jpg
-question: click on the man with the green shirt, looking ate the clock
+question: click on the man with the green shirt, looking at the clock
 topleft: 548,514
 bottomright: 590,642
 
@@ -648,3 +648,25 @@ image:rijks3.jpg
 question: click on the route from schiphol
 topleft: 956,641
 bottomright: 1575,703
+
+
+#Added by the Add GUI-Question GUI
+type: gui
+level: 1
+question: these are opening times, select the opening times of jumbo delft on tuesdays
+menu: stores
+menu: city
+element: den haag
+element: bodegraven
+correctelement: delft
+element: wageningen
+menu: day
+element: monday
+correctelement: tuesdays
+element: wednesdday
+element: thursday
+element: friday
+element: saturday
+element: sunday
+
+
