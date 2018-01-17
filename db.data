@@ -177,3 +177,19 @@ menu: Places
 correctelement: Place one
 element: Place two
 correctelement: Place three
+
+#Added by the Add GUI-Question GUI
+type: gui
+level: 1
+question: Find Company X
+menu: Company
+element: Company 1
+element: Comapny 5
+correctelement: CompanyX
+element: Comapny 6
+menu: Place
+menu: Garden
+element: Garden 1
+element: Garedn2
+element: Garden something something
+menu: empty
