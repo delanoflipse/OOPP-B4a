@@ -74,9 +74,7 @@ public class AddMCQuestion {
         addanswerfieldbutton.setOnAction(e -> addAnswerField());
 
         savebutton = new Button("Save Question");
-        savebutton.setOnAction(e -> {
-            saveQuestion();
-        });
+        savebutton.setOnAction(e ->  saveQuestion());
 
         cancelbutton = new Button("Cancel");
         cancelbutton.setOnAction(e -> Admin.display());
@@ -152,7 +150,7 @@ public class AddMCQuestion {
 
             //We add new data at the end of the file
             PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter("db.data", true)));
-            writer.print("\n");
+            writer.println("\n");
             //Write all the data
             writer.println("#Question Added by the MC GUI");
             writer.println("type: multiple choice");

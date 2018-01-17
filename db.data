@@ -160,3 +160,36 @@ image:Screenshot (15).png
 question: Where can uou type your search?
 topleft: 638,440
 bottomright: 1290,491
+
+#testing the Database parser
+type: gui
+level: 1
+question: Where can we find place one (or three is fine as well)?
+menu: Companies
+element: Company one
+element: Company two
+element: Company three
+menu: Schools
+element: School one
+element: School two
+element: School three
+menu: Places
+correctelement: Place one
+element: Place two
+correctelement: Place three
+
+#Added by the Add GUI-Question GUI
+type: gui
+level: 1
+question: Find Company X
+menu: Company
+element: Company 1
+element: Comapny 5
+correctelement: CompanyX
+element: Comapny 6
+menu: Place
+menu: Garden
+element: Garden 1
+element: Garedn2
+element: Garden something something
+menu: empty
