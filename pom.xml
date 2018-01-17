@@ -35,6 +35,11 @@
             <scope>system</scope>
             <systemPath>${project.basedir}/lib/jfxrt.jar</systemPath>
         </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>RELEASE</version>
+        </dependency>
     </dependencies>
 
     <build>

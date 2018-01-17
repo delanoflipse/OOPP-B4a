@@ -1,0 +1,29 @@
+.root{
+    /**-fx-background-color: #598fc1;
+    -fx-text-fill: #efec17;
+    -fx-font-weight: bold;**/
+}
+
+#Title {
+    -fx-font-size: 72px;
+    /**-fx-fill: #efec17;**/
+
+}
+
+#subtitle {
+    -fx-font-size: 36px;
+
+}
+
+.button {
+    -fx-font-size: 12px;
+    -fx-font-weight: normal;
+}
+
+.text-field {
+    -fx-font-weight: normal;
+}
+
+.radio-button{
+    -fx-font-weight: normal;
+}

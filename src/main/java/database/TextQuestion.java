@@ -1,8 +1,10 @@
-package main;
+package database;
 
 import java.util.ArrayList;
 
-
+/**
+ * Multiple choice question
+ */
 public class TextQuestion extends Question {
     public ArrayList<TextAnswer> answers;
 
@@ -24,7 +26,6 @@ public class TextQuestion extends Question {
             i++;
         }
     }
-
 
     public boolean isCorrect(int index) {
         if (answers.size() > index) {
