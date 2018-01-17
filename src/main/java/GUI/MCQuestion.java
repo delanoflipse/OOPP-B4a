@@ -1,6 +1,7 @@
 package GUI;
 
 import database.*;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
@@ -26,15 +27,13 @@ public class MCQuestion {
     private static ToggleGroup answergroup = new ToggleGroup();
     private static GridPane centergrid;
     private static VBox vboxLeft;
-    private static BorderPane borderpane;
     private static ArrayList<TextQuestion> questionlist = new ArrayList<>();
     private static Button submit;
     private static ImageView stop;
 
-    public static void askQuestions(GridPane grid){
+    public static void askQuestions(GridPane grid, VBox vbox){
         centergrid = grid;
-        vboxLeft = new VBox(); 
-        borderpane = new BorderPane();
+        vboxLeft = vbox;
         //Get the questions from the database
         Database.loadDatabase();
         ArrayList<Question> allquestions = Database.getQuestionsForLevel(1);
@@ -50,8 +49,10 @@ public class MCQuestion {
         score = 0;
 
         //Set new alignment for the grid
-        borderpane.setAlignment(centergrid, Pos.CENTER);
-        borderpane.setAlignment(vboxLeft, Pos.BOTTOM_LEFT);
+        centergrid.setAlignment(Pos.CENTER_LEFT);
+
+        //Setting alignment for VBox
+        vboxLeft.setAlignment(Pos.BOTTOM_LEFT);
 
         //Make the response text
         response = new Text();
@@ -64,7 +65,7 @@ public class MCQuestion {
         Image stopButton = new Image("file:src/images/stop_quiz.png");
         stop = new ImageView();
         stop.setImage(stopButton);
-        stop.setFitWidth(300);
+        stop.setFitWidth(350);
         stop.setPreserveRatio(true);
         stop.setSmooth(true);
         stop.setCache(true);
@@ -102,8 +103,8 @@ public class MCQuestion {
                 final int col = centergrid.getColumnIndex(submit);
                 final int row = centergrid.getRowIndex(submit);
                 centergrid.add(next, col, row+1);
-                vboxLeft.getChildren().remove(stop);
-                vboxLeft.getChildren().add(stop);
+                //vboxLeft.getChildren().remove(stop);
+                //vboxLeft.getChildren().add(stop);
                 centergrid.getChildren().remove(submit);
             }
         });
@@ -123,6 +124,7 @@ public class MCQuestion {
     private static void showNextQuestion(){
         //Clear the centergrid
         centergrid.getChildren().clear();
+        vboxLeft.getChildren().clear();
         //Increase i to get the next question
         i++;
         //Check whether there is a next question
@@ -184,17 +186,22 @@ public class MCQuestion {
         centergrid.add(back, 0, 2);
 
         //Make the exit button and set the action
-        Button exit = new Button("Exit");
-        exit.setOnAction(e -> StartMenu.display());
+        ImageView exit = new ImageView();
+        Image exitButton = new Image("file:src/images/exit.png");
+        exit.setImage(exitButton);
+        exit.setFitWidth(300);
+        exit.setPreserveRatio(true);
+        exit.setSmooth(true);
+        exit.setCache(true);
+        exit.setId("exitButton");
+        exit.setOnMouseClicked(e -> {
+            vboxLeft.getChildren().clear();
+            StartMenu.display();
+        });
 
-        //HBox to get the exit button in the center beneath the text
-        HBox exitbox = new HBox();
-        exitbox.setAlignment(Pos.CENTER);
-        exitbox.getChildren().add(exit);
-
-        //Add the HBox with the button in it
-        centergrid.add(exitbox ,0, 3);
-
+        //Replace exitButton
+        vboxLeft.getChildren().clear();
+        vboxLeft.getChildren().add(exit);
     }
 
 }

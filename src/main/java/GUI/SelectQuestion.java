@@ -9,6 +9,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
@@ -33,9 +34,10 @@ public class SelectQuestion {
     private static Rectangle correct = new Rectangle();
     private static int score;
     private static int totalanswered;
-    private static Button stop;
+    private static ImageView stop;
+    private static VBox vboxLeft;
 
-    public static void askQuestions(GridPane grid) {
+    public static void askQuestions(GridPane grid, VBox vbox) {
         ratio = .65;
         score = 0;
         totalanswered = 0;
@@ -48,10 +50,13 @@ public class SelectQuestion {
             }
         }
 
-        //Set the private centergrid to the one given by the function parameter
+        //Setting private params
         centergrid = grid;
-        //Set alignment to center left
-        centergrid.setAlignment(Pos.CENTER_LEFT);
+        vboxLeft = vbox;
+
+        //Set alignments
+        centergrid.setAlignment(Pos.CENTER);
+        vboxLeft.setAlignment(Pos.BOTTOM_LEFT);
         //Show the buttons
         makeButtons();
         //Show the image and the question
@@ -69,6 +74,7 @@ public class SelectQuestion {
         q = questionlist.get(index);
         //Show the question
         Text questiontext = new Text(q.text);
+        questiontext.setId("qtext");
         centergrid.add(questiontext, 0, 0, 2, 1);
         //Load the image
         qimage = new Image("file:src/images/"+q.image);
@@ -88,6 +94,7 @@ public class SelectQuestion {
         imagepane.getChildren().add(qimagev);
         //Prepare response text
         response = new Text("");
+        response.setId("responsetext");
         centergrid.add(response, 0, 2, 2, 1);
         //Disable the submit button
         submit.setDisable(true);
@@ -183,12 +190,19 @@ public class SelectQuestion {
             }
             //Show the button to go to the next question
             centergrid.add(next, 0, 3);
-            centergrid.getChildren().remove(submit);
-            centergrid.getChildren().remove(stop);
-            centergrid.add(stop, 1, 3);
+            vboxLeft.getChildren().remove(submit);
+            vboxLeft.getChildren().remove(stop);
+            vboxLeft.getChildren().add(stop);
         });
-        stop = new Button("Stop Quiz");
-        stop.setOnAction(e -> done());
+        Image stopButton = new Image("file:src/images/stop_quiz.png");
+        stop = new ImageView();
+        stop.setImage(stopButton);
+        stop.setFitWidth(350);
+        stop.setPreserveRatio(true);
+        stop.setSmooth(true);
+        stop.setCache(true);
+        stop.setId("stopButton");
+        stop.setOnMouseClicked(e -> done());
     }
 
     private static void beginDrag(MouseEvent e) {

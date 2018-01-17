@@ -145,7 +145,7 @@ public class StartMenu extends Application {
             vboxLeft.getChildren().clear();
             vboxRight.getChildren().clear();
             //Ask the questions
-            MCQuestion.askQuestions(centergrid);
+            MCQuestion.askQuestions(centergrid, vboxLeft);
             //Set other CSS file
             scene.getStylesheets().clear();
             scene.getStylesheets().add("file:src/stylesheets/MCquestions.css");
@@ -162,11 +162,10 @@ public class StartMenu extends Application {
             titlegrid.getChildren().remove(logov2);
             //Set other CSS file
             scene.getStylesheets().clear();
-            //We dont have CSS for this question yet
-            //scene.getStylesheets().add("file:src/stylesheets/");
+            scene.getStylesheets().add("file:src/stylesheets/SelectQuestions.css");
 
             //Ask the questions
-            GUI.SelectQuestion.askQuestions(centergrid);
+            GUI.SelectQuestion.askQuestions(centergrid, vboxLeft);
         });
 
         GUIbutton.setOnAction(e -> {
@@ -180,8 +179,7 @@ public class StartMenu extends Application {
             vboxRight.getChildren().clear();
             //Set other CSS file
             scene.getStylesheets().clear();
-            //We dont have CSS for this question yet
-            //scene.getStylesheets().add("file:src/stylesheets/");
+            scene.getStylesheets().add("file:src/stylesheets/GUIQuestions.css");
 
             //Ask the questions
             GUI.GUIQuestion.askQuestions(centergrid);
