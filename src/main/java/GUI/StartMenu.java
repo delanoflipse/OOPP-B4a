@@ -30,16 +30,11 @@ import java.util.ArrayList;
 public class StartMenu extends Application {
     public static final TextToSpeech tts = new TextToSpeech();
 
-    public static boolean playtts = false;
-    public static boolean before= false;
+    public static boolean playtts = true;
+
     @Override
     public void start(Stage primaryStage) {
-        if(before){
-            playtts = false;
-        }
-        else{
-            playtts= true;
-        }
+
         StackPane rootpane = new StackPane();
         GridPane titlegrid = new GridPane();
         GridPane centergrid = new GridPane();

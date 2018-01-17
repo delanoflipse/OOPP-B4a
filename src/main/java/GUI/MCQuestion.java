@@ -22,7 +22,7 @@ import tts.TextToSpeech;
 import java.util.ArrayList;
 
 import static GUI.StartMenu.playtts;
-import static GUI.StartMenu.before;
+
 public class MCQuestion {
     private static Service<Void> backGroundThread;
     private static TextToSpeech tts = new TextToSpeech();
@@ -45,7 +45,7 @@ public class MCQuestion {
 
     public static void askQuestions(Stage stage, Scene start){
 
-        ttsfinal = ttsfinal + "welcome to the multiple choice questions ";
+        ttsfinal = "welcome to the multiple choice questions ";
 
 
         primaryStage = stage;
@@ -198,7 +198,6 @@ public class MCQuestion {
         if (i >= questionlist.size()){
             tts.stopSpeaking();
             done(centergrid, questionlist, primaryStage);
-            before=true;
             return;
         }
 
@@ -232,6 +231,7 @@ public class MCQuestion {
         centergrid.add(submit, 0, j+1);
         centergrid.add(ttsB, 1, 5);
         ttsB.setOnMouseClicked(e -> {toggletts();});
+        tts(ttsfinal);
 
     }
     private static void toggletts(){
@@ -264,7 +264,7 @@ public class MCQuestion {
         centergrid.add(ttsB, 1, 5);
         ttsB.setOnMouseClicked(e -> {toggletts();});
         Button exit = new Button("Exit");
-        exit.setOnAction(e -> primaryStage.setScene(startMenu));
+        exit.setOnAction(e -> { playtts = false;primaryStage.setScene(startMenu);});
         exit.setOnMouseEntered(e -> {tts("exit");});
         HBox exitbox = new HBox();
         exitbox.setAlignment(Pos.CENTER);
@@ -272,6 +272,7 @@ public class MCQuestion {
 
         centergrid.add(exitbox ,0, 3);
         tts(ttsfinal);
+
 
     }
 
