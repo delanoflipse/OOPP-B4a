@@ -16,8 +16,12 @@ public class StartMenu extends Application {
 
     private static ImageView logov;
     private static ImageView logov2;
+    private static ImageView exit;
+    private static ImageView tutor;
     private static GridPane centergrid;
     private static GridPane titlegrid;
+    private static GridPane bottomleftgrid;
+    private static GridPane bottomrightgrid;
     private static Scene scene;
     private static Text title;
     private static Button MCbutton;
@@ -30,7 +34,9 @@ public class StartMenu extends Application {
         StackPane rootpane = new StackPane();
         titlegrid = new GridPane();
         centergrid = new GridPane();
-        rootpane.getChildren().addAll(titlegrid, centergrid);
+        bottomleftgrid = new GridPane();
+        bottomrightgrid = new GridPane();
+        rootpane.getChildren().addAll(titlegrid, bottomrightgrid, bottomleftgrid, centergrid);
 
         //Set the title of the stage
         primaryStage.setTitle("Stichting Lezen en Schrijven - Practice Program");
@@ -81,9 +87,49 @@ public class StartMenu extends Application {
         GUIbutton.setMinSize(300, 300);
         GUIbutton.setId("GUIbutton");
 
+        //Some settings for the grid at the bottom
+        bottomrightgrid.setHgap(30);
+        bottomrightgrid.setVgap(10);
+        bottomrightgrid.setPadding(new Insets(25, 25, 25, 25));
+
+        //Make the tutor button
+        Image tutorButton = new Image("file:src/images/Tutor.png");
+        tutor = new ImageView();
+        tutor.setImage(tutorButton);
+        tutor.setFitWidth(250);
+        tutor.setPreserveRatio(true);
+        tutor.setSmooth(true);
+        tutor.setCache(true);
+        tutor.setId("tutorButton");
+
+        //Some settings for the grid at the bottom
+        bottomleftgrid.setHgap(30);
+        bottomleftgrid.setVgap(10);
+        bottomleftgrid.setPadding(new Insets(25, 25, 25, 25));
+
+        //Make the exit button
+        Image exitButton = new Image("file:src/images/Exit.png");
+        exit = new ImageView();
+        exit.setImage(exitButton);
+        exit.setFitWidth(250);
+        exit.setPreserveRatio(true);
+        exit.setSmooth(true);
+        exit.setCache(true);
+        exit.setId("exitButton");
+
+        bottomrightgrid.add(tutor, 0, 0);
+        bottomleftgrid.add(exit, 0, 0);
+
+        tutor.setOnMouseClicked(e -> {Admin.display();});
+
+        exit.setOnMouseClicked(e -> {primaryStage.close();});
+
+
         //Gridlines for debugging are off
         titlegrid.setGridLinesVisible(false);
         centergrid.setGridLinesVisible(false);
+        bottomleftgrid.setGridLinesVisible(false);
+        bottomrightgrid.setGridLinesVisible(false);
 
         //Make scene to display the panes in
         scene = new Scene(rootpane, 1280, 720);
@@ -141,6 +187,12 @@ public class StartMenu extends Application {
         //Display the menu
         display();
 
+        //Fullscreen as default
+        primaryStage.setFullScreen(true);
+
+        //Make an icon for the program
+        primaryStage.getIcons().add(new Image("file:src/images/logo.png"));
+
         //Show it all
         primaryStage.show();
 
@@ -158,6 +210,12 @@ public class StartMenu extends Application {
 
         //Set centergrid alignment
         centergrid.setAlignment(Pos.CENTER);
+
+        //Set bottomleftgrid alignment
+        bottomleftgrid.setAlignment(Pos.BOTTOM_LEFT);
+
+        //Set bottomrightgrid alignment
+        bottomrightgrid.setAlignment(Pos.BOTTOM_RIGHT);
 
         //Set the CSS
         scene.getStylesheets().clear();

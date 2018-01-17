@@ -165,9 +165,9 @@ public class SelectQuestion {
             totalanswered++;
             //If the answer is correct
             if (q.isCorrect(selected.getCenterX()*imgratio, selected.getCenterY()*imgratio)) {
-                response.setFill(Color.DARKGREEN);
+                response.setFill(Color.LAWNGREEN);
                 response.setText("That is correct. Click continue to go to the next question.");
-                selected.setFill(Color.DARKGREEN);
+                selected.setFill(Color.LAWNGREEN);
                 score++;
             }
             //If the answer is not correct

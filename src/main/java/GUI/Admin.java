@@ -17,6 +17,9 @@ public class Admin extends Application {
 
     private static Text title;
     private static GridPane centergrid;
+    private static GridPane bottomleftgrid;
+    private static GridPane bottomrightgrid;
+    private static ImageView exit;
     private static Label MCtext;
     private static Button MCbut;
     private static Text subtitle;
@@ -34,7 +37,9 @@ public class Admin extends Application {
         StackPane rootpane = new StackPane();
         GridPane titlegrid = new GridPane();
         centergrid = new GridPane();
-        rootpane.getChildren().addAll(titlegrid, centergrid);
+        bottomleftgrid = new GridPane();
+        bottomrightgrid = new GridPane();
+        rootpane.getChildren().addAll(titlegrid, bottomrightgrid, centergrid, bottomleftgrid);
 
         //Set settings for titlegrid
         primaryStage.setTitle("Stichting Lezen en Schrijven - Admin");
@@ -42,6 +47,25 @@ public class Admin extends Application {
         titlegrid.setHgap(30);
         titlegrid.setVgap(10);
         titlegrid.setPadding(new Insets(25, 25, 25, 25));
+
+        //Settings for bottomleftgrid
+        bottomleftgrid.setAlignment(Pos.BOTTOM_LEFT);
+        bottomleftgrid.setHgap(30);
+        bottomleftgrid.setVgap(10);
+        bottomleftgrid.setPadding(new Insets(25, 25, 25, 25));
+
+        //Make the exit button
+        Image exitButton = new Image("file:src/images/Exit.png");
+        exit = new ImageView();
+        exit.setImage(exitButton);
+        exit.setFitWidth(250);
+        exit.setPreserveRatio(true);
+        exit.setSmooth(true);
+        exit.setCache(true);
+        exit.setId("exitButton");
+        bottomleftgrid.add(exit, 0, 0);
+
+        exit.setOnMouseClicked(e -> {primaryStage.close();});
 
         //Add logo
         Image logo = new Image("file:src/images/logo.png");
@@ -93,6 +117,7 @@ public class Admin extends Application {
         scene.getStylesheets().add("file:src/stylesheets/admin.css");
         display();
         primaryStage.setScene(scene);
+        primaryStage.setFullScreen(true);
         primaryStage.show();
     }
 

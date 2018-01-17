@@ -1,7 +1,7 @@
 .root{
-    /**-fx-background-image: url("../images/background.jpg");
+    -fx-background-image: url("../images/background2.jpg");
     -fx-background-repeat: stretch;
-    -fx-background-position: bottom center;**/
+    -fx-background-position: bottom center;
 }
 
 .text {
@@ -10,9 +10,8 @@
 }
 
 #Title {
-    -fx-font-size: 72px;
+    -fx-font-size: 65px;
     -fx-font-family: "Arial Rounded MT Bold";
-    -fx-fill: #cd6600;
     -fx-effect: innershadow(two-pass-box, #8b4500, 6, 0.0, 0, 2);
 }
 

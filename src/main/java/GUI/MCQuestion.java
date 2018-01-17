@@ -5,6 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
@@ -68,7 +69,7 @@ public class MCQuestion {
                     //Increase score
                     addScore();
                     //Set response text
-                    response.setFill(Color.DARKGREEN);
+                    response.setFill(Color.LAWNGREEN);
                     response.setText("That is correct. Click continue to go to the next question");
                 } else {
                     for (Answer answer : ((TextQuestion) questionlist.get(i)).answers) {

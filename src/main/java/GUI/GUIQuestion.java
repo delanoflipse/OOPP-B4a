@@ -154,7 +154,7 @@ public class GUIQuestion {
         //If the answer is correct
         if (correct) {
             score++;
-            response.setFill(Color.DARKGREEN);
+            response.setFill(Color.LAWNGREEN);
             response.setText("That is correct! Click continue to go to the next question.");
         }
         else {
