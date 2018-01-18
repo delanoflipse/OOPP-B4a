@@ -2,8 +2,13 @@ package GUI;
 
 
 import database.*;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.Toggle;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -14,48 +19,72 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
-public class SelectQuestion {
+public class SelectQuestion extends UIScene implements Initializable {
 
     private static GridPane centergrid;
     private static ArrayList<ClickQuestion> questionlist = new ArrayList<>();
-    private static ImageView qimagev;
-    private static Image qimage;
-    private static Circle selected = new Circle();
     private static double ratio; //how much of the screen the image should be (1 is full 0 is nothing)
     private static int i;
     private static Button submit;
     private static Button next;
     private static Text response;
     private static ClickQuestion q;
-    private static double imgratio;
-    private static Rectangle correct = new Rectangle();
 
+    private ClickQuestion question;
+    private ArrayList<Question> questions;
+    private int index;
+    private Image qimage;
+    private double imgratio;
 
-    public static void askQuestions(GridPane grid) {
-        ratio = .5;
+    @FXML private ImageView logoImage1;
+    @FXML private ImageView qimagev;
+    @FXML private Text questionText;
+    @FXML private Text questionTitle;
+    @FXML private Button submitButton;
+    @FXML private Button continueButton;
+    @FXML private Button exitButton;
+    @FXML private Pane imagepane;
+    @FXML private Text responseText;
+    @FXML private Circle selected;
+    @FXML private Rectangle correct;
 
-        //Make a questionlist and add questions
-        Database.loadDatabase();
-        ArrayList<Question> allquestions = Database.getQuestionsForLevel(1, "ImageQuestion");
-        for (Question q : allquestions) {
-            if (q instanceof ClickQuestion) {
-                questionlist.add((ClickQuestion) q);
-            }
-        }
-
-        //Set the private centergrid to the one given by the funtion parameter
-        centergrid = grid;
-        //Set alignment to center left
-        centergrid.setAlignment(Pos.CENTER_LEFT);
-        //Show the buttons
-        makeButtons();
-        //Show the image and the question
-        showQuestion(0);
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        // set image
+        Image image = new Image("file:src/images/logo.png");
+        logoImage1.setImage(image);
     }
 
-    private static void showQuestion(int index) {
+    public void setup() {
+        // set css
+        UI.setCSS("MCquestions.css");
+
+        // get state values
+        index = (int) UI.state.context.get("index");
+        questions = (ArrayList<Question>) UI.state.context.get("questions");
+        question = (ClickQuestion) questions.get(index);
+
+        // set text
+        questionText.setText("Question " + (1 + index));
+        questionTitle.setText(question.text);
+
+        qimage = new Image("file:src/images/" + question.image);
+        qimagev.setImage(qimage);
+        qimagev.setFitHeight(350);
+
+        //image is changed by this ratio
+        imgratio = qimage.getHeight()/qimagev.getFitHeight();
+
+        //Make a clickable pane as big as the image
+        imagepane.setPrefHeight(qimagev.getFitHeight());
+        imagepane.setPrefWidth(qimage.getWidth() * imgratio);
+    }
+
+    private void showQuestion(int index) {
         //Clear the grid
         centergrid.getChildren().clear();
         //Get the question
@@ -90,15 +119,6 @@ public class SelectQuestion {
         imagepane.getChildren().add(selected);
         imagepane.getChildren().add(correct);
 
-        //Set what should be done when someone clicks the image and moves the mouse
-        qimagev.setOnMousePressed(e -> beginDrag(e));
-
-        qimagev.setOnMouseDragged(e -> setCoordinates(e.getX(), e.getY()));
-
-        qimagev.setOnMouseReleased(e -> endDrag());
-        //If the rectangle is clicked the drag should start over again as well
-        selected.setOnMousePressed(e -> beginDrag(e));
-
         //At the beginning the circle is not visible
         selected.setFill(Color.YELLOW);
         selected.setRadius(0);
@@ -108,14 +128,18 @@ public class SelectQuestion {
         correct.setHeight(0);
     }
 
-    private static void setBeginCoordinates(double X, double Y) {
+    @FXML
+    private void setBeginCoordinates(double X, double Y) {
         //Read and set the coordinates at the beginning
         selected.setCenterX(X);
         selected.setCenterY(Y);
         selected.setRadius(5);
     }
 
-    private static void setCoordinates(double X, double Y) {
+    @FXML
+    private void setCoordinates(MouseEvent e) {
+        double X = e.getX();
+        double Y = e.getY();
         //If the mouse is in the image
         if (X >= 0.0 && X <= qimagev.getFitHeight()/qimage.getHeight()*qimage.getWidth()) {
             //Set the X coordinate of the circle
@@ -144,54 +168,59 @@ public class SelectQuestion {
         }
     }
 
-    //Made a function so that i can be changed with a button press
-    private static void incIndex() {
-        i++;
-    }
-
-    private static void makeButtons(){
-        //Button to go to the next question
-        next = new Button("Continue");
-        next.setOnAction(e -> {
-            incIndex();
-            showQuestion(i);
-        });
-        //Button to submit the answer
-        submit = new Button("submit");
-        submit.setOnAction(e -> {
-            //If the answer is correct
-            if (q.isCorrect(selected.getCenterX()*imgratio, selected.getCenterY()*imgratio)) {
-                response.setFill(Color.DARKGREEN);
-                response.setText("That is correct. Click continue to go to the next question.");
-                selected.setFill(Color.DARKGREEN);
-            }
-            //If the answer is not correct
-            else {
-                response.setFill(Color.FIREBRICK);
-                response.setText("That is incorrect, you can see the answer on the image now.\n" +
-                        "Click \"continue\" to go to the next question.");
-                correct.setX(q.topLeft.x/imgratio);
-                correct.setY(q.topLeft.y/imgratio);
-                correct.setWidth((q.bottomRight.x - q.topLeft.x)/imgratio);
-                correct.setHeight((q.bottomRight.y - q.topLeft.y)/imgratio);
-                correct.setFill(Color.FIREBRICK);
-            }
-            //Show the button to go to the next question
-            centergrid.add(next, 0, 3);
-        });
-    }
-
-    private static void beginDrag(MouseEvent e) {
+    @FXML
+    private void beginDrag(MouseEvent e) {
         //At the start of a drag set rectangle size to 0 and set coordinates
         //Also set the color back
         setBeginCoordinates(e.getX(), e.getY());
-        submit.setDisable(true);
+        submitButton.setDisable(true);
         selected.setFill(Color.YELLOW);
     }
 
-    private static void endDrag() {
+    @FXML
+    private void endDrag() {
         //Enable the submit button and make the color a bit darker
-        submit.setDisable(false);
+        submitButton.setDisable(false);
+    }
+
+    @FXML
+    protected void handleSubmit(ActionEvent event) {
+//        Toggle ans = answergroup.getSelectedToggle();
+//        if (ans == null) {
+//            responseText.setText("Please select a value!");
+//            responseText.setVisible(true);
+//            return;
+//        }
+
+//        String val = (String) ans.getUserData();
+//        boolean correct = question.isCorrect(val);
+        boolean correct = true;
+
+        continueButton.setVisible(true);
+        responseText.setVisible(true);
+        submitButton.setDisable(true);
+
+        if (correct) {
+            responseText.setFill(Color.DARKGREEN);
+            responseText.setText("That is correct. Click continue to go to the next question");
+        } else {
+            responseText.setFill(Color.FIREBRICK);
+            responseText.setText("That is incorrect. Click continue to go to the next question");
+        }
+    }
+
+    @FXML
+    protected void handleContinue(ActionEvent event) {
+        if (questions.size() - index <= 2) {
+            UI.goToScene("startmenu");
+        } else {
+            UI.state.context.set("index", ++index);
+            UI.goToScene("imagequestions");
+        }
+    }
+    @FXML
+    protected void handleExit(ActionEvent event) {
+        UI.goToScene("startmenu");
     }
 
 

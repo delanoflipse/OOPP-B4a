@@ -9,26 +9,38 @@
 
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
 <VBox xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="GUI.MCQuestion">
+      fx:controller="GUI.SelectQuestion">
     <GridPane hgap="30" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
         <padding>
             <Insets bottom="25" left="25" right="25" top="25" />
         </padding>
 
         <ImageView fx:id="logoImage1" fitWidth="100.0" cache="true" preserveRatio="true"  GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-        <Text fx:id="titleText" text="Multiple Choiche Questions" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        <Text fx:id="titleText" text="Image Questions" GridPane.columnIndex="1" GridPane.rowIndex="0" />
     </GridPane>
 
     <VBox spacing="10">
         <padding>
-            <Insets bottom="25" left="25" right="25" top="25" />
+            <Insets bottom="0" left="25" right="25" top="25" />
         </padding>
 
         <Text fx:id="questionText"/>
         <Text fx:id="questionTitle"/>
 
-        <VBox fx:id="buttonstack" spacing="10" />
+        <Pane fx:id="imagepane">
+            <ImageView fx:id="qimagev"
+                       cache="true"
+                       onMousePressed="#beginDrag"
+                       onMouseDragged="#setCoordinates"
+                       onMouseReleased="#endDrag"
+                       preserveRatio="true" />
+            <Circle fx:id="selected" radius="0" fill="yellow"/>
+            <Rectangle fx:id="correct" />
+        </Pane>
 
         <HBox spacing="10">
             <Button fx:id="submitButton" text="Submit" onAction="#handleSubmit"/>

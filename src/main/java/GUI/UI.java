@@ -4,13 +4,14 @@ import database.Database;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class UI extends Application {
-    public static StackPane root;
+    public static Pane root;
     public static Stage stage;
     public static Scene scene;
 
@@ -47,7 +48,7 @@ public class UI extends Application {
 
             // load scene
             FXMLLoader loader = new FXMLLoader(UI.class.getResource("/scenes/" + sceneName + ".fxml"));
-            StackPane rt = (StackPane) loader.load();
+            Pane rt = (Pane) loader.load();
 
             // set variables
             scene.setRoot(rt);

@@ -12,10 +12,8 @@ import java.util.ResourceBundle;
 
 public class StartMenu extends UIScene implements Initializable {
 
-    @FXML
-    private ImageView logoImage1;
-    @FXML
-    private ImageView logoImage2;
+    @FXML private ImageView logoImage1;
+    @FXML private ImageView logoImage2;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -50,8 +48,15 @@ public class StartMenu extends UIScene implements Initializable {
 
     @FXML
     protected void handleIQButton(ActionEvent event) {
-        // TODO
-        System.out.println("asdf");
+        // setup context
+        UI.state.setContext(
+                new UIContext()
+                        .set("questions", Database.getQuestionsForLevel(1, "ClickQuestion"))
+                        .set("index", 0)
+        );
+
+        // go to scene
+        UI.goToScene("imagequestions");
     }
 
 }

@@ -23,4 +23,24 @@ public class TextQuestion extends Question {
 
         return false;
     }
+
+    public boolean isCorrect(String value) {
+        for (TextAnswer answer : answers) {
+            if (answer.text.equals(value)) {
+                return answer.correct;
+            }
+        }
+
+        return false;
+    }
+
+    public TextAnswer getCorrectAnswer() {
+        for (TextAnswer answer : answers) {
+            if (answer.correct) {
+                return answer;
+            }
+        }
+
+        return null;
+    }
 }
