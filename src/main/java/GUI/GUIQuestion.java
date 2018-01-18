@@ -94,6 +94,7 @@ public class GUIQuestion {
 
         //Set response text to nothing
         response.setText("");
+        response.setId("responsetext");
 
         if (index >= questionlist.size()) {
             done();

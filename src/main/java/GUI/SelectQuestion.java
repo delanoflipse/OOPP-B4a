@@ -55,7 +55,7 @@ public class SelectQuestion {
         vboxLeft = vbox;
 
         //Set alignments
-        centergrid.setAlignment(Pos.CENTER);
+        centergrid.setAlignment(Pos.CENTER_RIGHT);
         vboxLeft.setAlignment(Pos.BOTTOM_LEFT);
         //Show the buttons
         makeButtons();
@@ -82,6 +82,7 @@ public class SelectQuestion {
         qimagev.setFitHeight(centergrid.getHeight()*ratio);
         qimagev.setPreserveRatio(true);
         qimagev.setSmooth(true);
+        qimagev.setId("image");
 
         //image is changed by this ratio
         imgratio = qimage.getHeight()/qimagev.getFitHeight();
@@ -99,7 +100,7 @@ public class SelectQuestion {
         //Disable the submit button
         submit.setDisable(true);
         centergrid.add(submit, 0, 2);
-        centergrid.add(stop, 1, 2);
+        vboxLeft.getChildren().add(stop);
 
         //Add the circle to show what point is selected
         imagepane.getChildren().add(selected);
@@ -189,10 +190,9 @@ public class SelectQuestion {
                 correct.setFill(Color.FIREBRICK);
             }
             //Show the button to go to the next question
+            vboxLeft.getChildren().clear();
             centergrid.add(next, 0, 3);
-            vboxLeft.getChildren().remove(submit);
-            vboxLeft.getChildren().remove(stop);
-            vboxLeft.getChildren().add(stop);
+            centergrid.getChildren().remove(submit);
         });
         Image stopButton = new Image("file:src/images/stop_quiz.png");
         stop = new ImageView();

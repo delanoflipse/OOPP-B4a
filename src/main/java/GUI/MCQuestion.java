@@ -53,6 +53,7 @@ public class MCQuestion {
 
         //Setting alignment for VBox
         vboxLeft.setAlignment(Pos.BOTTOM_LEFT);
+        vboxLeft.setPadding(new Insets(15, 15, 0, 28));
 
         //Make the response text
         response = new Text();
@@ -73,6 +74,7 @@ public class MCQuestion {
         stop.setOnMouseClicked(e -> done());
 
         //Make button to submit the question and set the action
+        Image submitButton = new Image("file:src/images/submit.png");
         submit = new Button("Submit");
         submit.setOnAction(e -> {
             total++;
@@ -185,9 +187,12 @@ public class MCQuestion {
         centergrid.add(endscore, 0, 1);
         centergrid.add(back, 0, 2);
 
+        //Padding for main menu button
+        vboxLeft.setPadding(new Insets(15, 15, 35, 50));
+
         //Make the exit button and set the action
         ImageView exit = new ImageView();
-        Image exitButton = new Image("file:src/images/exit.png");
+        Image exitButton = new Image("file:src/images/main_menu.png");
         exit.setImage(exitButton);
         exit.setFitWidth(300);
         exit.setPreserveRatio(true);

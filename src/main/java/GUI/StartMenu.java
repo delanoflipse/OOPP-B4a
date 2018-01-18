@@ -88,7 +88,7 @@ public class StartMenu extends Application {
         GUIbutton.setId("GUIbutton");
 
         vboxLeft = new VBox();
-        vboxLeft.setPadding(new Insets(15, 12, 15, 12));
+        vboxLeft.setPadding(new Insets(15, 12, 15, 20));
         vboxLeft.setSpacing(10);
         vboxLeft.setAlignment(Pos.BOTTOM_LEFT);
 
@@ -117,8 +117,6 @@ public class StartMenu extends Application {
         exit.setCache(true);
         exit.setId("exitButton");
 
-        //vboxLeft.getChildren().add(exit);
-        //vboxRight.getChildren().add(tutor);
         rootpane.setLeft(vboxLeft);
         rootpane.setRight(vboxRight);
 
