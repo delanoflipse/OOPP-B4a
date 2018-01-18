@@ -1,11 +1,11 @@
 package GUI;
 
 import database.Database;
+import user.UserData;
 
 public class UIState {
     Database database;
-    String username = "";
-    int userscore = 0;
+    UserData user = null;
 
     UIContext context = new UIContext();
 

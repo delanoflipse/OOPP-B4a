@@ -5,7 +5,10 @@ package user;
  */
 public class UserDateScore {
     /** A date */
-    String date;
+    public String date;
     /** A score */
-    int score;
+    public int score;
+
+    /** Circular reference to the user*/
+    public UserData user;
 }

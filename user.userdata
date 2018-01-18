@@ -1,8 +1,7 @@
-name: asdfs
+name: user
 scores
-12-12:12
-12-13:200
+Thursday 18 January at 10:44 PM:0
 preferences
 useTTS:true
-else:ja
-something:2
+showInList:true
+isTutor:false

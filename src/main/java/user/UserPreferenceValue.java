@@ -7,6 +7,14 @@ public class UserPreferenceValue {
     /** The stored string value */
     String value;
 
+    public UserPreferenceValue(String value) {
+        this.value = value;
+    }
+
+    public UserPreferenceValue() {
+        this.value = "";
+    }
+
     /**
      * Return the value as int
      * @return Integer

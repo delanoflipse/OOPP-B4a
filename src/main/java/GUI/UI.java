@@ -35,7 +35,7 @@ public class UI extends Application {
         stage.setScene(scene);
 
         // go to starting scene
-        goToScene("startmenu");
+        goToScene("welcome");
 
         primaryStage.show();
     }
@@ -55,8 +55,8 @@ public class UI extends Application {
             root = rt;
 
             // setup controller
-            UIScene controller = (UIScene) loader.getController();
-            controller.setup();
+//            UIScene controller = (UIScene) loader.getController();
+//            controller.setup();
         } catch (IOException e) {
             return;
         }

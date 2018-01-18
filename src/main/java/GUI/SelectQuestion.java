@@ -18,27 +18,19 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import user.UserDateScore;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class SelectQuestion extends UIScene implements Initializable {
-
-    private static GridPane centergrid;
-    private static ArrayList<ClickQuestion> questionlist = new ArrayList<>();
-    private static double ratio; //how much of the screen the image should be (1 is full 0 is nothing)
-    private static int i;
-    private static Button submit;
-    private static Button next;
-    private static Text response;
-    private static ClickQuestion q;
-
     private ClickQuestion question;
     private ArrayList<Question> questions;
     private int index;
     private Image qimage;
     private double imgratio;
+    private int currentScore;
 
     @FXML private ImageView logoImage1;
     @FXML private ImageView qimagev;
@@ -57,9 +49,7 @@ public class SelectQuestion extends UIScene implements Initializable {
         // set image
         Image image = new Image("file:src/images/logo.png");
         logoImage1.setImage(image);
-    }
 
-    public void setup() {
         // set css
         UI.setCSS("MCquestions.css");
 
@@ -67,6 +57,7 @@ public class SelectQuestion extends UIScene implements Initializable {
         index = (int) UI.state.context.get("index");
         questions = (ArrayList<Question>) UI.state.context.get("questions");
         question = (ClickQuestion) questions.get(index);
+        currentScore = (int) UI.state.context.get("score");
 
         // set text
         questionText.setText("Question " + (1 + index));
@@ -82,50 +73,6 @@ public class SelectQuestion extends UIScene implements Initializable {
         //Make a clickable pane as big as the image
         imagepane.setPrefHeight(qimagev.getFitHeight());
         imagepane.setPrefWidth(qimage.getWidth() * imgratio);
-    }
-
-    private void showQuestion(int index) {
-        //Clear the grid
-        centergrid.getChildren().clear();
-        //Get the question
-        q = questionlist.get(index);
-        //Show the question
-        Text questiontext = new Text(q.text);
-        centergrid.add(questiontext, 0, 0);
-        //Load the image
-        qimage = new Image("file:src/images/"+q.image);
-        qimagev = new ImageView(qimage);
-        qimagev.setFitHeight(centergrid.getHeight()*ratio);
-        qimagev.setPreserveRatio(true);
-        qimagev.setSmooth(true);
-
-        //image is changed by this ratio
-        imgratio = qimage.getHeight()/qimagev.getFitHeight();
-        //Make a clickable pane as big as the image
-        Pane imagepane = new Pane();
-        imagepane.setPrefHeight(qimagev.getFitHeight());
-        imagepane.setPrefWidth(qimage.getWidth()*imgratio);
-        centergrid.add(imagepane, 0, 1);
-        //Add the image to the pane
-        imagepane.getChildren().add(qimagev);
-        //Prepare response text
-        response = new Text("");
-        centergrid.add(response, 1, 2);
-        //Disable the submit button
-        submit.setDisable(true);
-        centergrid.add(submit, 0, 2);
-
-        //Add the circle to show what point is selected
-        imagepane.getChildren().add(selected);
-        imagepane.getChildren().add(correct);
-
-        //At the beginning the circle is not visible
-        selected.setFill(Color.YELLOW);
-        selected.setRadius(0);
-
-        correct.setOpacity(0.5);
-        correct.setWidth(0);
-        correct.setHeight(0);
     }
 
     @FXML
@@ -185,15 +132,6 @@ public class SelectQuestion extends UIScene implements Initializable {
 
     @FXML
     protected void handleSubmit(ActionEvent event) {
-//        Toggle ans = answergroup.getSelectedToggle();
-//        if (ans == null) {
-//            responseText.setText("Please select a value!");
-//            responseText.setVisible(true);
-//            return;
-//        }
-
-//        String val = (String) ans.getUserData();
-//        boolean correct = question.isCorrect(val);
         boolean correct = true;
 
         continueButton.setVisible(true);
@@ -203,6 +141,7 @@ public class SelectQuestion extends UIScene implements Initializable {
         if (correct) {
             responseText.setFill(Color.DARKGREEN);
             responseText.setText("That is correct. Click continue to go to the next question");
+            UI.state.context.set("score", currentScore + 10);
         } else {
             responseText.setFill(Color.FIREBRICK);
             responseText.setText("That is incorrect. Click continue to go to the next question");
@@ -212,16 +151,27 @@ public class SelectQuestion extends UIScene implements Initializable {
     @FXML
     protected void handleContinue(ActionEvent event) {
         if (questions.size() - index <= 2) {
+            saveScore();
             UI.goToScene("startmenu");
         } else {
             UI.state.context.set("index", ++index);
             UI.goToScene("imagequestions");
         }
     }
+
     @FXML
     protected void handleExit(ActionEvent event) {
+        saveScore();
         UI.goToScene("startmenu");
     }
 
+    private void saveScore() {
+        UserDateScore score = new UserDateScore();
+        score.date = (String) UI.state.context.get("date");
+        score.score = (int) UI.state.context.get("score");
+
+        UI.state.user.scores.add(score);
+        UI.state.user.save();
+    }
 
 }

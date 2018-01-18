@@ -18,6 +18,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import user.UserDateScore;
 
 import java.lang.reflect.Array;
 import java.net.URL;
@@ -39,16 +40,14 @@ public class MCQuestion extends UIScene implements Initializable {
     private ToggleGroup answergroup = new ToggleGroup();
     private TextQuestion question;
     private ArrayList<Question> questions;
-    private int index;
+    private int index, currentScore;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // set image
         Image image = new Image("file:src/images/logo.png");
         logoImage1.setImage(image);
-    }
 
-    public void setup() {
         // set css
         UI.setCSS("MCquestions.css");
 
@@ -56,6 +55,7 @@ public class MCQuestion extends UIScene implements Initializable {
         index = (int) UI.state.context.get("index");
         questions = (ArrayList<Question>) UI.state.context.get("questions");
         question = (TextQuestion) questions.get(index);
+        currentScore = (int) UI.state.context.get("score");
 
         // set text
         questionText.setText("Question " + (1 + index));
@@ -89,6 +89,7 @@ public class MCQuestion extends UIScene implements Initializable {
         if (correct) {
             responseText.setFill(Color.DARKGREEN);
             responseText.setText("That is correct. Click continue to go to the next question");
+            UI.state.context.set("score", currentScore + 10);
         } else {
             responseText.setFill(Color.FIREBRICK);
             responseText.setText("That is incorrect. The answer was:\n" + question.getCorrectAnswer().text + "\nClick continue to go to the next question");
@@ -98,14 +99,26 @@ public class MCQuestion extends UIScene implements Initializable {
     @FXML
     protected void handleContinue(ActionEvent event) {
         if (questions.size() - index <= 2) {
+            saveScore();
             UI.goToScene("startmenu");
         } else {
             UI.state.context.set("index", ++index);
             UI.goToScene("mcquestions");
         }
     }
+
     @FXML
     protected void handleExit(ActionEvent event) {
+        saveScore();
         UI.goToScene("startmenu");
+    }
+
+    private void saveScore() {
+        UserDateScore score = new UserDateScore();
+        score.date = (String) UI.state.context.get("date");
+        score.score = (int) UI.state.context.get("score");
+
+        UI.state.user.scores.add(score);
+        UI.state.user.save();
     }
 }

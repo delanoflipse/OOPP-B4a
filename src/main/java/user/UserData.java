@@ -1,6 +1,6 @@
 package user;
 
-import main.KeyValuePair;
+import database.KeyValuePair;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -27,6 +27,14 @@ public class UserData {
     public UserData() {
         scores = new ArrayList<>();
         preferences = new HashMap<>();
+        setBasePreferences();
+
+    }
+
+    public void setBasePreferences() {
+        setPreference("useTTS", "true");
+        setPreference("showInList", "true");
+        setPreference("isTutor", "false");
     }
 
     /**
@@ -56,6 +64,10 @@ public class UserData {
         return preferences.get(key).valueAsBoolean();
     }
 
+    public void setPreference(String key, String value) {
+        preferences.put(key, new UserPreferenceValue(value));
+    }
+
     /**
      * Parse a userdata file and return a new UserData instance
      * @param file The filename
@@ -63,7 +75,7 @@ public class UserData {
      */
     public static UserData parse(String file) {
         UserData data = new UserData();
-        data.filename = file;
+        data.filename = file.toLowerCase();
         String line;
         // 0 = init values
         // 1 = scores
@@ -71,10 +83,10 @@ public class UserData {
         int state = 0;
         KeyValuePair pair = null;
 
-        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(data.filename))) {
             // for each line in the file
             while ((line = br.readLine()) != null) {
-                pair = KeyValuePair.splitLine(line);
+                pair = KeyValuePair.splitLine(line, false);
                 int newState = state;
                 if (line.equals("")) {
                     continue;
@@ -105,6 +117,7 @@ public class UserData {
                         UserDateScore newScore = new UserDateScore();
                         newScore.date = pair.key;
                         newScore.score = pair.valueAsInt();
+                        newScore.user = data;
                         data.scores.add(newScore);
                         break;
                     case 2:
@@ -120,8 +133,11 @@ public class UserData {
 
                 state = newState;
             }
+
+            br.close();
         } catch (IOException e) {
-            System.out.println("Something went wrong reading the file");
+            System.out.println("File does not yet exist");
+//            return null;
         }
 
         return data;
@@ -150,9 +166,10 @@ public class UserData {
             }
 
             writer.close();
+            System.out.println("Saved user progress.");
 
         } catch (IOException e) {
-            System.out.println("Something went wrong reading the file");
+            System.out.println("Something went wrong reading the file!");
         }
     }
 

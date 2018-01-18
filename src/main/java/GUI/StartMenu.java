@@ -7,10 +7,16 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import javafx.event.ActionEvent;
+import javafx.scene.text.Text;
+
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class StartMenu extends UIScene implements Initializable {
+
+    @FXML private Text userTitle;
 
     @FXML private ImageView logoImage1;
     @FXML private ImageView logoImage2;
@@ -21,16 +27,12 @@ public class StartMenu extends UIScene implements Initializable {
         Image image = new Image("file:src/images/logo.png");
         logoImage1.setImage(image);
         logoImage2.setImage(image);
-    }
 
-    @Override
-    public void setup() {
         //Set the title of the stage
         UI.setTitle("Stichting Lezen en Schrijven - Practice Program");
         UI.setCSS("start_menu.css");
 
-        //Get the questions from the database
-        Database.loadDatabase();
+        userTitle.setText("Welcome " + UI.state.user.name);
     }
 
     @FXML
@@ -40,6 +42,8 @@ public class StartMenu extends UIScene implements Initializable {
                 new UIContext()
                     .set("questions", Database.getQuestionsForLevel(1, "TextQuestion"))
                     .set("index", 0)
+                    .set("score", 0)
+                    .set("date", getDate())
         );
 
         // go to scene
@@ -53,10 +57,23 @@ public class StartMenu extends UIScene implements Initializable {
                 new UIContext()
                         .set("questions", Database.getQuestionsForLevel(1, "ClickQuestion"))
                         .set("index", 0)
+                        .set("score", 0)
+                        .set("date", getDate())
         );
 
         // go to scene
         UI.goToScene("imagequestions");
+    }
+    @FXML
+    protected void goToScores(ActionEvent event) {
+        // go to scene
+        UI.goToScene("scores");
+    }
+
+    private String getDate() {
+        String date = new SimpleDateFormat("EEEE d MMMM").format(new Date());
+        String time = new SimpleDateFormat("h:mm a").format(new Date());
+        return date + " at " + time;
     }
 
 }

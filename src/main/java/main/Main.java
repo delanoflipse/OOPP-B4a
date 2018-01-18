@@ -1,10 +1,15 @@
 package main;
 
 import GUI.*;
+import database.Database;
+import user.UserData;
 
 public class Main {
 
     public static void main(String[] args) {
+        // Load the database
+        Database.loadDatabase();
+
         if (args.length > 0 && args[0].equals("-admin")) {
             new Thread() {
                 @Override
@@ -20,11 +25,5 @@ public class Main {
                 }
             }.start();
         }
-
-
-//        UserData data = UserData.parse("user.userdata");
-//        data.name = "asdfs";
-//        System.out.println(data.getPreference("useTTS"));
-//        data.save();
     }
 }

@@ -1,13 +1,18 @@
 package database;
 
+import GUI.UIContext;
+import user.UserData;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
  * Database container class
  */
-public class Database {
+public class Database extends UIContext{
     /** list of questions */
-    public static ArrayList<Question> questions;
+    public static ArrayList<Question> questions = new ArrayList<>();
+    public static ArrayList<UserData> users = new ArrayList<>();
     /** filename of the database */
     public static final String filename = "db.data";
 
@@ -16,7 +21,10 @@ public class Database {
      */
     public static void loadDatabase() {
         DatabaseParser parser = new DatabaseParser(filename);
-        questions = parser.parse();
+        parser.parse();
+
+        System.out.println("Found " + questions.size() + " questions.");
+        System.out.println("Found " + users.size() + " users.");
     }
 
     /**

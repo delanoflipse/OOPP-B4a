@@ -5,3 +5,11 @@
 #title {
     -fx-font-size: 64px;
 }
+
+.title {
+    -fx-font-size: 64px;
+}
+
+.colheader {
+    -fx-font-weight: bold;
+}

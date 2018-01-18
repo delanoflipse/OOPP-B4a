@@ -1,4 +1,4 @@
-import main.KeyValuePair;
+import database.KeyValuePair;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

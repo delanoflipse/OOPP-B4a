@@ -22,4 +22,16 @@ public class UIContext {
     public Object get(String key) {
         return values.get(key);
     }
+
+    public String getString(String key) {
+        return (String) values.get(key);
+    }
+
+    public boolean getBoolean(String key) {
+        return (boolean) values.get(key);
+    }
+
+    public int getInteger(String key) {
+        return (int) values.get(key);
+    }
 }
