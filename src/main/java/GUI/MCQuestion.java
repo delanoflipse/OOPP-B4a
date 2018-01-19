@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import static GUI.StartMenu.playtts;
 import static GUI.StartMenu.ttsfinal;
 import static GUI.StartMenu.tts;
-
+import static GUI.StartMenu.asText;
 public class MCQuestion {
 
     private static int i;
@@ -29,11 +29,12 @@ public class MCQuestion {
     private static Button stop;
 
     public static void askQuestions(GridPane grid){
+
         centergrid = grid;
         //Get the questions from the database
         Database.loadDatabase();
         ArrayList<Question> allquestions = Database.getQuestionsForLevel(1);
-        ttsfinal = "";
+        ttsfinal = ttsfinal + "Welcome to the multiple choice questions";
         //Get all mc questions
         for (Question q: allquestions) {
             if (q instanceof TextQuestion) {
@@ -99,7 +100,7 @@ public class MCQuestion {
         });
 
         //Set action for continue button (Showing the next question)
-        next.setOnAction(e -> showNextQuestion());
+        next.setOnAction(e -> {showNextQuestion(); });
 
         //Show the first question
         i=-1;
@@ -125,7 +126,7 @@ public class MCQuestion {
         //Display which question we'recurrently at
         TextQuestion q = (TextQuestion) questionlist.get(i);
         Text qtitle = new Text("Question " + (i+1));
-        ttsfinal = ttsfinal + "question" + (i+1);
+        ttsfinal = ttsfinal + "question " + asText(i+1,false,"negative");
         qtitle.setId("qtitle");
         centergrid.add(qtitle, 0, 0);
 
@@ -140,7 +141,7 @@ public class MCQuestion {
         for (Answer answer : q.answers) {
             TextAnswer tanswer = (TextAnswer) answer;
             answerbuttons.add(new RadioButton(tanswer.text));
-            ttsfinal = ttsfinal + tanswer.text;
+            ttsfinal = ttsfinal + tanswer.text + " . ";
         }
         int j = 1;
         //Add every button to the togglegroup, so that only one can eb selected at a time
@@ -159,6 +160,7 @@ public class MCQuestion {
         stop.setOnMouseEntered(e->tts.speak("stop",false,playtts));
         submit.setOnMouseEntered(e->tts.speak("submit",false,playtts));
         tts.speak(ttsfinal,false,playtts);
+        ttsfinal= "";
     }
 
     private static void done(){
@@ -168,7 +170,7 @@ public class MCQuestion {
         Text endscore = new Text("Your score is: " + score + " out of " + total);
         Text back = new Text("You will be redirected to the startscreen, when you click exit.");
         ttsfinal = "";
-        ttsfinal = ttsfinal + "That were all the question, well done!" + "Your score is: " + score + " out of " + total + "You will be redirected to the startscreen, when you click exit.";
+        ttsfinal = ttsfinal + "That were all the question, well done!" + "Your score is: " + asText(score,false,"negative") + " out of " + asText(total,false,"negative") + "You will be redirected to the startscreen, when you click exit.";
         tts.speak(ttsfinal,false,playtts);
         //Set IDs for CSS
         end.setId("end");

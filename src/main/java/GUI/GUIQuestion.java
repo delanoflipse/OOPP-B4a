@@ -11,7 +11,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 import java.util.ArrayList;
-
+import static GUI.StartMenu.playtts;
+import static GUI.StartMenu.ttsfinal;
+import static GUI.StartMenu.tts;
+import static GUI.StartMenu.asText;
 
 public class GUIQuestion {
 
@@ -29,6 +32,7 @@ public class GUIQuestion {
 
 
     public static void askQuestions(GridPane grid) {
+        ttsfinal="welcome to the G U I questiopns . . ";
         index = 0;
         score = 0;
         total = 0;
@@ -46,6 +50,7 @@ public class GUIQuestion {
         }
 
         next = new Button("Continue");
+        next.setOnMouseEntered(e-> tts.speak("continue",false,playtts));
         next.setOnAction(e -> {
             index++;
             choiceBoxList.clear();
@@ -53,9 +58,11 @@ public class GUIQuestion {
         });
 
         stop = new Button("Stop Quiz");
+        stop.setOnMouseEntered(e-> tts.speak("Stop quiz",false,playtts));
         stop.setOnAction(e -> done());
 
         submit = new Button("Submit");
+        submit.setOnMouseEntered(e->tts.speak("submit",false,playtts));
         submit.setOnAction(e -> checkAnswer());
 
 
@@ -88,9 +95,13 @@ public class GUIQuestion {
         //ColSpan i so that menus don't appear 'behind' the text
         //Intro text
         Text intro = new Text("Please answer the question by selecting the right menu item (in one of the menus)");
+        ttsfinal = ttsfinal + "please answer the questions by selecting the right menu items in one of the menus";
         centergrid.add(intro, 1, 0, i+1, 1);
         //Show the question
         Text questiontext = new Text(q.text);
+        ttsfinal = ttsfinal + q.text;
+        tts.speak(ttsfinal,false,playtts);
+        ttsfinal = "";
         centergrid.add(questiontext, 1, 1, i+1, 1);
 
         //Add response text
@@ -146,10 +157,12 @@ public class GUIQuestion {
             score++;
             response.setFill(Color.DARKGREEN);
             response.setText("That is correct! Click continue to go to the next question.");
+            tts.speak("That is correct. .  click continue to go to the next question",false,playtts);
         }
         else {
             response.setFill(Color.FIREBRICK);
             response.setText("That is incorrect. Click continue to go to the next question");
+            tts.speak("that is incorrect . . click continue to go to the next question",false,playtts);
         }
 
         centergrid.getChildren().remove(submit);
@@ -167,7 +180,7 @@ public class GUIQuestion {
         Text end = new Text("That were all the question, well done!");
         Text endscore = new Text("Your score is: " + score + " out of " + total);
         Text back = new Text("You will be redirected to the startscreen, when you click exit.");
-
+        tts.speak("That were all the question, well done! . " + "Your score is: . .  " + asText(score,false,"neg") + ". . out of . " + asText(total,false,"neg") + " . . You will be redirected to the startscreen, when you click exit.",false,playtts );
         //Set IDs for CSS
         end.setId("end");
         endscore.setId("end");
@@ -181,6 +194,7 @@ public class GUIQuestion {
 
         //Make the exit button and set the action
         Button exit = new Button("Exit");
+        exit.setOnMouseEntered(e->tts.speak("exit",false,playtts));
         exit.setOnAction(e -> StartMenu.display());
 
         //HBox to get the exit button in the center beneath the text

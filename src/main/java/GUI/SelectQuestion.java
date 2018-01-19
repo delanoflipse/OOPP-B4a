@@ -15,6 +15,10 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
 import java.util.ArrayList;
+import static GUI.StartMenu.playtts;
+import static GUI.StartMenu.ttsfinal;
+import static GUI.StartMenu.tts;
+import static GUI.StartMenu.asText;
 
 public class SelectQuestion {
 
@@ -36,6 +40,8 @@ public class SelectQuestion {
     private static Button stop;
 
     public static void askQuestions(GridPane grid) {
+        ttsfinal = "Welcome to the select part of image questions . . ";
+
         ratio = .65;
         score = 0;
         totalanswered = 0;
@@ -69,6 +75,9 @@ public class SelectQuestion {
         q = questionlist.get(index);
         //Show the question
         Text questiontext = new Text(q.text);
+        ttsfinal = ttsfinal + q.text;
+        tts.speak(ttsfinal,false,playtts);
+        ttsfinal = "";
         centergrid.add(questiontext, 0, 0, 2, 1);
         //Load the image
         qimage = new Image("file:src/images/"+q.image);
@@ -155,18 +164,21 @@ public class SelectQuestion {
     private static void makeButtons(){
         //Button to go to the next question
         next = new Button("Continue");
+        next.setOnMouseEntered(e -> tts.speak("continue", false,playtts));
         next.setOnAction(e -> {
             i++;
             showQuestion(i);
         });
         //Button to submit the answer
         submit = new Button("Submit");
+        submit.setOnMouseEntered(e -> tts.speak("submit", false,playtts));
         submit.setOnAction(e -> {
             totalanswered++;
             //If the answer is correct
             if (q.isCorrect(selected.getCenterX()*imgratio, selected.getCenterY()*imgratio)) {
                 response.setFill(Color.DARKGREEN);
                 response.setText("That is correct. Click continue to go to the next question.");
+                tts.speak("That is correct. Click continue to go to the next question.",false,playtts);
                 selected.setFill(Color.DARKGREEN);
                 score++;
             }
@@ -175,6 +187,7 @@ public class SelectQuestion {
                 response.setFill(Color.FIREBRICK);
                 response.setText("That is incorrect, you can see the answer on the image now.\n" +
                         "Click \"continue\" to go to the next question.");
+                tts.speak("That is incorrect, you can see the answer on the image now. . , Click continue to go to the next question",false,playtts);
                 correct.setX(q.topLeft.x/imgratio);
                 correct.setY(q.topLeft.y/imgratio);
                 correct.setWidth((q.bottomRight.x - q.topLeft.x)/imgratio);
@@ -189,6 +202,7 @@ public class SelectQuestion {
         });
         stop = new Button("Stop Quiz");
         stop.setOnAction(e -> done());
+        stop.setOnMouseEntered(e-> tts.speak("Stop quiz",false,playtts));
     }
 
     private static void beginDrag(MouseEvent e) {
@@ -217,7 +231,7 @@ public class SelectQuestion {
         Text end = new Text("That were all the question, well done!");
         Text endscore = new Text("Your score is: " + score + " out of " + totalanswered);
         Text back = new Text("You will be redirected to the startscreen, when you click exit.");
-
+        tts.speak("That were all the question, well done!" + "Your score is: " + asText(score,false,"negative") + " out of . . " + asText(totalanswered,false,"neg") + ". . You will be redirected to the startscreen, when you click exit.",false,playtts);
         //Set IDs for CSS
         end.setId("end");
         endscore.setId("end");
@@ -232,7 +246,7 @@ public class SelectQuestion {
         //Make the exit button and set the action
         Button exit = new Button("Exit");
         exit.setOnAction(e -> StartMenu.display());
-
+        exit.setOnMouseEntered(e-> tts.speak("exit",false,playtts));
         //HBox to get the exit button in the center beneath the text
         HBox exitbox = new HBox();
         exitbox.setAlignment(Pos.CENTER);
