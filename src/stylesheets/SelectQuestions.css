@@ -31,10 +31,10 @@
     -fx-font-family: "Arial Rounded MT Bold";
 }
 
-#image {
+#imagepane {
     -fx-padding: 10;
-    -fx-border-style: solid;
-    -fx-border-width: 100;
+    -fx-border-style: solid outside;
+    -fx-border-width: 10;
     -fx-border-insets: 5;
     -fx-border-radius: 5;
     -fx-border-color: black;

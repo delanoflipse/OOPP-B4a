@@ -94,7 +94,7 @@ public class StartMenu extends Application {
         vboxLeft.setAlignment(Pos.BOTTOM_LEFT);
 
         vboxRight = new VBox();
-        vboxRight.setPadding(new Insets(15, 12, 15, 12));
+        vboxRight.setPadding(new Insets(15, 20, 30, 12));
         vboxRight.setSpacing(10);
         vboxRight.setAlignment(Pos.BOTTOM_RIGHT);
 
@@ -241,7 +241,7 @@ public class StartMenu extends Application {
         centergrid.getChildren().clear();
         Text chooseDifficulty = new Text("Select you difficulty");
         chooseDifficulty.setStyle("-fx-font-size: 38px;");
-        Text levelText = new Text("Easy");
+        Text levelText = new Text("      Easy      ");
         levelText.setStyle("-fx-font-size: 28px;");
         HBox hbox = new HBox();
         hbox.setAlignment(Pos.CENTER);
@@ -253,51 +253,51 @@ public class StartMenu extends Application {
 
         lower.setOnAction(e -> {
             switch(levelText.getText()) {
-                case "Easy":
-                    levelText.setText("Difficult");
+                case "      Easy      ":
+                    levelText.setText("   Difficult   ");
                     break;
-                case "Average":
-                    levelText.setText("Easy");
+                case "   Average   ":
+                    levelText.setText("      Easy      ");
                     break;
-                case "Difficult":
-                    levelText.setText("Average");
+                case "   Difficult   ":
+                    levelText.setText("   Average   ");
                     break;
             }
         });
 
         higher.setOnAction(e -> {
             switch (levelText.getText()) {
-                case "Easy":
-                    levelText.setText("Average");
+                case "      Easy      ":
+                    levelText.setText("   Average   ");
                     break;
-                case "Average":
-                    levelText.setText("Difficult");
+                case "   Average   ":
+                    levelText.setText("   Difficult   ");
                     break;
-                case "Difficult":
-                    levelText.setText("Easy");
+                case "   Difficult   ":
+                    levelText.setText("      Easy      ");
                     break;
             }
         });
 
         startQuiz.setOnMouseClicked(e -> {
             switch (levelText.getText()) {
-                case "Easy":
+                case "      Easy      ":
+                    //Remove buttons
+                    vboxLeft.getChildren().clear();
+                    vboxRight.getChildren().clear();
                     goToQuestions(questiontype, 1);
+                    break;
+                case "   Average   ":
                     //Remove buttons
                     vboxLeft.getChildren().clear();
                     vboxRight.getChildren().clear();
-                    break;
-                case "Average":
                     goToQuestions(questiontype, 2);
-                    //Remove buttons
-                    vboxLeft.getChildren().clear();
-                    vboxRight.getChildren().clear();
                     break;
-                case "Difficult":
-                    goToQuestions(questiontype, 3);
+                case "   Difficult   ":
                     //Remove buttons
                     vboxLeft.getChildren().clear();
                     vboxRight.getChildren().clear();
+                    goToQuestions(questiontype, 3);
                     break;
             }
         });

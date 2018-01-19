@@ -127,6 +127,7 @@ public class MCQuestion {
         //Clear the centergrid
         centergrid.getChildren().clear();
         vboxLeft.getChildren().clear();
+        vboxLeft.getChildren().add(stop);
         //Increase i to get the next question
         i++;
         //Check whether there is a next question
@@ -166,7 +167,6 @@ public class MCQuestion {
         //Add the response text and submit button on the right place
         centergrid.add(response, 0, j + 1, 2, 1);
         centergrid.add(submit, 0, j+1);
-        vboxLeft.getChildren().add(stop);
     }
 
     private static void done(){

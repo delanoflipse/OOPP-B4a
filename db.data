@@ -189,3 +189,9 @@ menu: contact us
 element: our address
 correctelement: our email
 element: our phone number
+#Question Added by the MC GUI
+type: multiple choice
+level: 2
+question: hviuchvuioas
+answer: A. asdfasdf
+correctanswer: B. sfasdfsa

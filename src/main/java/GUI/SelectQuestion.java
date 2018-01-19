@@ -55,7 +55,7 @@ public class SelectQuestion {
         vboxLeft = vbox;
 
         //Set alignments
-        centergrid.setAlignment(Pos.CENTER_RIGHT);
+        centergrid.setAlignment(Pos.CENTER);
         vboxLeft.setAlignment(Pos.BOTTOM_LEFT);
         //Show the buttons
         makeButtons();
@@ -70,6 +70,7 @@ public class SelectQuestion {
         }
         //Clear the grid
         centergrid.getChildren().clear();
+        vboxLeft.getChildren().clear();
         //Get the question
         q = questionlist.get(index);
         //Show the question
@@ -82,7 +83,6 @@ public class SelectQuestion {
         qimagev.setFitHeight(centergrid.getHeight()*ratio);
         qimagev.setPreserveRatio(true);
         qimagev.setSmooth(true);
-        qimagev.setId("image");
 
         //image is changed by this ratio
         imgratio = qimage.getHeight()/qimagev.getFitHeight();
@@ -93,6 +93,7 @@ public class SelectQuestion {
         centergrid.add(imagepane, 0, 1, 2, 1);
         //Add the image to the pane
         imagepane.getChildren().add(qimagev);
+        imagepane.setId("imagepane");
         //Prepare response text
         response = new Text("");
         response.setId("responsetext");
@@ -100,7 +101,6 @@ public class SelectQuestion {
         //Disable the submit button
         submit.setDisable(true);
         centergrid.add(submit, 0, 2);
-        vboxLeft.getChildren().add(stop);
 
         //Add the circle to show what point is selected
         imagepane.getChildren().add(selected);
@@ -122,6 +122,8 @@ public class SelectQuestion {
         correct.setOpacity(0.5);
         correct.setWidth(0);
         correct.setHeight(0);
+
+        vboxLeft.getChildren().add(stop);
     }
 
     private static void setBeginCoordinates(double X, double Y) {
@@ -190,7 +192,6 @@ public class SelectQuestion {
                 correct.setFill(Color.FIREBRICK);
             }
             //Show the button to go to the next question
-            vboxLeft.getChildren().clear();
             centergrid.add(next, 0, 3);
             centergrid.getChildren().remove(submit);
         });
