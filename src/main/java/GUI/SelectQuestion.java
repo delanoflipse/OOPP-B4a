@@ -37,13 +37,13 @@ public class SelectQuestion {
     private static ImageView stop;
     private static VBox vboxLeft;
 
-    public static void askQuestions(GridPane grid, VBox vbox) {
+    public static void askQuestions(GridPane grid, VBox vbox, int level) {
         ratio = .65;
         score = 0;
         totalanswered = 0;
         //Make a questionlist and add questions
         Database.loadDatabase();
-        ArrayList<Question> allquestions = Database.getQuestionsForLevel(1);
+        ArrayList<Question> allquestions = Database.getQuestionsForLevel(level);
         for (Question q : allquestions) {
             if (q instanceof ClickQuestion) {
                 questionlist.add((ClickQuestion) q);

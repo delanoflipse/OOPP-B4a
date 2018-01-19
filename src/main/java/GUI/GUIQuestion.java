@@ -30,7 +30,7 @@ public class GUIQuestion {
     private static Button submit;
 
 
-    public static void askQuestions(GridPane grid) {
+    public static void askQuestions(GridPane grid, int level) {
         index = 0;
         score = 0;
         total = 0;
@@ -38,7 +38,7 @@ public class GUIQuestion {
         centergrid.setAlignment(Pos.CENTER_LEFT);
         //Get the questions from the database
         Database.loadDatabase();
-        ArrayList<Question> allquestions = Database.getQuestionsForLevel(1);
+        ArrayList<Question> allquestions = Database.getQuestionsForLevel(level);
 
         //Get all GUI questions
         for (Question q: allquestions) {
@@ -46,30 +46,6 @@ public class GUIQuestion {
                 questionlist.add((database.GUIQuestion) q);
             }
         }
-
-        /**DropDownHead menu = new DropDownHead("Companies");
-        menu.getElements().add(new Element("Company one"));
-        menu.getElements().add(new Element("Company two"));
-        menu.getElements().add(new Element("Company three"));
-
-        DropDownHead menu2 = new DropDownHead("Schools");
-        menu2.getElements().add(new Element("School one"));
-        menu2.getElements().add(new Element("School two"));
-        menu2.getElements().add(new Element("School three"));
-
-        DropDownHead menu3 = new DropDownHead("Places");
-        menu3.getElements().add(new Element("Place one"));
-        menu3.getElements().add(new Element("Place two"));
-        menu3.getElements().add(new Element("Place three"));
-        menu3.getElements().get(0).correct = true;
-
-        database.GUIQuestion guiQuestion = new database.GUIQuestion();
-        guiQuestion.level = 1;
-        guiQuestion.text = "Where can we find Place one?";
-        guiQuestion.answers.add(menu);
-        guiQuestion.answers.add(menu2);
-        guiQuestion.answers.add(menu3);
-        questionlist.add(guiQuestion);**/
 
         next = new Button("Continue");
         next.setOnAction(e -> {

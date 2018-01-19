@@ -31,12 +31,12 @@ public class MCQuestion {
     private static Button submit;
     private static ImageView stop;
 
-    public static void askQuestions(GridPane grid, VBox vbox){
+    public static void askQuestions(GridPane grid, VBox vbox, int level){
         centergrid = grid;
         vboxLeft = vbox;
         //Get the questions from the database
         Database.loadDatabase();
-        ArrayList<Question> allquestions = Database.getQuestionsForLevel(1);
+        ArrayList<Question> allquestions = Database.getQuestionsForLevel(level);
 
         //Get all mc questions
         for (Question q: allquestions) {

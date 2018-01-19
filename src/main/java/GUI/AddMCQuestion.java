@@ -36,7 +36,7 @@ public class AddMCQuestion {
         centergrid.getChildren().clear();
 
         //Set centergrid alignment
-        centergrid.setAlignment(Pos.BOTTOM_LEFT);
+        centergrid.setAlignment(Pos.TOP_LEFT);
 
         //Add intro text
         Text intro = new Text("Please fill in the following fields:\nYou can click \"New Answer\" to add a new answer.\nClick save to store the question in the database.");

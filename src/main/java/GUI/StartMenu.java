@@ -28,6 +28,7 @@ public class StartMenu extends Application {
     private static Button MCbutton;
     private static Button Selectimgbutton;
     private static Button GUIbutton;
+    private static ImageView startQuiz;
 
     @Override
     public void start(Stage primaryStage) {
@@ -117,10 +118,19 @@ public class StartMenu extends Application {
         exit.setCache(true);
         exit.setId("exitButton");
 
+        //Make the start quiz button
+        Image startQuizButton = new Image("file:src/images/Start_quiz.png");
+        startQuiz = new ImageView(startQuizButton);
+        startQuiz.setFitWidth(300);
+        startQuiz.setPreserveRatio(true);
+        startQuiz.setSmooth(true);
+        startQuiz.setCache(true);
+        startQuiz.setId("startQuizButton");
+
         rootpane.setLeft(vboxLeft);
         rootpane.setRight(vboxRight);
 
-        tutor.setOnMouseClicked(e -> {Admin.display();});
+        tutor.setOnMouseClicked(e -> {Admin.start(primaryStage);});
 
         exit.setOnMouseClicked(e -> {primaryStage.close();});
 
@@ -139,14 +149,12 @@ public class StartMenu extends Application {
             title.setText("Multiple Choiche Questions");
             //Remove the second logo
             titlegrid.getChildren().remove(logov2);
-            //Remove buttons
-            vboxLeft.getChildren().clear();
-            vboxRight.getChildren().clear();
-            //Ask the questions
-            MCQuestion.askQuestions(centergrid, vboxLeft);
             //Set other CSS file
             scene.getStylesheets().clear();
             scene.getStylesheets().add("file:src/stylesheets/MCquestions.css");
+            //Ask the questions
+            levelmenu("mc");
+
         });
 
         Selectimgbutton.setOnAction(e -> {
@@ -163,7 +171,7 @@ public class StartMenu extends Application {
             scene.getStylesheets().add("file:src/stylesheets/SelectQuestions.css");
 
             //Ask the questions
-            GUI.SelectQuestion.askQuestions(centergrid, vboxLeft);
+            levelmenu("image");
         });
 
         GUIbutton.setOnAction(e -> {
@@ -180,7 +188,7 @@ public class StartMenu extends Application {
             scene.getStylesheets().add("file:src/stylesheets/GUIQuestions.css");
 
             //Ask the questions
-            GUI.GUIQuestion.askQuestions(centergrid);
+            levelmenu("gui");
         });
 
         //Set the scene and size of the stage
@@ -227,6 +235,90 @@ public class StartMenu extends Application {
         centergrid.add(GUIbutton, 2, 0);
         vboxLeft.getChildren().add(exit);
         vboxRight.getChildren().add(tutor);
+    }
+
+    private static void levelmenu (String questiontype) {
+        centergrid.getChildren().clear();
+        Text chooseDifficulty = new Text("Select you difficulty");
+        chooseDifficulty.setStyle("-fx-font-size: 38px;");
+        Text levelText = new Text("Easy");
+        levelText.setStyle("-fx-font-size: 28px;");
+        HBox hbox = new HBox();
+        hbox.setAlignment(Pos.CENTER);
+
+        Button lower = new Button("<");
+        Button higher = new Button(">");
+
+        hbox.getChildren().addAll(lower, levelText, higher);
+
+        lower.setOnAction(e -> {
+            switch(levelText.getText()) {
+                case "Easy":
+                    levelText.setText("Difficult");
+                    break;
+                case "Average":
+                    levelText.setText("Easy");
+                    break;
+                case "Difficult":
+                    levelText.setText("Average");
+                    break;
+            }
+        });
+
+        higher.setOnAction(e -> {
+            switch (levelText.getText()) {
+                case "Easy":
+                    levelText.setText("Average");
+                    break;
+                case "Average":
+                    levelText.setText("Difficult");
+                    break;
+                case "Difficult":
+                    levelText.setText("Easy");
+                    break;
+            }
+        });
+
+        startQuiz.setOnMouseClicked(e -> {
+            switch (levelText.getText()) {
+                case "Easy":
+                    goToQuestions(questiontype, 1);
+                    //Remove buttons
+                    vboxLeft.getChildren().clear();
+                    vboxRight.getChildren().clear();
+                    break;
+                case "Average":
+                    goToQuestions(questiontype, 2);
+                    //Remove buttons
+                    vboxLeft.getChildren().clear();
+                    vboxRight.getChildren().clear();
+                    break;
+                case "Difficult":
+                    goToQuestions(questiontype, 3);
+                    //Remove buttons
+                    vboxLeft.getChildren().clear();
+                    vboxRight.getChildren().clear();
+                    break;
+            }
+        });
+
+        centergrid.add(chooseDifficulty, 0, 0);
+        centergrid.add(hbox, 0, 1);
+        centergrid.add(startQuiz, 0, 3);
+    }
+
+    private static void goToQuestions(String type, int level) {
+        switch (type) {
+            case "mc":
+                MCQuestion.askQuestions(centergrid, vboxLeft, level);
+                break;
+            case "image":
+                SelectQuestion.askQuestions(centergrid, vboxLeft, level);
+                break;
+            case "gui":
+                GUIQuestion.askQuestions(centergrid, level);
+                break;
+        }
     }
 
 }

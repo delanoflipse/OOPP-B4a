@@ -8,12 +8,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class Admin extends Application {
+public class Admin {
 
     private static Text title;
     private static GridPane centergrid;
@@ -27,19 +28,17 @@ public class Admin extends Application {
     private static Button selectbut;
     private static Label selecttext;
 
-    public static void main(String[] args) {
-        launch(args);
-    }
-
-    @Override
-    public void start(Stage primaryStage) {
+    public static void start(Stage primaryStage) {
         //Set panes
-        StackPane rootpane = new StackPane();
+        BorderPane rootpane = new BorderPane();
         GridPane titlegrid = new GridPane();
         centergrid = new GridPane();
         bottomleftgrid = new GridPane();
         bottomrightgrid = new GridPane();
-        rootpane.getChildren().addAll(titlegrid, bottomrightgrid, centergrid, bottomleftgrid);
+        rootpane.setCenter(centergrid);
+        rootpane.setTop(titlegrid);
+        rootpane.setLeft(bottomleftgrid);
+        rootpane.setRight(bottomrightgrid);
 
         //Set settings for titlegrid
         primaryStage.setTitle("Stichting Lezen en Schrijven - Admin");
