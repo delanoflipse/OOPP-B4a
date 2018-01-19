@@ -650,23 +650,142 @@ topleft: 956,641
 bottomright: 1575,703
 
 
+
+
+
+
 #Added by the Add GUI-Question GUI
 type: gui
-level: 1
-question: these are opening times, select the opening times of jumbo delft on tuesdays
-menu: stores
-menu: city
-element: den haag
-element: bodegraven
-correctelement: delft
-element: wageningen
-menu: day
+level: 3
+question: select the opening hours of the dirk van den broek in amsterdam on wednesdays
+menu: Stores
+element: Jumbo
+element: AH
+element: Lidl
+element: Aldi
+correctelement: Dirk van den broek
+menu: citys
+element: Den Haag
+element: Bodegraven
+element: Delft
+element: goeree-overflakee
+correctelement: Amsterdam
+menu: Day
 element: monday
-correctelement: tuesdays
-element: wednesdday
+element: tuesday
+correctelement: wednesday
 element: thursday
 element: friday
 element: saturday
 element: sunday
 
 
+#Added by the Add GUI-Question GUI
+type: gui
+level: 1
+question: select blue-yellow-green
+menu: 1
+element: orange
+element: yellow
+element: green
+element: purple
+correctelement: blue
+element: red
+menu: 2
+element: orange
+correctelement: yellow
+element: green
+element: purple
+element: blue
+element: red
+menu: 3
+element: orange
+element: yellow
+correctelement: green
+element: purple
+element: blue
+element: red
+
+
+#Added by the Add GUI-Question GUI
+type: gui
+level: 1
+question: select three workdays
+menu: 1
+correctelement: monday
+correctelement: tuesday
+correctelement: wednesday
+correctelement: thursday
+correctelement: friday
+element: saturday
+element: sunday
+menu: 2
+correctelement: monday
+correctelement: tuesday
+correctelement: wednesday
+correctelement: thursday
+correctelement: friday
+element: saturday
+element: sunday
+menu: 3
+correctelement: monday
+correctelement: tuesday
+correctelement: wednesday
+correctelement: thursday
+correctelement: friday
+element: saturday
+element: sunday
+
+
+#Added by the Add GUI-Question GUI
+type: gui
+level: 2
+question: select so that there is no mary in the answer
+menu: 1
+element: mary-rosa-michelle
+element: rosa-charlotte-mary
+correctelement: charlotte-rosa-michelle
+menu: 2
+element: mary-oprah-sophia
+correctelement: oprah-sofia-olivia
+element: olivia-sophia-mary
+menu: 3
+element: Chloe-mary-Evelyn
+element: Nora-Mary-Chloe
+correctelement: Chloe-Evelyn-Nora
+
+
+#Added by the Add GUI-Question GUI
+type: gui
+level: 3
+question: select a combination that forms a word
+menu: 1
+element: tion
+correctelement: Co
+element: di
+element: we
+element: ro
+menu: 2
+element: tion
+element: mo
+element: ke
+correctelement: or
+element: top
+menu: 3
+element: lo
+element: que
+element: bi
+correctelement: di
+menu: 4
+element: tu
+element: bo
+correctelement: na
+element: li
+element: be
+menu: 5
+element: tion
+element: le
+element: vo
+correctelement: tion
+element: se
+element: en
