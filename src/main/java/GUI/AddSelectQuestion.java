@@ -266,7 +266,7 @@ public class AddSelectQuestion {
             if (button.isSelected()) {
                 level = i;
             }
-
+            i++;
         }
 
         //Read filename of image (the read file)
@@ -323,6 +323,8 @@ public class AddSelectQuestion {
             writer.println("bottomright: "+((Double) correctrbX).intValue()+","+((Double) correctrbY).intValue());
             //Close the writer
             writer.close();
+            i = 1;
+            level = 0;
             //Go back to the start menu
             Admin.display();
         }
