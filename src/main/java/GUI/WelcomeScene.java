@@ -25,7 +25,6 @@ public class WelcomeScene extends UIScene implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         UI.setTitle("Stichting Lezen en Schrijven - Practice Program");
-        UI.setCSS("base.css");
 
         // set image
         Image image = new Image("file:src/images/logo.png");

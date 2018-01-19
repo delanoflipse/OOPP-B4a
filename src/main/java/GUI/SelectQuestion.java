@@ -5,15 +5,12 @@ import database.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.Toggle;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
@@ -37,12 +34,13 @@ public class SelectQuestion extends UIScene implements Initializable {
     @FXML private Text questionText;
     @FXML private Text questionTitle;
     @FXML private Button submitButton;
-    @FXML private Button continueButton;
-    @FXML private Button exitButton;
     @FXML private Pane imagepane;
     @FXML private Text responseText;
     @FXML private Circle selected;
     @FXML private Rectangle correct;
+    @FXML private VBox imageBox;
+
+    private boolean done = false;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -51,7 +49,7 @@ public class SelectQuestion extends UIScene implements Initializable {
         logoImage1.setImage(image);
 
         // set css
-        UI.setCSS("MCquestions.css");
+        UI.setCSS("questions.css");
 
         // get state values
         index = (int) UI.state.context.get("index");
@@ -65,14 +63,7 @@ public class SelectQuestion extends UIScene implements Initializable {
 
         qimage = new Image("file:src/images/" + question.image);
         qimagev.setImage(qimage);
-        qimagev.setFitHeight(350);
-
-        //image is changed by this ratio
-        imgratio = qimage.getHeight()/qimagev.getFitHeight();
-
-        //Make a clickable pane as big as the image
-        imagepane.setPrefHeight(qimagev.getFitHeight());
-        imagepane.setPrefWidth(qimage.getWidth() * imgratio);
+        qimagev.fitHeightProperty().bind(imageBox.heightProperty());
     }
 
     @FXML
@@ -85,6 +76,8 @@ public class SelectQuestion extends UIScene implements Initializable {
 
     @FXML
     private void setCoordinates(MouseEvent e) {
+        //image is changed by this ratio
+        imgratio = qimage.getHeight() / qimagev.getFitHeight();
         double X = e.getX();
         double Y = e.getY();
         //If the mouse is in the image
@@ -132,11 +125,18 @@ public class SelectQuestion extends UIScene implements Initializable {
 
     @FXML
     protected void handleSubmit(ActionEvent event) {
+        if (done) {
+            handleContinue();
+            return;
+        }
+
+        //image is changed by this ratio
+        imgratio = qimage.getHeight() / qimagev.getFitHeight();
         boolean isCorrect = question.isCorrect(selected.getCenterX() * imgratio, selected.getCenterY() * imgratio);
 
-        continueButton.setVisible(true);
         responseText.setVisible(true);
-        submitButton.setDisable(true);
+        submitButton.setText("continue");
+        done = true;
 
         if (isCorrect) {
             responseText.setFill(Color.DARKGREEN);
@@ -145,8 +145,7 @@ public class SelectQuestion extends UIScene implements Initializable {
             UI.state.context.set("score", currentScore + 10);
         } else {
             responseText.setFill(Color.FIREBRICK);
-            responseText.setText("That is incorrect, you can see the answer on the image now.\n" +
-                    "Click \"continue\" to go to the next question.");
+            responseText.setText("That is incorrect, you can see the answer on the image now.");
             correct.setX(question.topLeft.x / imgratio);
             correct.setY(question.topLeft.y / imgratio);
             correct.setWidth((question.bottomRight.x - question.topLeft.x) / imgratio);
@@ -155,8 +154,7 @@ public class SelectQuestion extends UIScene implements Initializable {
         }
     }
 
-    @FXML
-    protected void handleContinue(ActionEvent event) {
+    private void handleContinue() {
         if (questions.size() - index <= 2) {
             saveScore();
             UI.goToScene("startmenu");

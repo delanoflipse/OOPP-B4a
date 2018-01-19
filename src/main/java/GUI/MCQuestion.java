@@ -40,6 +40,8 @@ public class MCQuestion extends UIScene implements Initializable {
     private ArrayList<Question> questions;
     private int index, currentScore;
 
+    private boolean done = false;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // set image
@@ -47,7 +49,7 @@ public class MCQuestion extends UIScene implements Initializable {
         logoImage1.setImage(image);
 
         // set css
-        UI.setCSS("MCquestions.css");
+        UI.setCSS("questions.css");
 
         // get state values
         index = (int) UI.state.context.get("index");
@@ -70,6 +72,11 @@ public class MCQuestion extends UIScene implements Initializable {
 
     @FXML
     protected void handleSubmit(ActionEvent event) {
+        if (done) {
+            handleContinue();
+            return;
+        }
+
         Toggle ans = answergroup.getSelectedToggle();
         if (ans == null) {
             responseText.setText("Please select a value!");
@@ -80,9 +87,9 @@ public class MCQuestion extends UIScene implements Initializable {
         String val = (String) ans.getUserData();
         boolean correct = question.isCorrect(val);
 
-        continueButton.setVisible(true);
         responseText.setVisible(true);
-        submitButton.setDisable(true);
+        submitButton.setText("Continue");
+        done = true;
 
         if (correct) {
             responseText.setFill(Color.DARKGREEN);
@@ -94,8 +101,7 @@ public class MCQuestion extends UIScene implements Initializable {
         }
     }
 
-    @FXML
-    protected void handleContinue(ActionEvent event) {
+    void handleContinue() {
         if (questions.size() - index <= 2) {
             saveScore();
             UI.goToScene("startmenu");

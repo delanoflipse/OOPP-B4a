@@ -1,0 +1,14 @@
+.root{
+    /*-fx-background-image: url("../images/background.jpg");*/
+    -fx-background-repeat: stretch;
+    -fx-background-position: bottom center;
+}
+
+#MCbutton{
+    -fx-background-image: url("../images/mcquestions.jpg");
+    -fx-background-size: cover;
+}
+
+#userTitle {
+    -fx-font-size: 24px;
+}

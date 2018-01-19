@@ -21,7 +21,6 @@ public class ScoreScene implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        UI.setCSS("base.css");
         ArrayList<UserDateScore> scores = new ArrayList<>();
         for (UserData user: Database.users) {
             scores.addAll(user.scores);

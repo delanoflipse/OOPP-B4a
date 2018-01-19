@@ -1,6 +1,5 @@
 package GUI;
 
-import database.Database;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -45,6 +44,7 @@ public class UI extends Application {
             // clear
             clearScene();
             clearCSS();
+            setCSS("base.css");
 
             // load scene
             FXMLLoader loader = new FXMLLoader(UI.class.getResource("/scenes/" + sceneName + ".fxml"));
@@ -58,7 +58,11 @@ public class UI extends Application {
 //            UIScene controller = (UIScene) loader.getController();
 //            controller.setup();
         } catch (IOException e) {
-            return;
+            System.out.println(e.getCause());
+            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            System.out.println(e.getCause());
+            System.out.println(e.getMessage());
         }
     }
 

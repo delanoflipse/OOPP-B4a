@@ -30,7 +30,7 @@ public class StartMenu extends UIScene implements Initializable {
 
         //Set the title of the stage
         UI.setTitle("Stichting Lezen en Schrijven - Practice Program");
-        UI.setCSS("start_menu.css");
+        UI.setCSS("startmenu.css");
 
         userTitle.setText("Welcome " + UI.state.user.name);
     }
@@ -40,14 +40,11 @@ public class StartMenu extends UIScene implements Initializable {
         // setup context
         UI.state.setContext(
                 new UIContext()
-                    .set("questions", Database.getQuestionsForLevel(1, "TextQuestion"))
-                    .set("index", 0)
-                    .set("score", 0)
-                    .set("date", getDate())
+                    .set("type", "TextQuestion")
         );
 
         // go to scene
-        UI.goToScene("mcquestions");
+        UI.goToScene("selection");
     }
 
     @FXML
@@ -55,25 +52,16 @@ public class StartMenu extends UIScene implements Initializable {
         // setup context
         UI.state.setContext(
                 new UIContext()
-                        .set("questions", Database.getQuestionsForLevel(1, "ClickQuestion"))
-                        .set("index", 0)
-                        .set("score", 0)
-                        .set("date", getDate())
+                        .set("type", "ClickQuestion")
         );
 
         // go to scene
-        UI.goToScene("imagequestions");
+        UI.goToScene("selection");
     }
     @FXML
     protected void goToScores(ActionEvent event) {
         // go to scene
         UI.goToScene("scores");
-    }
-
-    private String getDate() {
-        String date = new SimpleDateFormat("EEEE d MMMM").format(new Date());
-        String time = new SimpleDateFormat("h:mm a").format(new Date());
-        return date + " at " + time;
     }
 
 }

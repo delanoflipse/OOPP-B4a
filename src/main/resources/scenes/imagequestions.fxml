@@ -3,7 +3,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.control.Button?>
 
@@ -12,50 +11,58 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
-<VBox xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="GUI.SelectQuestion">
-    <GridPane hgap="30" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
-        <padding>
-            <Insets bottom="25" left="25" right="25" top="25" />
-        </padding>
+<?import javafx.scene.layout.BorderPane?>
+<BorderPane xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="GUI.SelectQuestion">
+    <top>
+        <VBox spacing="10">
+            <padding>
+                <Insets bottom="25" left="25" right="25" top="25" />
+            </padding>
+            <HBox spacing="30">
+                <ImageView fx:id="logoImage1" fitWidth="100.0" cache="true" preserveRatio="true"/>
+                <Text styleClass="titleText" text="Practise Program" />
+            </HBox>
 
-        <ImageView fx:id="logoImage1" fitWidth="100.0" cache="true" preserveRatio="true"  GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-        <Text fx:id="titleText" text="Image Questions" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-    </GridPane>
+            <Text fx:id="questionText"/>
+            <Text fx:id="questionTitle"/>
+        </VBox>
+    </top>
+    <center>
+        <VBox spacing="10" styleClass="image-pane" fx:id="imageBox">
+            <padding>
+                <Insets left="25" right="25"/>
+            </padding>
+            <Pane fx:id="imagepane">
+                <ImageView fx:id="qimagev"
+                           cache="true"
+                           onMousePressed="#beginDrag"
+                           onMouseDragged="#setCoordinates"
+                           onMouseReleased="#endDrag"
+                           preserveRatio="true" />
+                <Circle fx:id="selected" radius="0" fill="yellow"/>
+                <Rectangle fx:id="correct" opacity="0.5" width="0" height="0"/>
+            </Pane>
+        </VBox>
+    </center>
 
-    <VBox spacing="10">
-        <padding>
-            <Insets bottom="0" left="25" right="25" top="25" />
-        </padding>
+    <bottom>
+        <VBox spacing="10">
+            <padding>
+                <Insets bottom="25" top="25" left="25" right="25" />
+            </padding>
 
-        <Text fx:id="questionText"/>
-        <Text fx:id="questionTitle"/>
+            <Text fx:id="responseText"
+                  visible="false"/>
 
-        <Pane fx:id="imagepane">
-            <ImageView fx:id="qimagev"
-                       cache="true"
-                       onMousePressed="#beginDrag"
-                       onMouseDragged="#setCoordinates"
-                       onMouseReleased="#endDrag"
-                       preserveRatio="true" />
-            <Circle fx:id="selected" radius="0" fill="yellow"/>
-            <Rectangle fx:id="correct" opacity="0.5" width="0" height="0"/>
-        </Pane>
+            <HBox spacing="10">
+                <Button fx:id="submitButton" text="Submit" onAction="#handleSubmit" styleClass="green"/>
 
-        <HBox spacing="10">
-            <Button fx:id="submitButton" text="Submit" onAction="#handleSubmit"/>
-
-            <Button fx:id="exitButton"
-                    text="Exit"
-                    onAction="#handleExit"/>
-        </HBox>
-
-        <Text fx:id="responseText"
-              visible="false"/>
-
-        <Button fx:id="continueButton"
-                text="Continue"
-                visible="false"
-                onAction="#handleContinue"/>
-    </VBox>
-</VBox>
+                <Button fx:id="exitButton"
+                        text="Exit"
+                        styleClass="red"
+                        onAction="#handleExit"/>
+            </HBox>
+        </VBox>
+    </bottom>
+</BorderPane>
