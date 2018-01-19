@@ -91,9 +91,11 @@ public class GUIQuestion {
         //ColSpan i so that menus don't appear 'behind' the text
         //Intro text
         Text intro = new Text("Please answer the question by selecting the right menu item (in one of the menus)");
+        intro.setId("qtitle");
         centergrid.add(intro, 1, 0, i+1, 1);
         //Show the question
         Text questiontext = new Text(q.text);
+        questiontext.setId("qtext");
         centergrid.add(questiontext, 1, 1, i+1, 1);
 
         //Add response text
@@ -141,7 +143,7 @@ public class GUIQuestion {
                         String answer = choiceBox.getItems().get(i).toString();
                         String domain = choiceBox.getItems().get(0).toString();
                         response.setFill(Color.FIREBRICK);
-                        response.setText("That is incorrect.\nYou should have selected " + answer + " inside the " + domain + " menu\nClick continue to go to the next question");
+                        response.setText("That is incorrect.\nYou should have selected \"" + answer + "\" inside the \"" + domain + "\" menu\nClick continue to go to the next question");
                     }
                 }
             }

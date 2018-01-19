@@ -1,6 +1,7 @@
 package GUI;
 
 import database.*;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -55,7 +56,7 @@ public class SelectQuestion {
         vboxLeft = vbox;
 
         //Set alignments
-        centergrid.setAlignment(Pos.CENTER);
+        centergrid.setAlignment(Pos.CENTER_LEFT);
         vboxLeft.setAlignment(Pos.BOTTOM_LEFT);
         //Show the buttons
         makeButtons();
@@ -245,16 +246,22 @@ public class SelectQuestion {
         centergrid.add(back, 0, 2);
 
         //Make the exit button and set the action
-        Button exit = new Button("Exit");
-        exit.setOnAction(e -> StartMenu.display());
-
-        //HBox to get the exit button in the center beneath the text
-        HBox exitbox = new HBox();
-        exitbox.setAlignment(Pos.CENTER);
-        exitbox.getChildren().add(exit);
-
-        //Add the HBox with the button in it
-        centergrid.add(exitbox ,0, 3);
+        Image exitButton = new Image("file:src/images/main_menu.png");
+        ImageView exit = new ImageView();
+        exit.setImage(exitButton);
+        exit.setFitWidth(350);
+        exit.setPreserveRatio(true);
+        exit.setSmooth(true);
+        exit.setCache(true);
+        exit.setId("exitButton");
+        exit.setOnMouseClicked(e -> {
+            vboxLeft.getChildren().clear();
+            StartMenu.display();
+        });
+        vboxLeft.getChildren().clear();
+        vboxLeft.getChildren().add(exit);
+        vboxLeft.setPadding(new Insets(0,20,40,35)
+        );
     }
 
 

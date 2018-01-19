@@ -305,6 +305,7 @@ public class StartMenu extends Application {
         centergrid.add(chooseDifficulty, 0, 0);
         centergrid.add(hbox, 0, 1);
         centergrid.add(startQuiz, 0, 3);
+        startQuiz.setId("startButton");
     }
 
     private static void goToQuestions(String type, int level) {
