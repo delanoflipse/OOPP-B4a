@@ -32,6 +32,11 @@ public class WelcomeScene extends UIScene implements Initializable {
     }
 
     @FXML
+    protected void handleTutor(ActionEvent event) {
+        UI.goToScene("admin");
+    }
+
+    @FXML
     protected void handleSubmit(ActionEvent event) {
         String value = input.getText();
         value = value.trim().replaceAll("[^A-Za-z]", "");

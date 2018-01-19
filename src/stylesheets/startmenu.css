@@ -4,9 +4,19 @@
     -fx-background-position: bottom center;
 }
 
-#MCbutton{
+#MCButton{
     -fx-background-image: url("../images/mcquestions.jpg");
     -fx-background-size: cover;
+    -fx-font-weight: bold;
+    -fx-text-fill: black;
+    -fx-font-size: 24;
+}
+
+#SelectIMGButton{
+    -fx-background-image: url("../images/imgquestions.jpg");
+    -fx-background-size: cover;
+    -fx-font-weight: bold;
+    -fx-font-size: 24;
 }
 
 #userTitle {

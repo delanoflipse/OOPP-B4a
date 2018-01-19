@@ -17,7 +17,6 @@
     <Text text="Welcome!" styleClass="title"/>
     <Label text="Please fill in your name:" styleClass="label"/>
     <TextField prefWidth="250" maxWidth="250" fx:id="input" text="delano"/>
-    <Button text="Submit" prefWidth="150" minHeight="40" onAction="#handleSubmit" styleClass="green" defaultButton="true"/>
-    <Button text="Tutor" prefWidth="150" minHeight="40" onAction="#handleTutor"/>
+    <Button text="Submit" minWidth="60" minHeight="40" onAction="#handleSubmit" styleClass="green" defaultButton="true"/>
     <Text text="" fx:id="errorText"/>
 </VBox>

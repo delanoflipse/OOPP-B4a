@@ -58,10 +58,17 @@ public class StartMenu extends UIScene implements Initializable {
         // go to scene
         UI.goToScene("selection");
     }
+
     @FXML
     protected void goToScores(ActionEvent event) {
         // go to scene
         UI.goToScene("scores");
+    }
+
+    @FXML
+    protected void handleReturn(ActionEvent event) {
+        // go to scene
+        UI.goToScene("welcome");
     }
 
 }

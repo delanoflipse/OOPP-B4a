@@ -1,6 +1,8 @@
 package GUI;
 
 import javafx.embed.swing.SwingFXUtils;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -18,10 +20,23 @@ import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 
-public class AddSelectQuestion {
+public class AddSelectQuestion extends UIScene implements Initializable {
+
+    @FXML
+    private ImageView logoImage1, logoImage2;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        // set image
+        Image image = new Image("file:src/images/logo.png");
+        logoImage1.setImage(image);
+        logoImage2.setImage(image);
+    }
 
     private static GridPane centergrid;
     private static Image image;
@@ -62,7 +77,7 @@ public class AddSelectQuestion {
 
         //make cancel button
         cancel = new Button("Cancel");
-        cancel.setOnAction(e -> Admin.display());
+//        cancel.setOnAction(e -> Admin.display());
         centergrid.add(cancel, 3, 22);
 
         //Make button for checking whether the image is correct
@@ -323,7 +338,7 @@ public class AddSelectQuestion {
             //Close the writer
             writer.close();
             //Go back to the start menu
-            Admin.display();
+//            Admin.display();
         }
         catch(IOException e) {System.out.println(e.getMessage());}
     }

@@ -1,6 +1,3 @@
 name: user
 scores
 preferences
-useTTS:true
-showInList:true
-isTutor:false

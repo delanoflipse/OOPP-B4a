@@ -68,14 +68,16 @@ public class SelectQuestion extends UIScene implements Initializable {
 
     @FXML
     private void setBeginCoordinates(double X, double Y) {
+        if (done) return;
         //Read and set the coordinates at the beginning
         selected.setCenterX(X);
         selected.setCenterY(Y);
-        selected.setRadius(5);
+        selected.setRadius(4);
     }
 
     @FXML
     private void setCoordinates(MouseEvent e) {
+        if (done) return;
         //image is changed by this ratio
         imgratio = qimage.getHeight() / qimagev.getFitHeight();
         double X = e.getX();
@@ -112,14 +114,15 @@ public class SelectQuestion extends UIScene implements Initializable {
     private void beginDrag(MouseEvent e) {
         //At the start of a drag set rectangle size to 0 and set coordinates
         //Also set the color back
+        if (done) return;
         setBeginCoordinates(e.getX(), e.getY());
-        submitButton.setDisable(true);
         selected.setFill(Color.YELLOW);
     }
 
     @FXML
     private void endDrag() {
         //Enable the submit button and make the color a bit darker
+        if (done) return;
         submitButton.setDisable(false);
     }
 

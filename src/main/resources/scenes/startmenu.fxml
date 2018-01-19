@@ -32,8 +32,8 @@
                 <Insets bottom="25" left="25" right="25" top="25" />
             </padding>
 
-            <Button text="Multiple Choiche Questions" minWidth="300" minHeight="300" fx:id="MCButton" onAction="#handleMCButton"/>
-            <Button text="Select part of Image Questions" minWidth="300" minHeight="300" fx:id="SelectIMGButton" onAction="#handleIQButton"/>
+            <Button text="Multiple Choice" minWidth="300" minHeight="300" fx:id="MCButton" onAction="#handleMCButton"/>
+            <Button text="Image Questions" minWidth="300" minHeight="300" fx:id="SelectIMGButton" onAction="#handleIQButton"/>
         </HBox>
     </center>
 
@@ -57,7 +57,7 @@
                         <Insets left="25"/>
                     </padding>
 
-                    <Button onAction="#goToScores" text="Tutor"/>
+                    <Button onAction="#handleReturn" styleClass="red" text="Go back"/>
                 </HBox>
             </right>
         </BorderPane>

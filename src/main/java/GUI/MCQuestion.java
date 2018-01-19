@@ -32,10 +32,10 @@ public class MCQuestion extends UIScene implements Initializable {
     @FXML private Text questionText;
     @FXML private Text questionTitle;
     @FXML private Text responseText;
-    @FXML private Button continueButton;
     @FXML private Button submitButton;
 
     private ToggleGroup answergroup = new ToggleGroup();
+    private RadioButton rightButton;
     private TextQuestion question;
     private ArrayList<Question> questions;
     private int index, currentScore;
@@ -66,6 +66,11 @@ public class MCQuestion extends UIScene implements Initializable {
             RadioButton btn = new RadioButton(answer.text);
             btn.setToggleGroup(answergroup);
             btn.setUserData(answer.text);
+
+            if (answer.correct) {
+                rightButton = btn;
+            }
+
             buttonstack.getChildren().add(btn);
         }
     }
@@ -77,7 +82,7 @@ public class MCQuestion extends UIScene implements Initializable {
             return;
         }
 
-        Toggle ans = answergroup.getSelectedToggle();
+        RadioButton ans = (RadioButton) answergroup.getSelectedToggle();
         if (ans == null) {
             responseText.setText("Please select a value!");
             responseText.setVisible(true);
@@ -98,6 +103,9 @@ public class MCQuestion extends UIScene implements Initializable {
         } else {
             responseText.setFill(Color.FIREBRICK);
             responseText.setText("That is incorrect. The answer was:\n" + question.getCorrectAnswer().text + "\nClick continue to go to the next question");
+            rightButton.getStyleClass().add("right");
+            ans.getStyleClass().add("wrong");
+
         }
     }
 

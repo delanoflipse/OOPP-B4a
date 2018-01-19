@@ -1,11 +1,18 @@
 package GUI;
 
+import database.Question;
+import database.TextAnswer;
+import database.TextQuestion;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -13,7 +20,36 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class Admin extends Application {
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
+
+public class Admin extends UIScene implements Initializable {
+
+    @FXML
+    private ImageView logoImage1, logoImage2;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        // set image
+        Image image = new Image("file:src/images/logo.png");
+        logoImage1.setImage(image);
+        logoImage2.setImage(image);
+    }
+
+    @FXML
+    protected void handleMC(ActionEvent e) {
+        UI.goToScene("adminAddMC");
+    }
+
+    @FXML
+    protected void handleIQ(ActionEvent e) {
+        UI.goToScene("adminAddImage");
+    }
+    @FXML
+    protected void handleReturn(ActionEvent e) {
+        UI.goToScene("welcome");
+    }
 
     private static Text title;
     private static GridPane centergrid;
@@ -23,7 +59,7 @@ public class Admin extends Application {
     private static Text info;
     private static Button selectbut;
     private static Label selecttext;
-
+/*
     @Override
     public void start(Stage primaryStage) {
         //Set panes
@@ -106,4 +142,5 @@ public class Admin extends Application {
         //Change back alignment
         centergrid.setAlignment(Pos.CENTER_LEFT);
     }
+    */
 }

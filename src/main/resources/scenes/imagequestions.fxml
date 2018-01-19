@@ -56,7 +56,7 @@
                   visible="false"/>
 
             <HBox spacing="10">
-                <Button fx:id="submitButton" text="Submit" onAction="#handleSubmit" styleClass="green"/>
+                <Button fx:id="submitButton" text="Submit" onAction="#handleSubmit" styleClass="green" disable="true"/>
 
                 <Button fx:id="exitButton"
                         text="Exit"
