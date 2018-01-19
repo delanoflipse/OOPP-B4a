@@ -68,3 +68,13 @@
     -fx-scale-y: 1.1;
     -fx-scale-z: 1.1;
 }
+
+.default-color0.chart-pie {-fx-pie-color: green;}
+.default-color1.chart-pie { -fx-pie-color: red;}
+.chart-pie-label-line {
+    -fx-stroke: #291309;
+}
+.chart-title {
+    -fx-font-size: 3em;
+    -fx-text-fill: green;
+}

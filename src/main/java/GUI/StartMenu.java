@@ -1,17 +1,25 @@
 package GUI;
 
 import javafx.application.Application;
+import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
+import static javafx.collections.FXCollections.observableArrayList;
 
 public class StartMenu extends Application {
 
@@ -321,4 +329,14 @@ public class StartMenu extends Application {
         }
     }
 
+    public static PieChart makePieChart(int good, int wrong) {
+        ObservableList<PieChart.Data> pieChartData = observableArrayList(
+                new PieChart.Data("Correct", good),
+                new PieChart.Data("Wrong", wrong));
+        final PieChart chart = new PieChart(pieChartData);
+        chart.setTitle("Results");
+        chart.setStartAngle(90);
+        chart.setLegendVisible(false);
+        return chart;
+    }
 }

@@ -34,6 +34,8 @@ public class MCQuestion {
     public static void askQuestions(GridPane grid, VBox vbox, int level){
         centergrid = grid;
         vboxLeft = vbox;
+        score = 0;
+        total = 0;
         //Get the questions from the database
         Database.loadDatabase();
         ArrayList<Question> allquestions = Database.getQuestionsForLevel(level);
@@ -111,6 +113,8 @@ public class MCQuestion {
             }
         });
 
+
+
         //Set action for continue button (Showing the next question)
         next.setOnAction(e -> showNextQuestion());
 
@@ -173,19 +177,18 @@ public class MCQuestion {
         questionlist.clear();
         //Make the texts for the ending
         Text end = new Text("That were all the question, well done!");
-        Text endscore = new Text("Your score is: " + score + " out of " + total);
         Text back = new Text("You will be redirected to the startscreen, when you click exit.");
 
         //Set IDs for CSS
         end.setId("end");
-        endscore.setId("end");
         back.setId("end");
 
         //Clear centergrid and add the texts
         centergrid.getChildren().clear();
-        centergrid.add(end, 0, 0);
-        centergrid.add(endscore, 0, 1);
+        centergrid.add(end, 0, 1);
         centergrid.add(back, 0, 2);
+        centergrid.add(StartMenu.makePieChart(score, total-score), 0, 0);
+
 
         //Padding for main menu button
         vboxLeft.setPadding(new Insets(15, 15, 35, 50));
