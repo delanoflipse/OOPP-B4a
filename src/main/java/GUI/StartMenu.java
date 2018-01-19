@@ -11,6 +11,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import tts.TextToSpeech;
 
 public class StartMenu extends Application {
 
@@ -23,9 +24,13 @@ public class StartMenu extends Application {
     private static Button MCbutton;
     private static Button Selectimgbutton;
     private static Button GUIbutton;
-
+    public static String ttsfinal = "";
+    public static TextToSpeech tts = new TextToSpeech();
+    public static boolean playtts = true;
     @Override
     public void start(Stage primaryStage) {
+        ttsfinal = "";
+        playtts = true;
         //Set up the different panes
         StackPane rootpane = new StackPane();
         titlegrid = new GridPane();
@@ -34,6 +39,8 @@ public class StartMenu extends Application {
 
         //Set the title of the stage
         primaryStage.setTitle("Stichting Lezen en Schrijven - Practice Program");
+        //tts title
+        tts.speak( "Reading and writing association .  Practice Program",false,playtts);//play only line of tts
         //Some settings for the grid at the top
         titlegrid.setHgap(30);
         titlegrid.setVgap(10);
@@ -70,17 +77,17 @@ public class StartMenu extends Application {
         MCbutton = new Button("Multiple Choiche Questions");
         MCbutton.setMinSize(300, 300);
         MCbutton.setId("MCbutton");
-
+        MCbutton.setOnMouseEntered(e -> tts.speak("Multiple Choice Questions",false,playtts)); //ttsonmousenter multiple choicequestions
         //Make the button for the ImageQuestions
         Selectimgbutton = new Button("Select part of Image Questions");
         Selectimgbutton.setMinSize(300, 300);
         Selectimgbutton.setId("SelectIMGButton");
-
+        Selectimgbutton.setOnMouseEntered(e -> tts.speak("Select Part of image questions",false,playtts));
         //Make button for the GUIQuestions
         GUIbutton = new Button("GUI Elements Question");
         GUIbutton.setMinSize(300, 300);
         GUIbutton.setId("GUIbutton");
-
+        GUIbutton.setOnMouseEntered(e -> tts.speak("G U I Elements Question",false,playtts)); //tts gui question on mouse enter
         //Gridlines for debugging are off
         titlegrid.setGridLinesVisible(false);
         centergrid.setGridLinesVisible(false);
@@ -169,5 +176,14 @@ public class StartMenu extends Application {
         centergrid.add(Selectimgbutton, 1, 0);
         centergrid.add(GUIbutton, 2, 0);
     }
+    public void toggletts(boolean playtts,String ttsfinal){
+        if (playtts) {
+            playtts = false;
+            tts.stopSpeaking();
+
+        } else {
+            playtts = true;
+            tts.speak(ttsfinal,false,true);
+        }};
 
 }

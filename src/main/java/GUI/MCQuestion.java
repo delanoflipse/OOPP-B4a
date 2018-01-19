@@ -11,6 +11,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 import java.util.ArrayList;
+import static GUI.StartMenu.playtts;
+import static GUI.StartMenu.ttsfinal;
+import static GUI.StartMenu.tts;
 
 public class MCQuestion {
 
@@ -30,7 +33,7 @@ public class MCQuestion {
         //Get the questions from the database
         Database.loadDatabase();
         ArrayList<Question> allquestions = Database.getQuestionsForLevel(1);
-
+        ttsfinal = "";
         //Get all mc questions
         for (Question q: allquestions) {
             if (q instanceof TextQuestion) {
@@ -50,13 +53,14 @@ public class MCQuestion {
 
         //Make the button for going to the next question
         Button next = new Button("Continue");
-
+        next.setOnMouseEntered(e->tts.speak("continue",false,playtts));
         //Make button for stopping the quiz
         stop = new Button("Stop Quiz");
         stop.setOnAction(e -> done());
-
+        stop.setOnMouseEntered(e->tts.speak("stop",false,playtts));
         //Make button to submit the question and set the action
         submit = new Button("Submit");
+        submit.setOnMouseEntered(e -> tts.speak("submit",false,playtts));
         submit.setOnAction(e -> {
             total++;
             //If there is an answer selected
@@ -70,6 +74,7 @@ public class MCQuestion {
                     //Set response text
                     response.setFill(Color.DARKGREEN);
                     response.setText("That is correct. Click continue to go to the next question");
+                    tts.speak("That is correct click continue to go to the next question",false,playtts);
                 } else {
                     for (Answer answer : ((TextQuestion) questionlist.get(i)).answers) {
                         //Get correct answer
@@ -79,6 +84,7 @@ public class MCQuestion {
                             final String answertext = tanswer.text;
                             response.setFill(Color.FIREBRICK);
                             response.setText("That is incorrect. The answer was:\n" + answertext + "\nClick continue to go to the next question");
+                            tts.speak("That is incorrect . The answer was :" + answertext + "Click continue to go to the next question", false,playtts);
                         }
                     }
                 }
@@ -119,6 +125,7 @@ public class MCQuestion {
         //Display which question we'recurrently at
         TextQuestion q = (TextQuestion) questionlist.get(i);
         Text qtitle = new Text("Question " + (i+1));
+        ttsfinal = ttsfinal + "question" + (i+1);
         qtitle.setId("qtitle");
         centergrid.add(qtitle, 0, 0);
 
@@ -126,12 +133,14 @@ public class MCQuestion {
         Text qtext = new Text(q.text);
         qtext.setId("qtext");
         centergrid.add(qtext, 0, 1, 2, 1);
+        ttsfinal = ttsfinal + q.text;
         //Clear the answerbuttons list
         answerbuttons.clear();
         //Add the new buttons with the right texts behind it
         for (Answer answer : q.answers) {
             TextAnswer tanswer = (TextAnswer) answer;
             answerbuttons.add(new RadioButton(tanswer.text));
+            ttsfinal = ttsfinal + tanswer.text;
         }
         int j = 1;
         //Add every button to the togglegroup, so that only one can eb selected at a time
@@ -147,6 +156,9 @@ public class MCQuestion {
         centergrid.add(response, 0, j + 1, 2, 1);
         centergrid.add(submit, 0, j+1);
         centergrid.add(stop, 0, j+2);
+        stop.setOnMouseEntered(e->tts.speak("stop",false,playtts));
+        submit.setOnMouseEntered(e->tts.speak("submit",false,playtts));
+        tts.speak(ttsfinal,false,playtts);
     }
 
     private static void done(){
@@ -155,7 +167,9 @@ public class MCQuestion {
         Text end = new Text("That were all the question, well done!");
         Text endscore = new Text("Your score is: " + score + " out of " + total);
         Text back = new Text("You will be redirected to the startscreen, when you click exit.");
-
+        ttsfinal = "";
+        ttsfinal = ttsfinal + "That were all the question, well done!" + "Your score is: " + score + " out of " + total + "You will be redirected to the startscreen, when you click exit.";
+        tts.speak(ttsfinal,false,playtts);
         //Set IDs for CSS
         end.setId("end");
         endscore.setId("end");
@@ -170,7 +184,7 @@ public class MCQuestion {
         //Make the exit button and set the action
         Button exit = new Button("Exit");
         exit.setOnAction(e -> StartMenu.display());
-
+        exit.setOnMouseEntered(e -> tts.speak("exit", false, playtts));
         //HBox to get the exit button in the center beneath the text
         HBox exitbox = new HBox();
         exitbox.setAlignment(Pos.CENTER);
