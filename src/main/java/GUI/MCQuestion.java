@@ -32,9 +32,7 @@ public class MCQuestion extends UIScene implements Initializable {
     @FXML private Text questionText;
     @FXML private Text questionTitle;
     @FXML private Text responseText;
-    @FXML private Text titleText;
     @FXML private Button continueButton;
-    @FXML private Button exitButton;
     @FXML private Button submitButton;
 
     private ToggleGroup answergroup = new ToggleGroup();
@@ -117,6 +115,7 @@ public class MCQuestion extends UIScene implements Initializable {
         UserDateScore score = new UserDateScore();
         score.date = (String) UI.state.context.get("date");
         score.score = (int) UI.state.context.get("score");
+        score.user = UI.state.user;
 
         UI.state.user.scores.add(score);
         UI.state.user.save();

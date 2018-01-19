@@ -22,22 +22,23 @@ public class ScoreScene implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         UI.setCSS("base.css");
-
         ArrayList<UserDateScore> scores = new ArrayList<>();
         for (UserData user: Database.users) {
             scores.addAll(user.scores);
         }
 
-        Comparator<UserDateScore> comparator = new Comparator<UserDateScore>() {
-            @Override
-            public int compare(UserDateScore left, UserDateScore right) {
+        Comparator<UserDateScore> comparator = (UserDateScore left, UserDateScore right) -> {
                 return right.score - left.score; // use your logic
-            }
         };
 
         scores.sort(comparator);
 
         int index = 0;
+
+        if (scores.size() == 0) {
+            scoreContainer.add(new Text("No scores available"), 0, 1);
+            return;
+        }
 
         for (UserDateScore score : scores) {
             if (index++ == MAX_SCORES) {

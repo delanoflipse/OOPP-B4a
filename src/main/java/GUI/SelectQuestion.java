@@ -132,19 +132,26 @@ public class SelectQuestion extends UIScene implements Initializable {
 
     @FXML
     protected void handleSubmit(ActionEvent event) {
-        boolean correct = true;
+        boolean isCorrect = question.isCorrect(selected.getCenterX() * imgratio, selected.getCenterY() * imgratio);
 
         continueButton.setVisible(true);
         responseText.setVisible(true);
         submitButton.setDisable(true);
 
-        if (correct) {
+        if (isCorrect) {
             responseText.setFill(Color.DARKGREEN);
-            responseText.setText("That is correct. Click continue to go to the next question");
+            responseText.setText("That is correct. Click continue to go to the next question.");
+            selected.setFill(Color.DARKGREEN);
             UI.state.context.set("score", currentScore + 10);
         } else {
             responseText.setFill(Color.FIREBRICK);
-            responseText.setText("That is incorrect. Click continue to go to the next question");
+            responseText.setText("That is incorrect, you can see the answer on the image now.\n" +
+                    "Click \"continue\" to go to the next question.");
+            correct.setX(question.topLeft.x / imgratio);
+            correct.setY(question.topLeft.y / imgratio);
+            correct.setWidth((question.bottomRight.x - question.topLeft.x) / imgratio);
+            correct.setHeight((question.bottomRight.y - question.topLeft.y) / imgratio);
+            correct.setFill(Color.FIREBRICK);
         }
     }
 
@@ -169,6 +176,7 @@ public class SelectQuestion extends UIScene implements Initializable {
         UserDateScore score = new UserDateScore();
         score.date = (String) UI.state.context.get("date");
         score.score = (int) UI.state.context.get("score");
+        score.user = UI.state.user;
 
         UI.state.user.scores.add(score);
         UI.state.user.save();

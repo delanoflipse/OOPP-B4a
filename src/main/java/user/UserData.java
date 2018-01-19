@@ -166,10 +166,8 @@ public class UserData {
             }
 
             writer.close();
-            System.out.println("Saved user progress.");
-
         } catch (IOException e) {
-            System.out.println("Something went wrong reading the file!");
+            System.out.println("Something went wrong writing the user file!");
         }
     }
 

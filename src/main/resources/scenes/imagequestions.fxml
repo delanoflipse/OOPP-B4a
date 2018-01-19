@@ -39,7 +39,7 @@
                        onMouseReleased="#endDrag"
                        preserveRatio="true" />
             <Circle fx:id="selected" radius="0" fill="yellow"/>
-            <Rectangle fx:id="correct" />
+            <Rectangle fx:id="correct" opacity="0.5" width="0" height="0"/>
         </Pane>
 
         <HBox spacing="10">
