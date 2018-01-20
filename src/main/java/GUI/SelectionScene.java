@@ -5,6 +5,7 @@ import database.Question;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
@@ -19,6 +20,7 @@ public class SelectionScene extends UIScene implements Initializable {
 
     @FXML private ImageView logoImage1, logoImage2;
     @FXML private Text diffText;
+    @FXML private Button returnBtn;
 
     private String selectedValue = "";
     private String[] possibleValues = {"Easy", "Medium", "Hard"};
@@ -29,6 +31,8 @@ public class SelectionScene extends UIScene implements Initializable {
         Image image = new Image("file:src/images/logo.png");
         logoImage1.setImage(image);
         logoImage2.setImage(image);
+
+        setButtonImage(returnBtn, "file:src/images/arrowleft.png");
 
         selectedValue = possibleValues[0];
         diffText.setText(selectedValue);

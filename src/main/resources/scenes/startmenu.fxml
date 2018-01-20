@@ -48,16 +48,25 @@
                         <Insets right="25" />
                     </padding>
 
-                    <Button onAction="#goToScores" text="Scores"/>
+                    <Button onAction="#handleReturn" fx:id="returnBtn" styleClass="red, image" text="Go back" />
                 </HBox>
             </left>
+            <center>
+                <HBox alignment="CENTER" spacing="10">
+                    <padding>
+                        <Insets right="25" left="25"/>
+                    </padding>
+
+                    <Button onMouseReleased="#toggleTTS" fx:id="ttsBtn" styleClass="image" text="" />
+                </HBox>
+            </center>
             <right>
                 <HBox alignment="CENTER_RIGHT" spacing="10">
                     <padding>
                         <Insets left="25"/>
                     </padding>
 
-                    <Button onAction="#handleReturn" styleClass="red" text="Go back"/>
+                    <Button onAction="#goToScores" fx:id="scoreBtn" text="Scores" styleClass="image"/>
                 </HBox>
             </right>
         </BorderPane>

@@ -160,7 +160,8 @@ public class SelectQuestion extends UIScene implements Initializable {
     private void handleContinue() {
         if (questions.size() - index <= 2) {
             saveScore();
-            UI.goToScene("startmenu");
+
+            UI.goToScene("result");
         } else {
             UI.state.context.set("index", ++index);
             UI.goToScene("imagequestions");

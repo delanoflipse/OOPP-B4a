@@ -58,6 +58,25 @@
 .button.red:hover {-fx-background-color: #982f27;}
 .button.red:pressed {-fx-background-color: #822821;}
 
+.button.close {
+    -fx-background-radius: 50;
+    -fx-max-height: 36;
+    -fx-min-height: 36;
+    -fx-max-width: 36;
+    -fx-min-width: 36;
+    -fx-padding: 0;
+    -fx-font-size: 14;
+    -fx-font-weight: bold;
+}
+
+.button.image {
+    -fx-padding: 10 45 10 21;
+}
+
+.graphic {
+
+}
+
 .radio-button .radio {
     -fx-background-color: none;
     -fx-border-color: #bec3c7;
@@ -89,4 +108,13 @@
 
 .titleText {
     -fx-font-size: 72px;
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane {
+    -fx-border-width: 0;
+    -fx-background-color: transparent;
 }

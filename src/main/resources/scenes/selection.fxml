@@ -47,7 +47,7 @@
                     <padding>
                         <Insets right="25" />
                     </padding>
-                    <Button text="Go back" styleClass="red" onAction="#handleBack"/>
+                    <Button text="Go back" styleClass="red, image" fx:id="returnBtn" onAction="#handleBack"/>
                 </HBox>
             </left>
         </BorderPane>

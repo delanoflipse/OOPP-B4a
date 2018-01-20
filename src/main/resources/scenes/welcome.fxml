@@ -8,16 +8,29 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 
-<VBox xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="GUI.WelcomeScene" alignment="CENTER" spacing="15">
-    <padding>
-        <Insets bottom="25" left="25" right="25" top="25" />
-    </padding>
-    <ImageView fx:id="logoImage"/>
-    <Text text="Welcome!" styleClass="title"/>
-    <Label text="Please fill in your name:" styleClass="label"/>
-    <TextField prefWidth="250" maxWidth="250" fx:id="input" text="delano"/>
-    <Button text="Submit" prefWidth="150" minHeight="40" onAction="#handleSubmit" styleClass="green" defaultButton="true"/>
-    <Button text="Tutor" prefWidth="150" minHeight="40" onAction="#handleTutor"/>
-    <Text text="" fx:id="errorText"/>
-</VBox>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<BorderPane xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="GUI.WelcomeScene">
+    <center>
+        <VBox alignment="CENTER" spacing="15">
+            <padding>
+                <Insets bottom="25" left="25" right="25" top="25" />
+            </padding>
+            <ImageView fx:id="logoImage"/>
+            <Text text="Welcome!" styleClass="title"/>
+            <Label text="Please fill in your name:" styleClass="label"/>
+            <TextField prefWidth="250" maxWidth="250" fx:id="input" text="delano"/>
+            <Button text="Submit" fx:id="submitBtn" prefWidth="200" minHeight="40" onAction="#handleSubmit" styleClass="green, image" defaultButton="true"/>
+            <Text text="" fx:id="errorText"/>
+        </VBox>
+    </center>
+    <bottom>
+        <HBox alignment="CENTER_RIGHT">
+            <padding>
+                <Insets bottom="25" left="25" right="25" top="25" />
+            </padding>
+            <Button text="Tutor" prefWidth="150" minHeight="40" fx:id="tutorBtn" styleClass="image" onAction="#handleTutor"/>
+        </HBox>
+    </bottom>
+</BorderPane>

@@ -20,5 +20,5 @@
         <Text text="Score" GridPane.columnIndex="2" GridPane.rowIndex="0" styleClass="colheader"/>
     </GridPane>
 
-    <Button onAction="#handleReturn" text="Go back" />
+    <Button onAction="#handleReturn" styleClass="red, image" fx:id="returnBtn" text="Go back" />
 </VBox>

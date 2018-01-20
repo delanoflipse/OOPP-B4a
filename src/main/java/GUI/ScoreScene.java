@@ -4,6 +4,8 @@ import database.Database;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import user.UserData;
@@ -12,15 +14,19 @@ import user.UserDateScore;
 import java.net.URL;
 import java.util.*;
 
-public class ScoreScene implements Initializable {
+public class ScoreScene extends UIScene implements Initializable {
 
     @FXML
     GridPane scoreContainer;
 
+
+    @FXML private Button returnBtn;
     private final int MAX_SCORES = 10;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        setButtonImage(returnBtn, "file:src/images/arrowleft.png");
+
         ArrayList<UserDateScore> scores = new ArrayList<>();
         for (UserData user: Database.users) {
             scores.addAll(user.scores);

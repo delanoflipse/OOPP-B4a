@@ -1,5 +1,6 @@
 package GUI;
 
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
@@ -22,5 +23,16 @@ public abstract class UIScene {
 
     public Text createText() {
         return new Text();
+    }
+
+    protected void setButtonImage(Button btn, String img) {
+        Image icon = new Image(img);
+        ImageView imageView = new ImageView(icon);
+        imageView.setFitWidth(24);
+        imageView.setX(20);
+        imageView.setFitHeight(24);
+        imageView.setPreserveRatio(true);
+        imageView.getStyleClass().add("graphic");
+        btn.setGraphic(imageView);
     }
 }

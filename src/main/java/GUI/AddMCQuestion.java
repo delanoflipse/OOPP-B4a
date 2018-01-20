@@ -156,5 +156,6 @@ class AnswerGroup {
 
         this.removeButton.getStyleClass().add("red");
         this.removeButton.getStyleClass().add("small");
+        this.removeButton.getStyleClass().add("close");
     }
 }

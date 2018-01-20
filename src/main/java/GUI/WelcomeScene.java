@@ -21,6 +21,7 @@ public class WelcomeScene extends UIScene implements Initializable {
     @FXML private Text errorText;
     @FXML private TextField input;
     @FXML private ImageView logoImage;
+    @FXML private Button submitBtn, tutorBtn;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -29,6 +30,9 @@ public class WelcomeScene extends UIScene implements Initializable {
         // set image
         Image image = new Image("file:src/images/logo.png");
         logoImage.setImage(image);
+
+        setButtonImage(submitBtn, "file:src/images/arrow.png");
+        setButtonImage(tutorBtn, "file:src/images/tutor.png");
     }
 
     @FXML

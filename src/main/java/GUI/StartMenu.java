@@ -3,15 +3,15 @@ package GUI;
 import database.Database;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import javafx.event.ActionEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 
 import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.ResourceBundle;
 
 public class StartMenu extends UIScene implements Initializable {
@@ -20,6 +20,8 @@ public class StartMenu extends UIScene implements Initializable {
 
     @FXML private ImageView logoImage1;
     @FXML private ImageView logoImage2;
+
+    @FXML private Button scoreBtn, returnBtn, ttsBtn;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -31,6 +33,10 @@ public class StartMenu extends UIScene implements Initializable {
         //Set the title of the stage
         UI.setTitle("Stichting Lezen en Schrijven - Practice Program");
         UI.setCSS("startmenu.css");
+
+        setButtonImage(scoreBtn, "file:src/images/scores.png");
+        setButtonImage(returnBtn, "file:src/images/arrowleft.png");
+        setTTSbutton();
 
         userTitle.setText("Welcome " + UI.state.user.name);
     }
@@ -69,6 +75,24 @@ public class StartMenu extends UIScene implements Initializable {
     protected void handleReturn(ActionEvent event) {
         // go to scene
         UI.goToScene("welcome");
+    }
+
+    @FXML
+    protected void toggleTTS(MouseEvent event) {
+        boolean val = UI.state.user.getBoolPreference("useTTS");
+        UI.state.user.setPreference("useTTS", val ? "false" : "true");
+        UI.state.user.save();
+        setTTSbutton();
+    }
+
+    private void setTTSbutton() {
+        if (UI.state.user.getBoolPreference("useTTS")) {
+            ttsBtn.setText("Disable spoken text");
+            setButtonImage(ttsBtn, "file:src/images/speakeron.png");
+        } else {
+            ttsBtn.setText("Use spoken text");
+            setButtonImage(ttsBtn, "file:src/images/speakeroff.png");
+        }
     }
 
 }

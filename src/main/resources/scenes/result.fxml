@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+<BorderPane xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.ResultScene">
+    <top>
+        <HBox spacing="30" alignment="CENTER">
+            <padding>
+                <Insets bottom="25" left="25" right="25" top="25" />
+            </padding>
+            <ImageView fx:id="logoImage1" fitWidth="100.0" cache="true" preserveRatio="true"/>
+            <Text styleClass="titleText" text="Practise Program" />
+            <ImageView fx:id="logoImage2" fitWidth="100.0" cache="true" preserveRatio="true"/>
+        </HBox>
+    </top>
+
+    <center>
+        <VBox alignment="CENTER">
+            <padding>
+                <Insets bottom="25" left="25" right="25" top="25" />
+            </padding>
+            <Text styleClass="title" text="Your score was:"/>
+            <Text styleClass="title" fx:id="text"/>
+        </VBox>
+    </center>
+
+    <bottom>
+        <HBox alignment="CENTER_LEFT">
+            <padding>
+                <Insets bottom="25" left="25" right="25" top="25" />
+            </padding>
+            <Button onAction="#handleReturn" styleClass="red, image" fx:id="returnBtn" text="Go back to the main screen" />
+        </HBox>
+    </bottom>
+</BorderPane>

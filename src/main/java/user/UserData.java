@@ -61,7 +61,13 @@ public class UserData {
      * @return A boolean
      */
     public Boolean getBoolPreference(String key) {
-        return preferences.get(key).valueAsBoolean();
+        UserPreferenceValue pref = preferences.get(key);
+        if (pref == null) {
+            System.out.println(key + " is not set");
+            return false;
+        } else {
+            return pref.valueAsBoolean();
+        }
     }
 
     public void setPreference(String key, String value) {
@@ -157,12 +163,11 @@ public class UserData {
             }
 
             writer.println("preferences");
-            Iterator it = preferences.entrySet().iterator();
-            while (it.hasNext()) {
-                Map.Entry pair = (Map.Entry) it.next();
-                UserPreferenceValue value = (UserPreferenceValue)pair.getValue();
-                writer.println(pair.getKey() + ":" + value.value);
-                it.remove(); // avoids a ConcurrentModificationException
+
+            for (Map.Entry<String, UserPreferenceValue> entry : preferences.entrySet()) {
+                String key = entry.getKey();
+                UserPreferenceValue value = entry.getValue();
+                writer.println(key + ":" + value.value);
             }
 
             writer.close();
