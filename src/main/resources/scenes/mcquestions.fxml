@@ -34,7 +34,7 @@
                   visible="false"/>
 
             <HBox spacing="10">
-                <Button fx:id="submitButton" styleClass="green" text="Submit" onAction="#handleSubmit" onMouseEntered="#SUBMITTTSButton"/>
+                <Button fx:id="submitButton" styleClass="green" text="Submit" disable="true" onAction="#handleSubmit" onMouseEntered="#SUBMITTTSButton"/>
                 <Button fx:id="exitButton" styleClass="red" text="Exit"  onAction="#handleExit" onMouseEntered="#EXITTTSButton"/>
             </HBox>
         </VBox>
