@@ -18,6 +18,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import tts.ttshelper;
 import user.UserDateScore;
 
 import java.lang.reflect.Array;
@@ -25,7 +26,6 @@ import java.net.URL;
 import java.util.ArrayList;
 
 import java.util.ResourceBundle;
-
 public class MCQuestion extends UIScene implements Initializable {
 
     @FXML private ImageView logoImage1;
@@ -61,7 +61,7 @@ public class MCQuestion extends UIScene implements Initializable {
         // set text
         questionText.setText("Question " + (1 + index));
         questionTitle.setText(question.text);
-
+        ttshelper.ttsfinal = "question" + ttshelper.tripleAsText((index + 1),false) + ", .  " + question.text;
         // create buttons
         for (TextAnswer answer : question.answers) {
             RadioButton btn = new RadioButton(answer.text);
@@ -73,7 +73,9 @@ public class MCQuestion extends UIScene implements Initializable {
             }
 
             buttonstack.getChildren().add(btn);
+            ttshelper.ttsfinal = ttshelper.ttsfinal + ", " + answer.text;
         }
+        ttshelper.tts.speak(ttshelper.ttsfinal,false,ttshelper.playtts);
     }
 
     @FXML
@@ -86,6 +88,7 @@ public class MCQuestion extends UIScene implements Initializable {
         RadioButton ans = (RadioButton) answergroup.getSelectedToggle();
         if (ans == null) {
             responseText.setText("Please select a value!");
+            ttshelper.tts.speak("please select a value",false,ttshelper.playtts);
             responseText.setVisible(true);
             return;
         }
@@ -100,16 +103,33 @@ public class MCQuestion extends UIScene implements Initializable {
         if (correct) {
             responseText.setFill(Color.DARKGREEN);
             responseText.setText("That is correct. Click continue to go to the next question");
+            ttshelper.ttsfinal = "That is correct. Click continue to go to the next question";
+            ttshelper.tts.speak(ttshelper.ttsfinal,false,ttshelper.playtts);
             UI.state.context.set("score", currentScore + 10);
         } else {
             responseText.setFill(Color.FIREBRICK);
             responseText.setText("That is incorrect. The answer was:\n" + question.getCorrectAnswer().text + "\nClick continue to go to the next question");
+            ttshelper.ttsfinal = " That is incorrect. The answer was , " + question.getCorrectAnswer().text + " , Click continue to go to the next question";
+            ttshelper.tts.speak(ttshelper.ttsfinal,false,ttshelper.playtts);
             rightButton.getStyleClass().add("right");
             ans.getStyleClass().add("wrong");
 
         }
     }
+    //button tts
+    @FXML
+    protected void SUBMITTTSButton () {
+        if (responseText.isVisible()){
+            ttshelper.tts.speak("Continue", false, ttshelper.playtts);
+        } else{
+        ttshelper.tts.speak("submit", false, ttshelper.playtts);
+        }
+    }
 
+    @FXML
+    protected void EXITTTSButton(){
+        ttshelper.tts.speak("exit",false,ttshelper.playtts);
+    }
 
     void handleContinue() {
         if (questions.size() - index <= 2) {
@@ -121,9 +141,7 @@ public class MCQuestion extends UIScene implements Initializable {
         }
     }
 
-    void handleSubmitSpeak() {
-        //Do tts stuff
-    }
+
 
     @FXML
     protected void handleExit(ActionEvent event) {

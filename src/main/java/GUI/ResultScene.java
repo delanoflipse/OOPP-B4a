@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
+import tts.ttshelper;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -29,10 +30,19 @@ public class ResultScene extends UIScene implements Initializable {
 
         int currentScore = (int) UI.state.context.get("score");
         text.setText("" + currentScore);
+        ttshelper.ttsfinal = "your score was ," + ttshelper.tripleAsText(currentScore,false);
+        ttshelper.tts.speak(ttshelper.ttsfinal,false,ttshelper.playtts);
     }
 
     @FXML
     protected void handleReturn(ActionEvent event) {
         UI.goToScene("startmenu");
+    }
+
+    //tts buttons
+
+    @FXML
+    protected void RETURNTTSButton(){
+        ttshelper.tts.speak("go back to the main screen",false,ttshelper.playtts);
     }
 }

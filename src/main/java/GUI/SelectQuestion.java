@@ -15,6 +15,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import tts.ttshelper;
 import user.UserDateScore;
 
 import java.net.URL;
@@ -65,6 +66,8 @@ public class SelectQuestion extends UIScene implements Initializable {
         qimage = new Image("file:src/images/" + question.image);
         qimagev.setImage(qimage);
         qimagev.fitHeightProperty().bind(imageBox.heightProperty());
+        ttshelper.ttsfinal = "question" + ttshelper.tripleAsText((index + 1),false) + "," + question.text;
+        ttshelper.tts.speak(ttshelper.ttsfinal,false,ttshelper.playtts);
     }
 
     @FXML
@@ -146,11 +149,15 @@ public class SelectQuestion extends UIScene implements Initializable {
         if (isCorrect) {
             responseText.setFill(Color.DARKGREEN);
             responseText.setText("That is correct. Click continue to go to the next question.");
+            ttshelper.ttsfinal = "That is correct. Click continue to go to the next question.";
+            ttshelper.tts.speak(ttshelper.ttsfinal,false,ttshelper.playtts);
             selected.setFill(Color.DARKGREEN);
             UI.state.context.set("score", currentScore + 10);
         } else {
             responseText.setFill(Color.FIREBRICK);
             responseText.setText("That is incorrect, you can see the answer on the image now.");
+            ttshelper.ttsfinal = "That is incorrect, you can see the answer on the image now.";
+            ttshelper.tts.speak(ttshelper.ttsfinal,false,ttshelper.playtts);
             correct.setX(question.topLeft.x / imgratio);
             correct.setY(question.topLeft.y / imgratio);
             correct.setWidth((question.bottomRight.x - question.topLeft.x) / imgratio);
@@ -184,6 +191,21 @@ public class SelectQuestion extends UIScene implements Initializable {
 
         UI.state.user.scores.add(score);
         UI.state.user.save();
+    }
+
+    //button tts
+    @FXML
+    protected void SUBMITTTSButton () {
+        if (responseText.isVisible()){
+            ttshelper.tts.speak("Continue", false, ttshelper.playtts);
+        } else{
+            ttshelper.tts.speak("submit", false, ttshelper.playtts);
+        }
+    }
+
+    @FXML
+    protected void EXITTTSButton(){
+        ttshelper.tts.speak("exit",false,ttshelper.playtts);
     }
 
 }

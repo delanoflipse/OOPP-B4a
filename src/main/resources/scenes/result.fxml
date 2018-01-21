@@ -34,7 +34,7 @@
             <padding>
                 <Insets bottom="25" left="25" right="25" top="25" />
             </padding>
-            <Button onAction="#handleReturn" styleClass="red, image" fx:id="returnBtn" text="Go back to the main screen" />
+            <Button onAction="#handleReturn" styleClass="red, image" fx:id="returnBtn" text="Go back to the main screen" onMouseEntered="#RETURNTTSButton"/>
         </HBox>
     </bottom>
 </BorderPane>

@@ -17,6 +17,8 @@ import user.UserData;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import tts.ttshelper;
+
 public class WelcomeScene extends UIScene implements Initializable {
     @FXML private Text errorText;
     @FXML private TextField input;
@@ -33,6 +35,8 @@ public class WelcomeScene extends UIScene implements Initializable {
 
         setButtonImage(submitBtn, "file:src/images/arrow.png");
         setButtonImage(tutorBtn, "file:src/images/tutor.png");
+        ttshelper.ttsfinal = "welcome to our practice program, please fill in your name";
+        ttshelper.tts.speak(ttshelper.ttsfinal,false,ttshelper.playtts);
     }
 
     @FXML
@@ -67,5 +71,16 @@ public class WelcomeScene extends UIScene implements Initializable {
         System.out.println("Selected user " + UI.state.user.name);
 
         UI.goToScene("startmenu");
+    }
+
+    @FXML
+    protected void SUBMITTTSButton(){
+        ttshelper.tts.speak("SUBMIT",false,ttshelper.playtts);
+    }
+
+
+    @FXML
+    protected void TUTORTTSButton(){
+        ttshelper.tts.speak("TUTOR",false,ttshelper.playtts);
     }
 }

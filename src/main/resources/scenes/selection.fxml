@@ -29,12 +29,12 @@
             <Text styleClass="large-text" text="Please chooses a difficulty level using the arrow buttons:"/>
 
             <HBox spacing="20" alignment="CENTER">
-                <Button styleClass="light, small" text="&lt;" onAction="#selectPrev"/>
-                <Text fx:id="diffText" wrappingWidth="100" textAlignment="CENTER"/>
-                <Button styleClass="light, small" text="&gt;" onAction="#selectNext"/>
+                <Button styleClass="light, small" text="&lt;" onAction="#selectPrev" onMouseClicked="#TTSDIFF"/>
+                <Text fx:id="diffText" wrappingWidth="100" textAlignment="CENTER" onMouseEntered="#TTSDIFF"/>
+                <Button styleClass="light, small" text="&gt;" onAction="#selectNext" onMouseClicked="#TTSDIFF"/>
             </HBox>
 
-            <Button text="Start" styleClass="green" onAction="#handleStart"/>
+            <Button text="Start" styleClass="green" onAction="#handleStart" onMouseEntered="#STARTTTSButton"/>
         </VBox>
     </center>
     <bottom>
@@ -47,7 +47,7 @@
                     <padding>
                         <Insets right="25" />
                     </padding>
-                    <Button text="Go back" styleClass="red, image" fx:id="returnBtn" onAction="#handleBack"/>
+                    <Button text="Go back" styleClass="red, image" fx:id="returnBtn" onAction="#handleBack" onMouseEntered="#BACKTTSButton"/>
                 </HBox>
             </left>
         </BorderPane>

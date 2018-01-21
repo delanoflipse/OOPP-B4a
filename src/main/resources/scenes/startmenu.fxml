@@ -32,8 +32,8 @@
                 <Insets bottom="25" left="25" right="25" top="25" />
             </padding>
 
-            <Button text="Multiple Choice" minWidth="300" minHeight="300" fx:id="MCButton" onAction="#handleMCButton"/>
-            <Button text="Image Questions" minWidth="300" minHeight="300" fx:id="SelectIMGButton" onAction="#handleIQButton"/>
+            <Button text="Multiple Choice" minWidth="300" minHeight="300" fx:id="MCButton" onAction="#handleMCButton" onMouseEntered="#MCTTSButton"/>
+            <Button text="Image Questions" minWidth="300" minHeight="300" fx:id="SelectIMGButton" onAction="#handleIQButton" onMouseEntered="#IMGTTSButton"/>
         </HBox>
     </center>
 
@@ -48,7 +48,7 @@
                         <Insets right="25" />
                     </padding>
 
-                    <Button onAction="#handleReturn" fx:id="returnBtn" styleClass="red, image" text="Go back" />
+                    <Button onAction="#handleReturn" fx:id="returnBtn" styleClass="red, image" text="Go back" onMouseEntered="#BACKTTSButton" />
                 </HBox>
             </left>
             <center>
@@ -57,7 +57,8 @@
                         <Insets right="25" left="25"/>
                     </padding>
 
-                    <Button onMouseReleased="#toggleTTS" fx:id="ttsBtn" styleClass="image" text="" />
+                    <Button onMouseReleased="#toggleTTS" fx:id="ttsBtn" styleClass="image" text="" onMouseClicked="#handleTTSButton"  onMouseEntered="#TTSTTSButton"/>
+
                 </HBox>
             </center>
             <right>
@@ -66,7 +67,7 @@
                         <Insets left="25"/>
                     </padding>
 
-                    <Button onAction="#goToScores" fx:id="scoreBtn" text="Scores" styleClass="image"/>
+                    <Button onAction="#goToScores" fx:id="scoreBtn" text="Scores" styleClass="image" onMouseEntered="#SCORESTTSButton"/>
                 </HBox>
             </right>
         </BorderPane>

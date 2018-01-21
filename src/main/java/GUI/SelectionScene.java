@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
+import tts.ttshelper;
 
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -36,6 +37,8 @@ public class SelectionScene extends UIScene implements Initializable {
 
         selectedValue = possibleValues[0];
         diffText.setText(selectedValue);
+        ttshelper.ttsfinal = "please choose a difficulty using the arrow buttons";
+        ttshelper.tts.speak(ttshelper.ttsfinal,false,ttshelper.playtts);
     }
 
     @FXML protected void handleStart(ActionEvent event) {
@@ -46,6 +49,7 @@ public class SelectionScene extends UIScene implements Initializable {
 
         if (questions.size() == 0) {
             System.out.println("No questions for level " + level + " with type " + type);
+            ttshelper.tts.speak("no questions for level" + ttshelper.tripleAsText(level,false) + "with type " + type,false,ttshelper.playtts);
             UI.goToScene("startmenu");
             return;
         }
@@ -68,7 +72,9 @@ public class SelectionScene extends UIScene implements Initializable {
                 break;
             default:
                 System.out.println("I have no idea what to do, going back");
+                ttshelper.tts.speak("I have no idea what to do, going back",false,ttshelper.playtts);
                 UI.goToScene("startmenu");
+
                 break;
         }
     }
@@ -102,5 +108,23 @@ public class SelectionScene extends UIScene implements Initializable {
         String date = new SimpleDateFormat("EEEE d MMMM").format(new Date());
         String time = new SimpleDateFormat("h:mm a").format(new Date());
         return date + " at " + time;
+    }
+
+    //button tts
+    @FXML
+    protected void BACKTTSButton () {
+
+            ttshelper.tts.speak("go back", false, ttshelper.playtts);
+
+    }
+
+    @FXML
+    protected void STARTTTSButton(){
+        ttshelper.tts.speak("start",false,ttshelper.playtts);
+    }
+
+    @FXML
+    protected void TTSDIFF(){
+        ttshelper.tts.speak(diffText.getText(),false,ttshelper.playtts);
     }
 }
