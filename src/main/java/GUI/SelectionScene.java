@@ -56,6 +56,7 @@ public class SelectionScene extends UIScene implements Initializable {
                         .set("questions", questions)
                         .set("index", 0)
                         .set("score", 0)
+                        .set("total", 0)
                         .set("date", getDate())
         );
 

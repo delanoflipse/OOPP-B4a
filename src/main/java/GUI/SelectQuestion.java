@@ -29,6 +29,7 @@ public class SelectQuestion extends UIScene implements Initializable {
     private Image qimage;
     private double imgratio;
     private int currentScore;
+    private int currentTotal;
 
     @FXML private ImageView logoImage1;
     @FXML private ImageView qimagev;
@@ -57,6 +58,7 @@ public class SelectQuestion extends UIScene implements Initializable {
         questions = (ArrayList<Question>) UI.state.context.get("questions");
         question = (ClickQuestion) questions.get(index);
         currentScore = (int) UI.state.context.get("score");
+        currentTotal = (int) UI.state.context.get("total");
 
         // set text
         questionText.setText("Question " + (1 + index));
@@ -134,6 +136,8 @@ public class SelectQuestion extends UIScene implements Initializable {
             handleContinue();
             return;
         }
+
+        UI.state.context.set("total", ++currentTotal);
 
         //image is changed by this ratio
         imgratio = qimage.getHeight() / qimagev.getFitHeight();

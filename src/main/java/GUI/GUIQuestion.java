@@ -35,6 +35,7 @@ public class GUIQuestion extends UIScene implements Initializable {
 
     private int currentScore;
     private int index;
+    private int currentTotal;
     private ArrayList<ChoiceBox<Element>> choiceBoxList = new ArrayList<>();
     private ArrayList<Question> questions;
     private database.GUIQuestion question;
@@ -55,6 +56,7 @@ public class GUIQuestion extends UIScene implements Initializable {
         questions = (ArrayList<Question>) UI.state.context.get("questions");
         question = (database.GUIQuestion) questions.get(index);
         currentScore = (int) UI.state.context.get("score");
+        currentTotal = (int) UI.state.context.get("total");
 
         // set text
         questionText.setText("Question " + (1 + index));
@@ -90,6 +92,8 @@ public class GUIQuestion extends UIScene implements Initializable {
             handleContinue();
             return;
         }
+
+        UI.state.context.set("total", ++currentTotal);
 
         //Set total correct answers
         int totalcorrect = 0;
