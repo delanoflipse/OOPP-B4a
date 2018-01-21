@@ -46,5 +46,15 @@
             </HBox>
         </VBox>
     </center>
+
+    <bottom>
+        <HBox alignment="CENTER" spacing="10">
+            <padding>
+                <Insets right="25" left="25" bottom="25"/>
+            </padding>
+
+            <Button onMouseReleased="#toggleTTS" fx:id="ttsBtn" styleClass="image" text="" onMouseClicked="#handleTTSButton"  onMouseEntered="#TTSTTSButton"/>
+        </HBox>
+    </bottom>
 </BorderPane>
 
