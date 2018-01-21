@@ -12,6 +12,7 @@ import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -34,6 +35,7 @@ public class MCQuestion extends UIScene implements Initializable {
     @FXML private Text questionTitle;
     @FXML private Text responseText;
     @FXML private Button submitButton;
+    @FXML private Button ttsBtn;
 
     private ToggleGroup answergroup = new ToggleGroup();
     private RadioButton rightButton;
@@ -58,6 +60,8 @@ public class MCQuestion extends UIScene implements Initializable {
         question = (TextQuestion) questions.get(index);
         currentScore = (int) UI.state.context.get("score");
         currentTotal = (int) UI.state.context.get("total");
+
+        setTTSbutton();
 
         // set text
         questionText.setText("Question " + (1 + index));
@@ -150,6 +154,24 @@ public class MCQuestion extends UIScene implements Initializable {
         UI.goToScene("result");
     }
 
+    @FXML
+    protected void toggleTTS(MouseEvent event) {
+        boolean val = UI.state.user.getBoolPreference("useTTS");
+        UI.state.user.setPreference("useTTS", val ? "false" : "true");
+        UI.state.user.save();
+        setTTSbutton();
+    }
+
+    @FXML
+    protected void handleTTSButton(){
+        ttshelper.toggletts();
+    }
+
+    @FXML
+    protected void TTSTTSButton() {
+        ttshelper.tts.speak("disable spoken text", false, ttshelper.playtts);
+    }
+
     private void saveScore() {
         UserDateScore score = new UserDateScore();
         score.date = (String) UI.state.context.get("date");
@@ -158,5 +180,15 @@ public class MCQuestion extends UIScene implements Initializable {
 
         UI.state.user.scores.add(score);
         UI.state.user.save();
+    }
+
+    private void setTTSbutton() {
+        if (UI.state.user.getBoolPreference("useTTS")) {
+            ttsBtn.setText("Disable spoken text");
+            setButtonImage(ttsBtn, "file:src/images/speakeron.png");
+        } else {
+            ttsBtn.setText("Use spoken text");
+            setButtonImage(ttsBtn, "file:src/images/speakeroff.png");
+        }
     }
 }

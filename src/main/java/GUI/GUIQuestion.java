@@ -10,6 +10,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
@@ -29,6 +30,7 @@ public class GUIQuestion extends UIScene implements Initializable {
     @FXML private Text questionTitle;
     @FXML private Text responseText;
     @FXML private Button submitButton;
+    @FXML private Button ttsBtn;
 
     private int currentScore;
     private int index;
@@ -54,6 +56,8 @@ public class GUIQuestion extends UIScene implements Initializable {
         question = (database.GUIQuestion) questions.get(index);
         currentScore = (int) UI.state.context.get("score");
         currentTotal = (int) UI.state.context.get("total");
+
+        setTTSbutton();
 
         // set text
         questionText.setText("Question " + (1 + index));
@@ -164,15 +168,15 @@ public class GUIQuestion extends UIScene implements Initializable {
         UI.state.user.save();
     }
 
- //tts for buttons
- @FXML
- protected void SUBMITTTSButton () {
-     if (responseText.isVisible()){
-         ttshelper.tts.speak("Continue", false, ttshelper.playtts);
-     } else{
-         ttshelper.tts.speak("submit", false, ttshelper.playtts);
-     }
- }
+    //tts for buttons
+    @FXML
+    protected void SUBMITTTSButton () {
+        if (responseText.isVisible()){
+            ttshelper.tts.speak("Continue", false, ttshelper.playtts);
+        } else{
+            ttshelper.tts.speak("submit", false, ttshelper.playtts);
+        }
+    }
 
 
     @FXML
@@ -180,6 +184,33 @@ public class GUIQuestion extends UIScene implements Initializable {
         ttshelper.tts.speak("exit",false,ttshelper.playtts);
     }
 
+    @FXML
+    protected void handleTTSButton(){
+        ttshelper.toggletts();
+    }
+
+    @FXML
+    protected void TTSTTSButton() {
+        ttshelper.tts.speak("disable spoken text", false, ttshelper.playtts);
+    }
+
+    @FXML
+    protected void toggleTTS(MouseEvent event) {
+        boolean val = UI.state.user.getBoolPreference("useTTS");
+        UI.state.user.setPreference("useTTS", val ? "false" : "true");
+        UI.state.user.save();
+        setTTSbutton();
+    }
+
+    private void setTTSbutton() {
+        if (UI.state.user.getBoolPreference("useTTS")) {
+            ttsBtn.setText("Disable spoken text");
+            setButtonImage(ttsBtn, "file:src/images/speakeron.png");
+        } else {
+            ttsBtn.setText("Use spoken text");
+            setButtonImage(ttsBtn, "file:src/images/speakeroff.png");
+        }
+    }
 
 }
 
