@@ -26,8 +26,7 @@ public class ScoreScene extends UIScene implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setButtonImage(returnBtn, "file:src/images/arrowleft.png");
-
-        Database.loadDatabase();
+        
         ttshelper.ttsfinal = "these are the scores in the leaderboard , ";
         ArrayList<UserDateScore> scores = new ArrayList<>();
         for (UserData user: Database.users) {

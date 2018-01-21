@@ -44,7 +44,6 @@ public class SelectionScene extends UIScene implements Initializable {
     @FXML protected void handleStart(ActionEvent event) {
         int level = java.util.Arrays.asList(possibleValues).indexOf(selectedValue) + 1;
         String type = (String) UI.state.context.get("type");
-        Database.loadDatabase();
         ArrayList<Question> questions = Database.getQuestionsForLevel(level, type);
 
         if (questions.size() == 0) {
