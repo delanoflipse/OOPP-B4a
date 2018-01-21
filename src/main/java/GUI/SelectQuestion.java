@@ -62,7 +62,7 @@ public class SelectQuestion extends UIScene implements Initializable {
         currentScore = (int) UI.state.context.get("score");
         currentTotal = (int) UI.state.context.get("total");
 
-        setTTSbutton();
+        handleTTSbutton(ttsBtn);
 
         // set text
         questionText.setText("Question " + (1 + index));
@@ -216,30 +216,8 @@ public class SelectQuestion extends UIScene implements Initializable {
     }
 
     @FXML
-    protected void handleTTSButton(){
-        ttshelper.toggletts();
-    }
-
-    @FXML
     protected void TTSTTSButton() {
         ttshelper.tts.speak("disable spoken text", false, ttshelper.playtts);
     }
 
-    @FXML
-    protected void toggleTTS(MouseEvent event) {
-        boolean val = UI.state.user.getBoolPreference("useTTS");
-        UI.state.user.setPreference("useTTS", val ? "false" : "true");
-        UI.state.user.save();
-        setTTSbutton();
-    }
-
-    private void setTTSbutton() {
-        if (UI.state.user.getBoolPreference("useTTS")) {
-            ttsBtn.setText("Disable spoken text");
-            setButtonImage(ttsBtn, "file:src/images/speakeron.png");
-        } else {
-            ttsBtn.setText("Use spoken text");
-            setButtonImage(ttsBtn, "file:src/images/speakeroff.png");
-        }
-    }
 }

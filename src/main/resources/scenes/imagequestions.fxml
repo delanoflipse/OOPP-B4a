@@ -2,7 +2,6 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.control.Button?>
 
@@ -73,7 +72,7 @@
                         <Insets right="25" left="25" bottom="25"/>
                     </padding>
 
-                    <Button onMouseReleased="#toggleTTS" fx:id="ttsBtn" styleClass="image" text="" onMouseClicked="#handleTTSButton"  onMouseEntered="#TTSTTSButton"/>
+                    <Button fx:id="ttsBtn" styleClass="image" onMouseEntered="#TTSTTSButton"/>
 
                 </HBox>
             </center>

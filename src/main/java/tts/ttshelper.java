@@ -4,22 +4,21 @@ public class ttshelper {
     public static TextToSpeech tts = new TextToSpeech();
     public static boolean playtts = true;
     public static String ttsfinal = "tts";
-    public static void toggletts(){
-        if(playtts){
-            tts.stopSpeaking();
-            playtts = false;
-        }
-        else{
+
+    public static void toggle(boolean value){
+        if(value){
             playtts = true;
             tts.speak(ttsfinal,false,playtts);
+        } else{
+            tts.stopSpeaking();
+            playtts = false;
         }
 
     }
 
-
-
     private static final String[] SUBTWENTY = {"zero", "waan", "tu", "three", "foor", "five", "six", "seeveen", "eight", "naain", "ten",
             "eeleevun", "twelf", "tuurteen", "foor teen", "fifteen", "sixteen", "sevunteen", "eighteen", "naainteen"};
+
     private static final String[] DECADES = {"zero", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"};
 
     /**

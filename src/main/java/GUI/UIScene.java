@@ -1,9 +1,12 @@
 package GUI;
 
+import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import tts.ttshelper;
 
 public abstract class UIScene {
 
@@ -34,5 +37,26 @@ public abstract class UIScene {
         imageView.setPreserveRatio(true);
         imageView.getStyleClass().add("graphic");
         btn.setGraphic(imageView);
+    }
+
+    protected void handleTTSbutton(Button btn) {
+        setTTSbutton(btn);
+        btn.setOnMouseClicked((MouseEvent e) -> {
+            boolean val = UI.state.user.getBoolPreference("useTTS");
+            UI.state.user.setPreference("useTTS", val ? "false" : "true");
+            UI.state.user.save();
+            ttshelper.toggle(!val);
+            setTTSbutton(btn);
+        });
+    }
+
+    private void setTTSbutton(Button btn) {
+        if (UI.state.user.getBoolPreference("useTTS")) {
+            btn.setText("Disable spoken text");
+            setButtonImage(btn, "file:src/images/speakeron.png");
+        } else {
+            btn.setText("Use spoken text");
+            setButtonImage(btn, "file:src/images/speakeroff.png");
+        }
     }
 }

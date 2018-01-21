@@ -69,6 +69,7 @@ public class WelcomeScene extends UIScene implements Initializable {
         }
 
         System.out.println("Selected user " + UI.state.user.name);
+        ttshelper.toggle(UI.state.user.getBoolPreference("useTTS"));
 
         UI.goToScene("startmenu");
     }

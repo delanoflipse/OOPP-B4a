@@ -46,7 +46,7 @@
                 <Insets right="25" left="25" bottom="25"/>
             </padding>
 
-            <Button onMouseReleased="#toggleTTS" fx:id="ttsBtn" styleClass="image" text="" onMouseClicked="#handleTTSButton"  onMouseEntered="#TTSTTSButton"/>
+            <Button fx:id="ttsBtn" styleClass="image" onMouseEntered="#TTSTTSButton"/>
         </HBox>
     </bottom>
 </BorderPane>

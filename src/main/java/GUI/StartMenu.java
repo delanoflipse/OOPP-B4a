@@ -38,11 +38,11 @@ public class StartMenu extends UIScene implements Initializable {
 
         setButtonImage(scoreBtn, "file:src/images/scores.png");
         setButtonImage(returnBtn, "file:src/images/arrowleft.png");
-        setTTSbutton();
 
         userTitle.setText("Welcome " + UI.state.user.name);
         ttshelper.ttsfinal = "welcome " + UI.state.user.name;
         ttshelper.tts.speak(ttshelper.ttsfinal,false,ttshelper.playtts);
+        handleTTSbutton(ttsBtn);
     }
 
     @FXML
@@ -65,8 +65,7 @@ public class StartMenu extends UIScene implements Initializable {
 
     @FXML
     protected void TTSTTSButton() {
-
-            ttshelper.tts.speak("disable spoken text", false, ttshelper.playtts);
+        ttshelper.tts.speak("disable spoken text", false, ttshelper.playtts);
     }
 
     @FXML
@@ -103,11 +102,6 @@ public class StartMenu extends UIScene implements Initializable {
     }
 
     @FXML
-    protected void handleTTSButton(){
-        ttshelper.toggletts();
-    }
-
-    @FXML
     protected void handleGUIButton(ActionEvent event) {
         // setup context
         UI.state.setContext(
@@ -130,27 +124,5 @@ public class StartMenu extends UIScene implements Initializable {
         // go to scene
         UI.goToScene("welcome");
     }
-
-    @FXML
-    protected void toggleTTS(MouseEvent event) {
-        boolean val = UI.state.user.getBoolPreference("useTTS");
-        UI.state.user.setPreference("useTTS", val ? "false" : "true");
-        UI.state.user.save();
-        setTTSbutton();
-    }
-
-    private void setTTSbutton() {
-        if (UI.state.user.getBoolPreference("useTTS")) {
-            ttsBtn.setText("Disable spoken text");
-            setButtonImage(ttsBtn, "file:src/images/speakeron.png");
-        } else {
-            ttsBtn.setText("Use spoken text");
-            setButtonImage(ttsBtn, "file:src/images/speakeroff.png");
-        }
-    }
-
-
-
-
 
 }
