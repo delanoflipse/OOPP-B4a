@@ -4,20 +4,17 @@ import database.Database;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import user.UserData;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import tts.ttshelper;
+import tts.TTSHelper;
 
 public class WelcomeScene extends UIScene implements Initializable {
     @FXML private Text errorText;
@@ -35,8 +32,8 @@ public class WelcomeScene extends UIScene implements Initializable {
 
         setButtonImage(submitBtn, "file:src/images/arrow.png");
         setButtonImage(tutorBtn, "file:src/images/tutor.png");
-        ttshelper.ttsfinal = "welcome to our practice program, please fill in your name";
-        ttshelper.tts.speak(ttshelper.ttsfinal,false,ttshelper.playtts);
+        TTSHelper.ttsfinal = "welcome to our practice program, please fill in your name";
+        TTSHelper.tts.speak(TTSHelper.ttsfinal,false, TTSHelper.playtts);
     }
 
     @FXML
@@ -69,19 +66,19 @@ public class WelcomeScene extends UIScene implements Initializable {
         }
 
         System.out.println("Selected user " + UI.state.user.name);
-        ttshelper.toggle(UI.state.user.getBoolPreference("useTTS"));
+        TTSHelper.toggle(UI.state.user.getBoolPreference("useTTS"));
 
         UI.goToScene("startmenu");
     }
 
     @FXML
     protected void SUBMITTTSButton(){
-        ttshelper.tts.speak("SUBMIT",false,ttshelper.playtts);
+        TTSHelper.tts.speak("SUBMIT",false, TTSHelper.playtts);
     }
 
 
     @FXML
     protected void TUTORTTSButton(){
-        ttshelper.tts.speak("TUTOR",false,ttshelper.playtts);
+        TTSHelper.tts.speak("TUTOR",false, TTSHelper.playtts);
     }
 }

@@ -1,6 +1,6 @@
 package tts;
 
-public class ttshelper {
+public class TTSHelper {
     public static TextToSpeech tts = new TextToSpeech();
     public static boolean playtts = true;
     public static String ttsfinal = "tts";

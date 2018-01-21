@@ -15,7 +15,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
-import tts.ttshelper;
+import tts.TTSHelper;
 import user.UserDateScore;
 
 import java.net.URL;
@@ -71,8 +71,8 @@ public class SelectQuestion extends UIScene implements Initializable {
         qimage = new Image("file:src/images/" + question.image);
         qimagev.setImage(qimage);
         qimagev.fitHeightProperty().bind(imageBox.heightProperty());
-        ttshelper.ttsfinal = "question" + ttshelper.tripleAsText((index + 1),false) + "," + question.text;
-        ttshelper.tts.speak(ttshelper.ttsfinal,false,ttshelper.playtts);
+        TTSHelper.ttsfinal = "question" + TTSHelper.tripleAsText((index + 1),false) + "," + question.text;
+        TTSHelper.tts.speak(TTSHelper.ttsfinal,false, TTSHelper.playtts);
     }
 
     @FXML
@@ -156,15 +156,15 @@ public class SelectQuestion extends UIScene implements Initializable {
         if (isCorrect) {
             responseText.setFill(Color.DARKGREEN);
             responseText.setText("That is correct. Click continue to go to the next question.");
-            ttshelper.ttsfinal = "That is correct. Click continue to go to the next question.";
-            ttshelper.tts.speak(ttshelper.ttsfinal,false,ttshelper.playtts);
+            TTSHelper.ttsfinal = "That is correct. Click continue to go to the next question.";
+            TTSHelper.tts.speak(TTSHelper.ttsfinal,false, TTSHelper.playtts);
             selected.setFill(Color.DARKGREEN);
             UI.state.context.set("score", currentScore + 10);
         } else {
             responseText.setFill(Color.FIREBRICK);
             responseText.setText("That is incorrect, you can see the answer on the image now.");
-            ttshelper.ttsfinal = "That is incorrect, you can see the answer on the image now.";
-            ttshelper.tts.speak(ttshelper.ttsfinal,false,ttshelper.playtts);
+            TTSHelper.ttsfinal = "That is incorrect, you can see the answer on the image now.";
+            TTSHelper.tts.speak(TTSHelper.ttsfinal,false, TTSHelper.playtts);
             correct.setX(question.topLeft.x / imgratio);
             correct.setY(question.topLeft.y / imgratio);
             correct.setWidth((question.bottomRight.x - question.topLeft.x) / imgratio);
@@ -204,20 +204,20 @@ public class SelectQuestion extends UIScene implements Initializable {
     @FXML
     protected void SUBMITTTSButton () {
         if (responseText.isVisible()){
-            ttshelper.tts.speak("Continue", false, ttshelper.playtts);
+            TTSHelper.tts.speak("Continue", false, TTSHelper.playtts);
         } else{
-            ttshelper.tts.speak("submit", false, ttshelper.playtts);
+            TTSHelper.tts.speak("submit", false, TTSHelper.playtts);
         }
     }
 
     @FXML
     protected void EXITTTSButton(){
-        ttshelper.tts.speak("exit",false,ttshelper.playtts);
+        TTSHelper.tts.speak("exit",false, TTSHelper.playtts);
     }
 
     @FXML
     protected void TTSTTSButton() {
-        ttshelper.tts.speak("disable spoken text", false, ttshelper.playtts);
+        TTSHelper.tts.speak("disable spoken text", false, TTSHelper.playtts);
     }
 
 }

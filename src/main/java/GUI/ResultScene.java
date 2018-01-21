@@ -9,7 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
-import tts.ttshelper;
+import tts.TTSHelper;
 
 import static javafx.collections.FXCollections.observableArrayList;
 
@@ -36,8 +36,8 @@ public class ResultScene extends UIScene implements Initializable {
 
         int currentScore = (int) UI.state.context.get("score");
 
-        ttshelper.ttsfinal = "your score was ," + ttshelper.tripleAsText(currentScore,false);
-        ttshelper.tts.speak(ttshelper.ttsfinal,false,ttshelper.playtts);
+        TTSHelper.ttsfinal = "your score was ," + TTSHelper.tripleAsText(currentScore,false);
+        TTSHelper.tts.speak(TTSHelper.ttsfinal,false, TTSHelper.playtts);
 
         scoreText.setText("Your score was: "+currentScore);
 
@@ -61,6 +61,6 @@ public class ResultScene extends UIScene implements Initializable {
 
     @FXML
     protected void RETURNTTSButton(){
-        ttshelper.tts.speak("go back to the main screen",false,ttshelper.playtts);
+        TTSHelper.tts.speak("go back to the main screen",false, TTSHelper.playtts);
     }
 }

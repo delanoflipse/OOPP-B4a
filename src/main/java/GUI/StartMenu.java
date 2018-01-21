@@ -1,6 +1,5 @@
 package GUI;
 
-import database.Database;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -8,13 +7,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import javafx.event.ActionEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import tts.ttshelper;
+import tts.TTSHelper;
 
 
 public class StartMenu extends UIScene implements Initializable {
@@ -40,8 +38,8 @@ public class StartMenu extends UIScene implements Initializable {
         setButtonImage(returnBtn, "file:src/images/arrowleft.png");
 
         userTitle.setText("Welcome " + UI.state.user.name);
-        ttshelper.ttsfinal = "welcome " + UI.state.user.name;
-        ttshelper.tts.speak(ttshelper.ttsfinal,false,ttshelper.playtts);
+        TTSHelper.ttsfinal = "welcome " + UI.state.user.name;
+        TTSHelper.tts.speak(TTSHelper.ttsfinal,false, TTSHelper.playtts);
         handleTTSbutton(ttsBtn);
     }
 
@@ -60,32 +58,32 @@ public class StartMenu extends UIScene implements Initializable {
     //tts for buttons
     @FXML
     protected void MCTTSButton() {
-        ttshelper.tts.speak("multiple choice questions",false,ttshelper.playtts);
+        TTSHelper.tts.speak("multiple choice questions",false, TTSHelper.playtts);
     }
 
     @FXML
     protected void TTSTTSButton() {
-        ttshelper.tts.speak("disable spoken text", false, ttshelper.playtts);
+        TTSHelper.tts.speak("disable spoken text", false, TTSHelper.playtts);
     }
 
     @FXML
     protected void GUITTSButton(){
-        ttshelper.tts.speak("g u i questions",false,ttshelper.playtts);
+        TTSHelper.tts.speak("g u i questions",false, TTSHelper.playtts);
     }
 
     @FXML
     protected void IMGTTSButton() {
-        ttshelper.tts.speak("image questions",false,ttshelper.playtts);
+        TTSHelper.tts.speak("image questions",false, TTSHelper.playtts);
     }
 
     @FXML
     protected void BACKTTSButton() {
-        ttshelper.tts.speak("GO BACK",false,ttshelper.playtts);
+        TTSHelper.tts.speak("GO BACK",false, TTSHelper.playtts);
     }
 
     @FXML
     protected void SCORESTTSButton() {
-        ttshelper.tts.speak("SCORES",false,ttshelper.playtts);
+        TTSHelper.tts.speak("SCORES",false, TTSHelper.playtts);
     }
 
 

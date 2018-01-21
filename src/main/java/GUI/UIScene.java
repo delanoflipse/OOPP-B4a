@@ -1,12 +1,11 @@
 package GUI;
 
-import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
-import tts.ttshelper;
+import tts.TTSHelper;
 
 public abstract class UIScene {
 
@@ -45,7 +44,7 @@ public abstract class UIScene {
             boolean val = UI.state.user.getBoolPreference("useTTS");
             UI.state.user.setPreference("useTTS", val ? "false" : "true");
             UI.state.user.save();
-            ttshelper.toggle(!val);
+            TTSHelper.toggle(!val);
             setTTSbutton(btn);
         });
     }

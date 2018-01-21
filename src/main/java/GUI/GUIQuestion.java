@@ -4,19 +4,15 @@ import database.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ComboBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import user.UserDateScore;
-import tts.ttshelper;
+import tts.TTSHelper;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -62,8 +58,8 @@ public class GUIQuestion extends UIScene implements Initializable {
         // set text
         questionText.setText("Question " + (1 + index));
         questionTitle.setText(question.text);
-        ttshelper.ttsfinal = "question" + ttshelper.tripleAsText((1 + index),false) + question.text;
-        ttshelper.tts.speak(ttshelper.ttsfinal,false,ttshelper.playtts);
+        TTSHelper.ttsfinal = "question" + TTSHelper.tripleAsText((1 + index),false) + question.text;
+        TTSHelper.tts.speak(TTSHelper.ttsfinal,false, TTSHelper.playtts);
         // create menus
 
         //variable to keep track at which dropdownbox we are
@@ -129,15 +125,15 @@ public class GUIQuestion extends UIScene implements Initializable {
         if (totalcorrect >= required) {
             responseText.setFill(Color.DARKGREEN);
             responseText.setText("That is correct! Click continue to go to the next question.");
-            ttshelper.ttsfinal = " That is correct! Click continue to go to the next question." ;
-            ttshelper.tts.speak(ttshelper.ttsfinal,false,ttshelper.playtts);
+            TTSHelper.ttsfinal = " That is correct! Click continue to go to the next question." ;
+            TTSHelper.tts.speak(TTSHelper.ttsfinal,false, TTSHelper.playtts);
             UI.state.context.set("score", currentScore + 10);
         }
         else {
             responseText.setFill(Color.FIREBRICK);
             responseText.setText("That is incorrect. Click continue to go to the next question");
-            ttshelper.ttsfinal = " That is incorrect, Click continue to go to the next question." ;
-            ttshelper.tts.speak(ttshelper.ttsfinal,false,ttshelper.playtts);
+            TTSHelper.ttsfinal = " That is incorrect, Click continue to go to the next question." ;
+            TTSHelper.tts.speak(TTSHelper.ttsfinal,false, TTSHelper.playtts);
         }
 
     }
@@ -172,22 +168,22 @@ public class GUIQuestion extends UIScene implements Initializable {
     @FXML
     protected void SUBMITTTSButton () {
         if (responseText.isVisible()){
-            ttshelper.tts.speak("Continue", false, ttshelper.playtts);
+            TTSHelper.tts.speak("Continue", false, TTSHelper.playtts);
         } else{
-            ttshelper.tts.speak("submit", false, ttshelper.playtts);
+            TTSHelper.tts.speak("submit", false, TTSHelper.playtts);
         }
     }
 
 
     @FXML
     protected void EXITTTSButton(){
-        ttshelper.tts.speak("exit",false,ttshelper.playtts);
+        TTSHelper.tts.speak("exit",false, TTSHelper.playtts);
     }
 
 
     @FXML
     protected void TTSTTSButton() {
-        ttshelper.tts.speak("disable spoken text", false, ttshelper.playtts);
+        TTSHelper.tts.speak("disable spoken text", false, TTSHelper.playtts);
     }
 
 
