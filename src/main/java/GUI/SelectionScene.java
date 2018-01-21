@@ -66,6 +66,9 @@ public class SelectionScene extends UIScene implements Initializable {
             case "TextQuestion":
                 UI.goToScene("mcquestions");
                 break;
+            case "GUIQuestion":
+                UI.goToScene("guiquestions");
+                break;
             default:
                 System.out.println("I have no idea what to do, going back");
                 UI.goToScene("startmenu");

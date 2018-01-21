@@ -34,6 +34,7 @@
 
             <Button text="Multiple Choice" minWidth="300" minHeight="300" fx:id="MCButton" onAction="#handleMCButton"/>
             <Button text="Image Questions" minWidth="300" minHeight="300" fx:id="SelectIMGButton" onAction="#handleIQButton"/>
+            <Button text="GUI Questions" minWidth="300" minHeight="300" fx:id="GUIButton" onAction="#handleGUIButton"/>
         </HBox>
     </center>
 

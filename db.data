@@ -128,39 +128,6 @@ answer: B. One more
 correctanswer: C. 2
 answer: D. No , go back to C
 
-#testing the Database parser
-type: gui
-level: 1
-question: Where can we find place one (or three is fine as well)?
-menu: Companies
-element: Company one
-element: Company two
-element: Company three
-menu: Schools
-element: School one
-element: School two
-element: School three
-menu: Places
-correctelement: Place one
-element: Place two
-correctelement: Place three
-
-#Added by the Add GUI-Question GUI
-type: gui
-level: 1
-question: Find Company X
-menu: Company
-element: Company 1
-element: Comapny 5
-correctelement: CompanyX
-element: Comapny 6
-menu: Place
-menu: Garden
-element: Garden 1
-element: Garedn2
-element: Garden something something
-menu: empty
-
 #Question Added by the Add Clickable Image GUI
 type: clickable
 level:1

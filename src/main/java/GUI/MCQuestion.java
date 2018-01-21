@@ -121,10 +121,6 @@ public class MCQuestion extends UIScene implements Initializable {
         }
     }
 
-    void handleSubmitSpeak() {
-        //Do tts stuff
-    }
-
     @FXML
     protected void handleExit(ActionEvent event) {
         saveScore();

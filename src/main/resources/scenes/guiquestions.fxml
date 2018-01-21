@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.geometry.Insets?>
+<BorderPane xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.GUIQuestion">
+    <top>
+        <HBox spacing="30">
+            <padding>
+                <Insets bottom="25" left="25" right="25" top="25" />
+            </padding>
+            <ImageView fx:id="logoImage1" fitWidth="100.0" cache="true" preserveRatio="true"/>
+            <Text styleClass="titleText" text="Practise Program" />
+        </HBox>
+    </top>
+
+    <center>
+        <VBox spacing="10">
+            <padding>
+                <Insets bottom="25" left="25" right="25" />
+            </padding>
+
+            <Text fx:id="questionText"/>
+            <Text fx:id="questionTitle"/>
+
+            <HBox fx:id="menus" spacing="10"/>
+
+            <Text fx:id="responseText"
+                  visible="false"/>
+
+            <HBox spacing="10">
+                <Button fx:id="submitButton" styleClass="green" text="Submit" onAction="#handleSubmit"/>
+
+                <Button fx:id="exitButton" styleClass="red"
+                        text="Exit"
+                        onAction="#handleExit"/>
+            </HBox>
+        </VBox>
+    </center>
+</BorderPane>
+
