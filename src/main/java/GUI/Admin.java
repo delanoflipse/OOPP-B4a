@@ -20,6 +20,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -46,6 +47,10 @@ public class Admin extends UIScene implements Initializable {
     protected void handleIQ(ActionEvent e) {
         UI.goToScene("adminAddImage");
     }
+
+    @FXML
+    protected void handleGUI(ActionEvent e) {UI.goToScene("adminAddGUI");}
+
     @FXML
     protected void handleReturn(ActionEvent e) {
         UI.goToScene("welcome");
