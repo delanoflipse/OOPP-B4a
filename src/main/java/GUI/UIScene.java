@@ -44,7 +44,7 @@ public abstract class UIScene {
             boolean val = UI.state.user.getBoolPreference("useTTS");
             UI.state.user.setPreference("useTTS", val ? "false" : "true");
             UI.state.user.save();
-
+            TTSHelper.tts.speak(TTSHelper.ttsfinal);
             setTTSbutton(btn);
         });
     }
