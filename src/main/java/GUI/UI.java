@@ -3,6 +3,7 @@ package GUI;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -32,6 +33,7 @@ public class UI extends Application {
         root = new StackPane();
         scene = new Scene(root, 1280, 720);
         stage.setScene(scene);
+        primaryStage.getIcons().add(new Image("file:src/images/logo.png"));
 
         // go to starting scene
         goToScene("welcome");
