@@ -34,5 +34,68 @@
     <orderEntry type="library" name="Maven: org.junit.jupiter:junit-jupiter-api:5.1.0-M1" level="project" />
     <orderEntry type="library" name="Maven: org.opentest4j:opentest4j:1.0.0" level="project" />
     <orderEntry type="library" name="Maven: org.junit.platform:junit-platform-commons:1.1.0-M1" level="project" />
+    <orderEntry type="module-library">
+      <library name="Maven: marytts:guava:22.0">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/marysourcetts/guava-22.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Maven: marytts:marytts-builder-with-dependencies:5.2">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/marysourcetts/marytts-builder-5.2-jar-with-dependencies.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Maven: marytts:marytts-lang-de:5.2">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/marysourcetts/marytts-lang-de-5.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Maven: marytts:marytts-lang-en:5.2">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/marysourcetts/marytts-lang-en-5.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Maven: marytts:voice-cmu-rms:5.2">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/marysourcetts/voice-cmu-rms-hsmm-5.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Maven: marytts:voice-cmu-slt:5.2">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/marysourcetts/voice-cmu-slt-hsmm-5.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Maven: marytts:voice-dfki:5.2">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/marysourcetts/voice-dfki-poppy-hsmm-5.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>
