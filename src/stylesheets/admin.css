@@ -1,12 +1,12 @@
 .root{
-    -fx-background-color: #598fc1;
+    /**-fx-background-color: #598fc1;
     -fx-text-fill: #efec17;
-    -fx-font-weight: bold;
+    -fx-font-weight: bold;**/
 }
 
 #Title {
     -fx-font-size: 72px;
-    -fx-fill: #efec17;
+    /**-fx-fill: #efec17;**/
 
 }
 

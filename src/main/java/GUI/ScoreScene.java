@@ -27,6 +27,8 @@ public class ScoreScene extends UIScene implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         setButtonImage(returnBtn, "file:src/images/arrowleft.png");
 
+        Database.loadDatabase();
+
         ArrayList<UserDateScore> scores = new ArrayList<>();
         for (UserData user: Database.users) {
             scores.addAll(user.scores);

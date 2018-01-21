@@ -321,10 +321,13 @@ public class AddSelectQuestion extends UIScene implements Initializable {
             writer.println("bottomright: "+((Double) correctrbX).intValue()+","+((Double) correctrbY).intValue());
             //Close the writer
             writer.close();
+            i = 1;
+            level = 0;
             //Go back to the start menu
 //            Admin.display();
         }
         catch(IOException e) {System.out.println(e.getMessage());}
+
     }
 */
 }

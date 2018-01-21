@@ -23,6 +23,7 @@ import user.UserDateScore;
 import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.ArrayList;
+
 import java.util.ResourceBundle;
 
 public class MCQuestion extends UIScene implements Initializable {
@@ -109,6 +110,7 @@ public class MCQuestion extends UIScene implements Initializable {
         }
     }
 
+
     void handleContinue() {
         if (questions.size() - index <= 2) {
             saveScore();
@@ -117,6 +119,10 @@ public class MCQuestion extends UIScene implements Initializable {
             UI.state.context.set("index", ++index);
             UI.goToScene("mcquestions");
         }
+    }
+
+    void handleSubmitSpeak() {
+        //Do tts stuff
     }
 
     @FXML

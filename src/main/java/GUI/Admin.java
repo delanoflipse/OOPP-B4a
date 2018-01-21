@@ -59,6 +59,7 @@ public class Admin extends UIScene implements Initializable {
     private static Text info;
     private static Button selectbut;
     private static Label selecttext;
+
 /*
     @Override
     public void start(Stage primaryStage) {
@@ -121,6 +122,14 @@ public class Admin extends UIScene implements Initializable {
         });
         selecttext = new Label("Clickable Image Question");
 
+        //Set the button to go to adding gui question
+        guibut = new Button("3");
+        guibut.setOnAction(e -> {
+            title.setText("Adding GUI Question");
+            AddGUIQuestion.AddQuestion(centergrid);
+        });
+        guitext = new Label("GUI Question");
+
         //Set CSS and show the program
         scene.getStylesheets().add("file:src/stylesheets/admin.css");
         display();
@@ -139,6 +148,8 @@ public class Admin extends UIScene implements Initializable {
         centergrid.add(MCtext, 1, 2);
         centergrid.add(selectbut, 0, 3);
         centergrid.add(selecttext, 1, 3);
+        centergrid.add(guibut, 0, 4);
+        centergrid.add(guitext, 1, 4);
         //Change back alignment
         centergrid.setAlignment(Pos.CENTER_LEFT);
     }

@@ -1,6 +1,5 @@
 package GUI;
 
-
 import database.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -19,6 +19,7 @@ import user.UserDateScore;
 
 import java.net.URL;
 import java.util.ArrayList;
+
 import java.util.ResourceBundle;
 
 public class SelectQuestion extends UIScene implements Initializable {
@@ -69,6 +70,7 @@ public class SelectQuestion extends UIScene implements Initializable {
     @FXML
     private void setBeginCoordinates(double X, double Y) {
         if (done) return;
+
         //Read and set the coordinates at the beginning
         selected.setCenterX(X);
         selected.setCenterY(Y);
