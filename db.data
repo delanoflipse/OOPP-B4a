@@ -21,16 +21,16 @@
 
   #3
   type: multiple choice
-  level: 1
+  level: 3
   question: Henk is in late tomorrow, because he has to go to the dentist. What is correct?
-      correctanswer: A. Henk is ill.
+      answer: A. Henk is ill.
       answer: B. Henk is late today.
       answer: C. From now on Henk will be late for work.
-      answer: D. None of the above.
+      correctanswer: D. None of the above.
 
   #4
   type: multiple choice
-  level: 1
+  level: 2
   question: Anne is travelling to New York on Friday morning. What is correct?
       answer: A. Anne is in New York.
       answer: B. Anne loves to travel.
@@ -39,7 +39,7 @@
 
   #5
   type: multiple choice
-  level: 1
+  level: 2
   question: Peter ate pizza for lunch, even though he hates it. What is correct?
       answer: A. Peter missed lunch today.
       answer: B. Peter hates lunch.
@@ -48,7 +48,7 @@
 
   #6
   type: multiple choice
-  level: 1
+  level: 3
   question: It's 9:45 and the shop closes in 15 minutes. What is correct?
       answer: A. The shop is closed.
       correctanswer: B. The shop closes at 10:00.
@@ -57,7 +57,7 @@
 
   #7
   type: multiple choice
-  level: 1
+  level: 2
   question: The parking costs 1$ for the fist hour and then 2.5$ per hour. What is correct?
       answer: A. The parking costs 2.5$ per hour.
       answer: B. The parking costs 1$ per hour.
@@ -66,7 +66,7 @@
 
   #8
   type: multiple choice
-  level: 1
+  level: 3
   question: For baking apple pie you need 6 apples, 1/2 cup of sugar and 1/4 cup of water. What is correct?
       answer: A. For apple pie you need water.
       answer: B. You need half a cup of sugar.
@@ -75,7 +75,7 @@
 
   #9
   type: multiple choice
-  level: 1
+  level: 3
   question: A car crashed into a shop, killing 2 and injuring more than 4 people. What is incorrect?
       answer: A. There was a car crash in a shop.
       correctanswer: B. 4 people were killed.
@@ -84,7 +84,7 @@
 
   #10
   type: multiple choice
-  level: 1
+  level: 2
   question: While cutting onion Susan cut her finger. What is correct?
       correctanswer: A. Susan's finger is bleeding.
       answer: B. Susan was cutting her fingers.
@@ -93,7 +93,7 @@
 
   #11
   type: multiple choice
-  level: 1
+  level: 2
   question: On her wedding day Mary said she wanted 2 children. What is correct?
       correctanswer: A. Mary is married.
       answer: B. Mary has 2 children.
@@ -102,7 +102,7 @@
 
   #12
   type: multiple choice
-  level: 1
+  level: 2
   question: After the robbery 1000$ were missing from the shop.What is correct?
       answer: A. The shop was robbed.
       answer: B. 1000$ was taken by the thief.
@@ -112,7 +112,7 @@
 
   #13
   type: multiple choice
-  level: 1
+  level: 3
   question:   After the end of the war Hans returned to Germany with his family. What is incorrect?
       correctanswer: A. Hans left his family in Germany.
       answer: B. The war has ended.

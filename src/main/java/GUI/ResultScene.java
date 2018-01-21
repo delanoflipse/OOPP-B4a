@@ -44,7 +44,7 @@ public class ResultScene extends UIScene implements Initializable {
                 new PieChart.Data("Wrong", currentTotal-currentScore));
         pieChart.setData(pieChartData);
         pieChart.setStartAngle(90);
-        pieChart.setLegendVisible(false);
+        pieChart.setLabelsVisible(false);
         pieChart.setTitle("Results");
     }
 
