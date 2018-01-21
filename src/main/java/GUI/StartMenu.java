@@ -67,8 +67,12 @@ public class StartMenu extends UIScene implements Initializable {
     protected void TTSTTSButton() {
 
             ttshelper.tts.speak("disable spoken text", false, ttshelper.playtts);
+    }
 
-        }
+    @FXML
+    protected void GUITTSButton(){
+        ttshelper.tts.speak("g u i questions",false,ttshelper.playtts);
+    }
 
     @FXML
     protected void IMGTTSButton() {
