@@ -118,3 +118,9 @@
     -fx-border-width: 0;
     -fx-background-color: transparent;
 }
+
+.default-color0.chart-pie { -fx-pie-color: #30ac63;}
+.default-color1.chart-pie { -fx-pie-color: #bf3a31;}
+.chart-pie-label-line {
+    -fx-stroke: #291309;
+}

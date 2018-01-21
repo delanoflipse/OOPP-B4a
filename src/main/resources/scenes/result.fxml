@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.chart.PieChart?>
 <BorderPane xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.ResultScene">
     <top>
         <HBox spacing="30" alignment="CENTER">
@@ -24,8 +25,8 @@
             <padding>
                 <Insets bottom="25" left="25" right="25" top="25" />
             </padding>
-            <Text styleClass="title" text="Your score was:"/>
-            <Text styleClass="title" fx:id="text"/>
+            <Text fx:id="scoreText" styleClass="title"/>
+            <PieChart fx:id="pieChart"/>
         </VBox>
     </center>
 

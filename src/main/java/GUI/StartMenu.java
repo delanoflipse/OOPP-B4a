@@ -103,6 +103,17 @@ public class StartMenu extends UIScene implements Initializable {
         ttshelper.toggletts();
     }
 
+    @FXML
+    protected void handleGUIButton(ActionEvent event) {
+        // setup context
+        UI.state.setContext(
+                new UIContext()
+                        .set("type", "GUIQuestion")
+        );
+
+        // go to scene
+        UI.goToScene("selection");
+    }
 
     @FXML
     protected void goToScores(ActionEvent event) {

@@ -39,7 +39,7 @@ public class MCQuestion extends UIScene implements Initializable {
     private RadioButton rightButton;
     private TextQuestion question;
     private ArrayList<Question> questions;
-    private int index, currentScore;
+    private int index, currentScore, currentTotal;
 
     private boolean done = false;
 
@@ -57,6 +57,7 @@ public class MCQuestion extends UIScene implements Initializable {
         questions = (ArrayList<Question>) UI.state.context.get("questions");
         question = (TextQuestion) questions.get(index);
         currentScore = (int) UI.state.context.get("score");
+        currentTotal = (int) UI.state.context.get("total");
 
         // set text
         questionText.setText("Question " + (1 + index));
@@ -84,6 +85,8 @@ public class MCQuestion extends UIScene implements Initializable {
             handleContinue();
             return;
         }
+
+        UI.state.context.set("total", ++currentTotal);
 
         RadioButton ans = (RadioButton) answergroup.getSelectedToggle();
         if (ans == null) {
@@ -141,12 +144,10 @@ public class MCQuestion extends UIScene implements Initializable {
         }
     }
 
-
-
     @FXML
     protected void handleExit(ActionEvent event) {
         saveScore();
-        UI.goToScene("startmenu");
+        UI.goToScene("result");
     }
 
     private void saveScore() {
