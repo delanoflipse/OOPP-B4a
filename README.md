@@ -1,6 +1,10 @@
 # Group B4a
 This is the OOP project repository for group B4a.
 
+#Usage
+Run Main.java (from the main package) to run the program.
+
+
 ## Team members:
 Delano Flipse(4606116)\
 <img src="https://github.com/delanoflipse/OOPP-B4a/blob/master/imgs/delano.png" width=300>
