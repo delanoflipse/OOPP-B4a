@@ -95,7 +95,7 @@ public class AddGUIQuestion extends UIScene implements Initializable {
             //Write type, level and question
             writer.println("#Added by the Add GUI-Question GUI");
             writer.println("type: gui");
-            writer.println("level: "+1);
+            writer.println("level: "+ level);
             writer.println("question: "+question);
 
             //Write every DropDownHead
@@ -118,6 +118,8 @@ public class AddGUIQuestion extends UIScene implements Initializable {
             addElementChoice.getItems().clear();
             questionField.setText("");
             //Admin.display();
+
+            UI.goToScene("admin");
 
         }
         catch (IOException e) {
