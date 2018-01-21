@@ -51,6 +51,8 @@ public class WelcomeScene extends UIScene implements Initializable {
             return;
         }
 
+        UI.state.user = null;
+
         for (UserData user : Database.users) {
             if (user.name.toLowerCase().equals(value)) {
                 UI.state.user = user;
