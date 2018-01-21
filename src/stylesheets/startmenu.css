@@ -8,7 +8,7 @@
     -fx-background-image: url("../images/mcquestions.jpg");
     -fx-background-size: cover;
     -fx-font-weight: bold;
-    -fx-text-fill: black;
+    -fx-text-fill: 	#1E90FF;
     -fx-font-size: 24;
 }
 
@@ -17,6 +17,16 @@
     -fx-background-size: cover;
     -fx-font-weight: bold;
     -fx-font-size: 24;
+    -fx-text-fill: 	#1E90FF;
+}
+
+#GUIButton{
+    -fx-background-image: url("../images/road-sign.png");
+    -fx-background-size: cover;
+    -fx-font-weight: bold;
+    -fx-font-size: 24;
+    -fx-text-fill: 	#1E90FF;
+    -fx-background-color: white;
 }
 
 #userTitle {
