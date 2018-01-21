@@ -26,7 +26,7 @@ public class Position {
     }
 
     public String toString() {
-        String out = x+","+y;
+        String out = (int)x + "," + (int)y;
         return out;
     }
 

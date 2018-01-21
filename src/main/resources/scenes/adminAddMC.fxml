@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.GridPane?>
+<BorderPane xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="GUI.AddMCQuestion">
+    <padding>
+        <Insets bottom="25" left="25" right="25" top="25" />
+    </padding>
+
+    <top >
+        <HBox alignment="CENTER" spacing="30">
+            <padding>
+                <Insets bottom="25" left="25" right="25" top="25" />
+            </padding>
+            <ImageView fx:id="logoImage1" fitWidth="100.0" cache="true" preserveRatio="true"/>
+            <Text styleClass="titleText" text="Practise Program" />
+        </HBox>
+    </top>
+
+    <center>
+        <VBox spacing="5">
+            <Text text="Please fill in the following fields:
+You can click the plus to add a new answer.
+Click save to store the question in the database."/>
+            <Label text="Question:" />
+            <TextField fx:id="questionField"/>
+            <Label text="Level: (1-3)" />
+            <TextField fx:id="levelField"/>
+            <Text text="Answers:"/>
+            <GridPane hgap="15" vgap="5" fx:id="answerGrid">
+                <Text text="Answer" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                <Text text="Correct answer?" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+            </GridPane>
+
+            <HBox spacing="10">
+                <Button text="Add answer" onAction="#addAnswerGroup"/>
+                <Button text="Save" styleClass="green" onAction="#handleSave"/>
+                <Button text="Exit" styleClass="red" onAction="#handleExit"/>
+            </HBox>
+        </VBox>
+    </center>
+</BorderPane>

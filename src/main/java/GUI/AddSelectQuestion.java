@@ -1,238 +1,185 @@
 package GUI;
 
+import database.ClickQuestion;
+import database.Database;
+import database.Position;
 import javafx.embed.swing.SwingFXUtils;
-import javafx.geometry.Pos;
-import javafx.scene.control.*;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.util.ArrayList;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 
-public class AddSelectQuestion {
+public class AddSelectQuestion extends UIScene implements Initializable {
 
-    private static GridPane centergrid;
-    private static Image image;
-    private static ImageView imagev;
-    private static Button cancel;
-    private static Rectangle selected;
-    //Coordinates of the rectangle
-    private static double ltX;
-    private static double ltY;
-    private static double rbX;
-    private static double rbY;
-    private static Button savebut;
-    private static TextField questionField;
-    private static ArrayList<RadioButton> levelbuttons = new ArrayList<>();
-    private static File file;
-    private static double imgratio;
+    @FXML private ImageView logoImage1, imagev;
+    @FXML private Rectangle selected;
+    @FXML private TextField questionField, levelField;
+    @FXML private Image image;
+    @FXML private Button saveButton;
+    @FXML private Label imgLabel;
+    @FXML private Pane imgPane;
 
-    public static void AddQuestion (Stage stage, GridPane grid) {
-        centergrid = grid;
-        //Empty the centergrid
-        centergrid.getChildren().clear();
-        //Set alignment
-        centergrid.setAlignment(Pos.TOP_LEFT);
+    private File file;
+    private double beginX, beginY;
+    private double endX, endY;
 
-        //Make and configure the filechooser
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        // set image
+        Image image = new Image("file:src/images/logo.png");
+        logoImage1.setImage(image);
+
+
+    }
+
+    @FXML
+    protected void handleExit(ActionEvent e) {
+        UI.goToScene("admin");
+    }
+
+    @FXML
+    protected void handleSelectImage(ActionEvent e) {
         final FileChooser imageChooser = new FileChooser();
-        imageChooser.setTitle("Choose Image");
+
+        imageChooser.setTitle("Please choose an image");
+
         imageChooser.setInitialDirectory(
                 new File(System.getProperty("user.home"))
         );
+
         imageChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("JPG", "*.jpg"),
-                new FileChooser.ExtensionFilter("PNG", "*.png"),
-                new FileChooser.ExtensionFilter("JPEG", "*.jpeg")
+                new FileChooser.ExtensionFilter("All Images", "*.jpg", "*.jpeg", "*.JPG", "*.JPEG", "*.png", "*.PNG"),
+                new FileChooser.ExtensionFilter("jpg", "*.jpg", "*.jpeg", "*.JPG", "*.JPEG"),
+                new FileChooser.ExtensionFilter("png", "*.png", "*.PNG")
         );
 
-        //Add intro text
-        Text intro = new Text("Here you can add a question where the user can select a certain point at the image as answer\nFirst, please select an image from your computer");
+        file = imageChooser.showOpenDialog(UI.stage);
 
-        //make cancel button
-        cancel = new Button("Cancel");
-        cancel.setOnAction(e -> Admin.display());
-        centergrid.add(cancel, 3, 22);
+        if (file != null) {
+            //Load image and display it
+            imgPane.setPrefHeight(500);
+            image = new Image("file:" + file.getAbsolutePath());
+            imagev.setFitHeight(500);
+            imagev.setPreserveRatio(true);
+            imagev.setImage(image);
 
-        //Make button for checking whether the image is correct
-        Button gotoconfigure = new Button("Yes, continue");
-        gotoconfigure.setOnAction(e -> ConfigureQuestion());
+            imgLabel.setVisible(true);
 
-        //Make Button for opening an image
-        Button openImage = new Button("Choose Image...");
-        openImage.setOnAction(e -> {
-            file = imageChooser.showOpenDialog(stage);
-            if (file != null) {
-                //Load image and display it
-               image = new Image("file:"+file.getAbsolutePath());
-               imagev = new ImageView(image);
-               imagev.setFitHeight(centergrid.getHeight()*0.5);
-               imagev.setPreserveRatio(true);
-               imagev.setSmooth(true);
-               imagev.setCache(true);
-               centergrid.add(imagev, 2, 21, 2, 1);
-               //remove this button and add new one
-               centergrid.getChildren().remove(openImage);
-               centergrid.add(gotoconfigure, 2, 22);
-            }
-        });
-
-        //Add Text and Button to grid
-        centergrid.add(intro, 2, 20, 2, 1);
-        centergrid.add(openImage, 2, 22);
-    }
-
-    private static void ConfigureQuestion() {
-        //clear centergrid
-        centergrid.getChildren().clear();
-
-        //Make introtext
-        Text intro = new Text("Fill in all the boxes and select a part of the image.");
-        centergrid.add(intro, 2, 20, 2, 1);
-
-        //Make questionField and label
-        questionField = new TextField();
-        questionField.setMaxWidth(500);
-        Label questionLabel = new Label("Question:");
-        centergrid.add(questionField, 2, 21, 2, 1);
-        centergrid.add(questionLabel, 1, 21);
-
-        //Add the cancel button
-        centergrid.add(cancel, 3, 27);
-
-        //Add buttons for the level of the question
-        Label levellabel = new Label("Level:");
-        RadioButton level1button = new RadioButton("1");
-        RadioButton level2button = new RadioButton("2");
-        RadioButton level3button = new RadioButton("3");
-        ToggleGroup levelgroup = new ToggleGroup();
-        level1button.setToggleGroup(levelgroup);
-        level2button.setToggleGroup(levelgroup);
-        level3button.setToggleGroup(levelgroup);
-        levelbuttons.add(level1button);
-        levelbuttons.add(level2button);
-        levelbuttons.add(level3button);
-        centergrid.add(levellabel, 1, 22);
-        centergrid.add(level1button, 2, 22);
-        centergrid.add(level2button, 2, 23);
-        centergrid.add(level3button, 2, 24);
-
-        //Image is changed by this ratio (will be used later)
-        imgratio = image.getHeight()/imagev.getFitHeight();
-        //Make a clickable pane as big as the image
-        Pane imagepane = new Pane();
-        imagepane.setPrefHeight(imagev.getFitHeight());
-        imagepane.setPrefWidth(image.getWidth()*imgratio);
-        //Show the pane
-        centergrid.add(imagepane, 2, 26, 2, 1);
-        //Add the image to the pane
-        imagepane.getChildren().add(imagev);
-        //Set position to top left
-        imagev.relocate(0,0);
-
-        //Get some text above and in front of the image
-        Label imageLabel = new Label("Chosen Image:");
-        Text imageText = new Text("Please select the part of the image that is the correct answer.");
-        centergrid.add(imageLabel, 1, 26);
-        centergrid.add(imageText, 2, 25, 2, 1);
-
-        //Make rectangle to show which part is selected
-        selected = new Rectangle();
-        //Add the rectangle to the imagepane
-        imagepane.getChildren().add(selected);
-
-        //Set what should be done when someone clicks the image and moves the mouse
-        imagev.setOnMousePressed(e -> beginDrag(e));
-
-        imagev.setOnMouseDragged(e -> setCoordinates(e.getX(), e.getY()));
-
-        imagev.setOnMouseReleased(e -> endDrag(e));
-        //If the rectangle is clicked the drag should start over again as well
-        selected.setOnMousePressed(e -> beginDrag(e));
-
-        //At the beginning the rectangle is not visible
-        selected.setOpacity(0.5);
-        selected.setHeight(0);
-        selected.setWidth(0);
-
-        //Make a button that will save the question
-        savebut = new Button("Save Question");
-        savebut.setOnAction(e -> {
-            if (questionField.getText()!=null) {
-                save();
-            }
-        });
-        //Starts disabled
-        savebut.setDisable(true);
-
-        centergrid.add(savebut, 2, 27);
-    }
-
-    private static void setBeginCoordinates(double X, double Y) {
-        //Read and set the coordinates at the beginning
-        ltX = X;
-        ltY = Y;
-    }
-
-    private static void setCoordinates(double X, double Y) {
-        /**System.out.println("X: "+X);
-        System.out.println("Y: "+Y);**/
-        //If the mouse is in the image
-        if (X >= 0.0 && X <= imagev.getFitHeight()/image.getHeight()*image.getWidth()) {
-            //Set the rbX to the current value
-            rbX = X;
-        }
-        //Otherwise set is to the boundary
-        else {
-            if (X <= 0) {
-                rbX = 0.0;
-                X = 0;
-            }
-            if (X > imagev.getFitHeight()/image.getHeight()*image.getWidth()) {
-                rbX = imagev.getFitHeight()/image.getHeight()*image.getWidth();
-            }
-        }
-        //Set the width (and position) of the rectangle
-        if (rbX - ltX < 0) {
-            selected.setX(X);
-            selected.setWidth(ltX - rbX);
-        } else {
-            selected.setWidth(rbX - ltX);
-        }
-        //Same things for the Y value
-        if (Y >= 0 && Y <= imagev.getFitHeight()) {
-            rbY = Y;
-        } else {
-            if (Y <= 0) {
-                rbY = 0.0;
-                Y = 0;
-            }
-            if (Y > imagev.getFitHeight()) {
-                rbY = imagev.getFitHeight();
-            }
-        }
-
-        if (rbY - ltY < 0) {
-            selected.setY(Y);
-            selected.setHeight(ltY - rbY);
-        } else {
-            selected.setHeight(rbY - ltY);
+            selected.setX(0);
+            selected.setY(0);
+            selected.setWidth(0);
+            selected.setHeight(0);
+            selected.setVisible(true);
         }
     }
 
-    private static void beginDrag(MouseEvent e) {
+    @FXML
+    protected void handleSave(ActionEvent e) {
+        String question = questionField.getText();
+        String leveltxt = levelField.getText();
+
+        if (question.length() == 0 || leveltxt.length() == 0) {
+            return;
+        }
+        int level;
+
+        try {
+            level = Integer.parseInt(leveltxt);
+        } catch (NumberFormatException error) {
+            return;
+        }
+
+        if (level < 1 || level > 3) {
+            return;
+        }
+
+        double imgratio = image.getHeight()/imagev.getFitHeight();
+        String filename = file.getName();
+        //Save file in the program folder
+        //Get extension
+        String extension = "";
+        int i = filename.lastIndexOf('.');
+        if (i > 0) {
+            extension = filename.substring(i+1);
+        }
+        filename = filename.substring(0,i);
+        //Get the correct path
+        String path = "src/images/"+filename+"."+extension;
+        //Check whether there exists a file with that name
+        i=0;
+        File f = new File(path);
+        int filenamelength = filename.length();
+        //If so change the name
+        while (f.exists() && !f.isDirectory()) {
+            filename = filename.substring(0,filenamelength) + i;
+            path = "src/images/"+filename+"."+extension;
+            f = new File(path);
+            i++;
+        }
+
+        //Make the new file for the image
+        File outputFile = new File(path);
+        BufferedImage bImage = SwingFXUtils.fromFXImage(image, null);
+        try {
+            //Write the image to the new file
+            ImageIO.write(bImage, extension , outputFile);
+        } catch (IOException err) {
+            System.out.println(err.getMessage());
+        }
+
+        double correctltX = imgratio * selected.getX();
+        double correctltY = imgratio * selected.getY();
+        double correctrbX = imgratio * (selected.getX() + selected.getWidth());
+        double correctrbY = imgratio * (selected.getY() + selected.getHeight());
+
+        ClickQuestion q = new ClickQuestion();
+        q.topLeft = new Position(correctltX, correctltY);
+        q.bottomRight = new Position(correctrbX, correctrbY);
+        q.text = question;
+        q.level = level;
+        q.image = filename + "." + extension;
+
+        Database.questions.add(q);
+
+        try {
+            PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter("db.data", true)));
+            writer.println();
+            //Write all the data
+            writer.println("#Question Added by the Add Clickable Image UI");
+            writer.println("type: clickable");
+            writer.println("level:" + q.level);
+            writer.println("image:" + q.image);
+            writer.println("question: " + q.text);
+            writer.println("topleft: " + q.topLeft.toString());
+            writer.println("bottomright: " + q.bottomRight.toString());
+            //Close the writer
+            writer.close();
+        } catch (IOException err) {
+            System.out.println(err.getCause());
+            System.out.println(err.getMessage());
+        }
+
+        UI.goToScene("admin");
+    }
+
+    @FXML
+    private void beginDrag(MouseEvent e) {
         //At the start of a drag set rectangle size to 0 and set coordinates
         //Also set the color back
         selected.setX(e.getX());
@@ -240,9 +187,63 @@ public class AddSelectQuestion {
         selected.setWidth(0);
         selected.setHeight(0);
         setBeginCoordinates(e.getX(), e.getY());
-        savebut.setDisable(true);
-        selected.setFill(Color.SKYBLUE);
+        saveButton.setDisable(true);
     }
+
+    private void setBeginCoordinates(double x, double y) {
+        //Read and set the coordinates at the beginning
+        beginX = x;
+        beginY = y;
+    }
+
+    @FXML
+    private void setCoordinates(MouseEvent e) {
+        double x = e.getX(), y = e.getY();
+
+        double newx = x, newy = x;
+
+        //Set mouse in image
+        if (x <= 0.0) x = 0.0;
+        if (x >= image.getWidth()) x = image.getWidth();
+        if (y <= 0.0) y = 0.0;
+        if (y >= image.getHeight()) y = image.getHeight();
+
+        endX = x;
+        endY = y;
+
+        if (endX < beginX) {
+            selected.setX(endX);
+            selected.setWidth(beginX - endX);
+        } else {
+            selected.setX(beginX);
+            selected.setWidth(endX - beginX);
+        }
+
+        if (endY < beginY) {
+            selected.setY(endY);
+            selected.setHeight(beginY - endY);
+        } else {
+            selected.setY(beginY);
+            selected.setHeight(endY - beginY);
+        }
+
+
+        if (selected.getWidth() >= 5 && selected.getHeight() >= 5) {
+            selected.setFill(Color.DEEPSKYBLUE);
+        } else {
+            selected.setFill(Color.SKYBLUE);
+        }
+    }
+
+    private double abs(double d) {
+        return d < 0.0 ? -d : d;
+    }
+
+    @FXML
+    private void endDrag(MouseEvent e) {
+        saveButton.setDisable(false);
+    }
+/*
 
     private static void endDrag(MouseEvent e) {
         //If there is a rectangle
@@ -250,12 +251,9 @@ public class AddSelectQuestion {
             //Enable the submit button and make the color a bit darker
             savebut.setDisable(false);
             selected.setFill(Color.DEEPSKYBLUE);
-            /**System.out.println("X: "+e.getX());
-             System.out.println("Y: "+e.getY());**/
-        }
-    }
-
-    private static void save() {
+            System.out.println("X: "+e.getX());
+             System.out.println("Y: "+e.getY());
+        }{
         //Read question
         String question = questionField.getText();
 
@@ -314,7 +312,7 @@ public class AddSelectQuestion {
             PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter("db.data", true)));
             writer.print("\n");
             //Write all the data
-            writer.println("#Question Added by the Add Clickable Image GUI");
+            writer.println("#Question Added by the Add Clickable Image UI");
             writer.println("type: clickable");
             writer.println("level:" + level);
             writer.println("image:" + filename + "." + extension);
@@ -326,10 +324,10 @@ public class AddSelectQuestion {
             i = 1;
             level = 0;
             //Go back to the start menu
-            Admin.display();
+//            Admin.display();
         }
         catch(IOException e) {System.out.println(e.getMessage());}
 
     }
-
+*/
 }

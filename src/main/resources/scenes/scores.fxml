@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.Button?>
+
+<?import javafx.scene.layout.VBox?>
+<VBox xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="GUI.ScoreScene" spacing="15">
+    <padding>
+        <Insets bottom="25" left="25" right="25" top="25" />
+    </padding>
+
+    <Text text="Scores:" styleClass="title"/>
+
+    <GridPane fx:id="scoreContainer" hgap="25" vgap="15" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+        <Text text="User" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="colheader"/>
+        <Text text="Date" GridPane.columnIndex="1" GridPane.rowIndex="0" styleClass="colheader"/>
+        <Text text="Score" GridPane.columnIndex="2" GridPane.rowIndex="0" styleClass="colheader"/>
+    </GridPane>
+
+    <Button onAction="#handleReturn" styleClass="red, image" fx:id="returnBtn" text="Go back"  onMouseEntered="#BACKTTSButton"/>
+</VBox>
+

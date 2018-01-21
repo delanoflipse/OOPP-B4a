@@ -40,6 +40,56 @@
             <artifactId>junit-jupiter-api</artifactId>
             <version>RELEASE</version>
         </dependency>
+
+        <dependency>
+            <groupId>marytts</groupId>
+            <artifactId>guava</artifactId>
+            <version>22.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/marysourcetts/guava-22.0.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>marytts</groupId>
+            <artifactId>marytts-builder-with-dependencies</artifactId>
+            <version>5.2</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/marysourcetts/marytts-builder-5.2-jar-with-dependencies.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>marytts</groupId>
+            <artifactId>marytts-lang-de</artifactId>
+            <version>5.2</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/marysourcetts/marytts-lang-de-5.2.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>marytts</groupId>
+            <artifactId>marytts-lang-en</artifactId>
+            <version>5.2</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/marysourcetts/marytts-lang-en-5.2.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>marytts</groupId>
+            <artifactId>voice-cmu-rms</artifactId>
+            <version>5.2</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/marysourcetts/voice-cmu-rms-hsmm-5.2.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>marytts</groupId>
+            <artifactId>voice-cmu-slt</artifactId>
+            <version>5.2</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/marysourcetts/voice-cmu-slt-hsmm-5.2.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>marytts</groupId>
+            <artifactId>voice-dfki</artifactId>
+            <version>5.2</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/marysourcetts/voice-dfki-poppy-hsmm-5.2.jar</systemPath>
+        </dependency>
     </dependencies>
 
     <build>

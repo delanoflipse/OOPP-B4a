@@ -1,0 +1,24 @@
+.root{
+    /*-fx-background-image: url("../images/background.jpg");*/
+    -fx-background-repeat: stretch;
+    -fx-background-position: bottom center;
+}
+
+#MCButton{
+    -fx-background-image: url("../images/mcquestions.jpg");
+    -fx-background-size: cover;
+    -fx-font-weight: bold;
+    -fx-text-fill: black;
+    -fx-font-size: 24;
+}
+
+#SelectIMGButton{
+    -fx-background-image: url("../images/imgquestions.jpg");
+    -fx-background-size: cover;
+    -fx-font-weight: bold;
+    -fx-font-size: 24;
+}
+
+#userTitle {
+    -fx-font-size: 24px;
+}

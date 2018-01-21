@@ -1,4 +1,4 @@
-package main;
+package database;
 
 /**
  * A String:String value pair
@@ -18,7 +18,7 @@ public class KeyValuePair {
      * @param line Line with format "key:pair"
      * @return A pair, or null
      */
-    public static KeyValuePair splitLine(String line) {
+    public static KeyValuePair splitLine(String line, boolean useFirst) {
         if (line == null || line.length() == 0) {
             return null;
         }
@@ -27,7 +27,7 @@ public class KeyValuePair {
             return null;
         }
 
-        int index = line.indexOf(':');
+        int index = useFirst ? line.indexOf(':') : line.lastIndexOf(':');
 
         if (index == -1) {
             return null;
@@ -37,6 +37,10 @@ public class KeyValuePair {
                 line.substring(0, index).trim(),
                 line.substring(index + 1, line.length()).trim()
         );
+    }
+
+    public static KeyValuePair splitLine(String line) {
+        return splitLine(line, true);
     }
 
     /**

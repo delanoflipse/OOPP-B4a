@@ -6,11 +6,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="OOP-Project" />
         <module name="OOPP" />
         <module name="OOPP-B4a" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="OOP-Project" target="1.8" />
       <module name="OOPP" target="1.8" />
       <module name="OOPP-B4a" target="1.8" />
     </bytecodeTargetLevel>

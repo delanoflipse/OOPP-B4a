@@ -19,12 +19,13 @@ import marytts.modules.synthesis.Voice;
 import marytts.signalproc.effects.AudioEffect;
 import marytts.signalproc.effects.AudioEffects;
 
+
 /**
  * @author GOXR3PLUS
  *
  */
 public class TextToSpeech {
-	
+
 	private AudioPlayer tts;
 	private MaryInterface marytts;
 	private static Service<Void> backGroundThread;

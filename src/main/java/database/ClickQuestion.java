@@ -32,10 +32,6 @@ public class ClickQuestion extends Question{
     }
 
     public boolean isCorrect(double x, double y) {
-        System.out.println("X: "+x);
-        System.out.println("Y: "+y);
-        System.out.println("CorrectLeftTop: "+topLeft);
-        System.out.println("CorrectBottomRight "+bottomRight);
         return x >= topLeft.x
                 && x <= bottomRight.x
                 && y >= topLeft.y

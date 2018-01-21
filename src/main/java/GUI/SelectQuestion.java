@@ -1,138 +1,97 @@
 package GUI;
 
 import database.*;
-import javafx.geometry.Pos;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
+
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import tts.ttshelper;
+import user.UserDateScore;
 
+import java.net.URL;
 import java.util.ArrayList;
-import static GUI.StartMenu.playtts;
-import static GUI.StartMenu.ttsfinal;
-import static GUI.StartMenu.tts;
-import static GUI.StartMenu.asText;
 
-public class SelectQuestion {
+import java.util.ResourceBundle;
 
-    private static GridPane centergrid;
-    private static ArrayList<ClickQuestion> questionlist = new ArrayList<>();
-    private static ImageView qimagev;
-    private static Image qimage;
-    private static Circle selected = new Circle();
-    private static double ratio; //how much of the screen the image should be (1 is full 0 is nothing)
-    private static int i;
-    private static Button submit;
-    private static Button next;
-    private static Text response;
-    private static ClickQuestion q;
-    private static double imgratio;
-    private static Rectangle correct = new Rectangle();
-    private static int score;
-    private static int totalanswered;
-    private static Button stop;
+public class SelectQuestion extends UIScene implements Initializable {
+    private ClickQuestion question;
+    private ArrayList<Question> questions;
+    private int index;
+    private Image qimage;
+    private double imgratio;
+    private int currentScore;
+    private int currentTotal;
 
-    public static void askQuestions(GridPane grid) {
-        ttsfinal = "Welcome to the select part of image questions . . ";
+    @FXML private ImageView logoImage1;
+    @FXML private ImageView qimagev;
+    @FXML private Text questionText;
+    @FXML private Text questionTitle;
+    @FXML private Button submitButton;
+    @FXML private Pane imagepane;
+    @FXML private Text responseText;
+    @FXML private Circle selected;
+    @FXML private Rectangle correct;
+    @FXML private VBox imageBox;
+    @FXML private Button ttsBtn;
 
-        ratio = .65;
-        score = 0;
-        totalanswered = 0;
-        //Make a questionlist and add questions
-        Database.loadDatabase();
-        ArrayList<Question> allquestions = Database.getQuestionsForLevel(1);
-        for (Question q : allquestions) {
-            if (q instanceof ClickQuestion) {
-                questionlist.add((ClickQuestion) q);
-            }
-        }
+    private boolean done = false;
 
-        //Set the private centergrid to the one given by the function parameter
-        centergrid = grid;
-        //Set alignment to center left
-        centergrid.setAlignment(Pos.CENTER_LEFT);
-        //Show the buttons
-        makeButtons();
-        //Show the image and the question
-        showQuestion(0);
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        // set image
+        Image image = new Image("file:src/images/logo.png");
+        logoImage1.setImage(image);
+
+        // set css
+        UI.setCSS("questions.css");
+
+        // get state values
+        index = (int) UI.state.context.get("index");
+        questions = (ArrayList<Question>) UI.state.context.get("questions");
+        question = (ClickQuestion) questions.get(index);
+        currentScore = (int) UI.state.context.get("score");
+        currentTotal = (int) UI.state.context.get("total");
+
+        setTTSbutton();
+
+        // set text
+        questionText.setText("Question " + (1 + index));
+        questionTitle.setText(question.text);
+
+        qimage = new Image("file:src/images/" + question.image);
+        qimagev.setImage(qimage);
+        qimagev.fitHeightProperty().bind(imageBox.heightProperty());
+        ttshelper.ttsfinal = "question" + ttshelper.tripleAsText((index + 1),false) + "," + question.text;
+        ttshelper.tts.speak(ttshelper.ttsfinal,false,ttshelper.playtts);
     }
 
-    private static void showQuestion(int index) {
-        if (index >= questionlist.size()) {
-            done();
-            return;
-        }
-        //Clear the grid
-        centergrid.getChildren().clear();
-        //Get the question
-        q = questionlist.get(index);
-        //Show the question
-        Text questiontext = new Text(q.text);
-        ttsfinal = ttsfinal + q.text;
-        tts.speak(ttsfinal,false,playtts);
-        ttsfinal = "";
-        centergrid.add(questiontext, 0, 0, 2, 1);
-        //Load the image
-        qimage = new Image("file:src/images/"+q.image);
-        qimagev = new ImageView(qimage);
-        qimagev.setFitHeight(centergrid.getHeight()*ratio);
-        qimagev.setPreserveRatio(true);
-        qimagev.setSmooth(true);
+    @FXML
+    private void setBeginCoordinates(double X, double Y) {
+        if (done) return;
 
-        //image is changed by this ratio
-        imgratio = qimage.getHeight()/qimagev.getFitHeight();
-        //Make a clickable pane as big as the image
-        Pane imagepane = new Pane();
-        imagepane.setPrefHeight(qimagev.getFitHeight());
-        imagepane.setPrefWidth(qimage.getWidth()*imgratio);
-        centergrid.add(imagepane, 0, 1, 2, 1);
-        //Add the image to the pane
-        imagepane.getChildren().add(qimagev);
-        //Prepare response text
-        response = new Text("");
-        centergrid.add(response, 0, 2, 2, 1);
-        //Disable the submit button
-        submit.setDisable(true);
-        centergrid.add(submit, 0, 2);
-        centergrid.add(stop, 1, 2);
-
-        //Add the circle to show what point is selected
-        imagepane.getChildren().add(selected);
-        imagepane.getChildren().add(correct);
-
-        //Set what should be done when someone clicks the image and moves the mouse
-        qimagev.setOnMousePressed(e -> beginDrag(e));
-
-        qimagev.setOnMouseDragged(e -> setCoordinates(e.getX(), e.getY()));
-
-        qimagev.setOnMouseReleased(e -> endDrag());
-        //If the rectangle is clicked the drag should start over again as well
-        selected.setOnMousePressed(e -> beginDrag(e));
-
-        //At the beginning the circle is not visible
-        selected.setFill(Color.YELLOW);
-        selected.setRadius(0);
-
-        correct.setOpacity(0.5);
-        correct.setWidth(0);
-        correct.setHeight(0);
-    }
-
-    private static void setBeginCoordinates(double X, double Y) {
         //Read and set the coordinates at the beginning
         selected.setCenterX(X);
         selected.setCenterY(Y);
-        selected.setRadius(5);
+        selected.setRadius(4);
     }
 
-    private static void setCoordinates(double X, double Y) {
+    @FXML
+    private void setCoordinates(MouseEvent e) {
+        if (done) return;
+        //image is changed by this ratio
+        imgratio = qimage.getHeight() / qimagev.getFitHeight();
+        double X = e.getX();
+        double Y = e.getY();
         //If the mouse is in the image
         if (X >= 0.0 && X <= qimagev.getFitHeight()/qimage.getHeight()*qimage.getWidth()) {
             //Set the X coordinate of the circle
@@ -161,100 +120,126 @@ public class SelectQuestion {
         }
     }
 
-    private static void makeButtons(){
-        //Button to go to the next question
-        next = new Button("Continue");
-        next.setOnMouseEntered(e -> tts.speak("continue", false,playtts));
-        next.setOnAction(e -> {
-            i++;
-            showQuestion(i);
-        });
-        //Button to submit the answer
-        submit = new Button("Submit");
-        submit.setOnMouseEntered(e -> tts.speak("submit", false,playtts));
-        submit.setOnAction(e -> {
-            totalanswered++;
-            //If the answer is correct
-            if (q.isCorrect(selected.getCenterX()*imgratio, selected.getCenterY()*imgratio)) {
-                response.setFill(Color.DARKGREEN);
-                response.setText("That is correct. Click continue to go to the next question.");
-                tts.speak("That is correct. Click continue to go to the next question.",false,playtts);
-                selected.setFill(Color.DARKGREEN);
-                score++;
-            }
-            //If the answer is not correct
-            else {
-                response.setFill(Color.FIREBRICK);
-                response.setText("That is incorrect, you can see the answer on the image now.\n" +
-                        "Click \"continue\" to go to the next question.");
-                tts.speak("That is incorrect, you can see the answer on the image now. . , Click continue to go to the next question",false,playtts);
-                correct.setX(q.topLeft.x/imgratio);
-                correct.setY(q.topLeft.y/imgratio);
-                correct.setWidth((q.bottomRight.x - q.topLeft.x)/imgratio);
-                correct.setHeight((q.bottomRight.y - q.topLeft.y)/imgratio);
-                correct.setFill(Color.FIREBRICK);
-            }
-            //Show the button to go to the next question
-            centergrid.add(next, 0, 3);
-            centergrid.getChildren().remove(submit);
-            centergrid.getChildren().remove(stop);
-            centergrid.add(stop, 1, 3);
-        });
-        stop = new Button("Stop Quiz");
-        stop.setOnAction(e -> done());
-        stop.setOnMouseEntered(e-> tts.speak("Stop quiz",false,playtts));
-    }
-
-    private static void beginDrag(MouseEvent e) {
+    @FXML
+    private void beginDrag(MouseEvent e) {
         //At the start of a drag set rectangle size to 0 and set coordinates
         //Also set the color back
+        if (done) return;
         setBeginCoordinates(e.getX(), e.getY());
-        submit.setDisable(true);
         selected.setFill(Color.YELLOW);
     }
 
-    private static void endDrag() {
+    @FXML
+    private void endDrag() {
         //Enable the submit button and make the color a bit darker
-        submit.setDisable(false);
+        if (done) return;
+        submitButton.setDisable(false);
     }
 
-    private static void incScore(){
-        score++;
+    @FXML
+    protected void handleSubmit(ActionEvent event) {
+        if (done) {
+            handleContinue();
+            return;
+        }
+
+        UI.state.context.set("total", ++currentTotal);
+
+        //image is changed by this ratio
+        imgratio = qimage.getHeight() / qimagev.getFitHeight();
+        boolean isCorrect = question.isCorrect(selected.getCenterX() * imgratio, selected.getCenterY() * imgratio);
+
+        responseText.setVisible(true);
+        submitButton.setText("continue");
+        done = true;
+
+        if (isCorrect) {
+            responseText.setFill(Color.DARKGREEN);
+            responseText.setText("That is correct. Click continue to go to the next question.");
+            ttshelper.ttsfinal = "That is correct. Click continue to go to the next question.";
+            ttshelper.tts.speak(ttshelper.ttsfinal,false,ttshelper.playtts);
+            selected.setFill(Color.DARKGREEN);
+            UI.state.context.set("score", currentScore + 10);
+        } else {
+            responseText.setFill(Color.FIREBRICK);
+            responseText.setText("That is incorrect, you can see the answer on the image now.");
+            ttshelper.ttsfinal = "That is incorrect, you can see the answer on the image now.";
+            ttshelper.tts.speak(ttshelper.ttsfinal,false,ttshelper.playtts);
+            correct.setX(question.topLeft.x / imgratio);
+            correct.setY(question.topLeft.y / imgratio);
+            correct.setWidth((question.bottomRight.x - question.topLeft.x) / imgratio);
+            correct.setHeight((question.bottomRight.y - question.topLeft.y) / imgratio);
+            correct.setFill(Color.FIREBRICK);
+        }
     }
 
-    private static void done() {
-        questionlist.clear();
-        //To make sure next time it starts with the first question
-        i=0;
+    private void handleContinue() {
+        if (questions.size() - index <= 2) {
+            saveScore();
 
-        //Make the texts for the ending
-        Text end = new Text("That were all the question, well done!");
-        Text endscore = new Text("Your score is: " + score + " out of " + totalanswered);
-        Text back = new Text("You will be redirected to the startscreen, when you click exit.");
-        tts.speak("That were all the question, well done!" + "Your score is: " + asText(score,false,"negative") + " out of . . " + asText(totalanswered,false,"neg") + ". . You will be redirected to the startscreen, when you click exit.",false,playtts);
-        //Set IDs for CSS
-        end.setId("end");
-        endscore.setId("end");
-        back.setId("end");
-
-        //Clear centergrid and add the texts
-        centergrid.getChildren().clear();
-        centergrid.add(end, 0, 0);
-        centergrid.add(endscore, 0, 1);
-        centergrid.add(back, 0, 2);
-
-        //Make the exit button and set the action
-        Button exit = new Button("Exit");
-        exit.setOnAction(e -> StartMenu.display());
-        exit.setOnMouseEntered(e-> tts.speak("exit",false,playtts));
-        //HBox to get the exit button in the center beneath the text
-        HBox exitbox = new HBox();
-        exitbox.setAlignment(Pos.CENTER);
-        exitbox.getChildren().add(exit);
-
-        //Add the HBox with the button in it
-        centergrid.add(exitbox ,0, 3);
+            UI.goToScene("result");
+        } else {
+            UI.state.context.set("index", ++index);
+            UI.goToScene("imagequestions");
+        }
     }
 
+    @FXML
+    protected void handleExit(ActionEvent event) {
+        saveScore();
+        UI.goToScene("startmenu");
+    }
 
+    private void saveScore() {
+        UserDateScore score = new UserDateScore();
+        score.date = (String) UI.state.context.get("date");
+        score.score = (int) UI.state.context.get("score");
+        score.user = UI.state.user;
+
+        UI.state.user.scores.add(score);
+        UI.state.user.save();
+    }
+
+    //button tts
+    @FXML
+    protected void SUBMITTTSButton () {
+        if (responseText.isVisible()){
+            ttshelper.tts.speak("Continue", false, ttshelper.playtts);
+        } else{
+            ttshelper.tts.speak("submit", false, ttshelper.playtts);
+        }
+    }
+
+    @FXML
+    protected void EXITTTSButton(){
+        ttshelper.tts.speak("exit",false,ttshelper.playtts);
+    }
+
+    @FXML
+    protected void handleTTSButton(){
+        ttshelper.toggletts();
+    }
+
+    @FXML
+    protected void TTSTTSButton() {
+        ttshelper.tts.speak("disable spoken text", false, ttshelper.playtts);
+    }
+
+    @FXML
+    protected void toggleTTS(MouseEvent event) {
+        boolean val = UI.state.user.getBoolPreference("useTTS");
+        UI.state.user.setPreference("useTTS", val ? "false" : "true");
+        UI.state.user.save();
+        setTTSbutton();
+    }
+
+    private void setTTSbutton() {
+        if (UI.state.user.getBoolPreference("useTTS")) {
+            ttsBtn.setText("Disable spoken text");
+            setButtonImage(ttsBtn, "file:src/images/speakeron.png");
+        } else {
+            ttsBtn.setText("Use spoken text");
+            setButtonImage(ttsBtn, "file:src/images/speakeroff.png");
+        }
+    }
 }

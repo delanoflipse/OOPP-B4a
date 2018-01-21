@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.image.ImageView?>
+<BorderPane xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="GUI.AddGUIQuestion">
+    <padding>
+        <Insets bottom="25" left="25" right="25" top="25" />
+    </padding>
+
+    <top>
+        <HBox alignment="CENTER" spacing="30">
+            <padding>
+                <Insets bottom="25" left="25" right="25" top="25" />
+            </padding>
+            <ImageView fx:id="logoImage1" fitWidth="100.0" cache="true" preserveRatio="true"/>
+            <Text styleClass="titleText" text="Practise Program" />
+        </HBox>
+    </top>
+
+    <center>
+        <VBox spacing="5">
+            <Text text="Fill in the question and level (1, 2 or 3)"/>
+            <Text text="Click 'new menu' to add a drop-down menu"/>
+            <Text text="Click 'add element' to add the element to the selected drop-down menu"/>
+            <Text text="Click 'save' to store the question in the database."/>
+
+            <Label text="Question:"/>
+            <TextField fx:id="questionField"/>
+            <Label text="Level:"/>
+            <TextField fx:id="levelField"/>
+
+            <HBox fx:id="menus" spacing="10">
+                <Label text="Your Menus:"/>
+            </HBox>
+
+            <HBox spacing="10">
+                <Label text="New Menu:"/>
+                <TextField fx:id="menuField"/>
+                <Button text="Add Menu" onAction="#handleAddMenu"/>
+            </HBox>
+
+            <HBox spacing="10">
+                <Label text="New Element:"/>
+                <Label text="Menu:"/>
+                <ChoiceBox fx:id="addElementChoice"/>
+                <Label text="Text:"/>
+                <TextField fx:id="elementField"/>
+                <Label text="Correct: "/>
+                <CheckBox fx:id="correctBox"/>
+                <Button text="Add Element" onAction="#handleAddElement"/>
+            </HBox>
+
+            <HBox spacing="10">
+                <Button text="Save" styleClass="green" onAction="#handleSave"/>
+                <Button text="Exit" styleClass="red" onAction="#handleExit"/>
+            </HBox>
+        </VBox>
+    </center>
+</BorderPane>

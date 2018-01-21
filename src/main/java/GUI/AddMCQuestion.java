@@ -1,5 +1,14 @@
 package GUI;
 
+import database.Answer;
+import database.Database;
+import database.TextAnswer;
+import database.TextQuestion;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -11,178 +20,142 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import javax.xml.crypto.Data;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
-public class AddMCQuestion {
+public class AddMCQuestion  extends UIScene implements Initializable {
 
-    private static int answerindex = 1;
-    private static GridPane centergrid;
-    private static ArrayList<RadioButton> correctanswerlist = new ArrayList<>();
-    private static ArrayList<TextField> answerfields = new ArrayList<>();
-    private static Button addanswerfieldbutton;
-    private static Button savebutton;
-    private static Button cancelbutton;
-    private static ArrayList<RadioButton> levelbuttons = new ArrayList<>();
-    private static TextField questionfield;
-    private static ToggleGroup correctgroup = new ToggleGroup();
+    @FXML private ImageView logoImage1;
+    @FXML private TextField questionField;
+    @FXML private TextField levelField;
+    @FXML private GridPane answerGrid;
 
-    public static void AddQuestion(GridPane grid) {
-        //Initialize pane
-        centergrid = grid;
-        centergrid.getChildren().clear();
+    private ToggleGroup answergroup = new ToggleGroup();
+    private ArrayList<AnswerGroup> answers = new ArrayList<>();
 
-        //Set centergrid alignment
-        centergrid.setAlignment(Pos.BOTTOM_LEFT);
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        // set image
+        Image image = new Image("file:src/images/logo.png");
+        logoImage1.setImage(image);
 
-        //Add intro text
-        Text intro = new Text("Please fill in the following fields:\nYou can click \"New Answer\" to add a new answer.\nClick save to store the question in the database.");
-        centergrid.add(intro, 1, 0, 4, 3);
-
-        //Add Question label and textfield
-        Label questionlabel = new Label("Question:");
-        questionfield = new TextField();
-        centergrid.add(questionlabel, 0, 3);
-        centergrid.add(questionfield, 1, 3);
-
-        //Add buttons for the level of the question
-        Label levellabel = new Label("Level:");
-        RadioButton level1button = new RadioButton("1");
-        RadioButton level2button = new RadioButton("2");
-        RadioButton level3button = new RadioButton("3");
-        ToggleGroup levelgroup = new ToggleGroup();
-        level1button.setToggleGroup(levelgroup);
-        level2button.setToggleGroup(levelgroup);
-        level3button.setToggleGroup(levelgroup);
-        levelbuttons.add(level1button);
-        levelbuttons.add(level2button);
-        levelbuttons.add(level3button);
-        centergrid.add(levellabel, 0, 4);
-        centergrid.add(level1button, 1, 4);
-        centergrid.add(level2button, 1, 5);
-        centergrid.add(level3button, 1, 6);
-
-        //Add one answerfield and the introtext for how to say which answer is correct.
-        Text answercorrectText = new Text("Here you can add the answers. Select the button with Correct? at the answer which is correct.");
-        centergrid.add(answercorrectText, 1, 7);
-
-        //Making actions and text of the buttons at the bottom of the screen
-        addanswerfieldbutton = new Button("New Answer");
-        addanswerfieldbutton.setOnAction(e -> addAnswerField());
-
-        savebutton = new Button("Save Question");
-        savebutton.setOnAction(e ->  saveQuestion());
-
-        cancelbutton = new Button("Cancel");
-        cancelbutton.setOnAction(e -> Admin.display());
-
-        //Now that the buttons exist we can show the answerfield
-        //This also shows the buttons
-        addAnswerField();
+        addAnswerGroup(null);
     }
 
-    //Makes a new answerfield
-    private static void addAnswerField(){
-        //Make new label, textfield and radio button
-        Label answerlabel = new Label("Answer "+answerindex+":");
-        TextField answerfield = new TextField();
-        RadioButton correct = new RadioButton("Correct Asnwer");
-        //Add new label, field and button to the screen
-        centergrid.add(answerlabel, 0, 7+answerindex);
-        centergrid.add(answerfield, 1, 7+answerindex);
-        centergrid.add(correct, 2, 7+answerindex);
-        //Add radiobutton to the List and the ToggleGroup
-        correctanswerlist.add(correct);
-        correct.setToggleGroup(correctgroup);
-        //Add the field to the List
-        answerfields.add(answerfield);
-        answerindex++;
-        showButtons();
+    @FXML
+    private void addAnswerGroup(ActionEvent e) {
+        AnswerGroup ng = new AnswerGroup();
+        int index = answers.size() + 1;
+        answerGrid.add(ng.removeButton, 0, index);
+        answerGrid.add(ng.textField, 1, index);
+        answerGrid.add(ng.checkButton, 2, index);
+        ng.checkButton.setToggleGroup(answergroup);
+        ng.removeButton.setOnAction((ActionEvent event) -> {
+            answerGrid.getChildren().remove(ng.checkButton);
+            answerGrid.getChildren().remove(ng.textField);
+            answerGrid.getChildren().remove(ng.removeButton);
+            answers.remove(ng);
+        });
+
+        ng.checkButton.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable,
+                                Boolean oldValue, Boolean newValue) {
+                ng.correct = newValue;
+            }
+        });
+
+        answers.add(ng);
     }
 
-    //Shows the button at the bottom again so that they don't go through answerfields
-    private static void showButtons() {
-        // remove the buttons
-        centergrid.getChildren().removeAll(addanswerfieldbutton, savebutton, cancelbutton);
-
-        //Add the buttons again at the right place
-        centergrid.add(addanswerfieldbutton, 1, 7+answerindex);
-        centergrid.add(savebutton, 0, 9+answerindex);
-        centergrid.add(cancelbutton, 1, 9+answerindex);
+    @FXML
+    protected void handleExit(ActionEvent e) {
+        UI.goToScene("admin");
     }
 
-    //Makes the new question and saves it in the database
-    private static void saveQuestion(){
+    @FXML
+    protected void handleSave(ActionEvent e) {
+        RadioButton ans = (RadioButton) answergroup.getSelectedToggle();
+        String question = questionField.getText();
+        String leveltxt = levelField.getText();
+
+        if (ans == null || question.length() == 0 || leveltxt.length() == 0) {
+            return;
+        }
+        int level;
+
         try {
-            //Read the data:
+            level = Integer.parseInt(leveltxt);
+        } catch (NumberFormatException error) {
+            return;
+        }
 
-            //Read question
-            String question = questionfield.getText();
+        if (level < 1 || level > 3) {
+            return;
+        }
 
-            //Read level
-            int level = 0;
-            int i=1;
-            for (RadioButton button : levelbuttons) {
-                if (button.isSelected()) {
-                    level = i;
-                }
-                i++;
-            }
+        TextQuestion q = new TextQuestion();
+        q.level = level;
+        q.text = question;
 
-            //Read answers
-            ArrayList<String> answers = new ArrayList<>();
-            for (TextField answerfield : answerfields) {
-                answers.add(answerfield.getText());
-            }
+        for (AnswerGroup ag: answers) {
+            TextAnswer ta = new TextAnswer();
+            ta.text = ag.textField.getText();
+            ta.correct = ag.correct;
+            q.answers.add(ta);
+        }
 
-            //Read correct answer
-            int correct = 0;
-            i = 0;
-            for (RadioButton button : correctanswerlist) {
-                if (button.isSelected()) {
-                    correct = i;
-                }
-                i++;
-            }
+        Database.questions.add(q);
 
-            //We add new data at the end of the file
+        try {
             PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter("db.data", true)));
-            writer.println("\n");
+            writer.print("\n");
+
             //Write all the data
-            writer.println("#Question Added by the MC GUI");
+            writer.println("#Question Added by the MC UI");
             writer.println("type: multiple choice");
-            writer.println("level: "+level);
-            writer.println("question: "+question);
-            i=0;
-            for (String answer: answers) {
-                if (i==correct) {
-                    writer.print("correct");
+            writer.println("level: " + q.level);
+            writer.println("question: "+ q.text);
+
+            for (TextAnswer ta: q.answers) {
+                if (ta.correct) {
+                    writer.println("correctanswer: " + ta.text);
+                } else {
+                    writer.println("answer: " + ta.text);
                 }
-                writer.println("answer: " + (char)(65+i)+". "+answer);
-                i++;
             }
+
             //close the writer
             writer.close();
             //go back to the start menu
-            quit();
-        } catch (IOException e) {
+            UI.goToScene("admin");
+        } catch (IOException err) {
             //Print the exception message
-            System.out.println(e.getMessage());
+            System.out.println(err.getMessage());
         }
+
     }
+}
 
-    //Go back to the start screen
-    private static void quit(){
-        //prepare new screen
-        centergrid.getChildren().clear();
-        centergrid.setAlignment(Pos.TOP_LEFT);
+class AnswerGroup {
+    public TextField textField;
+    public Button removeButton;
+    public RadioButton checkButton;
+    public boolean correct = false;
 
-        //Show the MC question just made (to be implemented)
+    public AnswerGroup() {
+        this.textField = new TextField();
+        this.removeButton = new Button("X");
+        this.checkButton = new RadioButton();
 
-        Admin.display();
+        this.removeButton.getStyleClass().add("red");
+        this.removeButton.getStyleClass().add("small");
+        this.removeButton.getStyleClass().add("close");
     }
-
 }
