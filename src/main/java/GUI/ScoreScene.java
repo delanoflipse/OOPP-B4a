@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import user.UserData;
 import user.UserDateScore;
@@ -50,10 +51,42 @@ public class ScoreScene extends UIScene implements Initializable {
             if (index++ == MAX_SCORES) {
                 break;
             }
+            Color color = Color.BLACK;
+            String style = "";
+            Text nametxt = new Text(score.user.name), datetxt =  new Text(score.date), scoretext = new Text(score.score + "");
 
-            scoreContainer.add(new Text(score.user.name), 0, index);
-            scoreContainer.add(new Text(score.date), 1, index);
-            scoreContainer.add(new Text(score.score + ""), 2, index);
+            switch (index) {
+                case 1:
+                    color = Color.web("DDB435");
+                    style = "-fx-font-size: 24; -fx-font-weight: bold";
+                    break;
+                case 2:
+                    color = Color.SILVER;
+                    style = "-fx-font-size: 22; -fx-font-weight: bold";
+                    break;
+                case 3:
+                    color = Color.web("#CD7F32");
+                    style = "-fx-font-size: 18; -fx-font-weight: bold";
+                    break;
+                default:
+            }
+
+            // set style
+            nametxt.setStyle(style);
+            datetxt.setStyle(style);
+            scoretext.setStyle(style);
+
+            // set color
+            nametxt.setFill(color);
+            datetxt.setFill(color);
+            scoretext.setFill(color);
+
+            scoreContainer.add(nametxt, 0, index);
+            scoreContainer.add(datetxt, 1, index);
+            scoreContainer.add(scoretext, 2, index);
+
+
+
             TTSHelper.ttsfinal = TTSHelper.ttsfinal + score.user.name + " scored " + score.score + " points on " + score.date + " , ,";
         }
         TTSHelper.tts.speak(TTSHelper.ttsfinal);
