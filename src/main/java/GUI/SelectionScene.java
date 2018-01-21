@@ -38,7 +38,7 @@ public class SelectionScene extends UIScene implements Initializable {
         selectedValue = possibleValues[0];
         diffText.setText(selectedValue);
         TTSHelper.ttsfinal = "please choose a difficulty using the arrow buttons";
-        TTSHelper.tts.speak(TTSHelper.ttsfinal,false, TTSHelper.playtts);
+        TTSHelper.tts.speak(TTSHelper.ttsfinal);
     }
 
     @FXML protected void handleStart(ActionEvent event) {
@@ -48,7 +48,7 @@ public class SelectionScene extends UIScene implements Initializable {
 
         if (questions.size() == 0) {
             System.out.println("No questions for level " + level + " with type " + type);
-            TTSHelper.tts.speak("no questions for level" + TTSHelper.tripleAsText(level,false) + "with type " + type,false, TTSHelper.playtts);
+            TTSHelper.tts.speak("no questions for level" + TTSHelper.tripleAsText(level,false) + "with type " + type);
             UI.goToScene("startmenu");
             return;
         }
@@ -75,7 +75,7 @@ public class SelectionScene extends UIScene implements Initializable {
                 break;
             default:
                 System.out.println("I have no idea what to do, going back");
-                TTSHelper.tts.speak("I have no idea what to do, going back",false, TTSHelper.playtts);
+                TTSHelper.tts.speak("I have no idea what to do, going back");
                 UI.goToScene("startmenu");
 
                 break;
@@ -117,17 +117,17 @@ public class SelectionScene extends UIScene implements Initializable {
     @FXML
     protected void BACKTTSButton () {
 
-            TTSHelper.tts.speak("go back", false, TTSHelper.playtts);
+            TTSHelper.tts.speak("go back");
 
     }
 
     @FXML
     protected void STARTTTSButton(){
-        TTSHelper.tts.speak("start",false, TTSHelper.playtts);
+        TTSHelper.tts.speak("start");
     }
 
     @FXML
     protected void TTSDIFF(){
-        TTSHelper.tts.speak(diffText.getText(),false, TTSHelper.playtts);
+        TTSHelper.tts.speak(diffText.getText());
     }
 }

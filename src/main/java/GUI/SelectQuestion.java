@@ -72,7 +72,7 @@ public class SelectQuestion extends UIScene implements Initializable {
         qimagev.setImage(qimage);
         qimagev.fitHeightProperty().bind(imageBox.heightProperty());
         TTSHelper.ttsfinal = "question" + TTSHelper.tripleAsText((index + 1),false) + "," + question.text;
-        TTSHelper.tts.speak(TTSHelper.ttsfinal,false, TTSHelper.playtts);
+        TTSHelper.tts.speak(TTSHelper.ttsfinal);
     }
 
     @FXML
@@ -157,14 +157,14 @@ public class SelectQuestion extends UIScene implements Initializable {
             responseText.setFill(Color.DARKGREEN);
             responseText.setText("That is correct. Click continue to go to the next question.");
             TTSHelper.ttsfinal = "That is correct. Click continue to go to the next question.";
-            TTSHelper.tts.speak(TTSHelper.ttsfinal,false, TTSHelper.playtts);
+            TTSHelper.tts.speak(TTSHelper.ttsfinal);
             selected.setFill(Color.DARKGREEN);
             UI.state.context.set("score", currentScore + 10);
         } else {
             responseText.setFill(Color.FIREBRICK);
             responseText.setText("That is incorrect, you can see the answer on the image now.");
             TTSHelper.ttsfinal = "That is incorrect, you can see the answer on the image now.";
-            TTSHelper.tts.speak(TTSHelper.ttsfinal,false, TTSHelper.playtts);
+            TTSHelper.tts.speak(TTSHelper.ttsfinal);
             correct.setX(question.topLeft.x / imgratio);
             correct.setY(question.topLeft.y / imgratio);
             correct.setWidth((question.bottomRight.x - question.topLeft.x) / imgratio);
@@ -204,20 +204,20 @@ public class SelectQuestion extends UIScene implements Initializable {
     @FXML
     protected void SUBMITTTSButton () {
         if (responseText.isVisible()){
-            TTSHelper.tts.speak("Continue", false, TTSHelper.playtts);
+            TTSHelper.tts.speak("Continue");
         } else{
-            TTSHelper.tts.speak("submit", false, TTSHelper.playtts);
+            TTSHelper.tts.speak("submit");
         }
     }
 
     @FXML
     protected void EXITTTSButton(){
-        TTSHelper.tts.speak("exit",false, TTSHelper.playtts);
+        TTSHelper.tts.speak("exit");
     }
 
     @FXML
     protected void TTSTTSButton() {
-        TTSHelper.tts.speak("disable spoken text", false, TTSHelper.playtts);
+        TTSHelper.tts.speak("disable spoken text");
     }
 
 }

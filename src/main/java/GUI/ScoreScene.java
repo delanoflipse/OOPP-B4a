@@ -56,7 +56,7 @@ public class ScoreScene extends UIScene implements Initializable {
             scoreContainer.add(new Text(score.score + ""), 2, index);
             TTSHelper.ttsfinal = TTSHelper.ttsfinal + score.user.name + " scored " + score.score + " points on " + score.date + " , ,";
         }
-        TTSHelper.tts.speak(TTSHelper.ttsfinal,false, TTSHelper.playtts);
+        TTSHelper.tts.speak(TTSHelper.ttsfinal);
     }
 
     @FXML
@@ -68,6 +68,6 @@ public class ScoreScene extends UIScene implements Initializable {
 
     @FXML
     protected void BACKTTSButton(){
-        TTSHelper.tts.speak("go back",false, TTSHelper.playtts);
+        TTSHelper.tts.speak("go back");
     }
 }
