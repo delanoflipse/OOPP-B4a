@@ -5,7 +5,7 @@ import user.UserData;
 
 public class UIState {
     Database database;
-    UserData user = null;
+    public UserData user = null;
 
     UIContext context = new UIContext();
 

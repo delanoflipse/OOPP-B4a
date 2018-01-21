@@ -59,7 +59,7 @@ public class GUIQuestion extends UIScene implements Initializable {
         questionText.setText("Question " + (1 + index));
         questionTitle.setText(question.text);
         TTSHelper.ttsfinal = "question" + TTSHelper.tripleAsText((1 + index),false) + question.text;
-        TTSHelper.tts.speak(TTSHelper.ttsfinal,false, TTSHelper.playtts);
+        TTSHelper.tts.speak(TTSHelper.ttsfinal);
         // create menus
 
         //variable to keep track at which dropdownbox we are
@@ -126,14 +126,14 @@ public class GUIQuestion extends UIScene implements Initializable {
             responseText.setFill(Color.DARKGREEN);
             responseText.setText("That is correct! Click continue to go to the next question.");
             TTSHelper.ttsfinal = " That is correct! Click continue to go to the next question." ;
-            TTSHelper.tts.speak(TTSHelper.ttsfinal,false, TTSHelper.playtts);
+            TTSHelper.tts.speak(TTSHelper.ttsfinal);
             UI.state.context.set("score", currentScore + 10);
         }
         else {
             responseText.setFill(Color.FIREBRICK);
             responseText.setText("That is incorrect. Click continue to go to the next question");
             TTSHelper.ttsfinal = " That is incorrect, Click continue to go to the next question." ;
-            TTSHelper.tts.speak(TTSHelper.ttsfinal,false, TTSHelper.playtts);
+            TTSHelper.tts.speak(TTSHelper.ttsfinal);
         }
 
     }
@@ -168,22 +168,22 @@ public class GUIQuestion extends UIScene implements Initializable {
     @FXML
     protected void SUBMITTTSButton () {
         if (responseText.isVisible()){
-            TTSHelper.tts.speak("Continue", false, TTSHelper.playtts);
+            TTSHelper.tts.speak("Continue");
         } else{
-            TTSHelper.tts.speak("submit", false, TTSHelper.playtts);
+            TTSHelper.tts.speak("submit");
         }
     }
 
 
     @FXML
     protected void EXITTTSButton(){
-        TTSHelper.tts.speak("exit",false, TTSHelper.playtts);
+        TTSHelper.tts.speak("exit");
     }
 
 
     @FXML
     protected void TTSTTSButton() {
-        TTSHelper.tts.speak("disable spoken text", false, TTSHelper.playtts);
+        TTSHelper.tts.speak("disable spoken text");
     }
 
 

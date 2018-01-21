@@ -72,7 +72,7 @@ public class MCQuestion extends UIScene implements Initializable {
             buttonstack.getChildren().add(btn);
             TTSHelper.ttsfinal = TTSHelper.ttsfinal + ", " + answer.text;
         }
-        TTSHelper.tts.speak(TTSHelper.ttsfinal,false, TTSHelper.playtts);
+        TTSHelper.tts.speak(TTSHelper.ttsfinal);
     }
 
     protected void EnableSubmit(){
@@ -91,7 +91,7 @@ public class MCQuestion extends UIScene implements Initializable {
         RadioButton ans = (RadioButton) answergroup.getSelectedToggle();
         if (ans == null) {
             responseText.setText("Please select a value!");
-            TTSHelper.tts.speak("please select a value",false, TTSHelper.playtts);
+            TTSHelper.tts.speak("please select a value");
             responseText.setVisible(true);
             return;
         }
@@ -107,13 +107,13 @@ public class MCQuestion extends UIScene implements Initializable {
             responseText.setFill(Color.DARKGREEN);
             responseText.setText("That is correct. Click continue to go to the next question");
             TTSHelper.ttsfinal = "That is correct. Click continue to go to the next question";
-            TTSHelper.tts.speak(TTSHelper.ttsfinal,false, TTSHelper.playtts);
+            TTSHelper.tts.speak(TTSHelper.ttsfinal);
             UI.state.context.set("score", currentScore + 10);
         } else {
             responseText.setFill(Color.FIREBRICK);
             responseText.setText("That is incorrect. The answer was:\n" + question.getCorrectAnswer().text + "\nClick continue to go to the next question");
             TTSHelper.ttsfinal = " That is incorrect. The answer was , " + question.getCorrectAnswer().text + " , Click continue to go to the next question";
-            TTSHelper.tts.speak(TTSHelper.ttsfinal,false, TTSHelper.playtts);
+            TTSHelper.tts.speak(TTSHelper.ttsfinal);
             rightButton.getStyleClass().add("right");
             ans.getStyleClass().add("wrong");
 
@@ -123,15 +123,15 @@ public class MCQuestion extends UIScene implements Initializable {
     @FXML
     protected void SUBMITTTSButton () {
         if (responseText.isVisible()){
-            TTSHelper.tts.speak("Continue", false, TTSHelper.playtts);
+            TTSHelper.tts.speak("Continue");
         } else{
-        TTSHelper.tts.speak("submit", false, TTSHelper.playtts);
+        TTSHelper.tts.speak("submit");
         }
     }
 
     @FXML
     protected void EXITTTSButton(){
-        TTSHelper.tts.speak("exit",false, TTSHelper.playtts);
+        TTSHelper.tts.speak("exit");
     }
 
     private void handleContinue() {
@@ -152,7 +152,7 @@ public class MCQuestion extends UIScene implements Initializable {
 
     @FXML
     protected void TTSTTSButton() {
-        TTSHelper.tts.speak("disable spoken text", false, TTSHelper.playtts);
+        TTSHelper.tts.speak("disable spoken text");
     }
 
     private void saveScore() {

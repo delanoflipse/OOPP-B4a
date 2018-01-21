@@ -7,6 +7,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
+
+import GUI.UI;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javax.sound.sampled.AudioInputStream;
@@ -18,6 +20,7 @@ import marytts.exceptions.SynthesisException;
 import marytts.modules.synthesis.Voice;
 import marytts.signalproc.effects.AudioEffect;
 import marytts.signalproc.effects.AudioEffects;
+import org.apache.commons.lang.ObjectUtils;
 
 
 /**
@@ -46,20 +49,18 @@ public class TextToSpeech {
 	
 	/**
 	 * Transform text to speech
-	 * 
-	 * @param text
-	 *            The text that will be transformed to speech
-	 * @param daemon
+	 *  @param daemon
 	 *            <br>
 	 *            <b>True</b> The thread that will start the text to speech Player will be a daemon Thread <br>
 	 *            <b>False</b> The thread that will start the text to speech Player will be a normal non daemon Thread
 	 * @param join
 	 *            <br>
 	 *            <b>True</b> The current Thread calling this method will wait(blocked) until the Thread which is playing the Speech finish <br>
-	 *            <b>False</b> The current Thread calling this method will continue freely after calling this method
+	 * @param text
+ *            The text that will be transformed to speech
 	 */
-	public void speak(String text, boolean  wait, boolean playtts) {
-		
+	public void speak(String text) {
+		boolean playtts = getplaytts();
 		// Stop the previous player
 		stopSpeaking();
 		marytts.setVoice("dfki-poppy-hsmm");
@@ -78,16 +79,12 @@ public class TextToSpeech {
 								tts.setGain(2);
 								tts.setDaemon(false);
 								tts.start();
-								if (wait)
-									tts.join();
+
 
 							} catch (SynthesisException ex) {
 								Logger.getLogger(getClass().getName()).log(Level.WARNING, "Error saying phrase.", ex);
 							} catch (IOException ex) {
 								Logger.getLogger(getClass().getName()).log(Level.WARNING, "IO Exception", ex);
-							} catch (InterruptedException ex) {
-								Logger.getLogger(getClass().getName()).log(Level.WARNING, "Interrupted ", ex);
-								tts.interrupt();
 							}
 						}
 						else {
@@ -118,7 +115,14 @@ public class TextToSpeech {
 	}
 
 	//----------------------GETTERS---------------------------------------------------//
-	
+	private boolean getplaytts(){
+		try {
+			return UI.state.user.getBoolPreference("useTTS");
+		}
+		catch (NullPointerException ex){
+			return true;
+		}
+	}
 	/**
 	 * Available voices in String representation
 	 * 

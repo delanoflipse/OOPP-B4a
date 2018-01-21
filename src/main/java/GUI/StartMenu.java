@@ -39,7 +39,7 @@ public class StartMenu extends UIScene implements Initializable {
 
         userTitle.setText("Welcome " + UI.state.user.name);
         TTSHelper.ttsfinal = "welcome " + UI.state.user.name;
-        TTSHelper.tts.speak(TTSHelper.ttsfinal,false, TTSHelper.playtts);
+        TTSHelper.tts.speak(TTSHelper.ttsfinal);
         handleTTSbutton(ttsBtn);
     }
 
@@ -58,32 +58,32 @@ public class StartMenu extends UIScene implements Initializable {
     //tts for buttons
     @FXML
     protected void MCTTSButton() {
-        TTSHelper.tts.speak("multiple choice questions",false, TTSHelper.playtts);
+        TTSHelper.tts.speak("multiple choice questions");
     }
 
     @FXML
     protected void TTSTTSButton() {
-        TTSHelper.tts.speak("disable spoken text", false, TTSHelper.playtts);
+        TTSHelper.tts.speak("disable spoken text");
     }
 
     @FXML
     protected void GUITTSButton(){
-        TTSHelper.tts.speak("g u i questions",false, TTSHelper.playtts);
+        TTSHelper.tts.speak("g u i questions");
     }
 
     @FXML
     protected void IMGTTSButton() {
-        TTSHelper.tts.speak("image questions",false, TTSHelper.playtts);
+        TTSHelper.tts.speak("image questions");
     }
 
     @FXML
     protected void BACKTTSButton() {
-        TTSHelper.tts.speak("GO BACK",false, TTSHelper.playtts);
+        TTSHelper.tts.speak("GO BACK");
     }
 
     @FXML
     protected void SCORESTTSButton() {
-        TTSHelper.tts.speak("SCORES",false, TTSHelper.playtts);
+        TTSHelper.tts.speak("SCORES");
     }
 
 

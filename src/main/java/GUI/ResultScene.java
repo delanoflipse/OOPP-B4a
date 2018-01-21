@@ -37,7 +37,7 @@ public class ResultScene extends UIScene implements Initializable {
         int currentScore = (int) UI.state.context.get("score");
 
         TTSHelper.ttsfinal = "your score was ," + TTSHelper.tripleAsText(currentScore,false);
-        TTSHelper.tts.speak(TTSHelper.ttsfinal,false, TTSHelper.playtts);
+        TTSHelper.tts.speak(TTSHelper.ttsfinal);
 
         scoreText.setText("Your score was: "+currentScore);
 
@@ -61,6 +61,6 @@ public class ResultScene extends UIScene implements Initializable {
 
     @FXML
     protected void RETURNTTSButton(){
-        TTSHelper.tts.speak("go back to the main screen",false, TTSHelper.playtts);
+        TTSHelper.tts.speak("go back to the main screen");
     }
 }

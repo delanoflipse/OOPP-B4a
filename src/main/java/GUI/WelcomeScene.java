@@ -33,7 +33,7 @@ public class WelcomeScene extends UIScene implements Initializable {
         setButtonImage(submitBtn, "file:src/images/arrow.png");
         setButtonImage(tutorBtn, "file:src/images/tutor.png");
         TTSHelper.ttsfinal = "welcome to our practice program, please fill in your name";
-        TTSHelper.tts.speak(TTSHelper.ttsfinal,false, TTSHelper.playtts);
+        TTSHelper.tts.speak(TTSHelper.ttsfinal);
     }
 
     @FXML
@@ -48,7 +48,7 @@ public class WelcomeScene extends UIScene implements Initializable {
 
         if (value.length() == 0) {
             errorText.setText("Please fill in a valid name(only letters).");
-            TTSHelper.tts.speak("Please fill in a valid name, that means only letters)",false,TTSHelper.playtts);
+            TTSHelper.tts.speak("Please fill in a valid name, that means only letters)");
             return;
         }
 
@@ -76,12 +76,12 @@ public class WelcomeScene extends UIScene implements Initializable {
 
     @FXML
     protected void SUBMITTTSButton(){
-        TTSHelper.tts.speak("SUBMIT",false, TTSHelper.playtts);
+        TTSHelper.tts.speak("SUBMIT");
     }
 
 
     @FXML
     protected void TUTORTTSButton(){
-        TTSHelper.tts.speak("TUTOR",false, TTSHelper.playtts);
+        TTSHelper.tts.speak("TUTOR");
     }
 }
