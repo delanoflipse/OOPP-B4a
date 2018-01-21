@@ -48,6 +48,7 @@ public class WelcomeScene extends UIScene implements Initializable {
 
         if (value.length() == 0) {
             errorText.setText("Please fill in a valid name(only letters).");
+            TTSHelper.tts.speak("Please fill in a valid name, that means only letters)",false,TTSHelper.playtts);
             return;
         }
 
@@ -66,7 +67,7 @@ public class WelcomeScene extends UIScene implements Initializable {
         }
 
         System.out.println("Selected user " + UI.state.user.name);
-        TTSHelper.toggle(UI.state.user.getBoolPreference("useTTS"));
+        //TTSHelper.toggle(UI.state.user.getBoolPreference("useTTS"));
 
         UI.goToScene("startmenu");
     }

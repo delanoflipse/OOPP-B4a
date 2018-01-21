@@ -64,7 +64,7 @@ public class MCQuestion extends UIScene implements Initializable {
             RadioButton btn = new RadioButton(answer.text);
             btn.setToggleGroup(answergroup);
             btn.setUserData(answer.text);
-
+            btn.setOnMouseClicked(e -> EnableSubmit());
             if (answer.correct) {
                 rightButton = btn;
             }
@@ -73,6 +73,10 @@ public class MCQuestion extends UIScene implements Initializable {
             TTSHelper.ttsfinal = TTSHelper.ttsfinal + ", " + answer.text;
         }
         TTSHelper.tts.speak(TTSHelper.ttsfinal,false, TTSHelper.playtts);
+    }
+
+    protected void EnableSubmit(){
+        submitButton.setDisable(false);
     }
 
     @FXML
