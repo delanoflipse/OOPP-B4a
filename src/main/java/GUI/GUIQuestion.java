@@ -139,7 +139,7 @@ public class GUIQuestion extends UIScene implements Initializable {
     }
 
     void handleContinue() {
-        if (questions.size() - index <= 2) {
+        if (questions.size() - index <= 1) {
             saveScore();
             UI.goToScene("result");
         } else {

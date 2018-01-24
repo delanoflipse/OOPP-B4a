@@ -174,7 +174,7 @@ public class SelectQuestion extends UIScene implements Initializable {
     }
 
     private void handleContinue() {
-        if (questions.size() - index <= 2) {
+        if (questions.size() - index <= 1) {
             saveScore();
 
             UI.goToScene("result");

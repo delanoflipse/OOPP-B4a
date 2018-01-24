@@ -750,3 +750,22 @@ element: se
 element: en
 
 
+#Added by the Add GUI-Question GUI
+type: gui
+level: 1
+question: Does this work? piggies?
+menu: pigs
+element: swine
+menu: booleans
+correctelement: true
+element: false
+
+
+#Added by the Add GUI-Question GUI
+type: gui
+level: 1
+question: hello
+menu: hoi
+correctelement: halo
+
+
